@@ -1,0 +1,10 @@
+name: topperstation
+recipe: pantheon
+config:
+  framework: drupal8
+  site: topperstation
+  id: db5fb5e4-3225-46f0-b0a9-1cc803600c48
+  drush: global:8.1.16
+tooling:
+  drush:
+    cmd: /app/vendor/bin/drush
