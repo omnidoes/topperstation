@@ -14,10 +14,14 @@
         "composer/installers": "^1.0.20",
         "cweagans/composer-patches": "^1.0",
         "drupal-composer/drupal-scaffold": "^2.0.1",
+        "drupal/admin_toolbar": "^1.26",
         "drupal/config_direct_save": "^1.0",
         "drupal/config_installer": "^1.0",
         "drupal/console": "^1",
         "drupal/core": "^8",
+        "drupal/ctools": "^3.2",
+        "drupal/module_filter": "^3.1",
+        "drupal/page_manager": "^4.0@beta",
         "drupal/pathauto": "^1.4",
         "drupal/simple_block": "^1.0@beta",
         "drush-ops/behat-drush-endpoint": "^9.3",
@@ -109,6 +113,23 @@
                 ".htaccess",
                 "web.config"
             ]
+        }
+    },
+    "enable-patching": true,
+    "patches": {
+        "drupal/drupal": {
+            "944582: ./sites/default/files directory permission check is incorrect during install AND status report (affects Docker on Windows)": 
+                "https://www.drupal.org/files/issues/sites_default_files-944582-120.patch"
+        },
+        "drupal/ctools": {
+            "2696819-8: Cannot add contexts whose entity ids are not numeric":
+                "https://www.drupal.org/files/issues/2018-03-10/2696819-8.patch"
+        },
+        "drupal/page_manager": {
+            "2921404-16: Use context in variant JS to be compatible with BigPipe": 
+                "https://www.drupal.org/files/issues/2018-03-14/2921404-16.patch",
+            "2799885-11: Warning: Missing argument 1 for Drupal page manager...":
+                "https://www.drupal.org/files/issues/2018-04-14/2799885-11.patch"
         }
     },
     "config": {
