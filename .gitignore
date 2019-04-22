@@ -101,3 +101,4 @@ Thumbs.db
 # SASS #
 ##########
 .sass-cache
+config/brightcove.brightcove_api_client.brightcove_west_liberty_university.yml

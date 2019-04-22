@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2ecd2ae34081c7a2673897197ea4b111",
+    "content-hash": "520bb6645d50de8f55cb811b5a82e16f",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -121,6 +121,63 @@
                 "stack"
             ],
             "time": "2017-12-20T14:37:45+00:00"
+        },
+        {
+            "name": "brightcove/api",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/brightcove/PHP-API-Wrapper.git",
+                "reference": "40ee91c0eaf0c5348bd906f1130cad4a921636cb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/brightcove/PHP-API-Wrapper/zipball/40ee91c0eaf0c5348bd906f1130cad4a921636cb",
+                "reference": "40ee91c0eaf0c5348bd906f1130cad4a921636cb",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.5.*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Brightcove\\": "lib/Brightcove/",
+                    "Brightcove\\Test\\": "test/Brightcove/Test/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tamás Demeter-Haludka",
+                    "homepage": "https://github.com/tamasd"
+                },
+                {
+                    "name": "KonczGabor",
+                    "homepage": "https://github.com/KonczGabor"
+                },
+                {
+                    "name": "janmashat",
+                    "homepage": "https://github.com/janmashat"
+                }
+            ],
+            "description": "Brightcove PHP API Wrapper",
+            "keywords": [
+                "Brightcove",
+                "api"
+            ],
+            "time": "2018-01-19T11:00:22+00:00"
         },
         {
             "name": "brumann/polyfill-unserialize",
@@ -1310,6 +1367,93 @@
             }
         },
         {
+            "name": "drupal/brightcove",
+            "version": "1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/brightcove.git",
+                "reference": "8.x-1.3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/brightcove-8.x-1.3.zip",
+                "reference": "8.x-1.3",
+                "shasum": "157818ac54ee0ef86d06a96a5d995f0ccc9f73f2"
+            },
+            "require": {
+                "brightcove/api": "~1.1",
+                "drupal/core": "*",
+                "drupal/inline_entity_form": "*",
+                "drupal/time_formatter": "*",
+                "drupal/token": "*"
+            },
+            "require-dev": {
+                "drupal/media_entity": "*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.3",
+                    "datestamp": "1517314382",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "László CSÉCSY",
+                    "homepage": "https://github.com/boobaa"
+                },
+                {
+                    "name": "Tamás NAGY",
+                    "homepage": "https://github.com/ycecube"
+                },
+                {
+                    "name": "balazswmann",
+                    "homepage": "https://www.drupal.org/user/2204810"
+                },
+                {
+                    "name": "lekob",
+                    "homepage": "https://www.drupal.org/user/3258368"
+                },
+                {
+                    "name": "mikeharty",
+                    "homepage": "https://www.drupal.org/user/315991"
+                },
+                {
+                    "name": "tamasd",
+                    "homepage": "https://www.drupal.org/user/372872"
+                },
+                {
+                    "name": "wiifm",
+                    "homepage": "https://www.drupal.org/user/358731"
+                },
+                {
+                    "name": "yce",
+                    "homepage": "https://www.drupal.org/user/2252152"
+                }
+            ],
+            "description": "Brightcove Video Connect",
+            "homepage": "https://www.drupal.org/project/brightcove",
+            "keywords": [
+                "Brightcove",
+                "Drupal"
+            ],
+            "support": {
+                "source": "http://cgit.drupalcode.org/brightcove",
+                "issues": "http://drupal.org/project/issues/brightcove"
+            }
+        },
+        {
             "name": "drupal/config_direct_save",
             "version": "1.0.0",
             "source": {
@@ -2050,6 +2194,72 @@
             "time": "2018-02-09T18:02:28+00:00"
         },
         {
+            "name": "drupal/inline_entity_form",
+            "version": "1.0.0-rc1",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/inline_entity_form.git",
+                "reference": "8.x-1.0-rc1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/inline_entity_form-8.x-1.0-rc1.zip",
+                "reference": "8.x-1.0-rc1",
+                "shasum": "898789fb6a0662fc2572b87f8d0654a0241473f9"
+            },
+            "require": {
+                "drupal/core": "~8.0"
+            },
+            "require-dev": {
+                "drupal/entity_reference_revisions": "*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.0-rc1",
+                    "datestamp": "1527030784",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "RC releases are not covered by Drupal security advisories."
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "bojanz",
+                    "homepage": "https://www.drupal.org/user/86106"
+                },
+                {
+                    "name": "dawehner",
+                    "homepage": "https://www.drupal.org/user/99340"
+                },
+                {
+                    "name": "rszrama",
+                    "homepage": "https://www.drupal.org/user/49344"
+                },
+                {
+                    "name": "slashrsm",
+                    "homepage": "https://www.drupal.org/user/744628"
+                },
+                {
+                    "name": "webflo",
+                    "homepage": "https://www.drupal.org/user/254778"
+                }
+            ],
+            "description": "Provides a widget for inline management (creation, modification, removal) of referenced entities.",
+            "homepage": "https://www.drupal.org/project/inline_entity_form",
+            "support": {
+                "source": "https://git.drupalcode.org/project/inline_entity_form"
+            }
+        },
+        {
             "name": "drupal/module_filter",
             "version": "3.1.0",
             "source": {
@@ -2269,6 +2479,73 @@
             "homepage": "https://www.drupal.org/project/simple_block",
             "support": {
                 "source": "http://cgit.drupalcode.org/simple_block"
+            }
+        },
+        {
+            "name": "drupal/time_formatter",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/time_formatter.git",
+                "reference": "8.x-1.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/time_formatter-8.x-1.0.zip",
+                "reference": "8.x-1.0",
+                "shasum": "8c9fc8a99f2f0b841ba886889097bb73f70484d0"
+            },
+            "require": {
+                "drupal/core": "~8.0"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.0",
+                    "datestamp": "1534930681",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Boobaa",
+                    "homepage": "https://www.drupal.org/user/199303"
+                },
+                {
+                    "name": "akosh",
+                    "homepage": "https://www.drupal.org/user/698510"
+                },
+                {
+                    "name": "jan.mashat",
+                    "homepage": "https://www.drupal.org/user/3198923"
+                },
+                {
+                    "name": "tamasd",
+                    "homepage": "https://www.drupal.org/user/372872"
+                },
+                {
+                    "name": "yce",
+                    "homepage": "https://www.drupal.org/user/2252152"
+                }
+            ],
+            "description": "Field formatter for integer fields storing time in seconds/milliseconds displaying it in various formats.",
+            "homepage": "https://www.drupal.org/project/time_formatter",
+            "keywords": [
+                "Drupal"
+            ],
+            "support": {
+                "source": "http://cgit.drupalcode.org/time_formatter",
+                "issues": "http://drupal.org/project/issues/time_formatter"
             }
         },
         {
