@@ -1,0 +1,31 @@
+uuid: 2b946588-23af-499e-9b8a-c31675cce822
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_show_collections
+    - node.type.show
+    - paragraphs.paragraphs_type.video_collection
+  module:
+    - entity_reference_revisions
+id: node.show.field_show_collections
+field_name: field_show_collections
+entity_type: node
+bundle: show
+label: Collections
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      video_collection: video_collection
+    target_bundles_drag_drop:
+      video_collection:
+        enabled: true
+        weight: 2
+field_type: entity_reference_revisions

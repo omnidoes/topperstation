@@ -1,0 +1,19 @@
+uuid: a3163b89-b6e9-4195-a26a-afdffef32ca6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_collection_name
+    - paragraphs.paragraphs_type.video_collection
+id: paragraph.video_collection.field_collection_name
+field_name: field_collection_name
+entity_type: paragraph
+bundle: video_collection
+label: 'Collection Name'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

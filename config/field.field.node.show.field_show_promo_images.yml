@@ -1,36 +1,34 @@
-uuid: 52eaec07-4842-4610-b730-4a744425eb3f
+uuid: 3eca2287-cc68-474e-a03f-7e21b68b8293
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_image
-    - node.type.article
+    - field.storage.node.field_show_promo_images
+    - node.type.show
   module:
     - image
-_core:
-  default_config_hash: tgJzhA7Swh4M_gWU5FwFe5lPxPj5rebpMbvhpdNrERs
-id: node.article.field_image
-field_name: field_image
+id: node.show.field_show_promo_images
+field_name: field_show_promo_images
 entity_type: node
-bundle: article
-label: Image
+bundle: show
+label: 'Promo Images'
 description: ''
 required: false
-translatable: true
+translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
-  file_directory: '[date:custom:Y]-[date:custom:m]'
+  file_directory: shows/promos
   file_extensions: 'png gif jpg jpeg'
   max_filesize: ''
   max_resolution: ''
   min_resolution: ''
   alt_field: true
-  title_field: false
   alt_field_required: true
+  title_field: false
   title_field_required: false
   default_image:
-    uuid: null
+    uuid: ''
     alt: ''
     title: ''
     width: null

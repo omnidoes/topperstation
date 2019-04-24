@@ -1,0 +1,24 @@
+uuid: d6500a23-c1dd-4c22-8296-65a7ff14c969
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.brightcove_video.field_release_date
+  module:
+    - brightcove
+    - datetime
+id: brightcove_video.brightcove_video.field_release_date
+field_name: field_release_date
+entity_type: brightcove_video
+bundle: brightcove_video
+label: 'Release Date'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    default_date_type: now
+    default_date: now
+default_value_callback: ''
+settings: {  }
+field_type: datetime
