@@ -23,7 +23,7 @@ content:
     type: string_textfield
     region: content
   field_collection_videos:
-    type: entity_browser_entity_reference
+    type: entity_browser_table
     weight: 1
     settings:
       entity_browser: brightcove_videos
@@ -33,6 +33,8 @@ content:
       selection_mode: selection_append
       field_widget_edit: false
       field_widget_replace: false
+      table_settings:
+        label_column: false
       field_widget_display_settings: {  }
     third_party_settings: {  }
     region: content
