@@ -1,0 +1,57 @@
+// -----------------------------------------------------------------------------
+// This file contains CSS helper classes.
+// -----------------------------------------------------------------------------
+
+// /**
+//  * Clear inner floats
+//  */
+.clearfix::after {
+  display: table;
+  clear: both;
+  content: '';
+}
+
+// /**
+//  * Hide text while making it readable for screen readers
+//  * 1. Needed in WebKit-based browsers because of an implementation bug;
+//  *    See: https://code.google.com/p/chromium/issues/detail?id=457146
+//  */
+.hide-text {
+  padding: 0; // 1
+  overflow: hidden;
+  text-indent: 101%;
+  white-space: nowrap;
+}
+
+// /**
+//  * Hide element while making it readable for screen readers
+//  * Shamelessly borrowed from HTML5Boilerplate:
+//  * https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css#L119-L133
+//  */
+.is-vishidden { 
+  position: absolute;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+
+// /**
+//  * Hide content based on breakpoint
+//  */
+.hide {
+  position: absolute;
+  left: -9999px;
+}
+@each $state in palm, lap, portable, desk {
+  @include media-query(#{$state}) {
+    .hide--#{$state} {
+      position: absolute;
+      left: -9999px;
+    }
+  }
+}

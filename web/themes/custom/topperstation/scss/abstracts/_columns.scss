@@ -1,0 +1,72 @@
+/*------------------------------------*\
+    $WIDTHS
+\*------------------------------------*/
+/**
+ * Sizes in human readable format. These are used in conjunction with other
+ * objects and abstractions found in inuit.css, most commonly the grid system
+ * and faux flexbox.
+ *
+ * We have a mixin to generate our widths and their breakpoint-specific
+ * variations.
+ */
+
+@mixin columns-setup($namespace: '') {
+  .#{$namespace}cols-2          { column-count: 2; column-gap: 2rem; }
+  .#{$namespace}cols-3          { column-count: 3; column-gap: 2rem; }
+  .#{$namespace}cols-4          { column-count: 4; column-gap: 2rem; }
+  .#{$namespace}cols-5          { column-count: 5; column-gap: 2rem; }
+  .#{$namespace}cols-6          { column-count: 6; column-gap: 2rem; }
+  .#{$namespace}cols-7          { column-count: 7; column-gap: 2rem; }
+  .#{$namespace}cols-8          { column-count: 8; column-gap: 2rem; }
+}
+
+@include columns-setup();
+
+
+
+/**
+ * If you have set `$responsive` to ‘true’ in `_vars.scss` then you now have
+ * access to these classes. You can define at which breakpoing you’d like an
+ * element to be a certain size, e.g.:
+ *
+ * `<div class='g  one-quarter  lap-one-half  palm-one-whole'> ... </div>`
+ *
+ * This would create a `div` that, at ‘desktop’ sizes, takes up a quarter of the
+ * horizontal space, a half of that space at ‘tablet’ sizes, and goes full width
+ * at ‘mobile’ sizes.
+ *
+ * Demo: jsfiddle.net/inuitcss/WS4Ge
+ *
+ */
+
+@if $responsive == true {
+
+  @include media-query(palm) {
+    @include columns-setup('palm-');
+  }
+
+  @include media-query(lap) {
+    @include columns-setup('lap-');
+  }
+
+  @include media-query(portable) {
+    @include columns-setup('portable-');
+  }
+
+  @include media-query(desk) {
+    @include columns-setup('desk-');
+  }
+
+  /**
+  * If you have set the additional `$responsive-extra` variable to ‘true’ in
+  * `_vars.scss` then you now have access to the following class available to
+  * accomodate much larger screen resolutions.
+  */
+
+  @if $responsive-extra == true {
+    @include media-query(desk-wide) {
+      @include columns-setup('deskwide-');
+    }
+  }
+
+} /* endif */

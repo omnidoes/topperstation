@@ -1,0 +1,16 @@
+global:
+  css:
+    theme:
+      css/style.css: {}
+  js:
+    js/topperstation.js: {}
+
+bower:
+  js:
+    # DO NOT REMOVE OR EDIT BETWEEN THESE LINES
+    # bower:js
+    # endbower
+  css:
+    theme:
+      # bower:css
+      # endbower

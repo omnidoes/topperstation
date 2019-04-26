@@ -1,0 +1,64 @@
+<?php
+/**
+ * @file
+ * topperstation starter .theme file
+ *
+ * Contains preprocessing, processing, and anything else you might need to do.
+ */
+
+use Drupal\node\Entity\Node;
+
+/**
+ * Override or insert variables into the html template.
+ *
+ * @param array $variables
+ *   An array of variables to pass to the theme template.
+ * @param string $hook
+ *   The name of the template being rendered. This is usually "html," but can
+ *   also be "maintenance_page" since topperstation_preprocess_maintenance_page()
+ *   calls this function to have consistent variables.
+ */
+function topperstation_preprocess_html(&$variables, $hook) {
+  // Return early so the maintenance page does not call any code we write below.
+  if ($hook != 'html') {
+    return;
+  }
+}
+
+function topperstation_preprocess_node(&$variables, $hook) {
+  // Add an unpublished variable
+  $variables['unpublished'] = FALSE;
+  if ($variables['node']->isPublished() != TRUE) {
+    $variables['unpublished'] = TRUE;
+  }
+
+}
+
+/**
+ * Implements hook_theme_suggestions_alter().
+ */
+function topperstation_theme_suggestions_alter(array &$suggestions, array $variables, $hook) {
+
+  // Create a page suggestion per content type.
+  if ($hook === 'page') {
+    // NOTE: once https://www.drupal.org/node/2730631 is committed to D8, we can
+    // simplify and go back to:
+    // $node = \Drupal::routeMatch()->getParameter('node')
+    // Currently the node revision routes do not convert the node parameter to
+    // a full object, hence we require this verbose workaround to ensure we start
+    // with a scalar in both cases.
+    $node_id = \Drupal::routeMatch()->getRawParameter('node');
+    if ($node_id && ($node = Node::load($node_id))) {
+      $content_type = $node->bundle();
+      $suggestions[] = 'page__' . $content_type;
+    }
+  }
+
+}
+
+/**
+ * Implements template_preprocess_menu_local_task().
+ */
+function topperstation_preprocess_menu_local_task(&$variables) {
+  $variables['link']['#options']['attributes']['class'][] = 'admin-tabs__link';
+}

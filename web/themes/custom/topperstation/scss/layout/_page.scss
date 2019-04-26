@@ -1,0 +1,15 @@
+body {
+  margin: 0;
+}
+
+.page__header {
+  background: $black;
+  color: white;
+
+  .l-contain {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: space-between;
+  }
+}
