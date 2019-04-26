@@ -16,6 +16,7 @@ module:
   ctools: 0
   datetime: 0
   dblog: 0
+  devel: 0
   dynamic_page_cache: 0
   editor: 0
   entity_browser: 0
@@ -29,7 +30,7 @@ module:
   history: 0
   image: 0
   inline_entity_form: 0
-  layout_builder: 0
+  kint: 0
   layout_discovery: 0
   link: 0
   media: 0
@@ -41,6 +42,7 @@ module:
   page_cache: 0
   page_manager: 0
   page_manager_ui: 0
+  panels: 0
   path: 0
   quickedit: 0
   rdf: 0
@@ -54,10 +56,13 @@ module:
   token: 0
   toolbar: 0
   tour: 0
+  ts_views: 0
   update: 0
   user: 0
+  views_jump_menu: 0
   views_ui: 0
   menu_link_content: 1
+  pathauto: 1
   views: 10
   paragraphs: 11
   standard: 1000

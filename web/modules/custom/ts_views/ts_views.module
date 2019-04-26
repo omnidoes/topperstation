@@ -1,0 +1,27 @@
+<?php
+
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ * 
+ * Alters the video collection options on show pages.
+ */
+function ts_views_form_views_exposed_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  
+  if ($form['#id'] != 'views-exposed-form-show-video-collections-block-1') {
+    return FALSE;
+  }
+
+  // Query nodes
+  $storage = Drupal::getContainer()->get('entity_type.manager')->getStorage('node');
+  $nids = $storage->getQuery();
+
+  // Gather published nodes and sort by title
+  $nids = $nids->condition('type', 'show')->execute();
+  if (!$nids) {
+    return FALSE;
+  }
+
+  // $nodes = $storage->loadMultiple($nids);
+}

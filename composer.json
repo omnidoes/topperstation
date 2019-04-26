@@ -22,13 +22,16 @@
         "drupal/console": "^1",
         "drupal/core": "^8",
         "drupal/ctools": "^3.2",
+        "drupal/devel": "^2.0",
         "drupal/entity_browser": "2.x-dev",
         "drupal/field_group": "^1.0",
         "drupal/module_filter": "^3.1",
         "drupal/page_manager": "^4.0@beta",
+        "drupal/panels": "^4.4",
         "drupal/paragraphs": "^1.8",
         "drupal/pathauto": "^1.4",
         "drupal/simple_block": "^1.0@beta",
+        "drupal/views_jump_menu": "^1.0@beta",
         "drush-ops/behat-drush-endpoint": "^9.3",
         "drush/drush": "~8",
         "pantheon-systems/quicksilver-pushback": "~1",
@@ -121,9 +124,9 @@
         },
         "enable-patching": true,
         "patches": {
-            "drupal/drupal": {
-                "944582: ./sites/default/files directory permission check is incorrect during install AND status report (affects Docker on Windows)": 
-                    "https://www.drupal.org/files/issues/sites_default_files-944582-120.patch"
+            "drupal/core": {
+                "22429699-141: Generalize TaxonomyIndexTid filter to be available for all entity reference fields":
+                    "https://www.drupal.org/files/issues/2019-01-28/generic_entityreference_filter_22429699-141.patch"
             },
             "drupal/page_manager": {
                 "2921404-16: Use context in variant JS to be compatible with BigPipe": 
