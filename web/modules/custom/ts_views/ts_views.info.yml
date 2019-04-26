@@ -1,9 +1,0 @@
-name: "Topper Station: Views Customizations"
-description: "Customizes views filters and whatnot."
-package: "Custom: Topper Station"
-
-type: module
-core: 8.x
-
-dependencies:
-  - drupal:views
