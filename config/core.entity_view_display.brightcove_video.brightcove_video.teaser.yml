@@ -10,13 +10,7 @@ dependencies:
     - datetime
     - file
     - image
-    - layout_builder
     - link
-third_party_settings:
-  layout_builder:
-    sections: {  }
-    allow_custom: false
-    enabled: false
 id: brightcove_video.brightcove_video.teaser
 targetEntityType: brightcove_video
 bundle: brightcove_video

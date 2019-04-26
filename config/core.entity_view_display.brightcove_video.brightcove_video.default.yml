@@ -9,13 +9,9 @@ dependencies:
     - datetime
     - file
     - image
-    - layout_builder
     - link
     - options
     - user
-third_party_settings:
-  layout_builder:
-    sections: {  }
 id: brightcove_video.brightcove_video.default
 targetEntityType: brightcove_video
 bundle: brightcove_video

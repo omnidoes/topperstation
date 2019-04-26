@@ -6,11 +6,6 @@ dependencies:
     - field.field.paragraph.video_collection.field_collection_name
     - field.field.paragraph.video_collection.field_collection_videos
     - paragraphs.paragraphs_type.video_collection
-  module:
-    - layout_builder
-third_party_settings:
-  layout_builder:
-    sections: {  }
 id: paragraph.video_collection.default
 targetEntityType: paragraph
 bundle: video_collection
