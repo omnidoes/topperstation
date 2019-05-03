@@ -72,16 +72,17 @@
 #}
 {%
   set classes = [
+    node.bundle|clean_class,
+    node.bundle|clean_class ~ '--' ~ view_mode|clean_class,
     'node',
-    'node--type-' ~ node.bundle|clean_class,
     node.isPromoted() ? 'node--promoted',
     node.isSticky() ? 'node--sticky',
     not node.isPublished() ? 'node--unpublished',
-    view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
   ]
 %}
 <article{{ attributes.addClass(classes) }}>
 
+  {% block titlearea %}
   {{ title_prefix }}
   {% if not page %}
     <h2{{ title_attributes }}>
@@ -89,6 +90,7 @@
     </h2>
   {% endif %}
   {{ title_suffix }}
+  {% endblock %}
 
   {% if display_submitted %}
     <footer>
@@ -100,8 +102,10 @@
     </footer>
   {% endif %}
 
+  {% block contentarea %}
   <div{{ content_attributes }}>
     {{ content }}
   </div>
+  {% endblock %}
 
 </article>

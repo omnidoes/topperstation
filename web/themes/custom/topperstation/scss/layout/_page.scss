@@ -2,14 +2,6 @@ body {
   margin: 0;
 }
 
-.page__header {
-  background: $black;
-  color: white;
-
-  .l-contain {
-    display: flex;
-    flex-direction: row;
-    align-content: center;
-    justify-content: space-between;
-  }
+.page__content {
+  padding: 2rem 0;
 }

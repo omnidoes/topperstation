@@ -20,7 +20,7 @@ html {
 }
 
 body {
-  @include font('body', 300);
+  @include font('body', normal);
   color: $default-text-color;
 }
 
@@ -34,13 +34,9 @@ pre, table, fieldset, hr {
 //
 // Headings
 //
-h1, .alpha {
-  @include font('headings', 900);
-}
-
-h2, h3, h4, h5, h6,
-.beta, .gamma, .delta, .epsilon, .zeta {
-  @include font('headings', 700);
+h1, h2, h3, h4, h5, h6,
+.alpha, .beta, .gamma, .delta, .epsilon, .zeta {
+  @include font('headings', normal);
 }
 
 h1, .alpha		{		@include font-size($h1-size, $heading-line-height); }

@@ -7,6 +7,8 @@
  */
 
 use Drupal\node\Entity\Node;
+use Drupal\node\Entity\File;
+use Drupal\image\Entity\ImageStyle;
 
 /**
  * Override or insert variables into the html template.
@@ -26,10 +28,25 @@ function topperstation_preprocess_html(&$variables, $hook) {
 }
 
 function topperstation_preprocess_node(&$variables, $hook) {
+  $node = $variables['node'];
+
   // Add an unpublished variable
   $variables['unpublished'] = FALSE;
   if ($variables['node']->isPublished() != TRUE) {
     $variables['unpublished'] = TRUE;
+  }
+
+  switch ($node->getType()) {
+    case 'show':
+      if($node->hasField('field_teaser_image')) {
+        $path = $node->field_teaser_image->entity->getFileUri();
+        $variables['bgImage'] = ImageStyle::load('show_teaser_image')->buildUrl($path);
+      }
+      break;
+    
+    default:
+      # code...
+      break;
   }
 
 }

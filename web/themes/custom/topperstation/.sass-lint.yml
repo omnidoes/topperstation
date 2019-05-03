@@ -15,9 +15,9 @@ rules:
     - 2
     - filename-extension: false
       leading-underscore: false
-  empty-line-between-blocks:
-    - 2
-    - ignore-single-line-rulesets: false
+  # empty-line-between-blocks:
+  #   - 2
+  #   - ignore-single-line-rulesets: false
   extends-before-declarations: 1
   extends-before-mixins: 1
   # final-newline:
@@ -33,15 +33,15 @@ rules:
   # hex-length:
   #   - 2
   #   - style: short
-  hex-notation:
-    - 2
-    - style: lowercase
+  # hex-notation:
+  #   - 2
+  #   - style: lowercase
   id-name-format:
     - 2
     - convention: hyphenatedbem
-  indentation:
-    - 2
-    - size: 2
+  # indentation:
+  #   - 2
+  #   - size: 2
   leading-zero:
     - 2
     - include: true
@@ -53,12 +53,12 @@ rules:
   nesting-depth:
     - 2
     - max-depth: 4
-  no-color-keywords: 2
+  # no-color-keywords: 2
   # no-color-literals: 2
   # no-css-comments: 2
   no-debug: 2
   # no-duplicate-properties: 2
-  no-empty-rulesets: 2
+  # no-empty-rulesets: 2
   no-ids: 2
   no-invalid-hex: 2
   # no-mergeable-selectors: 2

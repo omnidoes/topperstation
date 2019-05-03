@@ -1,0 +1,18 @@
+{%
+  set classes = [
+    'video',
+    'video--brightcove',
+    'video' ~ '--' ~ elements['#view_mode']|clean_class,
+  ]
+%}
+<article {{ attributes.addClass(classes) }}>
+  <div class="tile">
+    <div class="tile__header">
+      {{ elements.poster }}
+    </div>
+    <div class="tile__content">
+      <h1 class="tile__title">{{ elements.name }}</h1>
+      {{ elements.description }}
+    </div>
+  </div>
+</article>

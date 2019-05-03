@@ -22,6 +22,7 @@ module.exports = function (grunt) {
         'files': {
           'scss/_component.scss': 'scss/component/**/*.scss',
           'scss/_layout.scss': 'scss/layout/**/*.scss',
+          'scss/_entities.scss': 'scss/entities/**/*.scss',
           'scss/_skin.scss': 'scss/skin/**/*.scss'
         }
       },
@@ -82,6 +83,26 @@ module.exports = function (grunt) {
     'wiredep_create_bower': {
       'dist': {}
     },
+    'modernizr': {
+      'dist': {
+        'crawl': false,
+        'customTests': [],
+        'dest': 'js/modernizr-topperstation.js',
+        'tests': [
+          'backgroundcliptext',
+          [
+            'cssgrid',
+            'cssgridlegacy'
+          ],
+          'flexbox',
+          'cssgradients'
+        ],
+        'options': [
+          'setClasses'
+        ],
+        'uglify': true
+      }
+    },
     'autoprefixer': {
       'options': {
         'browsers': ['last 3 versions', 'ie 9']
@@ -128,7 +149,18 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-autoprefixer');
   grunt.loadNpmTasks('grunt-eslint');
   grunt.loadNpmTasks('grunt-sass-lint');
+  grunt.loadNpmTasks("grunt-modernizr");
 
-  grunt.registerTask('default', ['clean', 'wiredep_create_bower', 'wiredep', 'sasslint', 'sass_globbing', 'sass', 'autoprefixer', 'eslint']);
+  grunt.registerTask('default', [
+    'clean',
+    'wiredep_create_bower',
+    'wiredep',
+    'sasslint',
+    'sass_globbing',
+    'sass',
+    'modernizr',
+    'autoprefixer',
+    'eslint'
+  ]);
 
 };

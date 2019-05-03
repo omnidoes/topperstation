@@ -1,0 +1,21 @@
+{% extends 'node.html.twig' %}
+
+{% block titlearea %}
+<header>
+  <div class="l-contain">
+    <h1{{ title_attributes }}>
+      {{ label }}
+    </h1>
+  </div>
+</header>
+{% endblock %}
+
+{% block contentarea %}
+<div{{ content_attributes.addClass('node__content') }}>
+  <div class="l-contain">
+    {{ content }}
+
+    {{ drupal_view('show_videos', 'block_videos_gallery') }}
+  </div>
+</div>
+{% endblock %}

@@ -25,12 +25,14 @@
         "drupal/devel": "^2.0",
         "drupal/entity_browser": "2.x-dev",
         "drupal/field_group": "^1.0",
+        "drupal/focal_point": "^1.0",
         "drupal/module_filter": "^3.1",
         "drupal/page_manager": "^4.0@beta",
         "drupal/panels": "^4.4",
         "drupal/paragraphs": "^1.8",
         "drupal/pathauto": "^1.4",
         "drupal/simple_block": "^1.0@beta",
+        "drupal/twig_tweak": "^2.3",
         "drupal/views_jump_menu": "^1.0@beta",
         "drush-ops/behat-drush-endpoint": "^9.3",
         "drush/drush": "~8",
@@ -137,6 +139,14 @@
             "drupal/entity_browser": {
                 "2973457-129: Add option for field widget to display as table":
                     "https://www.drupal.org/files/issues/2019-04-24/entity-browser-add-table-widget-2973457-129.patch"
+            },
+            "drupal/brightcove": {
+                "2875507-8: Hoping someone can tell me how to use a template for brightcove...":
+                    "https://www.drupal.org/files/issues/2018-08-22/Brightcove-add-entity-template-2875507-8.patch"
+            },
+            "drupal/panelizer": {
+                "3034080-03: Change panelizer store":
+                    "https://www.drupal.org/files/issues/2019-02-19/panelizer_temp_store-3034080-03.patch"
             }
         }
     },

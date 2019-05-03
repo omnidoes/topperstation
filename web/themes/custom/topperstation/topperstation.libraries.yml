@@ -14,3 +14,8 @@ bower:
     theme:
       # bower:css
       # endbower
+
+fonts:
+  css:
+    theme:
+      'https://use.typekit.net/cnq2thw.css': { type: external }

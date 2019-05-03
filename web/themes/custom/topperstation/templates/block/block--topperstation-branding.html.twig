@@ -13,10 +13,11 @@
  * - site_slogan: Slogan for site as defined in Site information settings.
  */
 #}
+{% set attributes = attributes.addClass('block--branding') %}
 {% block content %}
   {% if site_logo %}
     <a href="{{ path('<front>') }}" title="{{ 'Home'|t }}" rel="home" class="site-logo">
-      <img src="{{ site_logo }}" alt="{{ 'Home'|t }}" />
+      {{ include(active_theme_path() ~ '/logo.svg' ) }}
     </a>
   {% endif %}
   {% if site_name %}

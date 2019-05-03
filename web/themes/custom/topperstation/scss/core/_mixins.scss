@@ -4,12 +4,12 @@
   $fallbacks: sans-serif;
 
   @if ($family == 'headings') {
-    $family: 'proxima-nova';
+    $family: 'open-sans';
     $fallbacks: Arial, sans-serif;
   }
 
   @if ($family == 'body') {
-    $family: 'proxima-nova';
+    $family: 'open-sans';
     $fallbacks: Arial, sans-serif;
   }
  

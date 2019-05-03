@@ -1,0 +1,30 @@
+.page__header {
+  padding: 1rem 0;
+  background: $black;
+  color: #ffffff;
+
+  .l-grid {
+    display: grid;
+    grid-template-columns: 1fr 140px 1fr;
+    // display: flex;
+    // flex-direction: row;
+    // align-content: center;
+    // justify-content: space-between;
+
+    & > * {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      flex: 1 1 100%;
+      text-align: center;
+    }
+  }
+
+  
+
+  nav {
+
+    ul { margin-bottom: 0; }
+    a { color: #ffffff; }
+  }
+}

@@ -1,6 +1,24 @@
-.block--system-branding-block {
+.block {
 
-  img {
-    max-width: 160px;
+}
+
+  .block__title {
+    color: $yellow-orange;
+
+    html.backgroundcliptext & {
+      display: inline-block;
+      background: linear-gradient(to right, $yellow, $yellow-orange);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
   }
+
+
+
+//
+// Unique Blocks
+//
+
+.block--system-branding-block {
+  // max-width: 120px;
 }
