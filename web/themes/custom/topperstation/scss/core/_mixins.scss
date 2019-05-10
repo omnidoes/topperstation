@@ -4,7 +4,7 @@
   $fallbacks: sans-serif;
 
   @if ($family == 'headings') {
-    $family: 'open-sans';
+    $family: 'open-sans-condensed';
     $fallbacks: Arial, sans-serif;
   }
 

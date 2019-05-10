@@ -7,6 +7,14 @@
         {
             "type": "composer",
             "url": "https://packages.drupal.org/8"
+        },
+        {
+            "type": "git",
+            "url": "https://github.com/bmcclure/drupal-views_selective_filters"
+        },
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
         }
     ],
     "require": {
@@ -32,10 +40,15 @@
         "drupal/paragraphs": "^1.8",
         "drupal/pathauto": "^1.4",
         "drupal/simple_block": "^1.0@beta",
+        "drupal/slick": "^1.1",
+        "drupal/smart_trim": "^1.1",
         "drupal/twig_tweak": "^2.3",
         "drupal/views_jump_menu": "^1.0@beta",
+        "drupal/views_selective_filters": "dev-8.x-1.x",
         "drush-ops/behat-drush-endpoint": "^9.3",
         "drush/drush": "~8",
+        "npm-asset/slick-carousel": "dev-master#v1.8.1",
+        "oomphinc/composer-installers-extender": "^1.1",
         "pantheon-systems/quicksilver-pushback": "~1",
         "rvtraveller/qs-composer-installer": "^1.1",
         "webflo/drupal-core-strict": "^8",
@@ -94,11 +107,21 @@
         ]
     },
     "extra": {
+        "installer-types": [
+            "npm-asset",
+            "bower-asset"
+        ],
         "installer-paths": {
             "web/core": ["type:drupal-core"],
             "web/modules/contrib/{$name}": ["type:drupal-module"],
             "web/profiles/contrib/{$name}": ["type:drupal-profile"],
             "web/themes/contrib/{$name}": ["type:drupal-theme"],
+            "web/libraries/slick": ["npm-asset/slick-carousel"],
+            "web/libraries/{$name}": [
+                "type:drupal-library",
+                "type:npm-asset",
+                "type:bower-asset"
+            ],
             "drush/Commands/contrib/{$name}": ["type:drupal-drush"]
         },
         "build-env": {
@@ -126,10 +149,6 @@
         },
         "enable-patching": true,
         "patches": {
-            "drupal/core": {
-                "22429699-141: Generalize TaxonomyIndexTid filter to be available for all entity reference fields":
-                    "https://www.drupal.org/files/issues/2019-01-28/generic_entityreference_filter_22429699-141.patch"
-            },
             "drupal/page_manager": {
                 "2921404-16: Use context in variant JS to be compatible with BigPipe": 
                     "https://www.drupal.org/files/issues/2018-03-14/2921404-16.patch",
@@ -147,6 +166,10 @@
             "drupal/panelizer": {
                 "3034080-03: Change panelizer store":
                     "https://www.drupal.org/files/issues/2019-02-19/panelizer_temp_store-3034080-03.patch"
+            },
+            "drupal/views_selective_filters": {
+                "2804485-04: SQL error when adding multiple fields of the same type":
+                    "https://www.drupal.org/files/issues/2018-09-14/2804485-views_selective_filters-sql_error-4.patch"
             }
         }
     },

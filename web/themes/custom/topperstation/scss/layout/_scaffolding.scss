@@ -20,6 +20,14 @@
   max-width: $desk-start;
 }
 
+.l-contain--wide {
+  max-width: 100vw;
+}
+
+.l-contain--flush {
+  padding: 0;
+}
+
 .l-skinny {
 
   .l-contain {

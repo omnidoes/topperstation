@@ -7,10 +7,12 @@ dependencies:
     - field.field.node.show.field_show_description
     - field.field.node.show.field_show_promo_images
     - field.field.node.show.field_teaser_image
+    - image.style.large
     - image.style.thumbnail
     - node.type.show
   module:
     - field_group
+    - focal_point
     - image
     - paragraphs
     - path
@@ -63,10 +65,12 @@ content:
   field_show_promo_images:
     weight: 4
     settings:
+      preview_image_style: large
+      preview_link: true
+      offsets: '50,50'
       progress_indicator: throbber
-      preview_image_style: thumbnail
     third_party_settings: {  }
-    type: image_image
+    type: image_focal_point
     region: content
   field_teaser_image:
     weight: 1

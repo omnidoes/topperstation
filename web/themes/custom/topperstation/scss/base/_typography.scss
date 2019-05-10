@@ -36,7 +36,7 @@ pre, table, fieldset, hr {
 //
 h1, h2, h3, h4, h5, h6,
 .alpha, .beta, .gamma, .delta, .epsilon, .zeta {
-  @include font('headings', normal);
+  @include font('headings', 700);
 }
 
 h1, .alpha		{		@include font-size($h1-size, $heading-line-height); }

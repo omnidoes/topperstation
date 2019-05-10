@@ -36,8 +36,9 @@
  * @see template_preprocess_field()
  */
 #}
+{% set entity_type_class = entity_type|replace({ 'brightcove_video': 'video' }) %}
 {% set attributes_rendered %}
-  {{ attributes }}
+  {{ attributes.addClass(entity_type_class|replace({ '_': '-' }) ~ '__' ~ field_name|replace({ 'field_': '' })|replace({ '_': '-' }) ) }}
 {% endset %}
 
 {% if label_hidden %}
@@ -60,12 +61,12 @@
   {% if attributes_rendered %}
     <div{{ attributes }}>
   {% endif %}
-    <div{{ title_attributes }}>{{ label }}</div>
+      <div{{ title_attributes.addClass('field__label', (label_display == 'visually_hidden') ? 'visually-hidden') }}>{{ label }}</div>
     {% if multiple %}
       <div>
     {% endif %}
     {% for item in items %}
-      <div{{ item.attributes }}>{{ item.content }}</div>
+      <div{{ item.attributes.addClass('field__value') }}>{{ item.content }}</div>
     {% endfor %}
     {% if multiple %}
       </div>

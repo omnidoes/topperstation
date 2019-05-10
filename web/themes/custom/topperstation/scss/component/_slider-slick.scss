@@ -1,0 +1,11 @@
+.slick .slick__slide {
+  display: none;
+}
+
+.slick .slick__slide:first-child {
+  display: block;
+}
+
+.slick.slick--initialized .slick__slide {
+  display: block;
+}

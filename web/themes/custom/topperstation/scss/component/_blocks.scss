@@ -1,5 +1,5 @@
 .block {
-
+  padding: 2rem 0;
 }
 
   .block__title {
@@ -14,11 +14,53 @@
   }
 
 
-
 //
 // Unique Blocks
 //
+.block--local-tasks-block { padding: 0; }
+
+.block--local-tasks {
+  padding: 0;
+
+  @include media-query(lap-and-up) {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  .tabs {
+    margin-bottom: 0;
+
+    @include media-query(lap-and-up) {
+      margin-bottom: 0;
+    }
+  }
+}
+
+
+.block--system-messages {
+  padding: 0;
+}
 
 .block--system-branding-block {
-  // max-width: 120px;
+
+  .site-logo {
+    display: block;
+  }
+  
+  #logo {
+    height: 50px;
+    width: 299px;
+
+    @include media-query(lap-and-up) {
+      height: 65px;
+    }
+  }
 }

@@ -5,26 +5,37 @@
 
   .l-grid {
     display: grid;
-    grid-template-columns: 1fr 140px 1fr;
+    grid-template-columns: 80% 1fr;
     // display: flex;
     // flex-direction: row;
     // align-content: center;
     // justify-content: space-between;
 
-    & > * {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      flex: 1 1 100%;
-      text-align: center;
+    @include media-query(lap-and-up) {
+      grid-template-columns: 1fr 140px 1fr;
     }
-  }
 
-  
+    // & > * {
+    //   display: flex;
+    //   flex-direction: column;
+    //   justify-content: center;
+    //   flex: 1 1 100%;
+    //   text-align: center;
+    // }
+  }  
 
   nav {
+    display: none;
+
+    @include media-query(lap-and-up) {
+      display: block;
+    }
 
     ul { margin-bottom: 0; }
     a { color: #ffffff; }
+  }
+
+  .block {
+    padding: 0;
   }
 }

@@ -16,21 +16,18 @@
  * @see template_preprocess_views_view_list()
  */
 #}
-{% if attributes -%}
-  <div{{ attributes }}>
+{% if title %}
+<div class="view__group">
 {% endif %}
   {% if title %}
-    <h3>{{ title }}</h3>
+  <h3>{{ title }}</h3>
   {% endif %}
 
   <div{{ list.attributes }}>
-
     {% for row in rows %}
-      <div{{ row.attributes }}>{{ row.content }}</div>
+    <div{{ row.attributes }}>{{ row.content }}</div>
     {% endfor %}
-
   </div>
-
-{% if attributes -%}
-  </div>
+{% if title %}
+</div>
 {% endif %}

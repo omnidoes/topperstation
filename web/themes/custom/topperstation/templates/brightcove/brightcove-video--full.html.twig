@@ -1,0 +1,30 @@
+{#
+/**
+ * @file brightcove-video.html.twig
+ * Default theme implementation to display Brightcove video entity.
+ */
+#}
+{%
+  set classes = [
+    'video',
+    'video--brightcove',
+    'video' ~ '--' ~ elements['#view_mode']|clean_class,
+    'video' ~ '--' ~ (status ? 'active': 'inactive')
+  ]
+%}
+<article {{ attributes.addClass(classes) }}>
+  <div class="l-contain--wide l-contain--flush">
+    <div class="flexgrid">
+      <div class="flexgrid__item one-whole lap-one-whole desk-four-fifths">
+        {{ elements.brightcove_video_player }}
+        <div class="video__content">
+          <h1>{{ elements.name }}</h1>
+          {{ elements.long_description }}
+        </div>
+      </div>
+      <div class="flexgrid__item one-whole lap-one-whole desk-one-fifth">
+        {{ drupal_view('videos', 'block_recommended') }}
+      </div>
+    </div>
+  </div>
+</article>

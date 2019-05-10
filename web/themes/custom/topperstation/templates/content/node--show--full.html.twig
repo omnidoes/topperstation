@@ -1,11 +1,14 @@
 {% extends 'node.html.twig' %}
 
 {% block titlearea %}
-<header>
+<header class="show__header">
   <div class="l-contain">
-    <h1{{ title_attributes }}>
+    <h1{{ title_attributes.addClass('show__title') }}>
       {{ label }}
     </h1>
+  </div>
+  <div class="show__promo-images">
+    {{ content.field_show_promo_images }}
   </div>
 </header>
 {% endblock %}
@@ -13,9 +16,21 @@
 {% block contentarea %}
 <div{{ content_attributes.addClass('node__content') }}>
   <div class="l-contain">
-    {{ content }}
-
-    {{ drupal_view('show_videos', 'block_videos_gallery') }}
+    <div class="gw">
+      <div class="g one-whole lap-two-thirds desk-three-fifths">
+        <div class="block">
+          {{ content|without('field_show_promo_images') }}
+        </div>
+      </div>
+      <div class="g one-whole lap-one-third desk-two-fifths">
+        CAST
+      </div>
+    </div>
+  </div>
+  <div class="show__gallery">
+    <div class="l-contain">
+      {{ drupal_view('show_videos', 'block_videos_gallery') }}
+    </div>
   </div>
 </div>
 {% endblock %}

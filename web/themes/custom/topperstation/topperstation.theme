@@ -9,6 +9,7 @@
 use Drupal\node\Entity\Node;
 use Drupal\node\Entity\File;
 use Drupal\image\Entity\ImageStyle;
+use Drupal\Core\Form\FormStateInterface;
 
 /**
  * Override or insert variables into the html template.
@@ -26,6 +27,20 @@ function topperstation_preprocess_html(&$variables, $hook) {
     return;
   }
 }
+
+
+function topperstation_preprocess_brightcove_video(&$variables, $hook) {
+  $brightcoveVideo = $variables['elements']['#brightcove_video'];
+
+  $variables['elements']['url'] = $brightcoveVideo->url();
+  $variables['elements']['id'] = $brightcoveVideo->id();
+  $variables['status'] = $brightcoveVideo->get('status')->getValue()[0]['value'];
+
+  if ( $variables['elements']['#view_mode'] == 'teaser') {
+    
+  }
+}
+
 
 function topperstation_preprocess_node(&$variables, $hook) {
   $node = $variables['node'];
@@ -78,4 +93,22 @@ function topperstation_theme_suggestions_alter(array &$suggestions, array $varia
  */
 function topperstation_preprocess_menu_local_task(&$variables) {
   $variables['link']['#options']['attributes']['class'][] = 'admin-tabs__link';
+}
+
+
+/**
+ * Implements hook_form_FORM_ID_alter()
+ */
+function topperstation_form_views_exposed_form_alter(array &$form, FormStateInterface $form_state, $form_id) {
+  
+  switch ($form['#id']) {
+    case 'views-exposed-form-show-videos-block-videos-gallery':
+      $form['seasons']['#options']['All'] = t('All Seasons');
+      $form['keywords']['#placeholder'] = 'Search…';
+      break;
+    
+    default:
+      # code...
+      break;
+  }
 }

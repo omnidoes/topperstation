@@ -33,6 +33,7 @@
 {%
   set classes = [
     dom_id ? 'js-view-dom-id-' ~ dom_id,
+    css_class
   ]
 %}
 <div{{ attributes.addClass(classes) }}>
@@ -41,23 +42,29 @@
   {{ title_suffix }}
 
   {% if header %}
-    <header>
-      {{ header }}
-    </header>
+  <header class="view__header">
+    {{ header }}
+  </header>
   {% endif %}
 
-  {{ exposed }}
+  {% if exposed %}
+  <div class="view__filters">
+    {{ exposed }}
+  </div>
+  {% endif %}
   {{ attachment_before }}
 
+  <div class="view__content">
   {{ rows }}
   {{ empty }}
+  </div>
   {{ pager }}
 
   {{ attachment_after }}
   {{ more }}
 
   {% if footer %}
-    <footer>
+    <footer class="view__footer">
       {{ footer }}
     </footer>
   {% endif %}
