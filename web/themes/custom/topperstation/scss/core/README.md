@@ -14,4 +14,3 @@ Filename          | Purpose
 `_fonts.scss`     | Sets up fonts and icon fonts
 `_variables.scss` | Contains variables used across the project
 `_mixins.scss`    | Contains Sass mixins for the project
-

@@ -11,4 +11,3 @@ Filename          | Purpose
 `_links.scss`     | Default styles and extendable selectors for link elements
 `_quotes.scss`    | Default styles and extendable selectors for quotes and blockquotes
 etc...            | etc...
-

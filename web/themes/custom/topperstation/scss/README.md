@@ -227,4 +227,3 @@ characters:
   color: $blue;
 }
 ```
-

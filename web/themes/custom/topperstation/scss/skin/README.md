@@ -35,4 +35,3 @@ Filename            | Purpose
 `_skin.scss`        | Used to import other files in this directory
 `_a-component.scss` | Some component's skin color definitions
 `_skin-blue.scss`   | A skin definition that handles a lot of different components
-
