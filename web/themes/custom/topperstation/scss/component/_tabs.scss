@@ -1,0 +1,38 @@
+.tabs {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: no-wrap;
+  justify-content: flex-start;
+  padding: 0.5rem 0 0;
+
+  background: #e0e0e0;
+  border-radius: 5px 5px 0 0;
+
+  li {
+    margin: 0 0.1rem;
+    list-style-type: none;
+
+    &:first-child {
+      margin-left: 1rem;
+    }
+
+    &:last-child {
+      margin-right: 1rem;
+    }
+  }
+
+  a {
+    display: block;
+    padding: 0.2rem 0.8rem;
+    background: $black;
+    color: #ffffff;
+    border-radius: 5px 5px 0 0;
+    font-size: 0.888rem;
+
+    &.is-active {
+      background: #ffffff;
+      color: $black;
+    }
+  }
+}

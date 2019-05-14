@@ -1,0 +1,22 @@
+uuid: d0a065b4-9897-4914-8d8b-c5fdbe2393bf
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - topperstation
+_core:
+  default_config_hash: 9EoWV2Lot6FVSr50t4hoKgiz1LIXYWNG-IIPYsWxBqo
+id: topperstation_content
+theme: topperstation
+region: content
+weight: 1
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Main page content'
+  provider: system
+  label_display: '0'
+visibility: {  }

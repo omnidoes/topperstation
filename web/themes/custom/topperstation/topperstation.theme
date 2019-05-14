@@ -1,0 +1,116 @@
+<?php
+
+/**
+ * @file
+ * Topperstation starter .theme file.
+ *
+ * Contains preprocessing, processing, and anything else you might need to do.
+ */
+
+use Drupal\node\Entity\Node;
+use Drupal\image\Entity\ImageStyle;
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Override or insert variables into the html template.
+ *
+ * @param array $variables
+ *   An array of variables to pass to the theme template.
+ * @param string $hook
+ *   The name of the template being rendered. This is usually "html," but can
+ *   also be "maintenance_page" since topperstation_preprocess_maintenance_page
+ *   calls this function to have consistent variables.
+ */
+function topperstation_preprocess_html(array &$variables, $hook) {
+  // Return early so the maintenance page does not call any code we write below.
+  if ($hook != 'html') {
+    return;
+  }
+}
+
+/**
+ * Implements hook_preprocess_hook().
+ */
+function topperstation_preprocess_brightcove_video(array &$variables, $hook) {
+  $brightcoveVideo = $variables['elements']['#brightcove_video'];
+
+  $variables['elements']['url'] = $brightcoveVideo->url();
+  $variables['elements']['id'] = $brightcoveVideo->id();
+  $variables['status'] = $brightcoveVideo->get('status')->getValue()[0]['value'];
+
+  if ($variables['elements']['#view_mode'] == 'teaser') {
+
+  }
+}
+
+/**
+ * Implements hook_preprocess_hook().
+ */
+function topperstation_preprocess_node(array &$variables, $hook) {
+  $node = $variables['node'];
+
+  // Add an unpublished variable.
+  $variables['unpublished'] = FALSE;
+  if ($variables['node']->isPublished() != TRUE) {
+    $variables['unpublished'] = TRUE;
+  }
+
+  switch ($node->getType()) {
+    case 'show':
+      if ($node->hasField('field_teaser_image')) {
+        $path = $node->field_teaser_image->entity->getFileUri();
+        $variables['bgImage'] = ImageStyle::load('show_teaser_image')->buildUrl($path);
+      }
+      break;
+
+    default:
+      // code...
+      break;
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_alter().
+ */
+function topperstation_theme_suggestions_alter(array &$suggestions, array $variables, $hook) {
+
+  // Create a page suggestion per content type.
+  if ($hook === 'page') {
+    // NOTE: once https://www.drupal.org/node/2730631 is committed to D8, we can
+    // simplify and go back to:
+    // $node = \Drupal::routeMatch()->getParameter('node')
+    // Currently the node revision routes do not convert the node parameter to
+    // a full object, hence we require this workaround to ensure we start
+    // with a scalar in both cases.
+    $node_id = \Drupal::routeMatch()->getRawParameter('node');
+    if ($node_id && ($node = Node::load($node_id))) {
+      $content_type = $node->bundle();
+      $suggestions[] = 'page__' . $content_type;
+    }
+  }
+
+}
+
+/**
+ * Implements template_preprocess_menu_local_task().
+ */
+function topperstation_preprocess_menu_local_task(array &$variables) {
+  $variables['link']['#options']['attributes']['class'][] = 'admin-tabs__link';
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter() for views exposed forms.
+ */
+function topperstation_form_views_exposed_form_alter(array &$form, FormStateInterface $form_state, $form_id) {
+
+  switch ($form['#id']) {
+    case 'views-exposed-form-show-videos-block-videos-gallery':
+      $form['seasons']['#options']['All'] = t('All Seasons');
+      $form['keywords']['#placeholder'] = 'Search…';
+      break;
+
+    default:
+      // code...
+      break;
+  }
+}

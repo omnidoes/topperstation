@@ -1,0 +1,108 @@
+/**
+ * Grid wrapper
+ * 
+ * Shorthand and verbose
+ */
+.gw,
+.grid-wrapper {
+  @extend .cf;
+  margin-left: -2rem;
+
+  list-style: none;
+  margin-bottom: 0;
+}
+ 
+.gw--gapless {
+  @extend .cf;
+  list-style: none;
+  margin-bottom: 0;
+}
+ 
+//  /**
+//   * Reverse grid order
+//   */
+.gw--rev > .g,
+.grid-wrapper--rev > .grid {
+  float: right;
+}
+
+//  /**
+//   * Very infrequently occuring grid wrappers as children of grid wrappers.
+//   */
+.gw > .gw,
+.grid-wrapper > .grid-wrapper {
+  margin-left: 0;
+}
+     
+//  /**
+//   * Grid
+//   * 
+//   * Shorthand and verbose
+//   */
+.g,
+.grid {
+  float: left;
+  padding-left: 2rem;
+
+  .gw--gapless & {
+    padding-left: 0;
+  }
+}
+ 
+// 
+// Flexgrids
+// 
+
+.flexgrid {
+
+  html.flexbox & {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    // justify-content: center;
+    margin-left: -2rem;
+
+    &.flexgrid--tight {
+      margin-left: -1rem;
+    }
+
+    &.flexgrid--micro {
+      margin-left: -1px;
+    }
+
+    &.flexgrid--gapless {
+      margin-left: 0;
+    }
+  }
+
+  html:not(.flexbox) & {
+    @extend .cf;
+    @extend .gw;
+  }
+}
+ 
+.flexgrid__item {
+    
+  html.flexbox & {
+    padding-left: 2rem;
+  }
+
+  html.flexbox .flexgrid--tight & {
+    margin-bottom: 1rem;
+    padding-left: 1rem;
+  }
+
+  html.flexbox .flexgrid--micro & {
+    padding-left: 2px;
+    margin-bottom: 2px;
+  }
+
+  html.flexbox .flexgrid--gapless & {
+    padding-left: 0;
+  }
+
+  html:not(.flexbox) & {
+    @extend .g;
+    float: left;
+  }
+}

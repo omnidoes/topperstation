@@ -1,0 +1,12 @@
+{% extends 'node.html.twig' %}
+{% set title_attributes = title_attributes.addClass('person__title') %}
+
+{% block titlearea %}
+  {{ title_prefix }}
+  {{ title_suffix }}
+{% endblock %}
+
+{% block contentarea %}
+  <h1{{ title_attributes }}>{{ label }}</h1>
+  {{ content.field_portrait }}
+{% endblock %}

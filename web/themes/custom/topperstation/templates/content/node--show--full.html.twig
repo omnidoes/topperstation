@@ -1,0 +1,41 @@
+{% extends 'node.html.twig' %}
+
+{% block titlearea %}
+<header class="show__header">
+  <div class="l-contain">
+    <h1{{ title_attributes.addClass('show__title') }}>
+      {{ label }}
+    </h1>
+  </div>
+  <div class="show__promo-images">
+    {{ content.field_show_promo_images }}
+  </div>
+</header>
+{% endblock %}
+
+{% block contentarea %}
+<div{{ content_attributes.addClass('node__content') }}>
+  <div class="l-contain">
+    <div class="gw">
+      <div class="g one-whole lap-two-thirds desk-three-fifths">
+        <div class="block show__info">
+          {{ content|without('field_show_promo_images', 'field_cast') }}
+        </div>
+      </div>
+      <div class="g one-whole lap-one-third desk-two-fifths">
+        <section class="block">
+          {% if content.field_cast[0] is not empty %}
+          <h1 class="epsilon">Cast Members</h1>
+          {{ content.field_cast }}
+          {% endif %}
+        </section>
+      </div>
+    </div>
+  </div>
+  <section class="show__gallery">
+    <div class="l-contain">
+      {{ drupal_view('show_videos', 'block_videos_gallery') }}
+    </div>
+  </section>
+</div>
+{% endblock %}

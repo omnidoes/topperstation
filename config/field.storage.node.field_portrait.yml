@@ -1,0 +1,30 @@
+uuid: cc36a47b-80b7-42b5-a05f-5bfecc31e22f
+langcode: en
+status: true
+dependencies:
+  module:
+    - file
+    - image
+    - node
+id: node.field_portrait
+field_name: field_portrait
+entity_type: node
+type: image
+settings:
+  uri_scheme: public
+  default_image:
+    uuid: c08e1665-2c7d-4600-8c66-bd16bbb883e2
+    alt: 'Missing portrait.'
+    title: ''
+    width: 500
+    height: 500
+  target_type: file
+  display_field: false
+  display_default: false
+module: image
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

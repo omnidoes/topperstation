@@ -3,7 +3,6 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.brightcove_video.brightcove_video.field_release_date
     - image.style.thumbnail
   module:
     - brightcove
@@ -11,6 +10,7 @@ dependencies:
     - file
     - image
     - link
+    - path
 id: brightcove_video.brightcove_video.default
 targetEntityType: brightcove_video
 bundle: brightcove_video
@@ -36,12 +36,6 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_release_date:
-    weight: -7
-    settings: {  }
-    third_party_settings: {  }
-    type: datetime_default
-    region: content
   langcode:
     type: language_select
     weight: -25
@@ -64,6 +58,12 @@ content:
     settings:
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 30
+    region: content
+    settings: {  }
     third_party_settings: {  }
   player:
     type: options_select

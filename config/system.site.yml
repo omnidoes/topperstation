@@ -1,11 +1,11 @@
 uuid: 995596cd-8817-47b9-a618-3a2fd662276b
-name: topperstation
+name: 'Topper Station'
 mail: aaron.silber@omniperforms.com
 slogan: 'WLU-TV 14'
 page:
   403: ''
   404: ''
-  front: /node
+  front: /home
 admin_compact_mode: false
 weight_select_max: 100
 langcode: en

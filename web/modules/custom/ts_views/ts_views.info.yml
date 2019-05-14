@@ -1,0 +1,9 @@
+name: "Topper Station: Views Customizations"
+description: "Provides customizations to Topper Station's unique views."
+package: Custom
+
+type: module
+core: 8.x
+
+dependencies:
+  - drupal:views

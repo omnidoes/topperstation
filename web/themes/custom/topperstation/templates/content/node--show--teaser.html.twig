@@ -1,0 +1,24 @@
+{% extends 'node.html.twig' %}
+{% if bgImage is defined %}
+{% set attributes = attributes.setAttribute('style', 'background-image: url(' ~ bgImage ~ ');') %}
+{% endif %}
+{% set title_attributes = title_attributes.addClass('show__title') %}
+
+{% block titlearea %}
+  {{ title_prefix }}
+  {{ title_suffix }}
+{% endblock %}
+
+{% block contentarea %}
+<div class="show__content">
+  <a href="{{ url }}" rel="bookmark">
+    <h1{{ title_attributes }}>{{ label }}</h1>
+    <div class="icongroup icongroup--inline">
+      <div class="icongroup__icon">
+        {{ include(directory ~ '/img/icon--play.svg') }}
+      </div>
+      <div class="icongroup__text">Watch <span class="hide--palm">Online</span></div>
+    </div>
+  </a>
+</div>
+{% endblock %}

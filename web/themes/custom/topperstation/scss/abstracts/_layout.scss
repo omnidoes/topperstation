@@ -1,0 +1,27 @@
+
+%page-margins {
+  padding-left: 5vw;
+  padding-right: 5vw;
+
+  @include media-query(lap-and-up) {
+    padding-left: 2em;
+    padding-right: 2em;
+  }
+}
+
+.float--right {
+  float: right;
+}
+
+.float--left {
+  float: left;
+}
+
+.position--spotlight {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.expand {
+  width: 100%;
+}

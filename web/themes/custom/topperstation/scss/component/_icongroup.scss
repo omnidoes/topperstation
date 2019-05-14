@@ -1,0 +1,32 @@
+.icongroup {
+  text-align: center;
+
+  .icongroup__icon {
+
+  }
+
+  .icongroup__text {
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    font-weight: bold;
+    font-size: 0.777em;
+  }
+}
+
+  .icongroup--inline {
+
+    html.flexbox & {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+    }
+
+    html.no-flexbox & {
+      
+      & > * {
+        display: inline-block;
+      }
+    }
+  }

@@ -1,0 +1,14 @@
+player_page:
+  label: 'Player Page'
+  category: 'Topper Station'
+  template: layouts/player-page
+  default_region: main
+  regions:
+    top:
+      label: Top
+    player:
+      label: Player
+    recommended:
+      label: Recommended
+    bottom:
+      label: Bottom

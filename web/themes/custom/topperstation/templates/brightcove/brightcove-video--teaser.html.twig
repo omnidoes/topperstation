@@ -1,0 +1,41 @@
+{%
+  set classes = [
+    'video',
+    'video--brightcove',
+    'video' ~ '--' ~ elements['#view_mode']|clean_class,
+    'video' ~ '--' ~ (status ? 'active': 'inactive')
+  ]
+%}
+<article {{ attributes.addClass(classes) }}>
+  {{ title_prefix }}
+  <header class="video__header">
+    {% if status %}
+    <div class="icongroup">
+      <div class="icongroup__icon">
+        {{ include(directory ~ '/img/icon--play.svg') }}
+      </div>
+      <div class="icongroup__text">Watch</div>
+    </div>
+    {% endif %}
+    <div class="video__image">
+      {% if status %}
+      <a href="{{ elements.url }}">
+      {% endif %}
+      {% if not elements.poster['#items'] %}
+        <img src="http://placehold.it/1280x720&text=Default+Image" />
+      {% endif %}
+      {{ elements.poster }}
+      {% if status %}
+      </a>
+      {% endif %}
+    </div>
+  </header>
+  <div class="video__content">
+    {% if not status %}<div class="tag">Coming soon</div><br/>{% endif %}
+    <h1 class="video__title">{{ elements.name }}</h1>
+    {{ elements.description }}
+  </div>
+  {% if status %}
+  <div class="video__read-more"><a href="{{ elements.url }}"></a></div>
+  {% endif %}
+</article>

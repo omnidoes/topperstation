@@ -1,0 +1,23 @@
+{#
+/**
+ * @file brightcove-video.html.twig
+ * Default theme implementation to display Brightcove video entity.
+ */
+#}
+{%
+  set classes = [
+    'video',
+    'video--brightcove',
+    'video' ~ '--' ~ elements['#view_mode']|clean_class,
+    'video' ~ '--' ~ (status ? 'active': 'inactive')
+  ]
+%}
+<div class="l-contain">
+  <article {{ attributes.addClass(classes) }}>
+    {{ elements.brightcove_video_player }}
+    <div class="video__content">
+      <h1>{{ elements.name }}</h1>
+      {{ elements.long_description }}
+    </div>
+  </article>
+</div>

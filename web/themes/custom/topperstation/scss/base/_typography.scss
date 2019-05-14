@@ -1,0 +1,89 @@
+//
+// Basic typography style for copy text
+//
+
+
+html {
+  font: #{($mobile-font-size/16px)*1em}/#{$line-height-ratio} sans-serif;
+
+  @include media-query(lap-and-up) {
+    font: #{($base-font-size/16px)*1em}/#{$line-height-ratio} sans-serif;
+  }
+
+  &.wf-loading {
+    visibility: hidden;
+  }
+
+  &.wf-active {
+    visibility: visible;
+  }
+}
+
+body {
+  @include font('body', normal);
+  color: $default-text-color;
+}
+
+h1, h2, h3, h4, h5, h6, hgroup,
+ul, ol, dd,
+p, figure, blockquote,
+pre, table, fieldset, hr {
+  margin-bottom: #{$line-height-ratio}rem;
+}
+
+//
+// Headings
+//
+h1, h2, h3, h4, h5, h6,
+.alpha, .beta, .gamma, .delta, .epsilon, .zeta {
+  @include font('headings', 700);
+}
+
+h1, .alpha		{		@include font-size($h1-size, $heading-line-height); }
+h2, .beta		{		@include font-size($h2-size, $heading-line-height); }
+h3, .gamma		{		@include font-size($h3-size, $heading-line-height); }
+h4, .delta		{		@include font-size($h4-size, $heading-line-height); }
+h5, .epsilon	{		@include font-size($h5-size, $heading-line-height); }
+h6, .zeta		{		@include font-size($h6-size, $heading-line-height); }
+
+
+.page__title {
+  margin: 0;
+  //text-align: center;
+}
+
+hr {
+  margin: 1rem 0;
+}
+
+
+//
+// Links
+//
+
+a {
+  position: relative;
+  z-index: 1;
+  color: $link-default;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+strong, b {
+  font-weight: 700;
+}
+
+.text--center,
+.rtecenter {
+  text-align: center;
+}
+
+.text--callout {
+  font-size: 1.3em;
+}
+
+.text--emphasis {
+  font-style: italic;
+}

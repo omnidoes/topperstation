@@ -4,6 +4,9 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
+    - field.field.node.show.field_show_collections
+    - field.field.node.show.field_show_description
+    - field.field.node.show.field_show_promo_images
     - field.field.node.show.field_teaser_image
     - node.type.show
   module:
@@ -12,11 +15,10 @@ id: node.show.teaser
 targetEntityType: node
 bundle: show
 mode: teaser
-content:
-  links:
-    weight: 100
-    settings: {  }
-    third_party_settings: {  }
-    region: content
+content: {  }
 hidden:
+  field_show_collections: true
+  field_show_description: true
+  field_show_promo_images: true
   field_teaser_image: true
+  links: true

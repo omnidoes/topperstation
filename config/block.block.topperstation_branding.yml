@@ -1,0 +1,25 @@
+uuid: 8684cbf7-b83b-421c-8cc4-234de882dfcb
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - topperstation
+_core:
+  default_config_hash: NDwadleLD3YVSbDUaakxyYZyINYtkFtOVGShfq4kWy8
+id: topperstation_branding
+theme: topperstation
+region: header
+weight: -4
+provider: null
+plugin: system_branding_block
+settings:
+  id: system_branding_block
+  label: 'Site branding'
+  provider: system
+  label_display: '0'
+  use_site_logo: true
+  use_site_name: false
+  use_site_slogan: false
+visibility: {  }

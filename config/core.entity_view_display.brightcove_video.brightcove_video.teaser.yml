@@ -4,166 +4,70 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.brightcove_video.teaser
-    - field.field.brightcove_video.brightcove_video.field_release_date
   module:
     - brightcove
-    - datetime
-    - file
     - image
-    - link
+    - smart_trim
 id: brightcove_video.brightcove_video.teaser
 targetEntityType: brightcove_video
 bundle: brightcove_video
 mode: teaser
 content:
-  brightcove_custom_fields:
-    weight: 13
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  brightcove_video_player:
-    weight: 0
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  bumper_video:
-    type: file_video
-    weight: 14
-    region: content
-    label: above
-    settings:
-      muted: false
-      width: 640
-      height: 480
-      controls: true
-      autoplay: false
-      loop: false
-      multiple_file_display_type: tags
-    third_party_settings: {  }
-  created:
-    label: inline
-    type: timestamp
-    weight: 12
-    region: content
-    settings:
-      date_format: medium
-      custom_date_format: ''
-      timezone: ''
-    third_party_settings: {  }
   description:
-    type: basic_string
-    label: hidden
+    type: smart_trim
     weight: 1
     region: content
-    settings: {  }
-    third_party_settings: {  }
-  geo_countries:
-    type: string
-    weight: 15
-    region: content
-    label: above
+    label: hidden
     settings:
-      link_to_entity: false
-    third_party_settings: {  }
-  long_description:
-    type: basic_string
-    label: above
-    weight: 4
-    region: content
-    settings: {  }
+      trim_length: 140
+      trim_type: chars
+      trim_suffix: …
+      wrap_class: trimmed
+      more_text: More
+      more_class: more-link
+      wrap_output: false
+      more_link: false
+      trim_options:
+        text: false
+        trim_zero: false
+      summary_handler: full
     third_party_settings: {  }
   poster:
     type: image
-    label: above
-    weight: 7
+    weight: 0
     region: content
+    label: hidden
     settings:
       image_style: ''
       image_link: ''
-    third_party_settings: {  }
-  reference_id:
-    type: string
-    label: inline
-    weight: 3
-    region: content
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-  related_link:
-    type: link
-    label: inline
-    weight: 2
-    settings:
-      trim_length: 150
-      target: _blank
-      url_only: false
-      url_plain: false
-      rel: ''
-    region: content
-    third_party_settings: {  }
-  schedule_ends_at:
-    type: datetime_default
-    label: inline
-    weight: 10
-    region: content
-    settings:
-      format_type: medium
-      timezone_override: ''
-    third_party_settings: {  }
-  schedule_starts_at:
-    type: datetime_default
-    label: inline
-    weight: 9
-    region: content
-    settings:
-      format_type: medium
-      timezone_override: ''
-    third_party_settings: {  }
-  text_tracks:
-    type: entity_reference_label
-    weight: 11
-    region: content
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-  thumbnail:
-    type: image
-    label: above
-    weight: 8
-    region: content
-    settings:
-      image_style: ''
-      image_link: ''
-    third_party_settings: {  }
-  video_file:
-    type: file_url_plain
-    label: inline
-    weight: 5
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  video_url:
-    type: uri_link
-    label: inline
-    weight: 6
-    settings: {  }
-    region: content
     third_party_settings: {  }
 hidden:
   api_client: true
+  brightcove_custom_fields: true
+  brightcove_video_player: true
+  bumper_video: true
+  created: true
   duration: true
   economics: true
-  field_release_date: true
+  geo_countries: true
   geo_exclude_countries: true
   geo_restricted: true
   logo_alignment: true
   logo_image: true
   logo_tooltip: true
   logo_url: true
+  long_description: true
   player: true
+  reference_id: true
+  related_link: true
+  schedule_ends_at: true
+  schedule_starts_at: true
   status: true
   tags: true
+  text_tracks: true
+  thumbnail: true
   uid: true
+  video_file: true
   video_id: true
+  video_url: true
   viral: true

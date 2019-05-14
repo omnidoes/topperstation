@@ -1,0 +1,23 @@
+.person {
+
+}
+
+  .person--teaser {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 1rem;
+    
+    .person__title {
+      margin: 0;
+      font-size: 1em;
+      // @include font('body', normal);
+    }
+
+    .person__portrait {
+      margin-right: 1em;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+  }

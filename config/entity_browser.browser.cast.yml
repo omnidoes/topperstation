@@ -1,0 +1,31 @@
+uuid: 08d5b07f-00fb-41e4-8d61-72b3d634ad22
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.cast
+  module:
+    - views
+name: cast
+label: 'Cast Members'
+display: modal
+display_configuration:
+  width: '650'
+  height: '500'
+  link_text: 'Select cast'
+  auto_open: false
+selection_display: no_display
+selection_display_configuration: {  }
+widget_selector: tabs
+widget_selector_configuration: {  }
+widgets:
+  f371c4d9-9e5b-4655-9696-6d74fb82f31f:
+    settings:
+      view: cast
+      view_display: entity_browser_1
+      submit_text: 'Select cast members'
+      auto_select: false
+    uuid: f371c4d9-9e5b-4655-9696-6d74fb82f31f
+    weight: 1
+    label: view
+    id: view

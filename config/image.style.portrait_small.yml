@@ -1,0 +1,17 @@
+uuid: e18f63c6-b2ed-47b7-85f3-da2444969834
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: portrait_small
+label: 'Portrait Small'
+effects:
+  257c9375-77c2-4003-8b66-078c1bc70484:
+    uuid: 257c9375-77c2-4003-8b66-078c1bc70484
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 60
+      height: 60
+      crop_type: focal_point

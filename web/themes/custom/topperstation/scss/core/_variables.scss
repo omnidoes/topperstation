@@ -1,0 +1,70 @@
+
+// 
+// Layout Settings
+// 
+
+$responsive: 				true;
+$responsive-extra: 	true;
+$responsive-push: 	true;
+$responsive-pull: 	true;
+
+// Responsive Breakpoints
+$lap-start:         42em !default;
+$desk-start:        60em !default;
+$desk-wide-start: 	74em !default;
+
+// 
+// Type Settings
+// 
+
+// Base font sizes
+$mobile-font-size:  	16px !default;
+$mobile-line-height:	24px !default;
+
+$base-font-size:    	18px !default;
+$base-line-height:  	25px !default;
+$heading-line-height: 1.111 !default;
+
+// Heading sizes in pixels
+$h1-size:           46px !default; // .alpha
+$h2-size:           34px !default; // .beta
+$h3-size:           30px !default; // .gamma
+$h4-size:           28px !default; // .delta
+$h5-size:           22px !default; // .epsilon
+$h6-size:           18px !default; // .zeta
+
+
+$base-spacing-unit: $base-line-height !default;
+$half-spacing-unit: $base-spacing-unit / 2 !default;
+$line-height-ratio: $base-line-height / $base-font-size;
+$mobile-line-height-ratio: $mobile-line-height / $base-font-size;
+
+
+
+//
+// UI
+//
+
+// Navburger icon settings
+$patty-width: 					34px;
+$patty-thickness: 			5px;
+$patty-spacing: 				6px;
+
+
+//
+// Colors
+//
+
+$black:             #292929;
+$yellow:            #FFCD33;
+$yellow-orange:     #FFAA33;
+
+
+$default-text-color: $black;
+$page-background: #fff;
+
+$link-default: 	#0000ff;
+
+%default-box-shadow {
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1);
+}

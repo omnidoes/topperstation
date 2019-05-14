@@ -1,0 +1,180 @@
+@mixin font($family, $weight: 400, $style: normal) {
+  $font-weight: $weight;
+  $font-style:  $style;
+  $fallbacks: sans-serif;
+
+  @if ($family == 'headings') {
+    $family: 'open-sans-condensed';
+    $fallbacks: Arial, sans-serif;
+  }
+
+  @if ($family == 'body') {
+    $family: 'open-sans';
+    $fallbacks: Arial, sans-serif;
+  }
+ 
+  // Translate Weight
+  @if ($weight == 100) or ($weight == thin) or ($weight == ultralight) {
+    $weight: 1;
+  }
+  @if ($weight == 200) or ($weight == extralight) {
+    $weight: 2;
+  }
+  @if ($weight == 300) or ($weight == light) {
+    $weight: 3;
+  }
+  @if ($weight == 400) or ($weight == normal) or ($weight == book) {
+    $weight: 4;
+  }
+  @if ($weight == 500) or ($weight == medium) {
+    $weight: 5;
+  }
+  @if ($weight == 600) or ($weight == semibold) or ($weight == demi) {
+    $weight: 6;
+  }
+  @if ($weight == 700) or ($weight == bold) {
+    $weight: 7;
+  }
+  @if ($weight == 800) or ($weight == extrabold) {
+    $weight: 8;
+  }
+  @if ($weight == 900) or ($weight == black) or ($weight == heavy) {
+    $weight: 9;
+  }
+ 
+  // Translate Style
+  @if $style == normal {
+    $style: n;
+  }
+  @else if $style == italic {
+    $style: i;
+  }
+ 
+  // Assemble $font-family
+  $primary-font:   $family + '-' + $style + $weight;
+  $secondary-font: $family;
+
+  $font-family:    '#{$primary-font}', '#{$secondary-font}', $fallbacks;
+ 
+  font-family: $font-family;
+  font-style:  $font-style;
+  font-weight: $font-weight;
+}
+
+
+/**
+ * Create a fully formed type style (sizing and vertical rhythm) by passing in a
+ * single value, e.g.:
+ * 
+   `@include font-size(10px);`
+ * 
+ * Thanks to @redclov3r for the `line-height` Sass:
+ * twitter.com/redclov3r/status/250301539321798657
+ */
+@mixin font-size($font-size, $line-height: true) {
+  font-size: $font-size;
+  font-size: ($font-size / $base-font-size)*1rem;
+
+  @if($line-height != false) {
+    
+    @if($line-height == true) {
+      line-height: ceil($font-size / $base-line-height) * ($base-line-height / $font-size);
+    }
+    @else {
+      line-height: $line-height;
+    }
+  }
+}
+
+
+/**
+ * Media query mixin.
+ *
+ * It’s not great practice to define solid breakpoints up-front, preferring to
+ * modify your design when it needs it, rather than assuming you’ll want a
+ * change at ‘mobile’. However, as inuit.css is required to take a hands off
+ * approach to design decisions, this is the closest we can get to baked-in
+ * responsiveness. It’s flexible enough to allow you to set your own breakpoints
+ * but solid enough to be frameworkified.
+ * 
+ * We define some broad breakpoints in our vars file that are picked up here
+ * for use in a simple media query mixin. Our options are:
+ *
+ * palm
+ * lap
+ * lap-and-up
+ * portable
+ * desk
+ * desk-wide
+ * 
+ * Not using a media query will, naturally, serve styles to all devices.
+ * 
+ * `@include media-query(palm){ [styles here] }`
+ * 
+ * We work out your end points for you:
+ */
+$palm-end:              $lap-start - 0.01em;
+$lap-end:               $desk-start - 0.01em;
+
+@mixin media-query($media-query) {
+
+  @if $media-query == palm {
+    @media only screen and (max-width: $palm-end) { @content; }
+  }
+  @if $media-query == lap {
+    @media only screen and (min-width: $lap-start) and (max-width: $lap-end) { @content; }
+  }
+  @if $media-query == lap-and-up {
+    @media only screen and (min-width: $lap-start) { @content; }
+  }
+  @if $media-query == portable {
+    @media only screen and (max-width: $lap-end) { @content; }
+  }
+  @if $media-query == desk {
+    @media only screen and (min-width: $desk-start) { @content; }
+  }
+  @if $media-query == desk-wide {
+    @media only screen and (min-width: $desk-wide-start) { @content; }
+  }
+}
+
+
+/*
+ * Returns the ratio of a height to it's width as a percentage
+ * 
+ * $first (integer, pixels)
+ * $second (integer, pixels)
+ */
+@function aspect-ratio($first, $second) {
+  @return ($second *1000) / ($first*1000) * 100%;
+}
+
+
+/*
+ * Clothoid Gradient
+ */
+@mixin clothoid-gradient($color: #000000, $alpha-from: 1, $alpha-to: 0) {
+  $diff: $alpha-from - $alpha-to;
+  background-image: linear-gradient(
+    rgba($color, $alpha-from) 0%,
+    rgba($color, $alpha-from - $diff*0.7) 50%,
+    rgba($color, $alpha-from - $diff*0.85) 65%,
+    rgba($color, $alpha-from - $diff*0.925) 75.5%,
+    rgba($color, $alpha-from - $diff*0.963) 82.85%,
+    rgba($color, $alpha-from - $diff*0.981) 88%,
+    rgba($color, $alpha-to) 100%
+  );
+}
+
+
+@mixin word-wrap() {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  // -ms-word-break: break-all;
+  word-break: break-all;
+  word-break: break-word;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}

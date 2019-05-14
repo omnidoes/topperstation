@@ -15,3 +15,6 @@ permissions:
   - 'search content'
   - 'use text format restricted_html'
   - 'view media'
+  - 'view published brightcove playlists'
+  - 'view published brightcove text track entities'
+  - 'view published brightcove videos'
