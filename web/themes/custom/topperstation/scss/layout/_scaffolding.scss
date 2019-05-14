@@ -21,7 +21,8 @@
 }
 
 .l-contain--wide {
-  max-width: 100vw;
+  @extend %l-contain;
+  max-width: $desk-wide-start + 10em;
 }
 
 .l-contain--flush {

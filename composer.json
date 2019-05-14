@@ -153,7 +153,9 @@
                 "2921404-16: Use context in variant JS to be compatible with BigPipe": 
                     "https://www.drupal.org/files/issues/2018-03-14/2921404-16.patch",
                 "2799885-11: Warning: Missing argument 1 for Drupal page manager...":
-                    "https://www.drupal.org/files/issues/2018-04-14/2799885-11.patch"
+                    "https://www.drupal.org/files/issues/2018-04-14/2799885-11.patch",
+                "3033057-15: Page Manager currently not working with CTools 3.1+":
+                    "https://www.drupal.org/files/issues/2019-02-26/3033057-ctools31-15.patch"
             },
             "drupal/entity_browser": {
                 "2973457-129: Add option for field widget to display as table":

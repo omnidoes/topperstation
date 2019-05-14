@@ -3,6 +3,9 @@
 }
 
 
+/**
+ * Full Display
+ */
 .show--full {
 
   .show__header {
@@ -35,6 +38,18 @@
     }
 
     img { width: 100%; }
+  }
+
+  .show__cast {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+
+    & > .field__value {
+      flex: 1 0 50%;
+      min-width: 190px;
+    }
   }
 
   .show__gallery {
@@ -116,6 +131,9 @@
 }
 
 
+/**
+ * Teaser Display
+ */
 .show--teaser {
   position: relative;
   max-width: 400px; 

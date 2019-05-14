@@ -18,19 +18,24 @@
   <div class="l-contain">
     <div class="gw">
       <div class="g one-whole lap-two-thirds desk-three-fifths">
-        <div class="block">
-          {{ content|without('field_show_promo_images') }}
+        <div class="block show__info">
+          {{ content|without('field_show_promo_images', 'field_cast') }}
         </div>
       </div>
       <div class="g one-whole lap-one-third desk-two-fifths">
-        CAST
+        <section class="block">
+          {% if content.field_cast[0] is not empty %}
+          <h1 class="epsilon">Cast Members</h1>
+          {{ content.field_cast }}
+          {% endif %}
+        </section>
       </div>
     </div>
   </div>
-  <div class="show__gallery">
+  <section class="show__gallery">
     <div class="l-contain">
       {{ drupal_view('show_videos', 'block_videos_gallery') }}
     </div>
-  </div>
+  </section>
 </div>
 {% endblock %}

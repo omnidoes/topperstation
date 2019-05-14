@@ -12,12 +12,11 @@
     'video' ~ '--' ~ (status ? 'active': 'inactive')
   ]
 %}
-<div class="l-contain">
-  <article {{ attributes.addClass(classes) }}>
-    {{ elements.brightcove_video_player }}
-    <div class="video__content">
-      <h1>{{ elements.name }}</h1>
-      {{ elements.long_description }}
-    </div>
-  </article>
-</div>
+<article {{ attributes.addClass(classes) }}>
+  {{ elements.brightcove_video_player }}
+  <div class="video__content">
+    <h1>{{ elements.name }}</h1>
+    {{ elements.long_description }}
+    {{ elements.tags }}
+  </div>
+</article>

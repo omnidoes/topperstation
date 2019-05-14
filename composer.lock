@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e1f36c8a3553c9811b682c2377f14ee2",
+    "content-hash": "bae2b8a3d6083fccd95d7baef928f5c3",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -2882,7 +2882,8 @@
                 },
                 "patches_applied": {
                     "2921404-16: Use context in variant JS to be compatible with BigPipe": "https://www.drupal.org/files/issues/2018-03-14/2921404-16.patch",
-                    "2799885-11: Warning: Missing argument 1 for Drupal page manager...": "https://www.drupal.org/files/issues/2018-04-14/2799885-11.patch"
+                    "2799885-11: Warning: Missing argument 1 for Drupal page manager...": "https://www.drupal.org/files/issues/2018-04-14/2799885-11.patch",
+                    "3033057-15: Page Manager currently not working with CTools 3.1+": "https://www.drupal.org/files/issues/2019-02-26/3033057-ctools31-15.patch"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
@@ -2902,6 +2903,10 @@
                 {
                     "name": "japerry",
                     "homepage": "https://www.drupal.org/user/45640"
+                },
+                {
+                    "name": "manuel.adan",
+                    "homepage": "https://www.drupal.org/user/516420"
                 }
             ],
             "description": "Provides a way to place blocks on a custom page.",
@@ -4238,7 +4243,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/kenwheeler/slick.git",
+                "url": "git@github.com:kenwheeler/slick.git",
                 "reference": "a2aa3fec335c50aceb58f6ef6d22df8e5f3238e1"
             },
             "dist": {

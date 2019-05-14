@@ -64,3 +64,9 @@
     }
   }
 }
+
+.block--player {
+  background: $black url('../img/swirls.svg') no-repeat;
+  background-size: cover;
+  color: white;
+}
