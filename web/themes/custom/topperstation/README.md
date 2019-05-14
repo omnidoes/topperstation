@@ -1,7 +1,8 @@
 # topperstation
 [![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/Lullabot/topperstation?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-A starter theme for Drupal. It's pretty light. It's made to be cloned and then hacked, please don't use me as a base theme!
+A starter theme for Drupal. It's pretty light. It's made to be cloned and then hacked, 
+please don't use me as a base theme!
 
 A Ruby Sass version of this theme can be found on the branch ruby-sass.
 
@@ -31,7 +32,8 @@ $ bower update
 
 You can also enable sourcemaps and full tracebacks on error in Gruntfile.js
 
-If you wish to rename topperstation to a different name (which you probably do), YMMV but you can try:
+If you wish to rename topperstation to a different name (which you probably do), 
+YMMV but you can try:
 ```bash
 $ grep -rl topperstation * | xargs sed -i .bk 's/topperstation/mytheme/g'
 $ rm *.bk
@@ -58,11 +60,16 @@ $ grunt watch
 
 This task will automatically compile Sass when changes are detected in the `.scss` files.
 
-If you're using ```grunt watch``` and click the [LiveReload](https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei?hl=en) button, your browser will refresh automatically when Grunt spots a change to your sass files.
+If you're using ```grunt watch``` and click the [LiveReload](https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei?hl=en) 
+button, your browser will refresh automatically when Grunt spots a change to your sass files.
 
 ### Autoprefixer
 
-topperstation uses [Autoprefixer](https://github.com/postcss/autoprefixer) to automatically add browser prefixes to your css properties based on your configuration. By default, autoprefixer is set to support the last 3 versions of browsers, and IE9 and up. You can modify this within Gruntfile.js using the the [syntax documented on the browserlist plugin page](https://github.com/ai/browserslist#queries).
+topperstation uses [Autoprefixer](https://github.com/postcss/autoprefixer) to automatically 
+add browser prefixes to your css properties based on your configuration. By default, 
+autoprefixer is set to support the last 3 versions of browsers, and IE9 and up. You can 
+modify this within Gruntfile.js using the the 
+[syntax documented on the browserlist plugin page](https://github.com/ai/browserslist#queries).
 
 ### Wire Dependencies
 
@@ -70,11 +77,13 @@ topperstation uses [Autoprefixer](https://github.com/postcss/autoprefixer) to au
 $ grunt wiredep
 ```
 
-This will wire the Bower components specified in ```bower.json``` into ```topperstation.info``` and ```_vendor.scss``` (See below).
+This will wire the Bower components specified in ```bower.json``` into 
+```topperstation.info``` and ```_vendor.scss``` (See below).
 
 ## Dependencies
 
-This will add your externally obtained JavaScript and CSS, as well as all it's necessary dependencies, into topperstation.info
+This will add your externally obtained JavaScript and CSS, as well as all it's 
+necessary dependencies, into topperstation.info
 
 ```bash
 $ bower install <package> --save
@@ -88,11 +97,14 @@ $ bower install susy --save
 $ grunt wiredep
 ```
 
-Where <package> is a registered package, GitHub shorthand (e.g. " desandro/masonry"), Git endpoint (e.g. "git://github.com/user/package.git") or a URL (e.g. "http://example.com/script.js").
+Where <package> is a registered package, GitHub shorthand (e.g. " desandro/masonry"), 
+Git endpoint (e.g. "git://github.com/user/package.git") or a URL 
+(e.g. "http://example.com/script.js").
 You can also edit ```bower.json``` directly.
 
 ## Template Suggestions and Classes
-Template suggestions across all core (Node, User, Taxonomy Term and Comment) and Entity API defined entity types have been normalised to the following:
+Template suggestions across all core (Node, User, Taxonomy Term and Comment) and 
+Entity API defined entity types have been normalised to the following:
 
 ```
 <entity type>
