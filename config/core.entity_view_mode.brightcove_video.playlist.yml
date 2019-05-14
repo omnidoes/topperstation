@@ -1,0 +1,10 @@
+uuid: c8d37a8e-6b00-496d-8542-b82a1531ce29
+langcode: en
+status: true
+dependencies:
+  module:
+    - brightcove
+id: brightcove_video.playlist
+label: Playlist
+targetEntityType: brightcove_video
+cache: true

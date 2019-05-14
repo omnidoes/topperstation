@@ -1,37 +1,30 @@
-uuid: 008dfd44-3bfd-4530-a555-d830770da593
+uuid: e9a26a78-3cc3-4b41-ac95-a12a1488fcae
 langcode: en
 status: true
 dependencies:
+  config:
+    - core.entity_view_mode.brightcove_video.playlist
   module:
     - brightcove
-id: brightcove_video.brightcove_video.default
+    - image
+id: brightcove_video.brightcove_video.playlist
 targetEntityType: brightcove_video
 bundle: brightcove_video
-mode: default
+mode: playlist
 content:
-  brightcove_video_player:
+  poster:
+    type: image
     weight: 0
     region: content
-    settings: {  }
-    third_party_settings: {  }
-  long_description:
-    type: basic_string
     label: hidden
-    weight: 1
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  tags:
-    type: entity_reference_label
-    weight: 2
-    region: content
-    label: inline
     settings:
-      link: false
+      image_style: ''
+      image_link: ''
     third_party_settings: {  }
 hidden:
   api_client: true
   brightcove_custom_fields: true
+  brightcove_video_player: true
   bumper_video: true
   created: true
   description: true
@@ -44,13 +37,14 @@ hidden:
   logo_image: true
   logo_tooltip: true
   logo_url: true
+  long_description: true
   player: true
-  poster: true
   reference_id: true
   related_link: true
   schedule_ends_at: true
   schedule_starts_at: true
   status: true
+  tags: true
   text_tracks: true
   thumbnail: true
   uid: true

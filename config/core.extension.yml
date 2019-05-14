@@ -60,6 +60,7 @@ module:
   slick: 0
   slick_ui: 0
   smart_trim: 0
+  statistics: 0
   system: 0
   taxonomy: 0
   text: 0

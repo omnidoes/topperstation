@@ -1,0 +1,70 @@
+uuid: 89aef226-dfc3-47f5-9793-491e504513a8
+langcode: en
+status: true
+dependencies:
+  config:
+    - page_manager.page.brightcove_video
+    - views.view.videos
+  module:
+    - ctools
+    - panels
+    - system
+    - views
+id: brightcove_video-panels_variant-0
+label: Default
+variant: panels_variant
+variant_settings:
+  blocks:
+    9f5ceb82-1dfa-4da1-96ef-57a5b670ddd3:
+      id: 'entity_view:brightcove_video'
+      label: 'Entity view (Brightcove Video)'
+      provider: ctools
+      label_display: '0'
+      view_mode: default
+      region: player
+      weight: 0
+      uuid: 9f5ceb82-1dfa-4da1-96ef-57a5b670ddd3
+      context_mapping:
+        entity: brightcove_video
+    b1d9312b-b776-4d9e-abc9-15c825b83890:
+      id: 'views_block:videos-block_recommended'
+      label: Recommended
+      provider: views
+      label_display: visible
+      views_label: Recommended
+      items_per_page: none
+      region: recommended
+      weight: 0
+      uuid: b1d9312b-b776-4d9e-abc9-15c825b83890
+      context_mapping: {  }
+    ac2eadf1-922d-4a0e-9bea-e0090d84dc11:
+      id: local_tasks_block
+      label: Tabs
+      provider: core
+      label_display: '0'
+      primary: true
+      secondary: false
+      region: top
+      weight: 0
+      uuid: ac2eadf1-922d-4a0e-9bea-e0090d84dc11
+      context_mapping: {  }
+  id: panels_variant
+  uuid: d2f46d35-ac40-4437-8589-1e02a621bb27
+  label: null
+  weight: 0
+  layout: player_page
+  layout_settings: {  }
+  page_title: ''
+  storage_type: page_manager
+  storage_id: brightcove_video-panels_variant-0
+  builder: standard
+page: brightcove_video
+weight: 0
+selection_criteria:
+  -
+    id: request_path
+    pages: '/watch/*'
+    negate: false
+    context_mapping: {  }
+selection_logic: and
+static_context: {  }

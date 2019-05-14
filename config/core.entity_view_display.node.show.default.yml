@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.node.show.field_cast
     - field.field.node.show.field_show_collections
     - field.field.node.show.field_show_description
     - field.field.node.show.field_show_promo_images
@@ -17,8 +18,17 @@ targetEntityType: node
 bundle: show
 mode: default
 content:
-  field_show_description:
+  field_cast:
     weight: 1
+    label: hidden
+    settings:
+      view_mode: teaser
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
+  field_show_description:
+    weight: 2
     label: hidden
     settings: {  }
     third_party_settings: {  }

@@ -7,7 +7,7 @@ dependencies:
 id: brightcove_video_page
 label: 'Brightcove Video Page'
 type: 'canonical_entities:brightcove_video'
-pattern: 'watch/[current-page:title]'
+pattern: 'watch/[brightcove_video:name]'
 selection_criteria: {  }
 selection_logic: and
 weight: 0

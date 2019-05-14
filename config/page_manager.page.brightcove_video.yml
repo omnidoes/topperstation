@@ -1,0 +1,16 @@
+uuid: 31ec718e-0c91-4488-a817-e4fccb908b75
+langcode: en
+status: true
+dependencies: {  }
+id: brightcove_video
+label: 'Brightcove Video'
+description: 'Player interface for brightcove videos.'
+use_admin_theme: false
+path: '/brightcove_video/{brightcove_video}'
+access_logic: and
+access_conditions: {  }
+parameters:
+  brightcove_video:
+    machine_name: brightcove_video
+    type: 'entity:brightcove_video'
+    label: brightcove_video

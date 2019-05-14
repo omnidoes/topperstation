@@ -3,6 +3,8 @@ langcode: en
 status: true
 dependencies:
   config:
+    - entity_browser.browser.cast
+    - field.field.node.show.field_cast
     - field.field.node.show.field_show_collections
     - field.field.node.show.field_show_description
     - field.field.node.show.field_show_promo_images
@@ -11,6 +13,7 @@ dependencies:
     - image.style.thumbnail
     - node.type.show
   module:
+    - entity_browser
     - field_group
     - focal_point
     - image
@@ -42,9 +45,23 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_cast:
+    weight: 10
+    settings:
+      entity_browser: cast
+      field_widget_display: label
+      field_widget_remove: true
+      open: true
+      selection_mode: selection_append
+      field_widget_edit: false
+      field_widget_replace: false
+      field_widget_display_settings: {  }
+    third_party_settings: {  }
+    type: entity_browser_entity_reference
+    region: content
   field_show_collections:
     type: entity_reference_paragraphs
-    weight: 10
+    weight: 11
     settings:
       title: Paragraph
       title_plural: Paragraphs
