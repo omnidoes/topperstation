@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bae2b8a3d6083fccd95d7baef928f5c3",
+    "content-hash": "d8eb206c196c5f2f22ba34d1d784e4ad",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -1529,7 +1529,8 @@
                     }
                 },
                 "patches_applied": {
-                    "2875507-8: Hoping someone can tell me how to use a template for brightcove...": "https://www.drupal.org/files/issues/2018-08-22/Brightcove-add-entity-template-2875507-8.patch"
+                    "2875507-8: Hoping someone can tell me how to use a template for brightcove...": "https://www.drupal.org/files/issues/2018-08-22/Brightcove-add-entity-template-2875507-8.patch",
+                    "2873478-9: Can no longer get thumbails when syncing": "https://www.drupal.org/files/issues/brightcove-can_no_longer_get-2873478-9.patch"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",

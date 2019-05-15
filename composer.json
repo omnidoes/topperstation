@@ -163,7 +163,9 @@
             },
             "drupal/brightcove": {
                 "2875507-8: Hoping someone can tell me how to use a template for brightcove...":
-                    "https://www.drupal.org/files/issues/2018-08-22/Brightcove-add-entity-template-2875507-8.patch"
+                    "https://www.drupal.org/files/issues/2018-08-22/Brightcove-add-entity-template-2875507-8.patch",
+                "2873478-9: Can no longer get thumbails when syncing":
+                    "https://www.drupal.org/files/issues/brightcove-can_no_longer_get-2873478-9.patch"
             },
             "drupal/panelizer": {
                 "3034080-03: Change panelizer store":
