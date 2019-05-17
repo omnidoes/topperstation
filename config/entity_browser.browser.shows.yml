@@ -1,0 +1,31 @@
+uuid: 81ae34f2-5a88-4b22-b8a1-5fee8756233a
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.shows
+  module:
+    - views
+name: shows
+label: Shows
+display: modal
+display_configuration:
+  width: '650'
+  height: '500'
+  link_text: 'Select shows'
+  auto_open: false
+selection_display: no_display
+selection_display_configuration: {  }
+widget_selector: tabs
+widget_selector_configuration: {  }
+widgets:
+  ade029b6-9df7-4cd3-987b-65caab25f237:
+    settings:
+      view: shows
+      view_display: entity_browser_1
+      submit_text: 'Select shows'
+      auto_select: false
+    uuid: ade029b6-9df7-4cd3-987b-65caab25f237
+    weight: 1
+    label: view
+    id: view
