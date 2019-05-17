@@ -70,6 +70,50 @@ function topperstation_preprocess_node(array &$variables, $hook) {
 }
 
 /**
+ * Implements hook_preprocess_hook().
+ */
+function topperstation_preprocess_block(array &$variables, $hook) {
+  $bundleType = '';
+
+  if (isset($variables['elements']['content']['#block_content'])) {
+    $bundleType = $variables['elements']['content']['#block_content']->bundle();
+  }
+
+  switch ($bundleType) {
+    case 'video_list':
+      // How many values, summing videos and the show endcap, should display?
+      $totalValueLimit = 4;
+
+      $fieldShowEndcap = &$variables['content']['field_show_endcap'];
+      $fieldVideos = &$variables['content']['field_videos'];
+
+      $showsValueCount = $fieldShowEndcap['#items']->count();
+      $videosValueCount = $fieldVideos['#items']->count();
+
+      $videosValueLimit = $totalValueLimit - $showsValueCount;
+      $videosToRemove = $videosValueCount - $videosValueLimit;
+
+      if ($videosValueCount > $videosValueLimit) {
+        for ($i = $videosValueCount; $i >= $videosValueLimit; $i--) {
+          unset($fieldVideos[$i]);
+        }
+
+        $user = \Drupal::currentUser();
+        if ($user->hasPermission('create video_list block content')) {
+          $messageQuantity = $videosToRemove . ' ' . \Drupal::translation()->formatPlural($videosToRemove, 'video is', 'videos are');
+          \Drupal::messenger()->addWarning($messageQuantity . ' being hidden in the <em>' . $variables['label'] . '</em> video list due to a ' . $totalValueLimit . ' item display limit.');
+        }
+      }
+
+      break;
+
+    default:
+      // code...
+      break;
+  }
+}
+
+/**
  * Implements hook_theme_suggestions_alter().
  */
 function topperstation_theme_suggestions_alter(array &$suggestions, array $variables, $hook) {
@@ -86,6 +130,18 @@ function topperstation_theme_suggestions_alter(array &$suggestions, array $varia
     if ($node_id && ($node = Node::load($node_id))) {
       $content_type = $node->bundle();
       $suggestions[] = 'page__' . $content_type;
+    }
+  }
+
+  if ($hook === 'block') {
+    // Block suggestions for custom block bundles.
+    if (isset($variables['elements']['content']['#block_content'])) {
+      array_splice(
+        $suggestions,
+        1,
+        0,
+        'block__bundle__' . $variables['elements']['content']['#block_content']->bundle()
+      );
     }
   }
 

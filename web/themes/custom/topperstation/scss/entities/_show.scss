@@ -143,6 +143,7 @@
   border-radius: 5px;
   overflow: hidden;
   transition: transform 0.1s ease-in-out;
+  box-shadow: 0 2px 2px 1px rgba(0,0,0,0.1);
 
   &:hover {
     transform: translateY(-2px);

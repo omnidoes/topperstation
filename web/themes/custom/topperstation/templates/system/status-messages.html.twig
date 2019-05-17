@@ -21,26 +21,29 @@
  * @ingroup themeable
  */
 #}
+{%
+  set icons = {
+    'error': include(directory ~ '/img/icon--error.svg'),
+    'status': include(directory ~ '/img/icon--info.svg'),
+    'warning': include(directory ~ '/img/icon--warning.svg'),
+    'success': include(directory ~ '/img/icon--success.svg'),
+  }
+%}
 <div class="messages" data-drupal-messages>
 {% for type, messages in message_list %}
-  <div class="message message--{{ type }}" role="contentinfo" aria-label="{{ status_headings[type] }}"{{ attributes|without('role', 'aria-label') }}>
-    {% if type == 'error' %}
-      <div role="alert">
-    {% endif %}
+  <div class="message message--{{ type }}" role="contentinfo {% if type == 'error' %}alert{% endif %}" aria-label="{{ status_headings[type] }}"{{ attributes|without('role', 'aria-label') }}>
     {% if status_headings[type] %}
       <h2 class="visually-hidden">{{ status_headings[type] }}</h2>
     {% endif %}
+    <div class="icon">{{ attribute(icons,type)|raw }}</div>
     {% if messages|length > 1 %}
-      <ul>
-        {% for message in messages %}
-          <li>{{ message }}</li>
-        {% endfor %}
-      </ul>
+    <div class="message__content">
+    {% for message in messages %}
+      <div>{{ message|raw }}</div>
+    {% endfor %}
+    </div>
     {% else %}
-      {{ messages|first }}
-    {% endif %}
-    {% if type == 'error' %}
-      </div>
+      <div class="message__content">{{ messages|first|raw }}</div>
     {% endif %}
   </div>
 {% endfor %}
