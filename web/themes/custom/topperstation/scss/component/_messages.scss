@@ -6,13 +6,69 @@
 
 .message {
   position: relative;
+  margin-bottom: 0.2em;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   padding: 1em;
-  background: #f8f8f9;
-  border: 1px solid #c7c7c7;
-  border-radius: 10px;
+  background: #706e6b;
+  color: white;
   font-size: 0.888em;
+  text-align: center;
+  border-radius: 5px;
+
+  ul {
+    margin-bottom: 0;
+  }
+
+  .icon {
+    display: inline-block;
+    margin-right: 0.75rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    line-height: 1;
+    flex-shrink: 0;
+  }
 }
 
-    .message--status {
-      
+    .message__content {
+      display: inline-block;
+      text-align: left;
     }
+
+  .message--status {
+    svg { fill: white; }
+  }
+
+  .message--success {
+    background-color: #04844b;
+    color: #ffffff;
+
+    svg { fill: white; }
+  }
+
+  .message--error {
+    color: white;
+    background: #c23934;
+    background-image: linear-gradient(
+      45deg, 
+      rgba(0,0,0,0.025) 25%, 
+      transparent 0, 
+      transparent 50%, 
+      rgba(0,0,0,0.025) 0, 
+      rgba(0,0,0,0.025) 75%, 
+      transparent 0, 
+      transparent
+    );
+    background-size: 64px 64px;
+    background-position: center;
+
+    svg { fill: white; }
+  }
+
+  .message--warning {
+    background-color: #ffb75d;
+    color: #080707;
+  }
