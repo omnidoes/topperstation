@@ -1,0 +1,47 @@
+.video-list {
+
+  .block__header {
+    margin-bottom: 2rem;
+
+    .block__title {
+      margin: 0;
+    }
+  }
+   
+  .block__title {
+    
+  }
+
+  .block-content__subtitle {
+
+  }
+
+  .block-content__subtitle {
+
+  }
+
+  .block-content__list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-left: -1em;
+
+    & > div {
+      flex: 1 0 100%;
+      min-width: 280px;
+      padding-left: 1em;
+
+      @include media-query(lap) {
+        flex: 1 0 33.33%;
+      }
+
+      @include media-query(lap-and-up) {
+        min-width: 220px;
+      }
+
+      @include media-query(desk) {
+        flex: 1 0 25%;
+      }
+    }
+  }
+}
