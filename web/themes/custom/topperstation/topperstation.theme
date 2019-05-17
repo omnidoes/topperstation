@@ -74,14 +74,14 @@ function topperstation_preprocess_node(array &$variables, $hook) {
  */
 function topperstation_preprocess_block(array &$variables, $hook) {
   $bundleType = '';
-  
-  if( isset($variables['elements']['content']['#block_content']) ) {
+
+  if (isset($variables['elements']['content']['#block_content'])) {
     $bundleType = $variables['elements']['content']['#block_content']->bundle();
   }
 
   switch ($bundleType) {
     case 'video_list':
-      // how many values, summing videos and the show endcap, should display?
+      // How many values, summing videos and the show endcap, should display?
       $totalValueLimit = 4;
 
       $fieldShowEndcap = &$variables['content']['field_show_endcap'];
@@ -94,19 +94,19 @@ function topperstation_preprocess_block(array &$variables, $hook) {
       $videosToRemove = $videosValueCount - $videosValueLimit;
 
       if ($videosValueCount > $videosValueLimit) {
-        for ($i = $videosValueCount; $i >= $videosValueLimit; $i--) { 
+        for ($i = $videosValueCount; $i >= $videosValueLimit; $i--) {
           unset($fieldVideos[$i]);
         }
-        
+
         $user = \Drupal::currentUser();
-        if( $user->hasPermission('create video_list block content') ) {
+        if ($user->hasPermission('create video_list block content')) {
           $messageQuantity = $videosToRemove . ' ' . \Drupal::translation()->formatPlural($videosToRemove, 'video is', 'videos are');
-          \Drupal::messenger()->addWarning($messageQuantity . ' being hidden in the <em>'.$variables['label'].'</em> video list due to a '.$totalValueLimit.' item display limit.');
+          \Drupal::messenger()->addWarning($messageQuantity . ' being hidden in the <em>' . $variables['label'] . '</em> video list due to a ' . $totalValueLimit . ' item display limit.');
         }
       }
 
       break;
-    
+
     default:
       // code...
       break;
@@ -137,9 +137,9 @@ function topperstation_theme_suggestions_alter(array &$suggestions, array $varia
     // Block suggestions for custom block bundles.
     if (isset($variables['elements']['content']['#block_content'])) {
       array_splice(
-        $suggestions, 
-        1, 
-        0, 
+        $suggestions,
+        1,
+        0,
         'block__bundle__' . $variables['elements']['content']['#block_content']->bundle()
       );
     }
