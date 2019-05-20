@@ -44,6 +44,7 @@
         "drupal/simple_block": "^1.0@beta",
         "drupal/slick": "^1.1",
         "drupal/smart_trim": "^1.1",
+        "drupal/social_link_field": "^1.0@alpha",
         "drupal/twig_tweak": "^2.3",
         "drupal/views_jump_menu": "^1.0@beta",
         "drupal/views_selective_filters": "dev-8.x-1.x",

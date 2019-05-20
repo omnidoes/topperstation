@@ -1,0 +1,9 @@
+name: "Social Link Field: Topperstation Icon set"
+description: "Provides a custom formatter for the social link field that aligns with Topper Station's theme."
+package: Custom
+
+type: module
+core: 8.x
+
+dependencies:
+  - drupal:social_link_field
