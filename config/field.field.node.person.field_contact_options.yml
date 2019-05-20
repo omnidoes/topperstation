@@ -1,0 +1,25 @@
+uuid: 66cbaba0-0e63-41cf-ab8e-e063ba135a46
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_contact_options
+    - node.type.person
+  module:
+    - social_link_field
+id: node.person.field_contact_options
+field_name: field_contact_options
+entity_type: node
+bundle: person
+label: 'Contact Options'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    actions: {  }
+    social: facebook
+    link: ''
+default_value_callback: ''
+settings: {  }
+field_type: social_links

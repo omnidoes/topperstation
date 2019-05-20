@@ -7,6 +7,13 @@
 {% endblock %}
 
 {% block contentarea %}
-  <h1{{ title_attributes }}>{{ label }}</h1>
   {{ content.field_portrait }}
+  <div class="group">
+    <h1{{ title_attributes }}>{{ label }}</h1>
+    {% if content.field_contact_options['#links'] %}
+    <div class="person__contact">
+      {{ content.field_contact_options }}
+    </div>
+    {% endif %}
+  </div>
 {% endblock %}

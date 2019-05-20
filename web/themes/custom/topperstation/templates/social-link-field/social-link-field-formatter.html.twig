@@ -1,0 +1,56 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a formatted social link field.
+ *
+ * Available variables:
+ * - links: A collection of social networks links data.
+ *   - text: Social link text/icon.
+ *   - url: Social network profile link.
+ *   - title: Social network name.
+ * - new_tab: Is need to open a new tab.
+ * - appearance: Parameters tha are responsible of appearance.
+ *   - orientation: Orientation of links list.
+ */
+#}
+
+{%
+set classes = [
+  'list--icons',
+  appearance.orientation,
+]
+%}
+{%
+set icons = {
+  'behance': include(directory ~ '/img/icons/icon--behance.svg'),
+  'bitbucket': include(directory ~ '/img/icons/icon--bitbucket.svg'),
+  'drupal': include(directory ~ '/img/icons/icon--drupal.svg'),
+  'envelope-o': include(directory ~ '/img/icons/icon--envelope.svg'),
+  'facebook': include(directory ~ '/img/icons/icon--facebook.svg'),
+  'github': include(directory ~ '/img/icons/icon--github.svg'),
+  'google-plus': include(directory ~ '/img/icons/icon--google-plus.svg'),
+  'instagram': include(directory ~ '/img/icons/icon--instagram.svg'),
+  'linkedin': include(directory ~ '/img/icons/icon--linkedin.svg'),
+  'pinterest-p': include(directory ~ '/img/icons/icon--pinterest.svg'),
+  'twitter': include(directory ~ '/img/icons/icon--twitter.svg'),
+  'vimeo': include(directory ~ '/img/icons/icon--vimeo.svg'),
+  'youtube': include(directory ~ '/img/icons/icon--youtube.svg'),
+}
+%}
+
+{% spaceless %}
+  {% if links %}
+    <ul {{ attributes.addClass(classes) }}>
+      {% for link in links %}
+        <li>
+          <a href="{{ link.url }}" class="{{ link.class }}" title="{{ link.title }}"{% if new_tab %} target="_blank"{% endif %}>
+            {{ link.text }}
+            {% if link.icon %}
+            {{ attribute(icons,link.icon)|raw }}
+            {% endif %}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endspaceless %}

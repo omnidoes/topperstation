@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3a0963859849cb8e61be42cd65d5c251",
+    "content-hash": "9f1f895166b8904c62f33dee083c622b",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -3430,6 +3430,53 @@
             "support": {
                 "source": "https://cgit.drupalcode.org/smart_trim",
                 "issues": "https://drupal.org/project/issues/smart_trim"
+            }
+        },
+        {
+            "name": "drupal/social_link_field",
+            "version": "1.0.0-alpha1",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/social_link_field.git",
+                "reference": "8.x-1.0-alpha1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/social_link_field-8.x-1.0-alpha1.zip",
+                "reference": "8.x-1.0-alpha1",
+                "shasum": "99fcb575851893f1079683df161342ecfae7b0bb"
+            },
+            "require": {
+                "drupal/core": "~8.0"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.0-alpha1",
+                    "datestamp": "1545300480",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Project has not opted into security advisory coverage!"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Romixua",
+                    "homepage": "https://www.drupal.org/user/3516201"
+                }
+            ],
+            "description": "Provide field type with social links.",
+            "homepage": "https://www.drupal.org/project/social_link_field",
+            "support": {
+                "source": "https://git.drupalcode.org/project/social_link_field"
             }
         },
         {
@@ -9415,6 +9462,7 @@
         "drupal/entityqueue": 10,
         "drupal/page_manager": 10,
         "drupal/simple_block": 10,
+        "drupal/social_link_field": 15,
         "drupal/views_jump_menu": 10,
         "drupal/views_selective_filters": 20,
         "npm-asset/slick-carousel": 20
