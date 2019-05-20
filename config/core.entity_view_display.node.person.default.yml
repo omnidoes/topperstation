@@ -3,16 +3,28 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.node.person.field_contact_options
     - field.field.node.person.field_portrait
     - node.type.person
   module:
     - image
+    - social_link_field
     - user
 id: node.person.default
 targetEntityType: node
 bundle: person
 mode: default
 content:
+  field_contact_options:
+    weight: 103
+    label: above
+    settings:
+      icon_type: common
+      orientation: vertical
+      new_tab: true
+    third_party_settings: {  }
+    type: font_awesome
+    region: content
   field_portrait:
     weight: 102
     label: above
