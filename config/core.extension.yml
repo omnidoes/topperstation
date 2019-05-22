@@ -59,6 +59,7 @@ module:
   shortcut: 0
   simple_block: 0
   slick: 0
+  slick_entityreference: 0
   slick_ui: 0
   smart_trim: 0
   social_link_field: 0
