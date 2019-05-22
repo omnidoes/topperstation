@@ -5,21 +5,67 @@ dependencies:
   config:
     - core.entity_view_mode.brightcove_video.playlist
   module:
+    - blazy
     - brightcove
-    - image
 id: brightcove_video.brightcove_video.playlist
 targetEntityType: brightcove_video
 bundle: brightcove_video
 mode: playlist
 content:
   poster:
-    type: image
+    type: blazy
     weight: 0
     region: content
     label: hidden
     settings:
-      image_style: ''
-      image_link: ''
+      image_style: video_poster_16_9
+      thumbnail_style: video_poster_16_9_micro
+      responsive_image_style: ''
+      media_switch: ''
+      ratio: '16:9'
+      caption:
+        alt: alt
+        title: '0'
+      sizes: ''
+      breakpoints:
+        xs:
+          image_style: ''
+          width: ''
+          breakpoint: ''
+        sm:
+          image_style: ''
+          width: ''
+          breakpoint: ''
+        md:
+          image_style: ''
+          width: ''
+          breakpoint: ''
+        lg:
+          image_style: ''
+          width: ''
+          breakpoint: ''
+        xl:
+          image_style: ''
+          width: ''
+          breakpoint: ''
+      current_view_mode: playlist
+      background: false
+      iframe_lazy: true
+      icon: ''
+      layout: ''
+      view_mode: ''
+      cache: 0
+      optionset: default
+      skin: ''
+      style: ''
+      box_caption: ''
+      box_caption_custom: ''
+      box_style: ''
+      box_media_style: ''
+      grid: 0
+      grid_header: ''
+      grid_medium: 0
+      grid_small: 0
     third_party_settings: {  }
 hidden:
   api_client: true
