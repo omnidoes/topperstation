@@ -1,0 +1,97 @@
+.billboard {
+  position: relative;
+  margin: 0;
+  padding-bottom: 4px;
+  background: linear-gradient(to right, $yellow, $yellow-orange);
+}
+
+  .billboard__caption {
+    position: relative;
+    width: 100%;
+    margin-top: -2rem;
+    padding: 3rem 0;
+    transition: all 0.4s ease-in-out;
+    transition-delay: 0.3s;
+
+    @include media-query(lap-and-up) {
+      position: absolute;
+      top: auto;
+      bottom: 0;
+      margin-top: 0;
+      padding: 0;
+    }
+
+    .slick-slide & {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .slick-center & {
+      opacity: 1;
+      transform: translateY(0px);
+      // make things happen
+    }
+
+    .l-contain {
+      position: absolute;
+      bottom: 2rem;
+
+      @include media-query(lap-and-up) {
+        position: relative;
+        bottom: 6vw;
+      }
+    }
+
+    .billboard__text {
+      position: relative;
+      display: inline;
+      padding: 0 0.5rem 1px;
+      
+      background: white;
+      box-decoration-break: clone;
+      // box-shadow: -0.25em 0 0 0 white, 0.25em 0 0 0 white;
+
+      @include font('headings', 700);
+      font-size: 9vw;
+      // line-height: 1;
+
+      @include media-query(lap) {
+        font-size: 4vw;
+      }
+
+      @include media-query(desk) {
+        font-size: $h1-size;
+      }
+    }
+
+    .billboard__subtitle {
+      display: block;
+      padding: 0.5rem;
+      background: white;
+      font-size: 1rem;
+      max-width: 30rem;
+
+      @include media-query(lap) {
+        font-size: 2vw;
+      }
+
+      @include media-query(lap-and-up) {
+        display: inline-block;
+      }
+
+      @include media-query(desk) {
+        font-size: 1rem;
+      }
+    }
+  }
+
+  .billboard__background {
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  .billboard__link {
+
+  }

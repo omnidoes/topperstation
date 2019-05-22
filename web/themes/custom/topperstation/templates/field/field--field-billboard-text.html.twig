@@ -45,37 +45,8 @@
   {{ attributes.addClass(customclass) }}
 {% endset %}
 
-{% if label_hidden %}
-  {% if multiple %}
-    {% if attributes_rendered %}
-      <div{{ attributes }}>
-    {% endif %}
-      {% for item in items %}
-        <div{{ item.attributes }}>{{ item.content }}</div>
-      {% endfor %}
-    {% if attributes_rendered %}
-      </div>
-    {% endif %}
-  {% else %}
-    {% for item in items %}
-      <div{{ attributes }}>{{ item.content }}</div>
-    {% endfor %}
-  {% endif %}
-{% else %}
-  {% if attributes_rendered %}
-    <div{{ attributes }}>
-  {% endif %}
-      <div{{ title_attributes.addClass('field__label', (label_display == 'visually_hidden') ? 'visually-hidden') }}>{{ label }}</div>
-    {% if multiple %}
-      <div class="field__values">
-    {% endif %}
-    {% for item in items %}
-      <div{{ item.attributes.addClass('field__value') }}>{{ item.content }}</div>
-    {% endfor %}
-    {% if multiple %}
-      </div>
-    {% endif %}
-  {% if attributes_rendered %}
-    </div>
-  {% endif %}
-{% endif %}
+{% for item in items %}
+<div{{ attributes }}>
+  <span>{{ item.content }}</span>
+</div>
+{% endfor %}

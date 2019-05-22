@@ -31,6 +31,8 @@
     line-height: 1;
     flex-shrink: 0;
   }
+
+  a { color: #fff900; }
 }
 
     .message__content {
@@ -53,13 +55,13 @@
     color: white;
     background: #c23934;
     background-image: linear-gradient(
-      45deg,
-      rgba(0,0,0,0.025) 25%,
-      transparent 0,
-      transparent 50%,
-      rgba(0,0,0,0.025) 0,
-      rgba(0,0,0,0.025) 75%,
-      transparent 0,
+      45deg, 
+      rgba(0, 0, 0, 0.05) 25%, 
+      transparent 0, 
+      transparent 50%, 
+      rgba(0, 0, 0, 0.05) 0, 
+      rgba(0, 0, 0, 0.05) 75%, 
+      transparent 0, 
       transparent
     );
     background-size: 64px 64px;
@@ -71,4 +73,6 @@
   .message--warning {
     background-color: #ffb75d;
     color: #080707;
+
+    a { color: #111111; }
   }

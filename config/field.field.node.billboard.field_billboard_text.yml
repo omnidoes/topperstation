@@ -1,0 +1,19 @@
+uuid: 0593f772-a959-4531-ac49-c65892367cd7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_billboard_text
+    - node.type.billboard
+id: node.billboard.field_billboard_text
+field_name: field_billboard_text
+entity_type: node
+bundle: billboard
+label: Text
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

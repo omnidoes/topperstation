@@ -1,0 +1,17 @@
+uuid: 2966dcca-89c7-4324-91d7-49b8426a3309
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: slider_medium
+label: 'Slider: Medium'
+effects:
+  d95f4035-a415-462d-bbc8-23163aedaed0:
+    uuid: d95f4035-a415-462d-bbc8-23163aedaed0
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 1000
+      height: 430
+      crop_type: focal_point

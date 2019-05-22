@@ -77,6 +77,7 @@ function topperstation_preprocess_block(array &$variables, $hook) {
 
   if (isset($variables['elements']['content']['#block_content'])) {
     $bundleType = $variables['elements']['content']['#block_content']->bundle();
+    $variables['bundle'] = $bundleType;
   }
 
   switch ($bundleType) {
@@ -87,8 +88,8 @@ function topperstation_preprocess_block(array &$variables, $hook) {
       $fieldShowEndcap = &$variables['content']['field_show_endcap'];
       $fieldVideos = &$variables['content']['field_videos'];
 
-      $showsValueCount = $fieldShowEndcap['#items']->count();
-      $videosValueCount = $fieldVideos['#items']->count();
+      $showsValueCount = isset($fieldShowEndcap['#items']) ? $fieldShowEndcap['#items']->count() : 0;
+      $videosValueCount = isset($fieldVideos['#items']) ? $fieldVideos['#items']->count() : 0;
 
       $videosValueLimit = $totalValueLimit - $showsValueCount;
       $videosToRemove = $videosValueCount - $videosValueLimit;

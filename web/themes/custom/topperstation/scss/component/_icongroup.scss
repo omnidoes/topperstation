@@ -15,18 +15,15 @@
 
   .icongroup--inline {
 
+    & > * {
+      display: inline-block;
+    }
+
     html.flexbox & {
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
       justify-content: center;
       align-items: center;
-    }
-
-    html.no-flexbox & {
-      
-      & > * {
-        display: inline-block;
-      }
     }
   }

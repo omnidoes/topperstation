@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9f1f895166b8904c62f33dee083c622b",
+    "content-hash": "5bc252b12384f6684dd57a7a27397cd5",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -3361,6 +3361,63 @@
             "support": {
                 "source": "http://cgit.drupalcode.org/slick",
                 "issues": "https://drupal.org/project/issues/slick"
+            }
+        },
+        {
+            "name": "drupal/slick_entityreference",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/slick_entityreference.git",
+                "reference": "8.x-1.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/slick_entityreference-8.x-1.1.zip",
+                "reference": "8.x-1.1",
+                "shasum": "ab5a55f26ddcabede19bebcaa36981ed096a3ab2"
+            },
+            "require": {
+                "drupal/core": "~8.0",
+                "drupal/slick": "~1.0"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.1",
+                    "datestamp": "1527530479",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "alanburke",
+                    "homepage": "https://www.drupal.org/user/35997"
+                },
+                {
+                    "name": "dpacassi",
+                    "homepage": "https://www.drupal.org/user/2831253"
+                },
+                {
+                    "name": "mikl",
+                    "homepage": "https://www.drupal.org/user/58679"
+                }
+            ],
+            "description": "Slick entity reference fields for the Slick carousel.",
+            "homepage": "https://drupal.org/project/slick_entityreference",
+            "support": {
+                "source": "https://cgit.drupalcode.org/slick_entityreference",
+                "issues": "https://drupal.org/project/issues/slick_entityreference"
             }
         },
         {

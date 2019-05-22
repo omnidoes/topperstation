@@ -1,3 +1,7 @@
+.slick {
+  position: relative;
+}
+
 .slick .slick__slide {
   display: none;
 }
@@ -8,4 +12,39 @@
 
 .slick.slick--initialized .slick__slide {
   display: block;
+}
+
+
+.slick__arrow {
+  
+  // hides the navigation buttons if JS is disabled.
+  button { display: none; }
+}
+
+.slick-arrow {
+  @extend .hide-text;
+
+  position: absolute;
+  top: 50%;
+  display: block;
+  width: 5vw;
+  height: 5vw;
+
+  border-radius: 50%;
+  background: rgba(white, 0.2);
+  border: 0;
+
+  &:hover {
+    background: white;
+  }
+
+  &.slick-prev {
+    left: 0;
+    transform: translateY(-50%) translateX(-50%);
+  }
+
+  &.slick-next {
+    right: 0;
+    transform: translateY(-50%) translateX(50%);
+  }
 }

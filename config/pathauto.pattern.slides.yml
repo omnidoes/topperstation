@@ -1,0 +1,22 @@
+uuid: a7e4d7ff-6971-4767-8697-9f6885de1b2f
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: slides
+label: Slides
+type: 'canonical_entities:node'
+pattern: 'slide/[node:title]'
+selection_criteria:
+  7c464104-bd8c-4767-99cb-45983460223a:
+    id: node_type
+    bundles:
+      billboard: billboard
+    negate: false
+    context_mapping:
+      node: node
+    uuid: 7c464104-bd8c-4767-99cb-45983460223a
+selection_logic: and
+weight: -5
+relationships: {  }
