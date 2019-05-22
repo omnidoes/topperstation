@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5bc252b12384f6684dd57a7a27397cd5",
+    "content-hash": "57766457025d1149ade6fff14fc59057",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -4452,6 +4452,18 @@
                 "php"
             ],
             "time": "2019-02-16T20:54:15+00:00"
+        },
+        {
+            "name": "npm-asset/blazy",
+            "version": "1.8.2",
+            "dist": {
+                "type": "tar",
+                "url": "https://registry.npmjs.org/blazy/-/blazy-1.8.2.tgz"
+            },
+            "type": "npm-asset",
+            "license": [
+                "MIT"
+            ]
         },
         {
             "name": "npm-asset/slick-carousel",

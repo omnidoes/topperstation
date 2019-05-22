@@ -51,6 +51,7 @@
         "drupal/views_selective_filters": "dev-8.x-1.x",
         "drush-ops/behat-drush-endpoint": "^9.3",
         "drush/drush": "~8",
+        "npm-asset/blazy": "^1.8",
         "npm-asset/slick-carousel": "dev-master#v1.8.1",
         "oomphinc/composer-installers-extender": "^1.1",
         "pantheon-systems/quicksilver-pushback": "~1",
