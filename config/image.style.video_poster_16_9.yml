@@ -1,0 +1,17 @@
+uuid: f96ebd9d-d7ae-44a5-ad31-34341acb9ad1
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: video_poster_16_9
+label: 'Video Poster 16:9'
+effects:
+  560d47d6-5dff-49fc-839f-b2fa5d04ac28:
+    uuid: 560d47d6-5dff-49fc-839f-b2fa5d04ac28
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 800
+      height: 450
+      crop_type: focal_point

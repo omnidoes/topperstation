@@ -9,14 +9,6 @@
 <article {{ attributes.addClass(classes) }}>
   {{ title_prefix }}
   <header class="video__header">
-    {% if status %}
-    <div class="icongroup">
-      <div class="icongroup__icon">
-        {{ include(directory ~ '/img/icon--play.svg') }}
-      </div>
-      <div class="icongroup__text">Watch</div>
-    </div>
-    {% endif %}
     <div class="video__image">
       {% if status %}
       <a href="{{ elements.url }}">
