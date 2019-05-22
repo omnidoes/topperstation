@@ -71,6 +71,18 @@ a {
   }
 }
 
+.link--cover {
+  display: block;
+  position: absolute;
+  z-index: 5;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  text-indent: -9999px;
+  overflow: hidden;
+}
+
 strong, b {
   font-weight: 700;
 }

@@ -96,7 +96,7 @@
   /* Components */
 
   .video__header {
-    // position: relative;
+    position: relative;
     // background: #dedede;
   }
 
@@ -142,19 +142,6 @@
     margin-top: 1em;
     font-size: 0.9em;
   }
-
-  .video__read-more {
-
-    a {
-      display: block;
-      position: absolute;
-      z-index: 5;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-    }
-  }
 }
 
 
@@ -193,17 +180,4 @@
       margin: 0;
       font-size: 0.888em;
     }
-
-  .video__read-more {
-
-    a {
-      display: block;
-      position: absolute;
-      z-index: 5;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-    }
-  }
 }

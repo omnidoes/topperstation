@@ -11,7 +11,7 @@
 {% set destination = content.field_link[0]['#url']|render %}
 <figure{{ attributes.addClass(classes) }}>
   {% if destination %}
-  <a href="{{ destination }}"></a>
+  <a href="{{ destination }}" class="link--cover">{{ content.field_billboard_text['#items'].getValue()[0].value }}</a>
   {% endif %}
   {{ content.field_billboard_background }}
   <figcaption class="billboard__caption">
