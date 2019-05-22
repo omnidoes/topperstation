@@ -55,10 +55,17 @@
 </header>
 {{ title_suffix }}
 {% block content %}
+  {% if (content.field_videos[0] is empty) and (content.field_show_endcap[0] is empty) %}
+  <div class="message message--status">
+    <div class="icon">{{ include(directory ~ '/img/icon--info.svg') }}</div>
+    <div class="message__content">Oops! It looks like we're missing some content here.</div>
+  </div>
+  {% else %}
   <div class="block-content__list">
     {{ content.field_videos }}
     {{ content.field_show_endcap }}
   </div>
+  {% endif %}
 {% endblock %}
 
 {% if layoutWidth %}

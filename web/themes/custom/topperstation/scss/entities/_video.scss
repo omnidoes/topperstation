@@ -1,5 +1,13 @@
 .video {
 
+  .video__header {
+    
+  }
+
+  .video__image {
+    background: #dedede;
+  }
+
   .video__content {
     padding: 1rem;
     background: white;
@@ -88,8 +96,8 @@
   /* Components */
 
   .video__header {
-    position: relative;
-
+    // position: relative;
+    // background: #dedede;
   }
 
     .icongroup {
@@ -170,13 +178,19 @@
     }
   }
 
+  .video__image {
+    background: #404040;
+  }
+
   .video__content {
+    padding: 0.2rem;
     padding-left: 1em;
     background: transparent;
     color: white;
   }
 
     .video__title {
+      margin: 0;
       font-size: 0.888em;
     }
 
