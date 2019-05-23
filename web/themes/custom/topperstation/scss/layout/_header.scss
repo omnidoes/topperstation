@@ -1,14 +1,22 @@
 .page__header {
-  position: sticky;
-  top: 0;
+  position: relative;
   z-index: 19;
-  padding: 1rem 0;
+  padding: 0.5rem 0;
   background: linear-gradient(to top, #3a3a3a, $black);
   color: #ffffff;
   box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
+  
+  @include media-query(lap-and-up) {
+    position: sticky;
+    top: 0;
+    padding: 1rem 0;
+  }
 
   .toolbar-fixed & {
-    top: 79px;
+    
+    @include media-query(lap-and-up) {
+      top: 79px;
+    }
   }
 
   &::after {
@@ -23,14 +31,15 @@
 
   .l-grid {
     display: grid;
-    grid-template-columns: 80% 1fr;
-    grid-gap: 2rem;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1rem;
     // display: flex;
     // flex-direction: row;
     // align-content: center;
     // justify-content: space-between;
 
     @include media-query(lap-and-up) {
+      grid-gap: 2rem;
       grid-template-columns: 100px auto 1fr;
     }
 
