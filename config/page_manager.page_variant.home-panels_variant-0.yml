@@ -6,6 +6,7 @@ dependencies:
     - page_manager.page.home
     - views.view.shows
   content:
+    - 'block_content:slider:109c9fad-63c5-4bf7-8682-0cbf31b78d65'
     - 'block_content:video_list:268fc36b-fa99-49cd-ae78-f74eea3ffc58'
     - 'block_content:video_list:bec7ec48-d05b-4e31-97a5-0f11d1cf5480'
   module:
@@ -25,7 +26,7 @@ variant_settings:
       views_label: ''
       items_per_page: none
       region: content
-      weight: 3
+      weight: 4
       uuid: 0171f9da-2efd-4611-a804-8e0c858231a3
       context_mapping: {  }
     f98c625c-95ed-4e12-bcd5-ce59c9b31d34:
@@ -39,7 +40,7 @@ variant_settings:
       context_mapping: {  }
       region: content
       uuid: f98c625c-95ed-4e12-bcd5-ce59c9b31d34
-      weight: 2
+      weight: 3
     db676d82-0e18-4903-acc8-4b5660a2e297:
       id: 'block_content:bec7ec48-d05b-4e31-97a5-0f11d1cf5480'
       label: 'The Hall of Heroes'
@@ -51,6 +52,18 @@ variant_settings:
       context_mapping: {  }
       region: content
       uuid: db676d82-0e18-4903-acc8-4b5660a2e297
+      weight: 2
+    0e32366a-db66-4e12-9ea9-101c4f4144e5:
+      id: 'block_content:109c9fad-63c5-4bf7-8682-0cbf31b78d65'
+      label: 'Shows Slider'
+      provider: block_content
+      label_display: '0'
+      status: true
+      info: ''
+      view_mode: full
+      context_mapping: {  }
+      region: content
+      uuid: 0e32366a-db66-4e12-9ea9-101c4f4144e5
       weight: 1
   id: panels_variant
   uuid: d22c1914-2c6e-478b-a97b-084edffe925a
