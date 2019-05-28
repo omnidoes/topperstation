@@ -13,7 +13,13 @@
   }
 
   .toolbar-fixed & {
-    
+
+    @include media-query(lap-and-up) {
+      top: 39px;
+    }
+  }
+
+  .toolbar-fixed.toolbar-tray-open & {
     @include media-query(lap-and-up) {
       top: 79px;
     }
@@ -63,7 +69,35 @@
     }
 
     ul { margin-bottom: 0; }
-    a { color: #ffffff; }
+
+    a {
+      color: #ffffff;
+
+      &.is-active {
+        color: $yellow;
+      }
+
+      &.is-onair {
+        position: relative;
+        top: 1px;
+        padding-left: 1.5em;
+        color: #d01f1f;
+        animation: onAirLight 2s infinite;
+
+        &::after {
+          content: '';
+          position: absolute;
+          display: block;
+          height: 0.4em;
+          width: 0.4em;
+          background: #ef0f0f;
+          border-radius: 50%;
+          left: 0.8em;
+          bottom: 0.8em;
+          line-height: 0;
+        }
+      }
+    }
   }
 
   .block {

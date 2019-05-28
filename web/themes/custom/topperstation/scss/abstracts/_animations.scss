@@ -45,6 +45,22 @@
   }
 }
 
+@keyframes onAirLight {
+  0% {
+    filter: drop-shadow(0 0 20px #f11313);
+  }
+
+  50% {
+    color: #ff0000;
+    filter: drop-shadow(0 0 10px #f11313);
+  }
+
+  100% {
+    filter: drop-shadow(0 0 20px #f11313);
+  }
+}
+
+
 
 /**
  * Animation Classes
