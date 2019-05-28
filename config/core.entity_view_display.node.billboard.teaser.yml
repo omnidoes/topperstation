@@ -5,6 +5,8 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.billboard.field_billboard_background
+    - field.field.node.billboard.field_billboard_subtitle
+    - field.field.node.billboard.field_billboard_text
     - field.field.node.billboard.field_link
     - node.type.billboard
   module:
@@ -21,4 +23,6 @@ content:
     region: content
 hidden:
   field_billboard_background: true
+  field_billboard_subtitle: true
+  field_billboard_text: true
   field_link: true

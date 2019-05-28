@@ -235,6 +235,7 @@ display:
         - user.permissions
       tags:
         - 'config:core.entity_view_display.brightcove_video.brightcove_video.default'
+        - 'config:core.entity_view_display.brightcove_video.brightcove_video.playlist'
         - 'config:core.entity_view_display.brightcove_video.brightcove_video.teaser'
   block_videos_gallery:
     display_plugin: block
@@ -822,5 +823,6 @@ display:
         - user.permissions
       tags:
         - 'config:core.entity_view_display.brightcove_video.brightcove_video.default'
+        - 'config:core.entity_view_display.brightcove_video.brightcove_video.playlist'
         - 'config:core.entity_view_display.brightcove_video.brightcove_video.teaser'
         - 'config:field.storage.paragraph.field_collection_name'
