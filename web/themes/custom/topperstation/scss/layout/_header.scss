@@ -1,18 +1,52 @@
 .page__header {
-  padding: 1rem 0;
-  background: $black;
+  position: relative;
+  z-index: 19;
+  padding: 0.5rem 0;
+  background: linear-gradient(to top, #3a3a3a, $black);
   color: #ffffff;
+  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
+  
+  @include media-query(lap-and-up) {
+    position: sticky;
+    top: 0;
+    padding: 1rem 0;
+  }
+
+  .toolbar-fixed & {
+
+    @include media-query(lap-and-up) {
+      top: 39px;
+    }
+  }
+
+  .toolbar-fixed.toolbar-tray-open & {
+    @include media-query(lap-and-up) {
+      top: 79px;
+    }
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background: $yellow linear-gradient(to right, $yellow, $yellow-orange);
+  }
 
   .l-grid {
     display: grid;
-    grid-template-columns: 80% 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1rem;
     // display: flex;
     // flex-direction: row;
     // align-content: center;
     // justify-content: space-between;
 
     @include media-query(lap-and-up) {
-      grid-template-columns: 1fr 140px 1fr;
+      grid-gap: 2rem;
+      grid-template-columns: 100px auto 1fr;
     }
 
     // & > * {
@@ -26,13 +60,44 @@
 
   nav {
     display: none;
+    @include font('headings', 700);
+    font-size: 1.2em;
 
     @include media-query(lap-and-up) {
-      display: block;
+      display: flex;
+      align-items: center;
     }
 
     ul { margin-bottom: 0; }
-    a { color: #ffffff; }
+
+    a {
+      color: #ffffff;
+
+      &.is-active {
+        color: $yellow;
+      }
+
+      &.is-onair {
+        position: relative;
+        top: 1px;
+        padding-left: 1.5em;
+        color: #d01f1f;
+        animation: onAirLight 2s infinite;
+
+        &::after {
+          content: '';
+          position: absolute;
+          display: block;
+          height: 0.4em;
+          width: 0.4em;
+          background: #ef0f0f;
+          border-radius: 50%;
+          left: 0.8em;
+          bottom: 0.8em;
+          line-height: 0;
+        }
+      }
+    }
   }
 
   .block {

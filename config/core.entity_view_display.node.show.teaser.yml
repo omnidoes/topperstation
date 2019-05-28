@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
+    - field.field.node.show.field_cast
     - field.field.node.show.field_show_collections
     - field.field.node.show.field_show_description
     - field.field.node.show.field_show_promo_images
@@ -17,6 +18,7 @@ bundle: show
 mode: teaser
 content: {  }
 hidden:
+  field_cast: true
   field_show_collections: true
   field_show_description: true
   field_show_promo_images: true
