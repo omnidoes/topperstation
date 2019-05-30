@@ -1,0 +1,67 @@
+uuid: f1c6beb0-f0ef-4e0c-a103-0f5be14584f8
+langcode: en
+status: true
+dependencies:
+  config:
+    - page_manager.page.node_view
+    - system.menu.main
+  module:
+    - ctools
+    - menu_block
+    - panels
+    - system
+id: node_view-panels_variant-0
+label: Default
+variant: panels_variant
+variant_settings:
+  blocks:
+    9f1d10c0-ea85-4dd6-bf82-69081a561ddd:
+      id: 'entity_view:node'
+      label: 'Entity view (Content)'
+      provider: ctools
+      label_display: '0'
+      view_mode: full
+      region: content
+      weight: 0
+      uuid: 9f1d10c0-ea85-4dd6-bf82-69081a561ddd
+      context_mapping:
+        entity: node
+    d77290b9-14e3-4dca-883b-80f645ce6add:
+      id: system_breadcrumb_block
+      label: Breadcrumbs
+      provider: system
+      label_display: '0'
+      region: top
+      weight: -10
+      uuid: d77290b9-14e3-4dca-883b-80f645ce6add
+      context_mapping: {  }
+    298e814e-998e-4a9a-b073-c62c19679b05:
+      id: 'menu_block:main'
+      label: 'Main navigation'
+      provider: menu_block
+      label_display: visible
+      level: 2
+      depth: 0
+      expand: 0
+      parent: 'main:'
+      suggestion: sidebar
+      label_type: root
+      region: side
+      weight: -1
+      uuid: 298e814e-998e-4a9a-b073-c62c19679b05
+      context_mapping: {  }
+  id: panels_variant
+  uuid: 1fec9f56-4ae6-4ebd-92a4-3a6504730e31
+  label: null
+  weight: 0
+  layout: basic_page
+  layout_settings: {  }
+  page_title: ''
+  storage_type: page_manager
+  storage_id: node_view-panels_variant-0
+  builder: standard
+page: node_view
+weight: 0
+selection_criteria: {  }
+selection_logic: and
+static_context: {  }

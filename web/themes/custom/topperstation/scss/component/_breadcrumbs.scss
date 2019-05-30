@@ -1,0 +1,39 @@
+.breadcrumb {
+  font-size: 0.888em;
+}
+
+  .breadcrumb__items {
+    @extend %list--plain;
+    display: flex;
+    flex-direction: row;
+    justify-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .breadcrumb__item {
+    display: block;
+    display: flex;
+    margin-bottom: 0.5rem;
+    align-items: center;
+
+    &::after {
+      content: '';
+      display: inline-block;
+      background: url('../img/icons/icon--arrow-short-right.svg') no-repeat center;
+      background-size: 100% auto;
+      width: 0.5em;
+      height: 0.8em;
+      margin-left: 1em;
+      margin-right: 1em;
+    }
+
+    &:last-child::after {
+      content: none;
+    }
+  }
+
+  .breadcrumb__link {
+    color: $black;
+    display: inline-block;
+    vertical-align: middle;
+  }
