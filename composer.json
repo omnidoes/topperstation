@@ -162,7 +162,11 @@
                 "2799885-11: Warning: Missing argument 1 for Drupal page manager...":
                     "https://www.drupal.org/files/issues/2018-04-14/2799885-11.patch",
                 "3033057-15: Page Manager currently not working with CTools 3.1+":
-                    "https://www.drupal.org/files/issues/2019-02-26/3033057-ctools31-15.patch"
+                    "https://www.drupal.org/files/issues/2019-02-26/3033057-ctools31-15.patch",
+                "2665328-87: Variants take entity label not the variant title (breadcrumb issue)":
+                    "https://www.drupal.org/files/issues/2018-12-12/2665328-variants-take-entity-label-87.patch",
+                "2820218-52: Page manager does not respect existing route defaults for title callbacks":
+                    "https://www.drupal.org/files/issues/2018-03-22/2820218-52.patch"
             },
             "drupal/entity_browser": {
                 "2973457-129: Add option for field widget to display as table":
