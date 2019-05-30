@@ -55,7 +55,7 @@
 
       &::after {
 
-        @include media-query(lap-and-up) {
+        @include media-query(desk) {
           content: '';
           width: 0;
           height: 0;
@@ -102,14 +102,14 @@
     transition: transform 0.2s linear;
     outline: none;
 
-    @include media-query(lap-and-up) {
+    @include media-query(desk) {
       display: none;
     }
 
     & + .menu {
       display: none;
 
-      @include media-query(lap-and-up) {
+      @include media-query(desk) {
         display: block;
       }
     }

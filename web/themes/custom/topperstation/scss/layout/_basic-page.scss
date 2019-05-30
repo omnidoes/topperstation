@@ -13,19 +13,21 @@
   }
 
   .block-region-content {
-    grid-row: 1;
-    grid-column: 3 / span 4;
+    grid-row: 2;
+    grid-column: 1 / -2;
 
     @include media-query(desk) {
-      grid-column: 4 / span 7;
+      grid-row: 1;
+      grid-column: 4 / span 8;
     }
   }
 
   .block-region-side {
     grid-row: 1;
-    grid-column: 1 / span 2;
+    grid-column: 1 / -1;
 
     @include media-query(desk) {
+      grid-row: 1;
       grid-column: 1 / span 3;
     }
   }

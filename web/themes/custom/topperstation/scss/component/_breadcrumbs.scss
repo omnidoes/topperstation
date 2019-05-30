@@ -7,11 +7,13 @@
     display: flex;
     flex-direction: row;
     justify-items: flex-start;
+    flex-wrap: wrap;
   }
 
   .breadcrumb__item {
     display: block;
     display: flex;
+    margin-bottom: 0.5rem;
     align-items: center;
 
     &::after {
