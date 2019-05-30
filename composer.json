@@ -36,6 +36,7 @@
         "drupal/entityqueue": "^1.0@beta",
         "drupal/field_group": "^1.0",
         "drupal/focal_point": "^1.0",
+        "drupal/menu_block": "^1.5",
         "drupal/menu_link_attributes": "^1.0",
         "drupal/module_filter": "^3.1",
         "drupal/page_manager": "^4.0@beta",
@@ -180,6 +181,10 @@
             "drupal/views_selective_filters": {
                 "2804485-04: SQL error when adding multiple fields of the same type":
                     "https://www.drupal.org/files/issues/2018-09-14/2804485-views_selective_filters-sql_error-4.patch"
+            },
+            "drupal/menu_block": {
+                "2809699-82: Menu parent as block title":
+                    "https://www.drupal.org/files/issues/2018-10-26/menu_block-label_configuration-2809699-82.patch"
             }
         }
     },

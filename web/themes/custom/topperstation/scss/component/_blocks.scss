@@ -1,5 +1,5 @@
 .block {
-  padding: 2rem 0;
+  // padding: 2rem 0;
 }
 
   .block__title {
@@ -29,6 +29,7 @@
 
 .block--local-tasks-block { padding: 0; }
 
+
 .block--local-tasks {
   padding: 0;
 
@@ -53,6 +54,7 @@
     }
   }
 }
+
 
 .block--search-form-block {
   display: flex;
@@ -114,6 +116,12 @@
 .block--system-messages {
   padding: 0;
 }
+
+
+.block--breadcrumbs {
+  padding: 1.5rem 0;
+}
+
 
 .block--system-branding-block {
 

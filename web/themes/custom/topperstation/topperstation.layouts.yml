@@ -2,7 +2,7 @@ player_page:
   label: 'Player Page'
   category: 'Topper Station'
   template: layouts/player-page
-  default_region: main
+  default_region: player
   regions:
     top:
       label: Top
@@ -10,5 +10,20 @@ player_page:
       label: Player
     recommended:
       label: Recommended
+    bottom:
+      label: Bottom
+
+basic_page:
+  label: 'Basic Page'
+  category: 'Topper Station'
+  template: layouts/basic-page
+  default_region: content
+  regions:
+    top:
+      label: Top
+    side:
+      label: Side
+    content:
+      label: Content
     bottom:
       label: Bottom

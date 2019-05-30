@@ -1,0 +1,30 @@
+{%
+  set classes = [
+    'sidenav'
+  ]
+%}
+{% set attributes_rendered %}
+  {{ attributes.addClass(classes) }}
+  {{ attributes.setAttribute('role', 'navigation') }}
+{% endset %}
+{% set title_attributes = title_attributes.addClass('sidenav__title') %}
+
+{% if attributes_rendered %}
+<nav{{ attributes_rendered }}>
+{% endif %}
+
+{{ title_prefix }}
+{% if label %}
+  <h2{{ title_attributes }}>{{ label }}</h2>
+{% endif %}
+{{ title_suffix }}
+
+<input type="checkbox" class="sidenav__toggle">
+
+{% block content %}
+  {{ content }}
+{% endblock %}
+
+{% if attributes_rendered %}
+</nav>
+{% endif %}
