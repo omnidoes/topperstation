@@ -18,6 +18,7 @@
  *   - in_active_trail: TRUE if the link is in the active trail.
  */
 #}
+{% set attributes = attributes.addClass('menu menu--celled theme--dark') %}
 {% import _self as menus %}
 
 {#
@@ -42,6 +43,11 @@
         {% endif %}
       </li>
     {% endfor %}
+      <li class="menu__item">
+        <button trigger trigger-target="mobileNav">
+          <span class="hide-text">Expand</span>
+        </button>
+      </li>
     </ul>
   {% endif %}
 {% endmacro %}
