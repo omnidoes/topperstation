@@ -66,21 +66,15 @@ function topperstation_preprocess_node(array &$variables, $hook) {
         $collections = $node->get('field_show_collections')->referencedEntities();
         $totalShows = 0;
 
-        foreach ($collections as $key => $collection) {
+        foreach ($collections as $collection) {
           $refVideos = $collection->field_collection_videos->referencedEntities();
-          foreach ($refVideos as $key => $video) {
+          foreach ($refVideos as $video) {
             $status = $video->get('status')->getValue()[0]['value'];
             $totalShows = $status == 1 ? $totalShows + 1 : $totalShows;
           }
         }
 
         $variables['videos_total'] = $totalShows;
-
-        // $collections = $node->field_show_collections->getValue();
-        // foreach ($collections as $key => $collection) {
-        //   $entity = Node::load($collection['target_id'])->toArray();
-        //   kint($entity);
-        // }
       }
       break;
 
@@ -182,11 +176,11 @@ function topperstation_preprocess_menu_local_task(array &$variables) {
 function topperstation_preprocess_menu(&$vars) {
 
   if (isset($vars['menu_name'])) {
-    
+
     if ($vars['menu_name'] === 'mobile-tab-menu') {
 
-      foreach($vars['items'] as &$item) {
-        switch($item['url']->toString()) {
+      foreach ($vars['items'] as &$item) {
+        switch ($item['url']->toString()) {
           case '/shows':
             $item['icon'] = 'television';
             break;
@@ -198,7 +192,7 @@ function topperstation_preprocess_menu(&$vars) {
           case '/schedule':
             $item['icon'] = 'calendar';
             break;
-          
+
           default:
             $item['icon'] = 'default';
             break;
