@@ -6,6 +6,7 @@ module:
   blazy: 0
   blazy_ui: 0
   block: 0
+  block_class: 0
   block_content: 0
   block_content_permissions: 0
   breakpoint: 0
@@ -43,7 +44,7 @@ module:
   media: 0
   media_library: 0
   menu_block: 0
-  menu_link_attributes: 0
+  menu_reference_render: 0
   menu_ui: 0
   module_filter: 0
   node: 0

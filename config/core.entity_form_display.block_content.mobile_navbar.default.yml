@@ -1,0 +1,27 @@
+uuid: 91311096-3d02-4fe3-bbb3-ca5ea5702a45
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.mobile_navbar
+    - field.field.block_content.mobile_navbar.field_menu_ref
+id: block_content.mobile_navbar.default
+targetEntityType: block_content
+bundle: mobile_navbar
+mode: default
+content:
+  field_menu_ref:
+    weight: 27
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  info:
+    type: string_textfield
+    weight: -5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden: {  }

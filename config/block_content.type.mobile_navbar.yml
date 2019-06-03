@@ -1,0 +1,8 @@
+uuid: a25d7482-2214-46c8-b759-4c5032e6760c
+langcode: en
+status: true
+dependencies: {  }
+id: mobile_navbar
+label: 'Mobile Navbar'
+revision: 0
+description: ''

@@ -61,6 +61,27 @@ function topperstation_preprocess_node(array &$variables, $hook) {
         $path = $node->field_teaser_image->entity->getFileUri();
         $variables['bgImage'] = ImageStyle::load('show_teaser_image')->buildUrl($path);
       }
+
+      if ($variables['view_mode'] == 'teaser') {
+        $collections = $node->get('field_show_collections')->referencedEntities();
+        $totalShows = 0;
+
+        foreach ($collections as $key => $collection) {
+          $refVideos = $collection->field_collection_videos->referencedEntities();
+          foreach ($refVideos as $key => $video) {
+            $status = $video->get('status')->getValue()[0]['value'];
+            $totalShows = $status == 1 ? $totalShows + 1 : $totalShows;
+          }
+        }
+
+        $variables['videos_total'] = $totalShows;
+
+        // $collections = $node->field_show_collections->getValue();
+        // foreach ($collections as $key => $collection) {
+        //   $entity = Node::load($collection['target_id'])->toArray();
+        //   kint($entity);
+        // }
+      }
       break;
 
     default:
@@ -153,6 +174,39 @@ function topperstation_theme_suggestions_alter(array &$suggestions, array $varia
  */
 function topperstation_preprocess_menu_local_task(array &$variables) {
   $variables['link']['#options']['attributes']['class'][] = 'admin-tabs__link';
+}
+
+/**
+ * Implements hook_preprocess_menu().
+ */
+function topperstation_preprocess_menu(&$vars) {
+
+  if (isset($vars['menu_name'])) {
+    
+    if ($vars['menu_name'] === 'mobile-tab-menu') {
+
+      foreach($vars['items'] as &$item) {
+        switch($item['url']->toString()) {
+          case '/shows':
+            $item['icon'] = 'television';
+            break;
+
+          case '/watch':
+            $item['icon'] = 'eye';
+            break;
+
+          case '/schedule':
+            $item['icon'] = 'calendar';
+            break;
+          
+          default:
+            $item['icon'] = 'default';
+            break;
+        }
+      }
+
+    }
+  }
 }
 
 /**

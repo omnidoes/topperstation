@@ -1,0 +1,8 @@
+uuid: 49eea43e-cee4-4469-8abc-930943f3236d
+langcode: en
+status: true
+dependencies: {  }
+id: mobile-utilities
+label: 'Mobile Utilities'
+description: ''
+locked: false

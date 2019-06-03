@@ -172,7 +172,6 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
-        - 'config:core.entity_view_display.node.billboard.default'
         - 'config:core.entity_view_display.node.billboard.teaser'
         - 'config:core.entity_view_display.node.page.default'
         - 'config:core.entity_view_display.node.page.teaser'
@@ -180,6 +179,7 @@ display:
         - 'config:core.entity_view_display.node.person.teaser'
         - 'config:core.entity_view_display.node.show.default'
         - 'config:core.entity_view_display.node.show.teaser'
+        - 'config:core.entity_view_display.node.billboard.default'
   block_shows_index:
     display_plugin: block
     id: block_shows_index
@@ -187,6 +187,10 @@ display:
     position: 1
     display_options:
       display_extenders: {  }
+      css_class: ''
+      defaults:
+        css_class: false
+      block_hide_empty: true
     cache_metadata:
       max-age: -1
       contexts:

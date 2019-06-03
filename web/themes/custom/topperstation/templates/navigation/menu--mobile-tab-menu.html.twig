@@ -19,15 +19,24 @@
  */
 #}
 {% set attributes = attributes.addClass('menu menu--celled theme--dark') %}
+{%
+  set icons = {
+    'television': include(directory ~ '/img/icons/icon--television.svg'),
+    'eye': include(directory ~ '/img/icons/icon--eye--white.svg'),
+    'calendar': include(directory ~ '/img/icons/icon--calendar--white.svg'),
+    'expand': include(directory ~ '/img/icons/icon--navburger--white.svg'),
+    'default': include(directory ~ '/img/icons/icon--twitter.svg'),
+  }
+%}
 {% import _self as menus %}
 
 {#
   We call a macro which calls itself to render the full tree.
   @see http://twig.sensiolabs.org/doc/tags/macro.html
 #}
-{{ menus.menu_links(items, attributes, 0) }}
+{{ menus.menu_links(items, attributes, 0, icons) }}
 
-{% macro menu_links(items, attributes, menu_level) %}
+{% macro menu_links(items, attributes, menu_level, icons) %}
   {% import _self as menus %}
   {% if items %}
     {% if menu_level == 0 %}
@@ -37,15 +46,19 @@
     {% endif %}
     {% for item in items %}
       <li{{ item.attributes.addClass('menu__item') }}>
-        {{ link(item.title, item.url) }}
+        <a href="{{ item.url }}" {% if item.in_active_trail %}class="is-active"{% endif %}>
+          <div class="icon">{{ attribute(icons,item.icon)|raw }}</div>
+          {{ item.title }}
+        </a>
         {% if item.below %}
-          {{ menus.menu_links(item.below, attributes, menu_level + 1) }}
+          {{ menus.menu_links(item.below, attributes, menu_level + 1, icons) }}
         {% endif %}
       </li>
     {% endfor %}
       <li class="menu__item">
         <button trigger trigger-target="mobileNav">
-          <span class="hide-text">Expand</span>
+          <div class="icon">{{ attribute(icons,'expand')|raw }}</div>
+          <span class="visually-hidden">Expand</span>
         </button>
       </li>
     </ul>
