@@ -18,6 +18,7 @@ stylesheets-remove:
   - core/modules/system/css/system.theme.css
   - core/modules/system/css/system.menus.css
 regions:
+  mobile: 'Mobile Nav'
   header: Header
   content: Content # the content region is required
   footer: Footer

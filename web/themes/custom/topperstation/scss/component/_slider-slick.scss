@@ -16,6 +16,11 @@
 
 
 .slick__arrow {
+  display: none;
+  
+  @include media-query(lap-and-up) {
+    display: block;
+  }
   
   // hides the navigation buttons if JS is disabled.
   button { display: none; }

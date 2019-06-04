@@ -23,21 +23,25 @@
     }
   }
 
-  .show__promo-images {
-    width: 100%;
-
-    &::before {
-      content: '';
-      position: absolute;
-      z-index: 5;
-      bottom: 0;
-      left: 0;
+    .show__promo-images {
       width: 100%;
-      height: 40%;
-      @include clothoid-gradient(#000000, 0, 0.8);
+
+      &::before {
+        content: '';
+        position: absolute;
+        z-index: 5;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 40%;
+        @include clothoid-gradient(#000000, 0, 0.8);
+      }
+
+      img { width: 100%; }
     }
 
-    img { width: 100%; }
+  .show__details {
+    padding: 2rem 0;
   }
 
   .show__cast {
@@ -60,74 +64,74 @@
     .video { height: 100%; }
   }
 
-  .view--show-videos-gallery {
+    .view--show-videos-gallery {
 
-    label {
-      display: none;
-      color: white;
-    }
-
-    .view__header {
-      margin-bottom: 1rem;
-
-      @include media-query(lap-and-up) {
-        display: flex;
-      }
-
-      h1 {
-        font-size: $h2-size;
-        color: $yellow;
-      }
-    }
-
-    .view__group {
-      margin-bottom: 2rem;
-    }
-
-    .view__filters {
-
-      @include media-query(lap-and-up) {
-        margin-left: 1rem;
-      }
-
-      form {
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
-      }
-    }
-
-      select, input {
-        border: 0;
-        border-left: 1px solid rgba(white, 0.2);
+      label {
+        display: none;
         color: white;
-        padding: 5px 1em;
-        @include font('headings', 700);
-        appearance: none;
-        background-color: transparent;
       }
 
-      select {
-        padding-right: 1.8em;
-        background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iMjBweCIgaGVpZ2h0PSIxMi42cHgiIHZpZXdCb3g9IjAgMCAyMCAxMi42IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAyMCAxMi42OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+PHN0eWxlIHR5cGU9InRleHQvY3NzIj4uc3Qwe2ZpbGw6I0ZGQ0QzMzt9PC9zdHlsZT48cGF0aCBjbGFzcz0ic3QwIiBkPSJNMTAuOSwxMi4yTDE5LjcsMmMwLjctMC44LDAuMS0yLTAuOS0ySDEuMmMtMSwwLTEuNiwxLjItMC45LDJsOC44LDEwLjJDOS42LDEyLjgsMTAuNCwxMi44LDEwLjksMTIuMnoiLz48L3N2Zz4=');
-        background-repeat: no-repeat;
-        background-position: right 0.7em top 50%;
-        background-size: 0.65em auto;
+      .view__header {
+        margin-bottom: 1rem;
 
-        & > * {
-          outline: none;
+        @include media-query(lap-and-up) {
+          display: flex;
         }
 
-        &:focus {
-          outline: none;
-          background-color: lighten($black, 10%);
-        }
-
-        option {
-          background-color: lighten($black, 10%);
+        h1 {
+          font-size: $h2-size;
+          color: $yellow;
         }
       }
-  }
+
+      .view__group {
+        margin-bottom: 2rem;
+      }
+
+      .view__filters {
+
+        @include media-query(lap-and-up) {
+          margin-left: 1rem;
+        }
+
+        form {
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-start;
+        }
+      }
+
+        select, input {
+          border: 0;
+          border-left: 1px solid rgba(white, 0.2);
+          color: white;
+          padding: 5px 1em;
+          @include font('headings', 700);
+          appearance: none;
+          background-color: transparent;
+        }
+
+        select {
+          padding-right: 1.8em;
+          background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iMjBweCIgaGVpZ2h0PSIxMi42cHgiIHZpZXdCb3g9IjAgMCAyMCAxMi42IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAyMCAxMi42OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+PHN0eWxlIHR5cGU9InRleHQvY3NzIj4uc3Qwe2ZpbGw6I0ZGQ0QzMzt9PC9zdHlsZT48cGF0aCBjbGFzcz0ic3QwIiBkPSJNMTAuOSwxMi4yTDE5LjcsMmMwLjctMC44LDAuMS0yLTAuOS0ySDEuMmMtMSwwLTEuNiwxLjItMC45LDJsOC44LDEwLjJDOS42LDEyLjgsMTAuNCwxMi44LDEwLjksMTIuMnoiLz48L3N2Zz4=');
+          background-repeat: no-repeat;
+          background-position: right 0.7em top 50%;
+          background-size: 0.65em auto;
+
+          & > * {
+            outline: none;
+          }
+
+          &:focus {
+            outline: none;
+            background-color: lighten($black, 10%);
+          }
+
+          option {
+            background-color: lighten($black, 10%);
+          }
+        }
+    }
 }
 
 
@@ -143,7 +147,6 @@
   border-radius: 5px;
   overflow: hidden;
   transition: transform 0.1s ease-in-out;
-  box-shadow: 0 2px 2px 1px rgba(0, 0, 0, 0.1);
 
   &:hover {
     transform: translateY(-2px);
@@ -158,27 +161,10 @@
     }
   }
 
-  &::before {
-    content: '';
-    display: block;
-    padding-top: aspect-ratio(1, 1);
-  }
-
-  &::after {
-    content: '';
-    position: absolute;
-    display: block;
-    width: 100%;
-    height: 100%;
-    bottom: 0;
-    left: 0;
-    z-index: 1;
-    background: linear-gradient(to top, $black, rgba($black, 0));
-  }
-
   .show__title {
-    padding: 1em;
+    padding: 1em 1em 0.25em;
     @include font('body', 700);
+    background: $black;
   }
   
   .show__content {
@@ -209,15 +195,28 @@
   
   }
 
-  .icongroup {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    margin-bottom: 1vw;
-    color: white;
+  .show__teaser-image {
+    img { width: 100%; height: auto; }
+  }
 
-    & > * { margin: 0 4px; }
+  .icongroup {
+    width: 100%;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0 1rem 0.5rem;
+
+    color: white;
+    background: $black;
+
+    & > * {
+      margin: 0 4px;
+
+      &:first-child {
+        margin-left: 0;
+      }
+    }
   }
 
     .icongroup__icon {
@@ -234,8 +233,8 @@
 
   .show__title {
     margin-bottom: 0;
-    text-align: center;
     font-size: 1.111rem;
-    color: $yellow;
+
+    a { color: $yellow; }
   }
 }

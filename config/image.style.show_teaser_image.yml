@@ -5,11 +5,11 @@ dependencies: {  }
 name: show_teaser_image
 label: 'Show Teaser Image'
 effects:
-  281f889b-d258-4608-91d2-b996ad54a349:
-    uuid: 281f889b-d258-4608-91d2-b996ad54a349
+  b2183263-54a4-4472-85ef-19e0408678b1:
+    uuid: b2183263-54a4-4472-85ef-19e0408678b1
     id: image_scale_and_crop
-    weight: 1
+    weight: 2
     data:
-      width: 280
-      height: 280
+      width: 600
+      height: 338
       anchor: center-center

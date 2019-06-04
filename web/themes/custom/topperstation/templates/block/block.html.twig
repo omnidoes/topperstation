@@ -29,7 +29,7 @@
   set classes = [
     'block',
     'block--' ~ plugin_id|clean_class,
-    bundle ? 'block--' ~ bundle
+    bundle ? 'block--' ~ bundle|replace('_','-')
   ]
 %}
 {% set attributes_rendered %}

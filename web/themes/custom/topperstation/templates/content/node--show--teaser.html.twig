@@ -1,6 +1,6 @@
 {% extends 'node.html.twig' %}
 {% if bgImage is defined %}
-{% set attributes = attributes.setAttribute('style', 'background-image: url(' ~ bgImage ~ ');') %}
+{# {% set attributes = attributes.setAttribute('style', 'background-image: url(' ~ bgImage ~ ');') %} #}
 {% endif %}
 {% set title_attributes = title_attributes.addClass('show__title') %}
 
@@ -10,15 +10,17 @@
 {% endblock %}
 
 {% block contentarea %}
-<div class="show__content">
-  <a href="{{ url }}" rel="bookmark">
-    <h1{{ title_attributes }}>{{ label }}</h1>
-    <div class="icongroup icongroup--inline">
-      <div class="icongroup__icon">
-        {{ include(directory ~ '/img/icon--play.svg') }}
-      </div>
-      <div class="icongroup__text">Watch <span class="hide--palm">Online</span></div>
-    </div>
-  </a>
+{{ content.field_teaser_image }}
+<a href="{{ url }}" class="link--cover">Watch {{label}} online.</a>
+<h1{{ title_attributes }}><a href="{{ url }}" rel="bookmark">{{ label }}</a></h1>
+<div class="icongroup icongroup--inline">
+  <div class="icongroup__icon">
+    {{ include(directory ~ '/img/icon--play.svg') }}
+  </div>
+  {% trans %}
+  <div class="icongroup__text">Watch {{ videos_total }} video <span class="hide--palm">online</span></div>
+  {% plural videos_total %}
+  <div class="icongroup__text">Watch {{ videos_total }} videos <span class="hide--palm">online</span></div>
+  {% endtrans %}
 </div>
 {% endblock %}

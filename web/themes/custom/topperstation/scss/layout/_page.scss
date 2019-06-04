@@ -2,6 +2,14 @@ body {
   margin: 0;
 }
 
+.dialog-off-canvas-main-canvas {
+  overflow: hidden;
+
+  @include media-query(lap-and-up) {
+    overflow: visible;
+  }
+}
+
 .page__content {
   // padding: 2rem 0;
 }

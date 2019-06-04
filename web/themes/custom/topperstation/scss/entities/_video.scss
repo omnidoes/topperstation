@@ -62,7 +62,7 @@
   background: #ffffff;
   color: $black;
   transition: transform 0.1s ease-in-out;
-  box-shadow: 0 2px 2px 1px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 2px 2px 1px rgba(0, 0, 0, 0.1); */
 
     &:hover {
       
@@ -112,6 +112,8 @@
 
     .icongroup__text {
       text-shadow: 0 2px 10px $black;
+      text-align: center;
+      font-weight: 700;
     }
 
   .video__content {
@@ -122,10 +124,10 @@
 
   .video__title {
     display: inline;
-    background-image: linear-gradient(to bottom, $yellow, $yellow-orange);
-    background-size: 100% 2px;
-    background-repeat: no-repeat;
-    background-position: bottom center;
+    // background-image: linear-gradient(to bottom, $yellow, $yellow-orange);
+    // background-size: 100% 2px;
+    // background-repeat: no-repeat;
+    // background-position: bottom center;
 
     font-size: 1.222em;
     line-height: 1.4;

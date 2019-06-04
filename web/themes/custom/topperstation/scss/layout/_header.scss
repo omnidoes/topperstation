@@ -1,8 +1,8 @@
 .site__header {
   position: relative;
-  z-index: 19;
+  z-index: 500;
   padding: 0.5rem 0;
-  background: linear-gradient(to top, #3a3a3a, $black);
+  background: $gradient-gray-bottom-light;
   color: #ffffff;
   box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
   
@@ -37,7 +37,7 @@
 
   .l-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: auto 40vw auto;
     grid-gap: 1rem;
     // display: flex;
     // flex-direction: row;
@@ -45,8 +45,8 @@
     // justify-content: space-between;
 
     @include media-query(lap-and-up) {
-      grid-gap: 2rem;
       grid-template-columns: 100px auto 1fr;
+      grid-gap: 2rem;
     }
 
     // & > * {
@@ -102,5 +102,20 @@
 
   .block {
     padding: 0;
+  }
+
+  .block--system-branding-block {
+    grid-column: 2;
+
+    @include media-query(lap-and-up) {
+      grid-column: auto;
+    }
+  }
+
+  .block--search-form-block {
+    
+    @include media-query(palm) {
+      display: none;
+    }
   }
 }

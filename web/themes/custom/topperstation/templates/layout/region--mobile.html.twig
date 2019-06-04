@@ -14,19 +14,21 @@
 #}
 {% if content %}
 
-  {% set attributes_string %}
-    {{ attributes.addClass("site__" ~ region) }}
-  {% endset %}
+{% set attributes_string %}
+  {{ attributes.addClass("site__" ~ region).setAttribute('target-name', 'mobileNav') }}
+{% endset %}
 
-  {% if attributes_string %}
-  <div{{ attributes_string }}>
-  {% endif %}
+{% if attributes_string %}
+<div{{ attributes_string }}>
+{% endif %}
 
-    {{ content }}
+  {{ content }}
 
-  {% if attributes_string %}
-  </div>
-  {% endif %}
+{% if attributes_string %}
+</div>
+{% endif %}
+
+<div class="site__mobile-nav">{{ drupal_menu('mobile-tab-menu', 1, 1) }}</div>
 
 {% endif %}
 

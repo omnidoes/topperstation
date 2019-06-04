@@ -4,6 +4,8 @@ global:
       css/style.css: {}
   js:
     js/topperstation.js: {}
+  dependencies:
+    - core/drupal
 
 bower:
   js:

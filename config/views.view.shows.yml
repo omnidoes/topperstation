@@ -60,7 +60,7 @@ display:
         type: default
         options:
           grouping: {  }
-          row_class: 'flexgrid__item one-half lap-one-third desk-one-quarter'
+          row_class: 'flexgrid__item one-whole lap-one-half desk-one-third'
           default_row_class: false
       row:
         type: fields
@@ -172,14 +172,14 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
-        - 'config:core.entity_view_display.node.billboard.default'
         - 'config:core.entity_view_display.node.billboard.teaser'
         - 'config:core.entity_view_display.node.page.default'
         - 'config:core.entity_view_display.node.page.teaser'
-        - 'config:core.entity_view_display.node.person.default'
-        - 'config:core.entity_view_display.node.person.teaser'
         - 'config:core.entity_view_display.node.show.default'
         - 'config:core.entity_view_display.node.show.teaser'
+        - 'config:core.entity_view_display.node.billboard.default'
+        - 'config:core.entity_view_display.node.person.default'
+        - 'config:core.entity_view_display.node.person.teaser'
   block_shows_index:
     display_plugin: block
     id: block_shows_index
@@ -187,6 +187,10 @@ display:
     position: 1
     display_options:
       display_extenders: {  }
+      css_class: ''
+      defaults:
+        css_class: false
+      block_hide_empty: true
     cache_metadata:
       max-age: -1
       contexts:
