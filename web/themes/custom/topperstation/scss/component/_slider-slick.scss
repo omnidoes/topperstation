@@ -15,41 +15,98 @@
 }
 
 
-.slick__arrow {
-  display: none;
-  
-  @include media-query(lap-and-up) {
-    display: block;
+.slick--optionset--horizontal-list {
+
+  .slick-track {
+    //margin-left: -0.5rem;
   }
-  
-  // hides the navigation buttons if JS is disabled.
-  button { display: none; }
+
+  .slick-slide {
+    margin: 0 4px;
+  }
+
+  .slick__arrow {
+    display: block;
+
+    // hides the navigation buttons if JS is disabled.
+    button { display: none; }
+  }
+
+  .slick-arrow {
+    @extend .hide-text;
+
+    position: absolute;
+    top: 50%;
+    display: block;
+    width: 36px;
+    height: 36px;
+
+    background-color: lighten($black, 4%);
+    background-repeat: no-repeat;
+    background-position: center;
+    box-shadow: 0 4px 10px 0 black;
+    border: 0;
+    border-radius: 50%;
+    outline: none;
+
+    &.slick-prev {
+      left: 0;
+      transform: translateY(0%) translateX(-50%);
+      background-image: url('../img/icons/icon--prev.svg');
+    }
+
+    &.slick-next {
+      right: 0;
+      transform: translateY(0%) translateX(50%);
+      background-image: url('../img/icons/icon--next.svg');
+    }
+
+    &:active {
+      margin-top: -3px;
+    }
+  }
 }
 
-.slick-arrow {
-  @extend .hide-text;
 
-  position: absolute;
-  top: 50%;
-  display: block;
-  width: 5vw;
-  height: 5vw;
 
-  border-radius: 50%;
-  background: rgba(white, 0.2);
-  border: 0;
-
-  &:hover {
-    background: white;
+.slick--optionset--slider {
+ 
+  .slick__arrow {
+    display: none;
+    
+    @include media-query(lap-and-up) {
+      display: block;
+    }
+    
+    // hides the navigation buttons if JS is disabled.
+    button { display: none; }
   }
 
-  &.slick-prev {
-    left: 0;
-    transform: translateY(-50%) translateX(-50%);
-  }
+  .slick-arrow {
+    @extend .hide-text;
 
-  &.slick-next {
-    right: 0;
-    transform: translateY(-50%) translateX(50%);
+    position: absolute;
+    top: 50%;
+    display: block;
+    width: 5vw;
+    height: 5vw;
+
+    border-radius: 50%;
+    background: rgba(white, 0.2);
+    border: 0;
+
+    &:hover {
+      background: white;
+    }
+
+    &.slick-prev {
+      left: 0;
+      transform: translateY(-50%) translateX(-50%);
+    }
+
+    &.slick-next {
+      right: 0;
+      transform: translateY(-50%) translateX(50%);
+    }
   }
 }

@@ -6,6 +6,7 @@ global:
     js/topperstation.js: {}
   dependencies:
     - core/drupal
+    - core/modernizr
 
 bower:
   js:

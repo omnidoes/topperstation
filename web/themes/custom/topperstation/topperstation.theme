@@ -38,6 +38,26 @@ function topperstation_preprocess_brightcove_video(array &$variables, $hook) {
   $variables['elements']['id'] = $brightcoveVideo->id();
   $variables['status'] = $brightcoveVideo->get('status')->getValue()[0]['value'];
 
+  if ($variables['elements']['#view_mode'] == 'default') {
+
+    /* $thumbnail = $brightcoveVideo->get('thumbnail')[0];
+
+    if (isset($thumbnail)) {
+    $fid = $thumbnail->get('target_id')->getValue();
+    $file = \Drupal\file\Entity\File::load($fid);
+    $imageUri = $file->getFileUri();
+    $imageType = $file->getMimeType();
+    $imagePathStyle = ImageStyle::load('video_poster_16_9_micro');
+    $imagePath = imagePathStyle->buildUrl($imageUri);
+
+    $base64Image = base64_encode(file_get_contents($imagePath));
+    $base64Data = "data:$imageType;base64,$base64Image";
+
+    $variables['bgImage'] = $imagePath;
+    $variables['bgImageBase64'] = $base64Data;
+    } */
+  }
+
   if ($variables['elements']['#view_mode'] == 'teaser') {
 
   }

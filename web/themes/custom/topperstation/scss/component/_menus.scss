@@ -70,6 +70,7 @@
   border-top: 1px solid rgba(0, 0, 0, 0.1);
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   background: white;
+  color: $black;
   font-size: 0.666em;
 
   .menu__item {
@@ -92,12 +93,19 @@
     width: 100%;
   }
 
+  svg * { fill: $black; }
+  svg line { stroke: $black; }
+
   &.theme--dark {
+    color: white;
     background: $gradient-gray-bottom-light;
 
     .menu__item {
       border-right-color: rgba(white, 0.1);
     }
+
+    svg * { fill: white; }
+    svg line { stroke: white; }
   }
 }
 

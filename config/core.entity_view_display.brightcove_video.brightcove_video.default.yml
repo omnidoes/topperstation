@@ -2,8 +2,11 @@ uuid: 008dfd44-3bfd-4530-a555-d830770da593
 langcode: en
 status: true
 dependencies:
+  config:
+    - image.style.video_poster_16_9_micro
   module:
     - brightcove
+    - image
 id: brightcove_video.brightcove_video.default
 targetEntityType: brightcove_video
 bundle: brightcove_video
@@ -14,6 +17,13 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  description:
+    type: basic_string
+    weight: 2
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
   long_description:
     type: basic_string
     label: hidden
@@ -21,20 +31,20 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  tags:
-    type: entity_reference_label
-    weight: 2
+  thumbnail:
+    type: image
+    weight: 3
     region: content
-    label: inline
+    label: hidden
     settings:
-      link: false
+      image_style: video_poster_16_9_micro
+      image_link: ''
     third_party_settings: {  }
 hidden:
   api_client: true
   brightcove_custom_fields: true
   bumper_video: true
   created: true
-  description: true
   duration: true
   economics: true
   geo_countries: true
@@ -51,8 +61,8 @@ hidden:
   schedule_ends_at: true
   schedule_starts_at: true
   status: true
+  tags: true
   text_tracks: true
-  thumbnail: true
   uid: true
   video_file: true
   video_id: true

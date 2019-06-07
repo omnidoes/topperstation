@@ -36,6 +36,33 @@
 
 
 /**
+ * Default display
+ */
+.video--default {
+  background: darken($black, 5%);
+  
+  &.theme--ambient-lighting {
+
+    @media only screen and (min-width: $desk-wide-start + 10em) {
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-blend-mode: multiply;
+      background-color: #656565;
+    }
+  }
+
+  .video__content {
+    max-width: 45rem;
+    margin: 0 auto;
+    background: transparent;
+    color: white;
+    text-align: center;
+  }
+}
+
+
+/**
  * Full display
  */
 .video--full {
@@ -77,9 +104,16 @@
    */
 
   &.video--inactive {
+    background: rgba(white, 0.2);
+    color: white;
     
     &:hover, &:active, &:focus {
 
+    }
+
+    .tag {
+      background: $yellow;
+      color: $black;
     }
   }
 
@@ -120,6 +154,7 @@
     padding: 1rem;
     font-size: 0.888em;
     background: transparent;
+    color: inherit;
   }
 
   .video__title {
@@ -145,6 +180,18 @@
     margin-top: 1em;
     font-size: 0.9em;
   }
+
+
+  /**
+   * Themes
+   */
+   .theme--dark & {
+     background: transparent;
+
+     .video__content {
+       color: white;
+     }
+   }
 }
 
 

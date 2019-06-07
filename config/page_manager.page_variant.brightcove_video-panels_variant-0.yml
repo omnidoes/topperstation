@@ -15,7 +15,7 @@ label: Default
 variant: panels_variant
 variant_settings:
   blocks:
-    9f5ceb82-1dfa-4da1-96ef-57a5b670ddd3:
+    43af2a78-9225-4a1f-abf8-d582b92ea700:
       id: 'entity_view:brightcove_video'
       label: 'Entity view (Brightcove Video)'
       provider: ctools
@@ -23,30 +23,19 @@ variant_settings:
       view_mode: default
       region: player
       weight: 0
-      uuid: 9f5ceb82-1dfa-4da1-96ef-57a5b670ddd3
+      uuid: 43af2a78-9225-4a1f-abf8-d582b92ea700
       context_mapping:
         entity: brightcove_video
-    b1d9312b-b776-4d9e-abc9-15c825b83890:
+    845c32c0-77d2-4240-a554-7202b66a50af:
       id: 'views_block:videos-block_recommended'
-      label: Recommended
+      label: ''
       provider: views
       label_display: visible
-      views_label: Recommended
+      views_label: ''
       items_per_page: none
       region: recommended
-      weight: 0
-      uuid: b1d9312b-b776-4d9e-abc9-15c825b83890
-      context_mapping: {  }
-    ac2eadf1-922d-4a0e-9bea-e0090d84dc11:
-      id: local_tasks_block
-      label: Tabs
-      provider: core
-      label_display: '0'
-      primary: true
-      secondary: false
-      region: top
-      weight: 0
-      uuid: ac2eadf1-922d-4a0e-9bea-e0090d84dc11
+      weight: -1
+      uuid: 845c32c0-77d2-4240-a554-7202b66a50af
       context_mapping: {  }
   id: panels_variant
   uuid: d2f46d35-ac40-4437-8589-1e02a621bb27

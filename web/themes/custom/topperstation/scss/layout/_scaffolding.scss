@@ -22,6 +22,7 @@
 
 .l-contain--wide {
   @extend %l-contain;
+  
   max-width: $desk-wide-start + 10em;
 }
 
@@ -110,3 +111,8 @@
 }
 .l-height90vh { height: 90vh; }
 .l-height100vh { height: 100vh; }
+
+
+.l-flex-center {
+  justify-content: center;
+}
