@@ -1,0 +1,12 @@
+uuid: da9a6537-8b01-44be-bda8-842ea72938be
+langcode: en
+status: true
+dependencies: {  }
+id: player
+label: Player
+description: ''
+use_admin_theme: false
+path: /watch
+access_logic: and
+access_conditions: {  }
+parameters: {  }

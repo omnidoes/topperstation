@@ -4,8 +4,10 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.brightcove_video.playlist
+    - core.entity_view_mode.brightcove_video.teaser
   module:
     - brightcove
+    - slick_views
 id: videos
 label: Videos
 module: views
@@ -48,7 +50,7 @@ display:
       pager:
         type: some
         options:
-          items_per_page: 5
+          items_per_page: 12
           offset: 0
       style:
         type: default
@@ -167,23 +169,134 @@ display:
         - 'languages:language_interface'
       tags:
         - 'config:core.entity_view_display.brightcove_video.brightcove_video.default'
+        - 'config:core.entity_view_display.brightcove_video.brightcove_video.teaser'
+        - 'config:core.entity_view_display.brightcove_video.brightcove_video.playlist'
+  block_1:
+    display_plugin: block
+    id: block_1
+    display_title: Gallery
+    position: 2
+    display_options:
+      display_extenders: {  }
+      display_description: ''
+      style:
+        type: html_list
+        options:
+          grouping: {  }
+          row_class: 'flexgrid__item one-whole lap-one-third desk-one-third'
+          default_row_class: false
+          type: ul
+          wrapper_class: ''
+          class: flexgrid
+      defaults:
+        style: false
+        row: false
+        sorts: false
+        fields: false
+        css_class: false
+      row:
+        type: fields
+        options:
+          default_field_elements: false
+          inline: {  }
+          separator: ''
+          hide_empty: false
+      sorts:
+        created:
+          id: created
+          table: brightcove_video
+          field: created
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: DESC
+          exposed: false
+          expose:
+            label: ''
+          granularity: second
+          entity_type: brightcove_video
+          entity_field: created
+          plugin_id: date
+      fields:
+        rendered_entity:
+          id: rendered_entity
+          table: brightcove_video
+          field: rendered_entity
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          view_mode: teaser
+          entity_type: brightcove_video
+          plugin_id: rendered_entity
+      css_class: theme--dark
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_interface'
+      tags:
+        - 'config:core.entity_view_display.brightcove_video.brightcove_video.default'
         - 'config:core.entity_view_display.brightcove_video.brightcove_video.playlist'
         - 'config:core.entity_view_display.brightcove_video.brightcove_video.teaser'
   block_recommended:
     display_plugin: block
     id: block_recommended
-    display_title: Recommended
+    display_title: 'Watch Next'
     position: 1
     display_options:
       display_extenders: {  }
       display_description: ''
-      title: Recommended
+      title: 'Watch Next'
       defaults:
         title: false
         sorts: false
         cache: false
         filters: false
         filter_groups: false
+        style: false
+        row: false
+        fields: false
+        css_class: false
       sorts:
         random:
           id: random
@@ -287,6 +400,106 @@ display:
         operator: AND
         groups:
           1: AND
+      style:
+        type: slick
+        options:
+          vanilla: true
+          optionset: horizontal_list
+          skin: ''
+          layout: ''
+          caption:
+            rendered_entity: '0'
+          optionset_thumbnail: ''
+          skin_thumbnail: ''
+          thumbnail_position: ''
+          grid_header: ''
+          grid: null
+          grid_medium: 3
+          grid_small: null
+          visible_items: 3
+          preserve_keys: false
+          image: ''
+          thumbnail: ''
+          overlay: ''
+          title: ''
+          link: ''
+          class: ''
+          id: watchnext
+          override: false
+          overridables:
+            arrows: '0'
+            autoplay: '0'
+            dots: '0'
+            draggable: '0'
+            infinite: '0'
+            mouseWheel: '0'
+            randomize: '0'
+            variableWidth: '0'
+          cache: 0
+          current_view_mode: block_recommended
+          thumbnail_effect: hover
+      row:
+        type: fields
+        options:
+          default_field_elements: false
+          inline: {  }
+          separator: ''
+          hide_empty: false
+      fields:
+        rendered_entity:
+          id: rendered_entity
+          table: brightcove_video
+          field: rendered_entity
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          view_mode: teaser
+          entity_type: brightcove_video
+          plugin_id: rendered_entity
+      allow:
+        items_per_page: false
+      css_class: theme--dark
     cache_metadata:
       max-age: 0
       contexts:
