@@ -36,4 +36,20 @@
     }
   };
 
+
+  // Drupal.behaviors.watchNext = {
+  //   'attach': function (context) {
+
+  //     var watchNextBlock = document.querySelectorAll('.block--views-blockvideos-block-recommended')[0];
+  //     var blockTitle = watchNextBlock.querySelectorAll('.block__title')[0];
+  //     var slickSlider = document.getElementById('watchnext');
+
+  //     blockTitle.addEventListener('click', function(e) {
+  //       e.preventDefault();
+  //       console.log(slick);
+  //     });
+
+  //   }
+  // };
+
 })();

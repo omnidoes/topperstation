@@ -55,6 +55,10 @@
 
 .flexgrid {
 
+  @at-root ul#{&} {
+    @extend %list--plain;
+  }
+
   html.flexbox & {
     display: flex;
     flex-direction: row;

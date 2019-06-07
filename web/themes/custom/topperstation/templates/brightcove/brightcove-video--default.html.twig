@@ -12,11 +12,32 @@
     'video' ~ '--' ~ (status ? 'active': 'inactive')
   ]
 %}
+{% if bgImageBase64 is defined %}
+<style>
+{% set attributes = attributes.addClass('theme--ambient-lighting').setAttribute('id', 'video-' ~ elements.id) %}
+@media only screen and (min-width: 84em) {
+  #video-{{elements.id}} {
+    background-image: url('{{ bgImageBase64 }}');
+  }
+}
+</style>
+{% endif %}
 <article {{ attributes.addClass(classes) }}>
-  {{ elements.brightcove_video_player }}
-  <div class="video__content">
-    <h1>{{ elements.name }}</h1>
-    {{ elements.long_description }}
-    {{ elements.tags }}
+  <div class="l-contain--wide l-contain--flush">
+    {{ elements.brightcove_video_player }}
+    <div class="video__content">
+      <h1>{{ elements.name }}</h1>
+      {% if elements.long_description.value %}
+        {{ elements.long_description }}
+      {% else %}
+        {{ elements.description }}
+      {% endif %}
+      <br/>
+      <ul class="list--icons l-flex-center">
+        <li><img src="http://placehold.it/40x40" /></li>
+        <li><img src="http://placehold.it/40x40" /></li>
+        <li><img src="http://placehold.it/40x40" /></li>
+      </ul>
+    </div>
   </div>
 </article>

@@ -22,7 +22,7 @@
       <a href="{{ elements.url }}">
       {% endif %}
       {% if not elements.poster['#items'] %}
-        <img src="http://placehold.it/1280x720&text=Default+Image" />
+        <img src="{{ directory }}/img/default-video.jpg" />
       {% endif %}
       {{ elements.poster }}
       {% if status %}

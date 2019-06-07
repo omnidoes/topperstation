@@ -148,6 +148,51 @@
 }
 
 
+.block--views-blockvideos-block-recommended {
+  background-image: 
+    linear-gradient(to bottom, #1f1f1f 10vw, transparent), 
+    url('../img/swirls.svg');
+    background-size: auto 100vw;
+    background-position: top -25vw center;
+    background-repeat: no-repeat;
+
+  @include media-query(lap-and-up) {
+    background-image: 
+    linear-gradient(to bottom, #1f1f1f 10vw, transparent), 
+    url('../img/swirls.svg');
+    background-size: auto 100vw;
+    background-position: center;
+  }
+
+  .block__title {
+    text-align: center;
+
+    @include media-query(desk) {
+      font-size: 3vw;
+      text-align: left;
+      word-spacing: 100vw;
+    }
+  }
+
+  .icongroup {
+    display: none;
+  }
+
+  .slick {
+    .slick-arrow {
+
+      @include media-query(lap) {
+        top: 24%;
+      }
+
+      @include media-query(desk) {
+        top: 21%;
+      }
+    }
+  }
+}
+
+
 .block--system-branding-block {
 
   .site-logo {
@@ -165,7 +210,7 @@
 }
 
 .block--player {
-  background: $black url('../img/swirls.svg') no-repeat;
-  background-size: cover;
+  background-color: $black;
+  // background: linear-gradient(to right, #0c0c0c, #292929, #0c0c0c);
   color: white;
 }
