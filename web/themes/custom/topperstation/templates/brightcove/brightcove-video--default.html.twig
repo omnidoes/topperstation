@@ -26,18 +26,13 @@
   <div class="l-contain--wide l-contain--flush">
     {{ elements.brightcove_video_player }}
     <div class="video__content">
-      <h1>{{ elements.name }}</h1>
+      <h1 class="video__title">{{ elements.name }}</h1>
+      {{ drupal_block('addtoany_block') }}
       {% if elements.long_description.value %}
         {{ elements.long_description }}
       {% else %}
         {{ elements.description }}
       {% endif %}
-      <br/>
-      <ul class="list--icons l-flex-center">
-        <li><img src="http://placehold.it/40x40" /></li>
-        <li><img src="http://placehold.it/40x40" /></li>
-        <li><img src="http://placehold.it/40x40" /></li>
-      </ul>
     </div>
   </div>
 </article>

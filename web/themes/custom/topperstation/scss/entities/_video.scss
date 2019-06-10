@@ -10,7 +10,7 @@
   }
 
   .video__content {
-    padding: 1rem;
+    padding: 2rem 1rem;
     background: white;
     color: $black;
   }
@@ -50,6 +50,14 @@
       background-blend-mode: multiply;
       background-color: #656565;
     }
+  }
+
+  .video__title {
+    margin-bottom: 0.25rem;
+  }
+
+  .block--addtoany-block {
+    margin-bottom: 1rem;
   }
 
   .video__content {
