@@ -1,0 +1,17 @@
+uuid: ea785690-a66d-4cf8-9e02-38269fa31b7d
+langcode: en
+status: true
+dependencies: {  }
+id: brightcove_video
+label: 'Brightcove Video'
+tags:
+  description: '[brightcove_video:description:value]'
+  title: '[node:title]'
+  handheldfriendly: 'true'
+  theme_color: '#292929'
+  og_description: '[brightcove_video:description:value]'
+  og_image: '[brightcove_video:poster:entity:url]'
+  og_site_name: 'Topper Station'
+  og_title: '[node:title]'
+  og_type: video.tv_show
+  og_video: '[brightcove_video:url:absolute]'
