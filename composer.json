@@ -53,6 +53,8 @@
         "drupal/slick_views": "^2.0",
         "drupal/smart_trim": "^1.1",
         "drupal/social_link_field": "^1.0@alpha",
+        "drupal/social_media_links": "^2.6",
+        "drupal/svg_image": "^1.9",
         "drupal/twig_tweak": "^2.3",
         "drupal/views_jump_menu": "^1.0@beta",
         "drupal/views_selective_filters": "dev-8.x-1.x",
