@@ -1,8 +1,4 @@
 <?php
-/**
- * @file
- * Contains \Drupal\custom_iconset\Plugin\SocialMediaLinks\Iconset\FontAwesomeSquare.
- */
 
 namespace Drupal\ts_social_media_links\Plugin\SocialMediaLinks\Iconset;
 
@@ -67,7 +63,7 @@ class FontAwesomeSquare extends IconsetBase implements IconsetInterface {
 
     $icon = [
       '#type' => 'markup',
-      '#markup' => "<span class='fa fa-$icon_name".$icon_shape." fa-$style'></span>",
+      '#markup' => "<span class='fa fa-$icon_name" . $icon_shape . " fa-$style'></span>",
     ];
 
     return $icon;
