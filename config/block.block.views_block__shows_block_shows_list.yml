@@ -1,0 +1,24 @@
+uuid: 16081454-5256-4277-86a0-28cf5395de80
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.shows
+  module:
+    - views
+  theme:
+    - topperstation
+id: views_block__shows_block_shows_list
+theme: topperstation
+region: footer_first
+weight: 0
+provider: null
+plugin: 'views_block:shows-block_shows_list'
+settings:
+  id: 'views_block:shows-block_shows_list'
+  label: ''
+  provider: views
+  label_display: visible
+  views_label: ''
+  items_per_page: none
+visibility: {  }
