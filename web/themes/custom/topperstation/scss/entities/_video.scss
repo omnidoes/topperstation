@@ -6,7 +6,7 @@
   }
 
   .video__image {
-    background: #dedede;
+    
   }
 
   .video__content {
@@ -92,6 +92,8 @@
  * Teaser
  */
 .video--teaser {
+  @extend %default-image-mask;
+
   position: relative;
   margin-bottom: 1rem;
   background: #ffffff;
@@ -106,6 +108,10 @@
         stroke-opacity: 1;
       }
     }
+    
+  .video__image {
+    // @extend %default-image-mask;
+  }
 
   /*
    * Modifiers
@@ -140,7 +146,6 @@
 
   .video__header {
     position: relative;
-    // background: #dedede;
   }
 
     .icongroup {

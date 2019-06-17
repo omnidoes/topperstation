@@ -21,4 +21,7 @@ regions:
   mobile: 'Mobile Nav'
   header: Header
   content: Content # the content region is required
-  footer: Footer
+  footer_first: Footer First
+  footer_second: Footer Second
+  footer_third: Footer Third
+  footer_fourth: Footer Fourth

@@ -20,6 +20,20 @@
 }
 
 
+.menu--vert {
+  @extend %list--plain;
+
+  .menu__item {
+    margin-bottom: 0.5em;
+    line-height: 1.2;
+  }
+
+  a {
+
+  }
+}
+
+
 .menu--skyscraper {
   @extend %list--plain;
 

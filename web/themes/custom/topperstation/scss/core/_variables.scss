@@ -50,6 +50,14 @@ $patty-width: 					34px;
 $patty-thickness: 			5px;
 $patty-spacing: 				6px;
 
+/* Images */
+$default-image-radius: 5px;
+
+%default-image-mask {
+  border-radius: $default-image-radius;
+  overflow: hidden;
+}
+
 
 //
 // Colors

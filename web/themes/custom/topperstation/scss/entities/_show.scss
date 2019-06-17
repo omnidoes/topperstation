@@ -68,7 +68,7 @@
 
       label {
         display: none;
-        color: white;
+        color: rgb(133, 63, 63);
       }
 
       .view__header {
@@ -139,14 +139,15 @@
  * Teaser Display
  */
 .show--teaser {
+  @extend %default-image-mask;
+
   position: relative;
-  max-width: 400px; 
+  max-width: $lap-start; 
   margin-bottom: 1rem;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  border-radius: 5px;
-  overflow: hidden;
+  
   transition: transform 0.1s ease-in-out;
 
   &:hover {
@@ -197,6 +198,7 @@
   }
 
   .show__teaser-image {
+    background: #dedede;
     img { width: 100%; height: auto; }
   }
 
