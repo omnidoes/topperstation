@@ -74,7 +74,9 @@ module:
   smart_trim: 0
   social_link_field: 0
   social_link_field_ts: 0
+  social_media_links: 0
   statistics: 0
+  svg_image: 0
   system: 0
   taxonomy: 0
   text: 0
@@ -82,6 +84,7 @@ module:
   token: 0
   toolbar: 0
   tour: 0
+  ts_social_media_links: 0
   twig_tweak: 0
   update: 0
   user: 0

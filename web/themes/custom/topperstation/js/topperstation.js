@@ -37,6 +37,13 @@
   };
 
 
+  Drupal.behaviors.playerStage = {
+    'attach': function (context) {
+
+
+    }
+  };
+
   // Drupal.behaviors.watchNext = {
   //   'attach': function (context) {
 

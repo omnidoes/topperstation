@@ -1,5 +1,28 @@
 .site__footer {
-  padding: 2rem 0;
-  border-top: 1px solid #cccccc;
+  padding: 3rem 0;
   text-align: center;
+  background: white url('../img/play-field.svg') no-repeat bottom -50px right -50px;
+  
+  @include media-query(lap-and-up) {
+    text-align: inherit;
+    background-size: contain;
+  }
+
+  .block {
+    margin-bottom: 3rem;
+  }
+
+  .block__title {
+    color: $black;
+
+    html.backgroundcliptext & {
+      background: unset;
+      -webkit-background-clip: unset;
+      -webkit-text-fill-color: unset;
+    }
+  }
+
+  a {
+    color: $black;
+  }
 }

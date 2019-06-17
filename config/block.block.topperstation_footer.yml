@@ -1,6 +1,6 @@
 uuid: da7b0ba1-ed25-4224-a83c-ac46d4ae0649
 langcode: en
-status: true
+status: false
 dependencies:
   config:
     - system.menu.footer
@@ -12,7 +12,7 @@ _core:
   default_config_hash: kkISXE1LT2FJEoYnqCrCpeFB-2pmGmMxMklVk7rQcfg
 id: topperstation_footer
 theme: topperstation
-region: footer
+region: mobile
 weight: -6
 provider: null
 plugin: 'system_menu_block:footer'

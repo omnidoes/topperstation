@@ -1,0 +1,26 @@
+uuid: cedc7666-bf44-456c-9a9a-253806eca570
+langcode: en
+status: true
+dependencies:
+  config:
+    - simple_block.simple_block.west_liberty_logo
+  module:
+    - block_class
+    - simple_block
+  theme:
+    - topperstation
+third_party_settings:
+  block_class:
+    classes: block--wlu-branding
+id: westlibertylogo
+theme: topperstation
+region: footer_fourth
+weight: 0
+provider: null
+plugin: 'simple_block:west_liberty_logo'
+settings:
+  id: 'simple_block:west_liberty_logo'
+  label: 'West Liberty Logo'
+  provider: simple_block
+  label_display: '0'
+visibility: {  }

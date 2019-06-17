@@ -1,0 +1,9 @@
+name: "Topper Station: Social Media Links"
+description: "Provides customizations to the Social Media Links module (including icon sets)."
+package: Custom
+
+type: module
+core: 8.x
+
+dependencies:
+  - drupal:social_media_links

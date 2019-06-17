@@ -41,5 +41,14 @@
 
 {{ page.header }}
 {{ page.content }}
-{{ page.footer }}
+<div class="site__footer">
+  <div class="l-contain">
+  <div class="flexgrid">
+    <div class="flexgrid__item one-whole lap-one-half desk-two-fifths">{{ page.footer_first }}</div>
+    <div class="flexgrid__item one-whole lap-one-half desk-one-fifth">{{ page.footer_second }}</div>
+    <div class="flexgrid__item one-whole lap-one-half desk-one-fifth">{{ page.footer_third }}</div>
+    <div class="flexgrid__item one-whole lap-one-half desk-one-fifth">{{ page.footer_fourth }}</div>
+  </div>
+  </div>
+</div>
 {{ page.mobile }}
