@@ -20,10 +20,17 @@
     <div class="gw">
       <div class="g one-whole lap-two-thirds desk-three-fifths">
         <div class="block show__info">
-          {{ content|without('field_show_promo_images', 'field_cast') }}
+          {{ content|without('field_show_promo_images', 'field_show_hosts', 'field_cast') }}
         </div>
       </div>
       <div class="g one-whole lap-one-third desk-two-fifths">
+        <section class="block">
+          {% if content.field_show_hosts[0] is not empty %}
+          <h1 class="epsilon">Show Hosts</h1>
+          {{ content.field_show_hosts }}
+          {% endif %}
+        </section>
+
         <section class="block">
           {% if content.field_cast[0] is not empty %}
           <h1 class="epsilon">Cast Members</h1>
