@@ -6,6 +6,7 @@ dependencies:
     - field.field.node.show.field_cast
     - field.field.node.show.field_show_collections
     - field.field.node.show.field_show_description
+    - field.field.node.show.field_show_hosts
     - field.field.node.show.field_show_promo_images
     - field.field.node.show.field_teaser_image
     - node.type.show
@@ -19,7 +20,7 @@ bundle: show
 mode: default
 content:
   field_cast:
-    weight: 1
+    weight: 2
     label: hidden
     settings:
       view_mode: teaser
@@ -28,11 +29,20 @@ content:
     type: entity_reference_entity_view
     region: content
   field_show_description:
-    weight: 2
+    weight: 3
     label: hidden
     settings: {  }
     third_party_settings: {  }
     type: text_default
+    region: content
+  field_show_hosts:
+    weight: 1
+    label: hidden
+    settings:
+      view_mode: teaser
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_entity_view
     region: content
   field_show_promo_images:
     weight: 0
@@ -109,6 +119,7 @@ content:
     type: slick_image
     region: content
 hidden:
+  addtoany: true
   field_show_collections: true
   field_teaser_image: true
   links: true
