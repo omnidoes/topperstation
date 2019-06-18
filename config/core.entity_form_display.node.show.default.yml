@@ -3,10 +3,11 @@ langcode: en
 status: true
 dependencies:
   config:
-    - entity_browser.browser.cast
+    - entity_browser.browser.people
     - field.field.node.show.field_cast
     - field.field.node.show.field_show_collections
     - field.field.node.show.field_show_description
+    - field.field.node.show.field_show_hosts
     - field.field.node.show.field_show_promo_images
     - field.field.node.show.field_teaser_image
     - image.style.large
@@ -16,9 +17,9 @@ dependencies:
     - entity_browser
     - field_group
     - focal_point
-    - image
     - paragraphs
     - path
+    - svg_image
     - text
 third_party_settings:
   field_group:
@@ -46,9 +47,9 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_cast:
-    weight: 10
+    weight: 11
     settings:
-      entity_browser: cast
+      entity_browser: people
       field_widget_display: label
       field_widget_remove: true
       open: true
@@ -56,12 +57,16 @@ content:
       field_widget_edit: false
       field_widget_replace: false
       field_widget_display_settings: {  }
+      table_settings:
+        status_column: false
+        bundle_column: false
+        label_column: false
     third_party_settings: {  }
-    type: entity_browser_entity_reference
+    type: entity_browser_table
     region: content
   field_show_collections:
     type: entity_reference_paragraphs
-    weight: 11
+    weight: 12
     settings:
       title: Paragraph
       title_plural: Paragraphs
@@ -78,6 +83,24 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: text_textarea
+    region: content
+  field_show_hosts:
+    weight: 10
+    settings:
+      entity_browser: people
+      field_widget_display: label
+      field_widget_remove: true
+      open: true
+      selection_mode: selection_append
+      field_widget_edit: false
+      field_widget_replace: false
+      table_settings:
+        status_column: false
+        bundle_column: false
+        label_column: false
+      field_widget_display_settings: {  }
+    third_party_settings: {  }
+    type: entity_browser_table
     region: content
   field_show_promo_images:
     weight: 4

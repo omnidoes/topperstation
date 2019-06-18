@@ -164,20 +164,14 @@
         "enable-patching": true,
         "patches": {
             "drupal/page_manager": {
-                "2921404-16: Use context in variant JS to be compatible with BigPipe": 
-                    "https://www.drupal.org/files/issues/2018-03-14/2921404-16.patch",
-                "2799885-11: Warning: Missing argument 1 for Drupal page manager...":
-                    "https://www.drupal.org/files/issues/2018-04-14/2799885-11.patch",
-                "3033057-15: Page Manager currently not working with CTools 3.1+":
-                    "https://www.drupal.org/files/issues/2019-02-26/3033057-ctools31-15.patch",
                 "2665328-87: Variants take entity label not the variant title (breadcrumb issue)":
                     "https://www.drupal.org/files/issues/2018-12-12/2665328-variants-take-entity-label-87.patch",
                 "2820218-52: Page manager does not respect existing route defaults for title callbacks":
                     "https://www.drupal.org/files/issues/2018-03-22/2820218-52.patch"
             },
             "drupal/entity_browser": {
-                "2973457-129: Add option for field widget to display as table":
-                    "https://www.drupal.org/files/issues/2019-04-24/entity-browser-add-table-widget-2973457-129.patch"
+                "2973457-146: Add option for field widget to display as table":
+                    "https://www.drupal.org/files/issues/2019-05-17/entity-browser-add-table-widget--includes-2851580-52--2973457-146.patch"
             },
             "drupal/brightcove": {
                 "2875507-8: Hoping someone can tell me how to use a template for brightcove...":
@@ -196,10 +190,6 @@
             "drupal/menu_block": {
                 "2809699-82: Menu parent as block title":
                     "https://www.drupal.org/files/issues/2018-10-26/menu_block-label_configuration-2809699-82.patch"
-            },
-            "drupal/menu_item_extras": {
-                "3046283-04: Menu item extras fails to update bundle on install and uninstall when menu content items exist and drupal > 8.7.x is used":
-                    "https://www.drupal.org/files/issues/2019-04-06/3046283-install-bundle-4.patch"
             }
         }
     },
