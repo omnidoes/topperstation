@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0b531b235aa586b735ef24f3ded7744e",
+    "content-hash": "55f899b902b7c9f5dd1c5a477fbe088f",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -4984,7 +4984,9 @@
             "version": "1.8.2",
             "dist": {
                 "type": "tar",
-                "url": "https://registry.npmjs.org/blazy/-/blazy-1.8.2.tgz"
+                "url": "https://registry.npmjs.org/blazy/-/blazy-1.8.2.tgz",
+                "reference": null,
+                "shasum": null
             },
             "type": "npm-asset",
             "license": [
@@ -5002,7 +5004,8 @@
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/kenwheeler/slick/zipball/a2aa3fec335c50aceb58f6ef6d22df8e5f3238e1",
-                "reference": "a2aa3fec335c50aceb58f6ef6d22df8e5f3238e1"
+                "reference": "a2aa3fec335c50aceb58f6ef6d22df8e5f3238e1",
+                "shasum": null
             },
             "type": "npm-asset",
             "license": [
@@ -8934,7 +8937,7 @@
             "time": "2016-12-01T10:57:30+00:00"
         },
         {
-            "name": "mikey179/vfsStream",
+            "name": "mikey179/vfsstream",
             "version": "v1.6.6",
             "source": {
                 "type": "git",
