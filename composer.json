@@ -47,6 +47,7 @@
         "drupal/panels": "^4.4",
         "drupal/paragraphs": "^1.8",
         "drupal/pathauto": "^1.4",
+        "drupal/search_api": "^1.13",
         "drupal/simple_block": "^1.0@beta",
         "drupal/slick": "^1.1",
         "drupal/slick_entityreference": "^1.1",

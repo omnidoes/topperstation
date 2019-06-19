@@ -1,0 +1,11 @@
+{% extends directory ~ '/templates/content/search-result.html.twig' %}
+{% set title = label %}
+{% set snippet = elements.body %}
+
+{% block media %}
+{% if media_asset.value %}
+<div class="search-result__media">
+  {{ media_asset }}
+</div>
+{% endif %}
+{% endblock %}

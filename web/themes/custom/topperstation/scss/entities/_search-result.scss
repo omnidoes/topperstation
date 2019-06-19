@@ -1,0 +1,37 @@
+.search-result {
+  position: relative;
+  max-width: 40rem;
+  display: flex;
+  flex-direction: row;
+
+  &__media {
+    position: relative;
+
+    @include media-query(lap-and-up) {
+      width: 100%;
+      max-width: 30%;
+    }
+  }
+
+  &__body {
+
+    @include media-query(lap-and-up) {
+
+    }
+  }
+
+  &__header {
+
+    @include media-query(lap-and-up) {
+
+    }
+  }
+
+    &__title {
+      font-size: $h4-size;
+      
+      a {
+        color: inherit;
+      }
+    }
+}

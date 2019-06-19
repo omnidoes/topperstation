@@ -56,14 +56,32 @@
  * @see template_preprocess_search_result()
  */
 #}
-{{ title_prefix }}
-<h3{{ title_attributes }}>
-  <a href="{{ url }}">{{ title }}</a>
-</h3>
-{{ title_suffix }}
-{% if snippet %}
-  <p{{ content_attributes }}>{{ snippet }}</p>
-{% endif %}
-{% if info %}
-  <p>{{ info }}</p>
-{% endif %}
+{% set title_attributes = title_attributes.addClass('search-result__title') %}
+<article class="search-result">
+  {% block media %}
+  {% if media_asset %}
+  <div class="search-result__media">
+    {{ media_asset }}
+  </div>
+  {% endif %}
+  {% endblock %}
+
+  {% block content %}
+  <div class="search-result__body">
+    <header class="search-result__header">
+      {{ title_prefix }}
+      <h1{{ title_attributes }}>
+        <a href="{{ url }}">{{ title }}</a>
+      </h1>
+      {{ title_suffix }}
+    </header>
+
+    {% if snippet %}
+    <div {{ content_attributes }}>{{ snippet }}</div>
+    {% endif %}
+    {% if info %}
+    <p>{{ info }}</p>
+    {% endif %}
+  </div>
+  {% endblock %}
+</article>

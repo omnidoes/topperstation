@@ -1,0 +1,5 @@
+{% extends directory ~ '/templates/content/search-result.html.twig' %}
+{% set title = elements.name %}
+{% set snippet = elements.description %}
+{% set media_asset = (elements.poster['#items']) ? elements.poster: null %}
+{% set url = elements.url %}
