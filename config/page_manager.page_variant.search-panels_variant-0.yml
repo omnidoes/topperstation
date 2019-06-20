@@ -1,0 +1,41 @@
+uuid: 60f4a373-c6d2-48d0-b258-06abaddc2186
+langcode: en
+status: true
+dependencies:
+  config:
+    - page_manager.page.search
+    - views.view.search
+  module:
+    - panels
+    - views
+id: search-panels_variant-0
+label: Default
+variant: panels_variant
+variant_settings:
+  blocks:
+    7c300f37-87ee-48ee-8af3-0eae163193a1:
+      id: 'views_block:search-block_1'
+      label: ''
+      provider: views
+      label_display: '0'
+      views_label: ''
+      items_per_page: none
+      region: content
+      weight: 0
+      uuid: 7c300f37-87ee-48ee-8af3-0eae163193a1
+      context_mapping: {  }
+  id: panels_variant
+  uuid: a870a934-6492-4e06-afd1-69999470da55
+  label: null
+  weight: 0
+  layout: skinny_page_1col
+  layout_settings: {  }
+  page_title: Search
+  storage_type: page_manager
+  storage_id: search-panels_variant-0
+  builder: standard
+page: search
+weight: 0
+selection_criteria: {  }
+selection_logic: and
+static_context: {  }

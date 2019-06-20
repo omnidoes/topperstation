@@ -7,7 +7,7 @@ dependencies:
   module:
     - brightcove
     - entity_browser
-    - image
+    - svg_image
     - user
 _core:
   default_config_hash: uBhP8fPkNKjV7mP4j7_DFqZzK3S_DICTFT9yKAZVaU0
@@ -1563,6 +1563,55 @@ display:
           fields:
             name: name
           plugin_id: combine
+        status:
+          id: status
+          table: brightcove_video
+          field: status
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value: All
+          group: 1
+          exposed: true
+          expose:
+            operator_id: ''
+            label: Status
+            description: ''
+            use_operator: false
+            operator: status_op
+            identifier: status
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              administrator: '0'
+              editor: '0'
+          is_grouped: true
+          group_info:
+            label: Enabled
+            description: ''
+            identifier: status
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items:
+              1:
+                title: Active
+                operator: '='
+                value: '1'
+              2:
+                title: Inactive
+                operator: '='
+                value: '0'
+          entity_type: brightcove_video
+          entity_field: status
+          plugin_id: boolean
       filter_groups:
         operator: AND
         groups:

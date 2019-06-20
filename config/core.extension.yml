@@ -64,7 +64,8 @@ module:
   quickedit: 0
   rdf: 0
   responsive_image: 0
-  search: 0
+  search_api: 0
+  search_api_db: 0
   shortcut: 0
   simple_block: 0
   slick: 0
@@ -91,6 +92,8 @@ module:
   views_jump_menu: 0
   views_selective_filters: 0
   views_ui: 0
+  webform: 0
+  webform_ui: 0
   menu_link_content: 1
   pathauto: 1
   views: 10

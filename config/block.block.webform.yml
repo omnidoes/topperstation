@@ -1,0 +1,29 @@
+uuid: 40a40dcd-f6a6-48e8-b386-7462b80f4808
+langcode: en
+status: true
+dependencies:
+  config:
+    - webform.webform.custom_search
+  module:
+    - block_class
+    - webform
+  theme:
+    - topperstation
+third_party_settings:
+  block_class:
+    classes: block--search-form-block
+id: webform
+theme: topperstation
+region: header
+weight: 0
+provider: null
+plugin: webform_block
+settings:
+  id: webform_block
+  label: 'Search for content'
+  provider: webform
+  label_display: '0'
+  webform_id: custom_search
+  default_data: ''
+  redirect: false
+visibility: {  }

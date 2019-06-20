@@ -1,53 +1,43 @@
-uuid: 008dfd44-3bfd-4530-a555-d830770da593
+uuid: 2e80b320-33b2-4648-ab41-0dcb099740a7
 langcode: en
 status: true
 dependencies:
   config:
-    - image.style.video_poster_16_9_micro
+    - core.entity_view_mode.brightcove_video.search_index
+    - image.style.video_poster_16_9
   module:
     - brightcove
     - svg_image
-id: brightcove_video.brightcove_video.default
+id: brightcove_video.brightcove_video.search_index
 targetEntityType: brightcove_video
 bundle: brightcove_video
-mode: default
+mode: search_index
 content:
-  brightcove_video_player:
-    weight: 0
-    region: content
-    settings: {  }
-    third_party_settings: {  }
   description:
     type: basic_string
-    weight: 2
-    region: content
-    label: hidden
-    settings: {  }
-    third_party_settings: {  }
-  long_description:
-    type: basic_string
-    label: hidden
     weight: 1
     region: content
+    label: hidden
     settings: {  }
     third_party_settings: {  }
-  thumbnail:
+  poster:
     type: image
-    weight: 3
+    weight: 0
     region: content
     label: hidden
     settings:
-      image_style: video_poster_16_9_micro
-      image_link: ''
+      image_style: video_poster_16_9
       svg_attributes:
         width: ''
         height: ''
       svg_render_as_image: true
+      image_link: ''
     third_party_settings: {  }
 hidden:
   addtoany: true
   api_client: true
   brightcove_custom_fields: true
+  brightcove_video_player: true
   bumper_video: true
   created: true
   duration: true
@@ -59,8 +49,8 @@ hidden:
   logo_image: true
   logo_tooltip: true
   logo_url: true
+  long_description: true
   player: true
-  poster: true
   reference_id: true
   related_link: true
   schedule_ends_at: true
@@ -68,6 +58,7 @@ hidden:
   status: true
   tags: true
   text_tracks: true
+  thumbnail: true
   uid: true
   video_file: true
   video_id: true
