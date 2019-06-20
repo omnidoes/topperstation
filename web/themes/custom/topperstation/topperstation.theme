@@ -227,7 +227,7 @@ function topperstation_preprocess_menu(&$vars) {
  * Implements hook_form_FORM_ID_alter() for views exposed forms.
  */
 function topperstation_form_views_exposed_form_alter(array &$form, FormStateInterface $form_state, $form_id) {
-  
+
   switch ($form['#id']) {
     case 'views-exposed-form-show-videos-block-videos-gallery':
       $form['seasons']['#options']['All'] = t('All Seasons');
