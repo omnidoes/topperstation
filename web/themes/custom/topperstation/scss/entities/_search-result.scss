@@ -1,19 +1,32 @@
 .search-result {
   position: relative;
-  max-width: 40rem;
-  display: flex;
-  flex-direction: row;
+  text-align: left;
+  font-size: 0.888rem;
+  
+  @include media-query(lap-and-up) {   
+
+  }
 
   &__media {
     position: relative;
+    margin-left: 1rem;
+    width: 30%;
+    max-width: 200px;
+    flex-shrink: 0;
 
     @include media-query(lap-and-up) {
-      width: 100%;
-      max-width: 30%;
+      
+    }
+
+    img {
+      @extend %default-image-mask;
     }
   }
 
   &__body {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 
     @include media-query(lap-and-up) {
 
@@ -28,7 +41,7 @@
   }
 
     &__title {
-      font-size: $h4-size;
+      font-size: 1.888em;
       
       a {
         color: inherit;

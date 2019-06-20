@@ -2,3 +2,10 @@ select, input, textarea, button, option {
   font-size: 1rem;
   @include font('body', normal);
 }
+
+input[type=text], input[type=search] {
+  padding: 0.4em 0.75em;
+  border-radius: 4px;
+  background: #f1f1f1;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}

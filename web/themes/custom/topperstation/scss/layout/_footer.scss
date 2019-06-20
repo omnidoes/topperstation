@@ -2,6 +2,8 @@
   padding: 3rem 0;
   text-align: center;
   background: white url('../img/play-field.svg') no-repeat bottom -50px right -50px;
+  border-top: 1px dashed #ccc;
+  border-bottom: 8px solid $black;
   
   @include media-query(lap-and-up) {
     text-align: inherit;

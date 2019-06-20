@@ -99,6 +99,10 @@
     outline: none;
   }
 
+  label {
+    @extend .is-vishidden;
+  }
+
   .form-search {
     padding: 0.5em 1.5em;
     width: 100%;
@@ -220,5 +224,39 @@
 
   svg {
     max-width: 300px;
+  }
+}
+
+
+.block--site-search-index {
+  text-align: center;
+
+  .view__header {
+
+    h1 {
+
+    }
+  }
+
+  .view__filters {
+    margin-bottom: 3rem;
+
+    .form-item-keywords {
+
+      label {
+        @extend .is-vishidden;
+      }
+    }
+
+    input[name=keywords] {
+      width: 30rem;
+      max-width: 100%;
+      font-size: 1rem;
+      text-align: center;
+    }
+
+    input[type=submit] {
+      @extend .is-vishidden;
+    }
   }
 }

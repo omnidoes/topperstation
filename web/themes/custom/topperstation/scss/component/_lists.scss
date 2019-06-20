@@ -27,3 +27,18 @@
     vertical-align: middle;
   }
 }
+
+
+.list--segmented-v {
+  @extend %list--plain;
+
+  li {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba($black, 0.2);
+
+    &:last-child {
+      border-bottom: 0;
+    }
+  }
+}

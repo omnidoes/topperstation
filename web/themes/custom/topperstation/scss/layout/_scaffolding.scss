@@ -4,13 +4,16 @@
 
   position: relative;
   margin: 0 auto;
-  padding: 0 1rem;
-  padding: 0 5vw;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-left: 5vw;
+  padding-right: 5vw;
   width: 100%;
   max-width: $desk-wide-start;
   
   @include media-query(lap-and-up) {
-    padding: 0 2rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
   }
 }
 
@@ -20,9 +23,15 @@
   max-width: $desk-start;
 }
 
+.l-contain--skinny-max {
+  @extend %l-contain;
+  width: 100%;
+  max-width: $lap-start;
+}
+
 .l-contain--wide {
   @extend %l-contain;
-  
+
   max-width: $desk-wide-start + 10em;
 }
 

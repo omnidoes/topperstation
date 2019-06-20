@@ -59,6 +59,7 @@
         "drupal/twig_tweak": "^2.3",
         "drupal/views_jump_menu": "^1.0@beta",
         "drupal/views_selective_filters": "dev-8.x-1.x",
+        "drupal/webform": "^5.2",
         "drush-ops/behat-drush-endpoint": "^9.3",
         "drush/drush": "~8",
         "npm-asset/blazy": "^1.8",

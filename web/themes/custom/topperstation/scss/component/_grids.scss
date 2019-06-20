@@ -59,6 +59,10 @@
     @extend %list--plain;
   }
 
+  @at-root ol#{&} {
+    @extend %list--plain;
+  }
+
   html.flexbox & {
     display: flex;
     flex-direction: row;
