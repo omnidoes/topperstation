@@ -1,0 +1,224 @@
+uuid: dfbd28b5-84e0-4192-8a36-0fce586c9841
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - search_api.server.topperstation
+  module:
+    - brightcove
+    - node
+    - search_api
+id: default
+name: Default
+description: ''
+read_only: false
+field_settings:
+  body:
+    label: Body
+    datasource_id: 'entity:node'
+    property_path: body
+    type: text
+    dependencies:
+      config:
+        - field.storage.node.body
+  description:
+    label: 'Short description'
+    datasource_id: 'entity:brightcove_video'
+    property_path: description
+    type: text
+    dependencies:
+      module:
+        - brightcove
+  long_description:
+    label: 'Long description'
+    datasource_id: 'entity:brightcove_video'
+    property_path: long_description
+    type: text
+    dependencies:
+      module:
+        - brightcove
+  name:
+    label: Name
+    datasource_id: 'entity:brightcove_video'
+    property_path: name
+    type: text
+    boost: !!float 2
+    dependencies:
+      module:
+        - brightcove
+  node_grants:
+    label: 'Node access information'
+    property_path: search_api_node_grants
+    type: string
+    indexed_locked: true
+    type_locked: true
+    hidden: true
+  status:
+    label: Enabled
+    datasource_id: 'entity:brightcove_video'
+    property_path: status
+    type: boolean
+    dependencies:
+      module:
+        - brightcove
+  status_1:
+    label: status_1
+    datasource_id: 'entity:node'
+    property_path: status
+    type: boolean
+    indexed_locked: true
+    type_locked: true
+    dependencies:
+      module:
+        - node
+  title:
+    label: Title
+    datasource_id: 'entity:node'
+    property_path: title
+    type: text
+    boost: !!float 2
+    dependencies:
+      module:
+        - node
+  type:
+    label: 'Content type'
+    datasource_id: 'entity:node'
+    property_path: type
+    type: string
+    dependencies:
+      module:
+        - node
+  uid:
+    label: uid
+    datasource_id: 'entity:node'
+    property_path: uid
+    type: integer
+    indexed_locked: true
+    type_locked: true
+    dependencies:
+      module:
+        - node
+datasource_settings:
+  'entity:brightcove_video': {  }
+  'entity:node':
+    bundles:
+      default: false
+      selected:
+        - page
+        - show
+    languages:
+      default: true
+      selected: {  }
+processor_settings:
+  add_url: {  }
+  aggregated_field: {  }
+  content_access:
+    weights:
+      preprocess_query: -30
+  entity_status: {  }
+  html_filter:
+    all_fields: false
+    fields:
+      - body
+      - description
+      - long_description
+      - name
+      - title
+    title: true
+    alt: true
+    tags:
+      b: 2
+      h1: 5
+      h2: 3
+      h3: 2
+      strong: 2
+    weights:
+      preprocess_index: -47
+      preprocess_query: -46
+  ignore_character:
+    all_fields: false
+    fields:
+      - body
+      - description
+      - long_description
+      - name
+      - title
+    ignorable: '[''¿¡!?,.:;]'
+    ignorable_classes:
+      - Pc
+      - Pd
+      - Pe
+      - Pf
+      - Pi
+      - Po
+      - Ps
+    weights:
+      preprocess_index: -10
+      preprocess_query: -10
+  ignorecase:
+    all_fields: false
+    fields:
+      - body
+      - description
+      - long_description
+      - name
+      - title
+    weights:
+      preprocess_index: -48
+      preprocess_query: -48
+  rendered_item: {  }
+  stemmer:
+    all_fields: false
+    fields:
+      - body
+      - description
+      - long_description
+      - name
+    exceptions:
+      mexican: mexic
+      texan: texa
+    weights:
+      preprocess_index: -44
+      preprocess_query: -43
+  tokenizer:
+    all_fields: false
+    fields:
+      - body
+      - description
+      - long_description
+      - name
+    spaces: ''
+    overlap_cjk: 1
+    minimum_word_size: '3'
+    weights:
+      preprocess_index: -49
+      preprocess_query: -49
+  transliteration:
+    all_fields: false
+    fields:
+      - body
+      - description
+      - long_description
+      - name
+      - title
+    weights:
+      preprocess_index: -20
+      preprocess_query: -20
+  type_boost:
+    boosts:
+      'entity:brightcove_video':
+        datasource_boost: !!float 1
+      'entity:node':
+        datasource_boost: !!float 1
+        bundle_boosts:
+          show: !!float 13
+    weights:
+      preprocess_index: 0
+tracker_settings:
+  default:
+    indexing_order: fifo
+options:
+  index_directly: true
+  cron_limit: 50
+server: topperstation

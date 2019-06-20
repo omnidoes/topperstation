@@ -6,7 +6,7 @@ dependencies:
     - image.style.video_poster_16_9_micro
   module:
     - brightcove
-    - image
+    - svg_image
 id: brightcove_video.brightcove_video.default
 targetEntityType: brightcove_video
 bundle: brightcove_video
@@ -39,8 +39,13 @@ content:
     settings:
       image_style: video_poster_16_9_micro
       image_link: ''
+      svg_attributes:
+        width: ''
+        height: ''
+      svg_render_as_image: true
     third_party_settings: {  }
 hidden:
+  addtoany: true
   api_client: true
   brightcove_custom_fields: true
   bumper_video: true

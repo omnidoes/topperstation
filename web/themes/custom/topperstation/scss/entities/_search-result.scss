@@ -1,0 +1,50 @@
+.search-result {
+  position: relative;
+  text-align: left;
+  font-size: 0.888rem;
+  
+  @include media-query(lap-and-up) {   
+
+  }
+
+  &__media {
+    position: relative;
+    margin-left: 1rem;
+    width: 30%;
+    max-width: 200px;
+    flex-shrink: 0;
+
+    @include media-query(lap-and-up) {
+      
+    }
+
+    img {
+      @extend %default-image-mask;
+    }
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    @include media-query(lap-and-up) {
+
+    }
+  }
+
+  &__header {
+
+    @include media-query(lap-and-up) {
+
+    }
+  }
+
+    &__title {
+      font-size: 1.888em;
+      
+      a {
+        color: inherit;
+      }
+    }
+}

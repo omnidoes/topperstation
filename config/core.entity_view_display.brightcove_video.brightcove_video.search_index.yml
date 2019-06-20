@@ -1,0 +1,66 @@
+uuid: 2e80b320-33b2-4648-ab41-0dcb099740a7
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.brightcove_video.search_index
+    - image.style.video_poster_16_9
+  module:
+    - brightcove
+    - svg_image
+id: brightcove_video.brightcove_video.search_index
+targetEntityType: brightcove_video
+bundle: brightcove_video
+mode: search_index
+content:
+  description:
+    type: basic_string
+    weight: 1
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+  poster:
+    type: image
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      image_style: video_poster_16_9
+      svg_attributes:
+        width: ''
+        height: ''
+      svg_render_as_image: true
+      image_link: ''
+    third_party_settings: {  }
+hidden:
+  addtoany: true
+  api_client: true
+  brightcove_custom_fields: true
+  brightcove_video_player: true
+  bumper_video: true
+  created: true
+  duration: true
+  economics: true
+  geo_countries: true
+  geo_exclude_countries: true
+  geo_restricted: true
+  logo_alignment: true
+  logo_image: true
+  logo_tooltip: true
+  logo_url: true
+  long_description: true
+  player: true
+  reference_id: true
+  related_link: true
+  schedule_ends_at: true
+  schedule_starts_at: true
+  status: true
+  tags: true
+  text_tracks: true
+  thumbnail: true
+  uid: true
+  video_file: true
+  video_id: true
+  video_url: true
+  viral: true

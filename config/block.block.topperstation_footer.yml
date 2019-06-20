@@ -13,7 +13,7 @@ _core:
 id: topperstation_footer
 theme: topperstation
 region: mobile
-weight: -6
+weight: -4
 provider: null
 plugin: 'system_menu_block:footer'
 settings:

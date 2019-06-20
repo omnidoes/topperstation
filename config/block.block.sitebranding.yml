@@ -9,7 +9,7 @@ dependencies:
 id: sitebranding
 theme: topperstation
 region: mobile
-weight: -6
+weight: -8
 provider: null
 plugin: system_branding_block
 settings:

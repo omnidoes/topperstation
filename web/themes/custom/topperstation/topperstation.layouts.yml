@@ -27,3 +27,16 @@ basic_page:
       label: Content
     bottom:
       label: Bottom
+
+skinny_page_1col:
+  label: 'Skinny Page: 1 Column'
+  category: 'Topper Station'
+  template: layouts/skinny-page-1col
+  default_region: content
+  regions:
+    top:
+      label: Top
+    content:
+      label: Content
+    bottom:
+      label: Bottom

@@ -56,14 +56,50 @@
  * @see template_preprocess_search_result()
  */
 #}
-{{ title_prefix }}
-<h3{{ title_attributes }}>
-  <a href="{{ url }}">{{ title }}</a>
-</h3>
-{{ title_suffix }}
-{% if snippet %}
-  <p{{ content_attributes }}>{{ snippet }}</p>
-{% endif %}
-{% if info %}
-  <p>{{ info }}</p>
-{% endif %}
+{% set title_attributes = title_attributes.addClass('search-result__title') %}
+{% set entityLabels = {
+    'brightcove_video': 'Video',
+    'show': 'Show',
+    'page': 'Page',
+} %}
+{% set tag_label = attribute(entityLabels,elements['#entity_type'])|raw %}
+
+<article class="search-result">
+  {# <div class="search-result__header">
+    {% if tag_label %}
+    <span class="tag">{{ tag_label }}</span>
+    {% endif %}
+  </div> #}
+
+  {% block header %}
+  <header class="search-result__header">
+    {{ title_prefix }}
+    <h1{{ title_attributes }}>
+      <a href="{{ url }}">{{ title }}</a>
+    </h1>
+    {{ title_suffix }}
+  </header>
+  {% endblock %}
+
+  {% block content %}
+  <div class="search-result__body">
+    {% if snippet %}
+    <div {{ content_attributes }}>{{ snippet }}</div>
+    {% endif %}
+    {% if info %}
+    <p>{{ info }}</p>
+    {% endif %}
+
+    {% block media %}
+    {% if media_asset %}
+    <div class="search-result__media">
+      <a href="{{ url }}">
+      {{ media_asset }}
+      </a>
+    </div>
+    {% endif %}
+    {% endblock %}
+  </div>
+  {% endblock %}
+
+</article>
