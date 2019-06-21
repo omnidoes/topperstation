@@ -38,6 +38,7 @@
         "drupal/entityqueue": "^1.0@beta",
         "drupal/field_group": "^1.0",
         "drupal/focal_point": "^1.0",
+        "drupal/google_analytics": "^3.0",
         "drupal/menu_block": "^1.5",
         "drupal/menu_link_attributes": "^1.0",
         "drupal/menu_reference_render": "^2.0@alpha",
