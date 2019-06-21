@@ -8,3 +8,8 @@ config:
 tooling:
   drush:
     cmd: /app/vendor/bin/drush
+services:
+  phpmyadmin:
+    type: phpmyadmin
+    hosts:
+      - database
