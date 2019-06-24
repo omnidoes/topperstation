@@ -56,6 +56,7 @@
  * @see template_preprocess_search_result()
  */
 #}
+{% set classes = 'search-result' ~ classes %}
 {% set title_attributes = title_attributes.addClass('search-result__title') %}
 {% set entityLabels = {
     'brightcove_video': 'Video',
@@ -64,7 +65,7 @@
 } %}
 {% set tag_label = attribute(entityLabels,elements['#entity_type'])|raw %}
 
-<article class="search-result">
+<article class="{{ classes }}">
   {# <div class="search-result__header">
     {% if tag_label %}
     <span class="tag">{{ tag_label }}</span>

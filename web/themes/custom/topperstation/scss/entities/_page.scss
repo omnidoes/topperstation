@@ -9,3 +9,18 @@
     
   }
 }
+
+
+.page--search-index {
+
+  .page__body {
+
+    > *:last-child {
+      margin-bottom: 0;
+    }
+
+    * {
+      display: inline;
+    }
+  }
+}
