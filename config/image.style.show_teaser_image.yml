@@ -1,15 +1,17 @@
 uuid: 563cb82d-cfab-4aa4-8563-082749d967ef
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - focal_point
 name: show_teaser_image
 label: 'Show Teaser Image'
 effects:
-  b2183263-54a4-4472-85ef-19e0408678b1:
-    uuid: b2183263-54a4-4472-85ef-19e0408678b1
-    id: image_scale_and_crop
+  8db1efc3-823c-4640-9582-f3da8c1c4e31:
+    uuid: 8db1efc3-823c-4640-9582-f3da8c1c4e31
+    id: focal_point_scale_and_crop
     weight: 2
     data:
       width: 600
       height: 338
-      anchor: center-center
+      crop_type: focal_point

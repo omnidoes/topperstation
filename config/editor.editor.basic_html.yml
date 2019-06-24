@@ -25,6 +25,11 @@ settings:
             - DrupalLink
             - DrupalUnlink
         -
+          name: 'Text Alignment'
+          items:
+            - JustifyLeft
+            - JustifyCenter
+        -
           name: Lists
           items:
             - BulletedList
@@ -37,16 +42,18 @@ settings:
         -
           name: 'Block Formatting'
           items:
+            - Styles
             - Format
         -
           name: Tools
           items:
+            - PasteFromWord
             - Source
   plugins:
     language:
       language_list: un
     stylescombo:
-      styles: ''
+      styles: "ul.list--plain|Unstyled List\r\nh1.heading--gradient-gold|Gradient Heading: Golden (h1)"
 image_upload:
   status: true
   scheme: public

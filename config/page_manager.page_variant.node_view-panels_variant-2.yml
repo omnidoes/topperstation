@@ -1,4 +1,4 @@
-uuid: 4c214a24-43c2-4578-a7c0-c307297b8b39
+uuid: 23deff21-e01a-4fa8-9101-163a8d9559d7
 langcode: en
 status: true
 dependencies:
@@ -7,12 +7,13 @@ dependencies:
   module:
     - ctools
     - panels
-id: node_view-panels_variant-1
-label: Show
+    - system
+id: node_view-panels_variant-2
+label: Schedule
 variant: panels_variant
 variant_settings:
   blocks:
-    4d353b19-8ad2-46c5-b5b2-09c021e8cab1:
+    9937bd44-ec76-490c-8bf4-e648af2207b2:
       id: 'entity_view:node'
       label: 'Entity view (Content)'
       provider: ctools
@@ -20,28 +21,26 @@ variant_settings:
       view_mode: full
       region: content
       weight: 0
-      uuid: 4d353b19-8ad2-46c5-b5b2-09c021e8cab1
+      uuid: 9937bd44-ec76-490c-8bf4-e648af2207b2
       context_mapping:
         entity: node
   id: panels_variant
-  uuid: 2f504fd2-186d-498a-80ba-e56ac892b441
+  uuid: 75b9fe13-2d8d-44e9-9600-ba1b0a16fbaf
   label: null
   weight: 0
-  layout: layout_onecol
+  layout: skinny_page_1col
   layout_settings: {  }
   page_title: ''
   storage_type: page_manager
-  storage_id: node_view-panels_variant-1
+  storage_id: node_view-panels_variant-2
   builder: standard
 page: node_view
-weight: -9
+weight: -10
 selection_criteria:
   -
-    id: 'entity_bundle:node'
-    bundles:
-      show: show
+    id: request_path
+    pages: /schedule
     negate: false
-    context_mapping:
-      node: node
+    context_mapping: {  }
 selection_logic: and
 static_context: {  }
