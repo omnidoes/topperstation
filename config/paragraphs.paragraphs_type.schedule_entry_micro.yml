@@ -1,0 +1,9 @@
+uuid: aefc7908-0e23-4f6d-a233-518211fd5a2f
+langcode: en
+status: true
+dependencies: {  }
+id: schedule_entry_micro
+label: 'Schedule Entry'
+icon_uuid: null
+description: 'Creates a time entry for schedules. Includes a time field and a reference or text field for the show.'
+behavior_plugins: {  }

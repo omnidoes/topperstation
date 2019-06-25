@@ -10,8 +10,7 @@ dependencies:
     - field.field.node.show.field_show_hosts
     - field.field.node.show.field_show_promo_images
     - field.field.node.show.field_teaser_image
-    - image.style.large
-    - image.style.thumbnail
+    - image.style.medium
     - node.type.show
   module:
     - entity_browser
@@ -19,7 +18,6 @@ dependencies:
     - focal_point
     - paragraphs
     - path
-    - svg_image
     - text
 third_party_settings:
   field_group:
@@ -115,10 +113,12 @@ content:
   field_teaser_image:
     weight: 1
     settings:
+      preview_image_style: medium
+      preview_link: true
+      offsets: '50,50'
       progress_indicator: throbber
-      preview_image_style: thumbnail
     third_party_settings: {  }
-    type: image_image
+    type: image_focal_point
     region: content
   path:
     type: path

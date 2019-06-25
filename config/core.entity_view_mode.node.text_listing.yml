@@ -1,0 +1,10 @@
+uuid: 507d425b-7b5c-411c-8f69-2fb1a5441255
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.text_listing
+label: 'Text Listing'
+targetEntityType: node
+cache: true

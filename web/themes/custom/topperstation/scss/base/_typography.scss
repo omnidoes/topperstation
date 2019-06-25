@@ -103,3 +103,17 @@ strong, b {
 .text--10vw {
   font-size: 10vw;
 }
+
+
+/* titles */
+
+.heading--gradient-gold {
+  color: $yellow-orange;
+
+  html.backgroundcliptext & {
+    display: block;
+    background: linear-gradient(to right, $yellow, $yellow-orange);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}

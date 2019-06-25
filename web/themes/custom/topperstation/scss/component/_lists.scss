@@ -1,4 +1,12 @@
-.list--plain,
+.list--plain {
+  padding: 0;
+  list-style-type: none;
+
+  li {
+    
+  }
+}
+
 %list--plain {
   margin: 0;
   padding: 0;
@@ -8,6 +16,7 @@
     
   }
 }
+
 
 .list--icons {
   list-style-type: none;

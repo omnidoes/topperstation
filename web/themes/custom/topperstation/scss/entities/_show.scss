@@ -242,3 +242,59 @@
     a { color: $yellow; }
   }
 }
+
+
+/**
+ * Text Listing
+ */
+.show--text-listing {
+
+  .show__title {
+    margin-bottom: 0.2em;
+    font-size: 1.4em;
+
+    a {
+      color: inherit;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+
+  .icongroup {
+    width: 100%;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    & > * {
+      margin: 0 4px;
+
+      &:first-child {
+        margin-left: 0;
+      }
+    }
+  }
+
+    .icongroup__icon {
+
+      html.flexbox & {
+        display: flex;
+      }
+
+      svg {
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+
+  .skin--dark & {
+
+    .icongroup__text a {
+      color: $yellow;
+    }
+  }
+}
