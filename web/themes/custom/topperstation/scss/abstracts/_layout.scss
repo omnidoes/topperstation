@@ -30,3 +30,17 @@
   padding-top: 2rem;
   padding-bottom: 2rem;
 }
+
+.l-table {
+
+  & > * {
+    padding: 1rem;
+  }
+}
+
+.l-table--alternate-rows {
+
+  & > *:nth-child(odd) {
+    background: rgba(black, 0.2);
+  }
+}
