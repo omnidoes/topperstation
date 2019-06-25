@@ -1,0 +1,54 @@
+uuid: 03acf250-fe16-4d53-bf89-7173570fdbbe
+langcode: en
+status: true
+dependencies:
+  config:
+    - page_manager.page.schedule
+    - simple_block.simple_block.schedule_intro
+  content:
+    - 'block_content:schedule_table:c86b7060-ae85-46ef-a64c-72173b4aff68'
+  module:
+    - block_content
+    - panels
+    - simple_block
+id: schedule-panels_variant-0
+label: Panels
+variant: panels_variant
+variant_settings:
+  blocks:
+    8c14c1e1-037c-4b61-999d-e96058506d06:
+      id: 'block_content:c86b7060-ae85-46ef-a64c-72173b4aff68'
+      label: 'Daily Schedule'
+      provider: block_content
+      label_display: '0'
+      status: true
+      info: ''
+      view_mode: full
+      region: content
+      weight: 0
+      uuid: 8c14c1e1-037c-4b61-999d-e96058506d06
+      context_mapping: {  }
+    3386b6e1-2d70-491c-ae96-3c40bbc389ac:
+      id: 'simple_block:schedule_intro'
+      label: 'Daily Schedule'
+      provider: simple_block
+      label_display: '0'
+      region: top
+      weight: 0
+      uuid: 3386b6e1-2d70-491c-ae96-3c40bbc389ac
+      context_mapping: {  }
+  id: panels_variant
+  uuid: 1a8f22a5-f181-4e12-9302-bec3331851b0
+  label: null
+  weight: 0
+  layout: skinny_page_1col_dark
+  layout_settings: {  }
+  page_title: 'Daily Schedule'
+  storage_type: page_manager
+  storage_id: schedule-panels_variant-0
+  builder: standard
+page: schedule
+weight: 0
+selection_criteria: {  }
+selection_logic: and
+static_context: {  }

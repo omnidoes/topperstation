@@ -1,0 +1,41 @@
+uuid: 61472637-549b-4160-95ac-e36f518f3c49
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.schedule_entry_micro.field_show_name
+    - field.field.paragraph.schedule_entry_micro.field_show_reference
+    - field.field.paragraph.schedule_entry_micro.field_start_time
+    - paragraphs.paragraphs_type.schedule_entry_micro
+  module:
+    - time_field
+id: paragraph.schedule_entry_micro.default
+targetEntityType: paragraph
+bundle: schedule_entry_micro
+mode: default
+content:
+  field_show_name:
+    weight: 2
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_show_reference:
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_start_time:
+    weight: 5
+    settings:
+      enabled: false
+      step: 5
+    third_party_settings: {  }
+    type: time_widget
+    region: content
+hidden:
+  created: true
+  status: true

@@ -1,0 +1,29 @@
+uuid: 8fd6155e-378c-473a-9fe9-979bdc8714af
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.text_listing
+    - field.field.node.show.field_cast
+    - field.field.node.show.field_show_collections
+    - field.field.node.show.field_show_description
+    - field.field.node.show.field_show_hosts
+    - field.field.node.show.field_show_promo_images
+    - field.field.node.show.field_teaser_image
+    - node.type.show
+  module:
+    - user
+id: node.show.text_listing
+targetEntityType: node
+bundle: show
+mode: text_listing
+content: {  }
+hidden:
+  addtoany: true
+  field_cast: true
+  field_show_collections: true
+  field_show_description: true
+  field_show_hosts: true
+  field_show_promo_images: true
+  field_teaser_image: true
+  links: true

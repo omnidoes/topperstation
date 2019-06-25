@@ -1,0 +1,29 @@
+uuid: 734d125f-3318-4d83-95ca-ed29582f3882
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_show_reference
+    - node.type.show
+    - paragraphs.paragraphs_type.schedule_entry_micro
+id: paragraph.schedule_entry_micro.field_show_reference
+field_name: field_show_reference
+entity_type: paragraph
+bundle: schedule_entry_micro
+label: 'Show Reference'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      show: show
+    sort:
+      field: title
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

@@ -17,6 +17,8 @@ module:
   comment: 0
   config: 0
   config_direct_save: 0
+  config_filter: 0
+  config_ignore: 0
   contact: 0
   contextual: 0
   crop: 0
@@ -82,6 +84,7 @@ module:
   system: 0
   taxonomy: 0
   text: 0
+  time_field: 0
   time_formatter: 0
   token: 0
   toolbar: 0

@@ -1,0 +1,11 @@
+uuid: 55a5a823-8e7a-45d6-a6ad-b059cdef3359
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.basic_html
+id: schedule_intro
+title: 'Daily Schedule: Intro'
+content:
+  value: "<h1 class=\"heading--gradient-gold text-align-center\">Daily Schedule</h1>\r\n\r\n<p class=\"text-align-center\">Schedule subject to change. Please refer to local listings for the most accurate information.</p>\r\n"
+  format: basic_html

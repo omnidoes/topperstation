@@ -1,0 +1,24 @@
+uuid: 3d3f39c2-8dba-4b19-a806-e24b712cac70
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.schedule_table
+    - field.field.block_content.schedule_table.field_schedule_entry
+  module:
+    - entity_reference_revisions
+id: block_content.schedule_table.default
+targetEntityType: block_content
+bundle: schedule_table
+mode: default
+content:
+  field_schedule_entry:
+    type: entity_reference_revisions_entity_view
+    weight: 2
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+hidden: {  }
