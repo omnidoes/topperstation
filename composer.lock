@@ -2798,7 +2798,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/entity_browser.git",
-                "reference": "52b48b1571d6f8924b5c8bafebe9882ee10f782e"
+                "reference": "67b968843313b1b742a2d3d4f05f85cd512ad3f5"
             },
             "require": {
                 "drupal/core": "~8.4"
@@ -2817,16 +2817,14 @@
                     "dev-2.x": "2.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-2.1+42-dev",
-                    "datestamp": "1557743881",
+                    "version": "8.x-2.1+43-dev",
+                    "datestamp": "1558095486",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Dev releases are not covered by Drupal security advisories."
                     }
                 },
-                "patches_applied": {
-                    "2973457-146: Add option for field widget to display as table": "https://www.drupal.org/files/issues/2019-05-17/entity-browser-add-table-widget--includes-2851580-52--2973457-146.patch"
-                }
+                "patches_applied": []
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
             "license": [
@@ -2876,11 +2874,11 @@
             "description": "Entity browsing and selecting component.",
             "homepage": "http://drupal.org/project/entity_browser",
             "support": {
-                "source": "http://cgit.drupalcode.org/entity_browser",
-                "issues": "http://drupal.org/project/issues/entity_browser",
+                "source": "https://git.drupalcode.org/project/entity_browser",
+                "issues": "https://www.drupal.org/project/issues/entity_browser",
                 "irc": "irc://irc.freenode.org/drupal-contribute"
             },
-            "time": "2019-05-17T12:11:11+00:00"
+            "time": "2019-06-25T10:30:01+00:00"
         },
         {
             "name": "drupal/entity_reference_revisions",
@@ -5393,7 +5391,9 @@
             "version": "1.8.2",
             "dist": {
                 "type": "tar",
-                "url": "https://registry.npmjs.org/blazy/-/blazy-1.8.2.tgz"
+                "url": "https://registry.npmjs.org/blazy/-/blazy-1.8.2.tgz",
+                "reference": null,
+                "shasum": null
             },
             "type": "npm-asset",
             "license": [
@@ -5411,7 +5411,8 @@
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/kenwheeler/slick/zipball/a2aa3fec335c50aceb58f6ef6d22df8e5f3238e1",
-                "reference": "a2aa3fec335c50aceb58f6ef6d22df8e5f3238e1"
+                "reference": "a2aa3fec335c50aceb58f6ef6d22df8e5f3238e1",
+                "shasum": null
             },
             "type": "npm-asset",
             "license": [
@@ -9008,17 +9009,17 @@
         },
         {
             "name": "drupal/coder",
-            "version": "8.3.4",
+            "version": "8.3.5",
             "source": {
                 "type": "git",
                 "url": "https://git.drupal.org/project/coder.git",
-                "reference": "0a274321f4930f186d9f246783f0b4d743501cf8"
+                "reference": "35277fc8675b6a2cbb194f8880145a9c85c845c4"
             },
             "require": {
                 "ext-mbstring": "*",
                 "php": ">=5.5.9",
                 "squizlabs/php_codesniffer": "^3.4.1",
-                "symfony/yaml": ">=2.0.0"
+                "symfony/yaml": ">=2.0.5"
             },
             "require-dev": {
                 "phpunit/phpunit": ">=3.7 <6"
@@ -9041,7 +9042,7 @@
                 "phpcs",
                 "standards"
             ],
-            "time": "2019-05-24T11:44:05+00:00"
+            "time": "2019-06-14T15:06:06+00:00"
         },
         {
             "name": "drupal/drupal-extension",
@@ -9343,7 +9344,7 @@
             "time": "2016-12-01T10:57:30+00:00"
         },
         {
-            "name": "mikey179/vfsStream",
+            "name": "mikey179/vfsstream",
             "version": "v1.6.6",
             "source": {
                 "type": "git",
