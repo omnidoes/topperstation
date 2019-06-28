@@ -187,12 +187,45 @@ jobs:
                 path: /tmp/artifacts
                 destination: artifacts
 
+    build_topperstation_theme:
+        <<: *defaults
+        docker:
+            - image: node:10.15.3
+        steps:
+            - checkout
+            - attach_workspace:
+                at: /tmp/workspace
+
+            - restore_cache:
+                keys:
+                    - d8-topperstation-node-modules-{{ checksum "web/themes/custom/topperstation/package-lock.json" }}
+
+            - run:
+                name: build theme
+                command: ./.ci/scripts/topperstation-npm-install
+
+            - save_cache:
+                key: d8-topperstation-node-modules-{{ checksum "web/themes/custom/topperstation/package-lock.json" }}
+                paths:
+                    - $HOME/web/themes/custom/topperstation/node_modules
+
+            - persist_to_workspace:
+                # Must be relative path from working_directory
+                root: .
+                # Must be relative path from root
+                paths:
+                    - web/themes/custom/topperstation
+
 workflows:
   version: 2
   build_and_test:
     jobs:
         # Set up environment variables
         - configure_env_vars
+        # Build Theme
+        - build_topperstation_theme:
+            requires:
+                - configure_env_vars
         # Install dev dependencies and do simple tests (sniff, unit tests, etc.)
         - unit
         # Build deploy and test on target platform

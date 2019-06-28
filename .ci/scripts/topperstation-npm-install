@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# Exit on errors
+set -e
+
+# Change into dev theme directory
+echo -e "\nChanging directories into web/themes/custom/topperstation"
+cd web/themes/custom/topperstation
+
+echo -e "\nCopying stored vendor directory"
+cp -r /tmp/web/themes/custom/topperstation/vendor/ .
+
+
+# Install any dependencies, if we find packages.json
+if [ -f 'package.json' ]
+then
+
+	echo -e "\npackage.json found"
+
+	echo -e "\nRunning 'npm install'"
+	npm install
+fi
+
+# Run gulp
+echo -e "\nRunning 'npm run grunt'"
+npm run grunt
+
+# Change back again
+echo -e "\nchanged directories back into:"
+cd -
