@@ -7,8 +7,8 @@ set -e
 echo -e "\nChanging directories into web/themes/custom/topperstation"
 cd web/themes/custom/topperstation
 
-echo -e "\nCopying stored vendor directory"
-cp -r /tmp/web/themes/custom/topperstation/vendor/ .
+# echo -e "\nCopying stored vendor directory"
+# cp -r /tmp/web/themes/custom/topperstation/vendor/ .
 
 
 # Install any dependencies, if we find packages.json
