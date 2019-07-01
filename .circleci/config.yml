@@ -214,7 +214,7 @@ jobs:
                 root: .
                 # Must be relative path from root
                 paths:
-                    - web/themes/custom/topperstation
+                    - web/themes/custom/topperstation/css
 
 workflows:
   version: 2
