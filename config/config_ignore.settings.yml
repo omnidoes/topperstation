@@ -1,8 +1,9 @@
 ignored_config_entities:
-  0: page_manager.page_variant.home-panels_variant-0.yml
-  2: page_manager.page_variant.node_view-panels_variant-1.yml
-  4: page_manager.page_variant.schedule-panels_variant-0.yml
-  6: page_manager.page_variant.search-panels_variant-0.yml
-  8: page_manager.page_variant.shows-panels_variant-0.yml
+  0: brightcove.brightcove_api_client.brightcove_west_liberty_university.yml
+  2: page_manager.page_variant.home-panels_variant-0.yml
+  4: page_manager.page_variant.node_view-panels_variant-1.yml
+  6: page_manager.page_variant.schedule-panels_variant-0.yml
+  8: page_manager.page_variant.search-panels_variant-0.yml
+  10: page_manager.page_variant.shows-panels_variant-0.yml
 _core:
   default_config_hash: UVH1aJ4b44UM-VdPVN7hNNuuVqfReJxwfVeDQH1Hvsk
