@@ -78,8 +78,10 @@ function topperstation_preprocess_node(array &$variables, $hook) {
   switch ($node->getType()) {
     case 'show':
       if ($node->hasField('field_teaser_image')) {
-        $path = $node->field_teaser_image->entity->getFileUri();
-        $variables['bgImage'] = ImageStyle::load('show_teaser_image')->buildUrl($path);
+        if (!$node->get('field_teaser_image')->isEmpty()) {
+          $path = $node->field_teaser_image->entity->getFileUri();
+          $variables['bgImage'] = ImageStyle::load('show_teaser_image')->buildUrl($path);
+        }
       }
 
       if ($variables['view_mode'] == 'teaser') {
