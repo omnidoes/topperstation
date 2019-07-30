@@ -8,6 +8,7 @@ weight: 3
 is_admin: null
 permissions:
   - 'access administration pages'
+  - 'access brightcove videos overview page'
   - 'access brightcove_videos entity browser pages'
   - 'access cast entity browser pages'
   - 'access content'
