@@ -21,6 +21,7 @@ permissions:
   - 'access site in maintenance mode'
   - 'access site reports'
   - 'access toolbar'
+  - 'administer brightcove configuration'
   - 'administer menu'
   - 'administer nodes'
   - 'create billboard content'
