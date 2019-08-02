@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "97da7e537885c367be368914e1366062",
+    "content-hash": "18d737a83b6c8ce38704ef8da3617267",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -5402,22 +5402,15 @@
         },
         {
             "name": "npm-asset/slick-carousel",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/kenwheeler/slick.git",
-                "reference": "9c55b531245e8c866324652a353bead23f9721a0"
-            },
+            "version": "1.8.1",
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/kenwheeler/slick/zipball/9c55b531245e8c866324652a353bead23f9721a0",
-                "reference": "9c55b531245e8c866324652a353bead23f9721a0"
+                "type": "tar",
+                "url": "https://registry.npmjs.org/slick-carousel/-/slick-carousel-1.8.1.tgz"
             },
             "type": "npm-asset",
             "license": [
                 "MIT"
-            ],
-            "time": "2019-07-16T19:44:46+00:00"
+            ]
         },
         {
             "name": "oomphinc/composer-installers-extender",
@@ -10472,8 +10465,7 @@
         "drupal/simple_block": 10,
         "drupal/social_link_field": 15,
         "drupal/views_jump_menu": 10,
-        "drupal/views_selective_filters": 20,
-        "npm-asset/slick-carousel": 20
+        "drupal/views_selective_filters": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
