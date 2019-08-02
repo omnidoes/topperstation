@@ -5406,18 +5406,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kenwheeler/slick.git",
-                "reference": "a2aa3fec335c50aceb58f6ef6d22df8e5f3238e1"
+                "reference": "9c55b531245e8c866324652a353bead23f9721a0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kenwheeler/slick/zipball/a2aa3fec335c50aceb58f6ef6d22df8e5f3238e1",
-                "reference": "a2aa3fec335c50aceb58f6ef6d22df8e5f3238e1"
+                "url": "https://api.github.com/repos/kenwheeler/slick/zipball/9c55b531245e8c866324652a353bead23f9721a0",
+                "reference": "9c55b531245e8c866324652a353bead23f9721a0"
             },
             "type": "npm-asset",
             "license": [
                 "MIT"
             ],
-            "time": "2018-04-17T19:49:13+00:00"
+            "time": "2019-07-16T19:44:46+00:00"
         },
         {
             "name": "oomphinc/composer-installers-extender",
