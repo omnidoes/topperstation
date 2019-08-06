@@ -6,7 +6,7 @@ id: brightcove_video
 label: 'Brightcove Video'
 tags:
   description: '[brightcove_video:description:value]'
-  title: '[node:title]'
+  title: '[brightcove_video:name] | Topper Station'
   handheldfriendly: 'true'
   theme_color: '#292929'
   og_description: '[brightcove_video:description:value]'
