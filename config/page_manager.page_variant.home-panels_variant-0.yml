@@ -40,18 +40,6 @@ variant_settings:
       context_mapping: {  }
       region: content
       uuid: f98c625c-95ed-4e12-bcd5-ce59c9b31d34
-      weight: 3
-    db676d82-0e18-4903-acc8-4b5660a2e297:
-      id: 'block_content:bec7ec48-d05b-4e31-97a5-0f11d1cf5480'
-      label: 'The Hall of Heroes'
-      provider: block_content
-      label_display: visible
-      status: true
-      info: ''
-      view_mode: full
-      context_mapping: {  }
-      region: content
-      uuid: db676d82-0e18-4903-acc8-4b5660a2e297
       weight: 2
     0e32366a-db66-4e12-9ea9-101c4f4144e5:
       id: 'block_content:109c9fad-63c5-4bf7-8682-0cbf31b78d65'
@@ -65,6 +53,18 @@ variant_settings:
       region: content
       uuid: 0e32366a-db66-4e12-9ea9-101c4f4144e5
       weight: 1
+    b86879d1-966d-4f6b-82a1-2d7ea9e7dfba:
+      id: 'block_content:bec7ec48-d05b-4e31-97a5-0f11d1cf5480'
+      label: 'The Hall of Heroes'
+      provider: block_content
+      label_display: visible
+      status: true
+      info: ''
+      view_mode: full
+      context_mapping: {  }
+      region: content
+      uuid: b86879d1-966d-4f6b-82a1-2d7ea9e7dfba
+      weight: 3
   id: panels_variant
   uuid: d22c1914-2c6e-478b-a97b-084edffe925a
   label: null

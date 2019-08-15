@@ -2,6 +2,33 @@
 
 }
 
+  .menu__item {
+
+    a.is-live {
+      margin-left: 0.5em;
+      color: $color-red;
+      text-transform: uppercase;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: -0.1em;
+        transform: translateY(-50%);
+        width: 0.5em;
+        height: 0.5em;
+        display: block;
+
+        border-radius: 50%;
+        background: $color-red;
+      }
+
+      &.is-active {
+        color: $color-red;
+      }
+    }
+  }
+
 
 .menu--long {
   list-style-type: none;
