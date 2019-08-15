@@ -2272,6 +2272,25 @@ img {
   .list--segmented-v li:last-child {
     border-bottom: 0; }
 
+.menu__item a.is-live {
+  margin-left: 0.5em;
+  color: #da3422;
+  text-transform: uppercase; }
+  .menu__item a.is-live::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -0.1em;
+    -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+    width: 0.5em;
+    height: 0.5em;
+    display: block;
+    border-radius: 50%;
+    background: #da3422; }
+  .menu__item a.is-live.is-active {
+    color: #da3422; }
+
 .menu--long {
   list-style-type: none;
   display: -ms-flexbox;
