@@ -2518,12 +2518,14 @@ img {
   -ms-flex-pack: center;
       justify-content: center;
   -ms-flex-wrap: wrap;
-      flex-wrap: wrap; }
+      flex-wrap: wrap;
+  width: 100%; }
 
 .pager__item {
   margin-right: -1px;
   margin-bottom: 5px;
   border: 1px solid #cccccc;
+  background: white;
   line-height: 1; }
   .pager__item:first-child {
     border-radius: 4px 0 0 4px; }
