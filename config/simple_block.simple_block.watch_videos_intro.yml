@@ -1,0 +1,11 @@
+uuid: 848109be-b5a9-4a85-a084-c8169216d2ac
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.basic_html
+id: watch_videos_intro
+title: 'Watch Videos: Introduction'
+content:
+  value: "<h1 class=\"heading--gradient-gold text-align-center\">Watch Videos</h1>\r\n\r\n<p class=\"text-align-center\">Enjoy all the newest content from Topperstation!</p>\r\n"
+  format: basic_html
