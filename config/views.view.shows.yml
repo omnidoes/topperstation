@@ -175,11 +175,13 @@ display:
         - 'config:core.entity_view_display.node.billboard.default'
         - 'config:core.entity_view_display.node.billboard.teaser'
         - 'config:core.entity_view_display.node.page.default'
+        - 'config:core.entity_view_display.node.page.search_index'
         - 'config:core.entity_view_display.node.page.teaser'
         - 'config:core.entity_view_display.node.person.default'
         - 'config:core.entity_view_display.node.person.teaser'
         - 'config:core.entity_view_display.node.show.default'
         - 'config:core.entity_view_display.node.show.teaser'
+        - 'config:core.entity_view_display.node.show.text_listing'
   block_shows_index:
     display_plugin: block
     id: block_shows_index
@@ -202,11 +204,13 @@ display:
         - 'config:core.entity_view_display.node.billboard.default'
         - 'config:core.entity_view_display.node.billboard.teaser'
         - 'config:core.entity_view_display.node.page.default'
+        - 'config:core.entity_view_display.node.page.search_index'
         - 'config:core.entity_view_display.node.page.teaser'
         - 'config:core.entity_view_display.node.person.default'
         - 'config:core.entity_view_display.node.person.teaser'
         - 'config:core.entity_view_display.node.show.default'
         - 'config:core.entity_view_display.node.show.teaser'
+        - 'config:core.entity_view_display.node.show.text_listing'
   block_shows_list:
     display_plugin: block
     id: block_shows_list
@@ -215,7 +219,7 @@ display:
     display_options:
       display_extenders: {  }
       display_description: ''
-      title: Shows
+      title: Channels
       defaults:
         title: false
         fields: false

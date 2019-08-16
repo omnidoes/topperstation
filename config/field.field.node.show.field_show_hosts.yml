@@ -10,7 +10,7 @@ id: node.show.field_show_hosts
 field_name: field_show_hosts
 entity_type: node
 bundle: show
-label: 'Show Hosts'
+label: Hosts
 description: ''
 required: false
 translatable: false
