@@ -9,6 +9,8 @@
       color: $color-red;
       text-transform: uppercase;
 
+      animation: onAirText 2s infinite;
+
       &::before {
         content: '';
         position: absolute;
@@ -21,6 +23,8 @@
 
         border-radius: 50%;
         background: $color-red;
+
+        animation: onAirBulb 2s infinite;
       }
 
       &.is-active {

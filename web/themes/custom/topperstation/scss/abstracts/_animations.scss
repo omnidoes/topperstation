@@ -45,18 +45,39 @@
   }
 }
 
-@keyframes onAirLight {
+@keyframes onAirText {
   0% {
-    filter: drop-shadow(0 0 20px #f11313);
+    color: $color-red;
   }
 
   50% {
-    color: #ff0000;
-    filter: drop-shadow(0 0 10px #f11313);
+    color: $color-red;
+  }
+
+  51% {
+    color: #fd3e2a;
   }
 
   100% {
-    filter: drop-shadow(0 0 20px #f11313);
+    color: #fd3e2a;
+  }
+}
+
+@keyframes onAirBulb {
+  0% {
+    background-color: $color-red;
+  }
+
+  50% {
+    background-color: $color-red;
+  }
+
+  51% {
+    background-color: #fd3e2a;
+  }
+
+  100% {
+    background-color: #fd3e2a;
   }
 }
 
