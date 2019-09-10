@@ -65,6 +65,7 @@ permissions:
   - 'update any video_list block content'
   - 'update media'
   - 'use ipe with page manager'
+  - 'use menu link attributes'
   - 'use panels dashboard'
   - 'use text format basic_html'
   - 'use text format full_html'
