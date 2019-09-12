@@ -192,6 +192,20 @@
 
 .block--system-branding-block {
 
+  .no-cssgrid & {
+
+    #logo {
+      display: block;
+      margin: 0 auto;
+    }
+    
+    @include media-query(lap-and-up) {
+      width: 20%;
+      float: left;
+      margin-right: 4%;
+    }
+  }
+
   .site-logo {
     display: block;
   }

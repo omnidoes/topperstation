@@ -2028,6 +2028,16 @@ html.flexbox .show--text-listing .icongroup__icon {
     .block--views-blockvideos-block-recommended .slick .slick-arrow {
       top: 21%; } }
 
+.no-cssgrid .block--system-branding-block #logo {
+  display: block;
+  margin: 0 auto; }
+
+@media only screen and (min-width: 42em) {
+  .no-cssgrid .block--system-branding-block {
+    width: 20%;
+    float: left;
+    margin-right: 4%; } }
+
 .block--system-branding-block .site-logo {
   display: block; }
 
