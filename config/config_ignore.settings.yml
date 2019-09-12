@@ -7,5 +7,7 @@ ignored_config_entities:
   10: page_manager.page_variant.search-panels_variant-0
   12: page_manager.page_variant.shows-panels_variant-0
   14: block.block.mainnavigation_2
+  16: block.block.socialmedialinks
+  18: system.performance
 _core:
   default_config_hash: UVH1aJ4b44UM-VdPVN7hNNuuVqfReJxwfVeDQH1Hvsk
