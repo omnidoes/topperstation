@@ -9,3 +9,5 @@ label: 'Front page'
 tags:
   canonical_url: '[site:url]'
   shortlink: '[site:url]'
+  og_description: 'To inform, connect and captivate people with content inspired by the students of West Liberty University. To be a leader and innovator in Higher Education and the place for digital, on-demand video content in the Ohio Valley.'
+  og_title: 'Topper Station'
