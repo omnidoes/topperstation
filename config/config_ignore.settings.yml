@@ -9,5 +9,7 @@ ignored_config_entities:
   14: block.block.mainnavigation_2
   16: block.block.socialmedialinks
   18: system.performance
+  20: simple_block.simple_block.schedule_intro
+  22: simple_block.simple_block.watch_videos_intro
 _core:
   default_config_hash: UVH1aJ4b44UM-VdPVN7hNNuuVqfReJxwfVeDQH1Hvsk

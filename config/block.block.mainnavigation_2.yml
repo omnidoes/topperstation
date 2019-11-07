@@ -22,7 +22,7 @@ settings:
   level: 1
   depth: 2
   expand: 0
-  parent: 'main:menu_link_content:db447a89-a5e3-4db6-8fab-772b21c5a4fd'
+  parent: 'main:menu_link_content:6e712263-4b61-4a74-925c-717f8a969938'
   suggestion: vertical
   label_type: fixed_parent
 visibility: {  }

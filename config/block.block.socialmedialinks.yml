@@ -39,7 +39,7 @@ settings:
       description: ''
       weight: '-6'
     facebook:
-      value: wlutv14
+      value: topperstation
       description: ''
       weight: '-5'
     flickr:
@@ -79,7 +79,7 @@ settings:
       description: ''
       weight: '4'
     twitter:
-      value: WLUTV14
+      value: topperstation
       description: ''
       weight: '5'
     vimeo:

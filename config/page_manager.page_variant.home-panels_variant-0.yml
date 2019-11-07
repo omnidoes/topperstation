@@ -6,9 +6,8 @@ dependencies:
     - page_manager.page.home
     - views.view.shows
   content:
-    - 'block_content:slider:109c9fad-63c5-4bf7-8682-0cbf31b78d65'
-    - 'block_content:video_list:268fc36b-fa99-49cd-ae78-f74eea3ffc58'
-    - 'block_content:video_list:bec7ec48-d05b-4e31-97a5-0f11d1cf5480'
+    - 'block_content:slider:39202cc7-3efa-4784-bee5-55e8b8477815'
+    - 'block_content:video_list:cd9dcf12-6f93-47c6-ae5e-1a37c99ceeea'
   module:
     - block_content
     - panels
@@ -20,58 +19,46 @@ variant_settings:
   blocks:
     0171f9da-2efd-4611-a804-8e0c858231a3:
       id: 'views_block:shows-block_shows_index'
-      label: ''
+      label: Channels
       provider: views
       label_display: visible
-      views_label: ''
+      views_label: Channels
       items_per_page: none
       region: content
-      weight: 4
+      weight: 3
       uuid: 0171f9da-2efd-4611-a804-8e0c858231a3
       context_mapping: {  }
-    f98c625c-95ed-4e12-bcd5-ce59c9b31d34:
-      id: 'block_content:268fc36b-fa99-49cd-ae78-f74eea3ffc58'
-      label: 'Best of Concert in the Kitchen'
-      provider: block_content
-      label_display: visible
-      status: true
-      info: ''
-      view_mode: full
-      context_mapping: {  }
-      region: content
-      uuid: f98c625c-95ed-4e12-bcd5-ce59c9b31d34
-      weight: 2
-    0e32366a-db66-4e12-9ea9-101c4f4144e5:
-      id: 'block_content:109c9fad-63c5-4bf7-8682-0cbf31b78d65'
-      label: 'Shows Slider'
+    daead53a-c3a8-4381-b516-2b110460eb0a:
+      id: 'block_content:39202cc7-3efa-4784-bee5-55e8b8477815'
+      label: 'West Liberty'
       provider: block_content
       label_display: '0'
       status: true
       info: ''
       view_mode: full
-      context_mapping: {  }
       region: content
-      uuid: 0e32366a-db66-4e12-9ea9-101c4f4144e5
       weight: 1
-    b86879d1-966d-4f6b-82a1-2d7ea9e7dfba:
-      id: 'block_content:bec7ec48-d05b-4e31-97a5-0f11d1cf5480'
-      label: 'The Hall of Heroes'
+      context_mapping: {  }
+      uuid: daead53a-c3a8-4381-b516-2b110460eb0a
+    34d7b9a5-1afe-46ab-953d-1e6d3bae20ab:
+      id: 'block_content:cd9dcf12-6f93-47c6-ae5e-1a37c99ceeea'
+      label: 'New This Week'
       provider: block_content
       label_display: visible
       status: true
       info: ''
       view_mode: full
-      context_mapping: {  }
       region: content
-      uuid: b86879d1-966d-4f6b-82a1-2d7ea9e7dfba
-      weight: 3
+      weight: 2
+      context_mapping: {  }
+      uuid: 34d7b9a5-1afe-46ab-953d-1e6d3bae20ab
   id: panels_variant
   uuid: d22c1914-2c6e-478b-a97b-084edffe925a
   label: null
   weight: 0
   layout: layout_onecol
   layout_settings: {  }
-  page_title: null
+  page_title: 'West Liberty University Television'
   storage_type: page_manager
   storage_id: home-panels_variant-0
   builder: ipe
