@@ -1698,6 +1698,12 @@ html.flexbox .show--text-listing .icongroup__icon {
     background: transparent;
     color: white;
     text-align: center; }
+  .video--default .video__description {
+    margin-bottom: 1em; }
+  .video--default .video__related-link .field__label {
+    font-weight: 700; }
+  .video--default .video__related-link a {
+    color: #FFCD33; }
 
 /**
  * Full display
