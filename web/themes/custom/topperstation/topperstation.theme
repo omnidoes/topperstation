@@ -8,7 +8,6 @@
  */
 
 use Drupal\node\Entity\Node;
-use Drupal\Core\Link;
 use Drupal\Core\Url;
 use Drupal\image\Entity\ImageStyle;
 use Drupal\Core\Form\FormStateInterface;
@@ -42,27 +41,25 @@ function topperstation_preprocess_brightcove_video(array &$variables, $hook) {
 
   if ($variables['elements']['#view_mode'] == 'default') {
 
-    if(!$brightcoveVideo->get('related_link')->isEmpty()) {
+    if (!$brightcoveVideo->get('related_link')->isEmpty()) {
       $url = $brightcoveVideo->get('related_link')->getValue()[0]['uri'];
       $title = $brightcoveVideo->get('related_link')->getValue()[0]['title'];
 
-      if($url && $title) {
-        // create a link
+      if ($url && $title) {
+        // Create a link with a target attribute.
         $link = [
           '#type' => 'link',
           '#title' => $title,
           '#url' => Url::fromUri($url),
           '#attributes' => [
-            'target' => '_blank'
-          ]
+            'target' => '_blank',
+          ],
         ];
 
         $renderer = \Drupal::service('renderer');
         $variables['overlay_content'] = $renderer->render($link);
       }
     }
-
-    //kint($brightcoveVideo->get('related_link')->getValue()[0]['uri']);
 
     /* $thumbnail = $brightcoveVideo->get('thumbnail')[0];
 
