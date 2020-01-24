@@ -6,6 +6,7 @@ dependencies:
     - image.style.video_poster_16_9_micro
   module:
     - brightcove
+    - link
     - svg_image
 id: brightcove_video.brightcove_video.default
 targetEntityType: brightcove_video
@@ -30,6 +31,18 @@ content:
     weight: 1
     region: content
     settings: {  }
+    third_party_settings: {  }
+  related_link:
+    type: link
+    weight: 4
+    region: content
+    label: above
+    settings:
+      trim_length: null
+      url_only: false
+      url_plain: false
+      rel: '0'
+      target: '0'
     third_party_settings: {  }
   thumbnail:
     type: image
@@ -62,7 +75,6 @@ hidden:
   player: true
   poster: true
   reference_id: true
-  related_link: true
   schedule_ends_at: true
   schedule_starts_at: true
   status: true

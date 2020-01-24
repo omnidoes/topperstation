@@ -13,5 +13,6 @@
     "tests"
   ],
   "dependencies": {
+    "videojs-overlay": "^2.1.4"
   }
 }

@@ -23,5 +23,6 @@
     "watch": "grunt watch",
     "grunt": "grunt",
     "clean": "rm -rf node_modules"
-  }
+  },
+  "dependencies": {}
 }
