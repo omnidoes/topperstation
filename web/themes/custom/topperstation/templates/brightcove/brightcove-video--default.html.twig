@@ -25,6 +25,27 @@
 <article {{ attributes.addClass(classes) }}>
   <div class="l-contain--wide l-contain--flush">
     {{ elements.brightcove_video_player }}
+    {% if overlay_content %}
+    <script>
+      (function(window, videojs) {
+        var player = window.player = videojs('player');
+
+        player.overlay({
+          content: '{{ overlay_content }}',
+          debug: true,
+          overlays: [{
+            start: 2,
+            end: 15,
+            align: 'top-right'
+          },{
+            start: 'pause',
+            end: 'play',
+            align: 'top-right'
+          }]
+        });
+      }(window, window.videojs));
+    </script>
+    {% endif %}
     <div class="video__content">
       <h1 class="video__title">{{ elements.name }}</h1>
       {{ drupal_block('addtoany_block') }}
