@@ -38,6 +38,7 @@
     white-space: nowrap;
   }
 
+  .video-js:hover .vjs-overlay.vjs-hidden,
   .vjs-overlay.vjs-hidden:hover {
     max-width: 100vw;
     width: auto;

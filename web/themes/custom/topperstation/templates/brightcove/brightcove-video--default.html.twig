@@ -32,15 +32,11 @@
 
         player.overlay({
           content: '{{ overlay_content }}',
-          debug: true,
           overlays: [{
             start: 2,
             end: 15,
-            align: 'top-right'
-          },{
-            start: 'pause',
-            end: 'play',
-            align: 'top-right'
+            align: 'top-right',
+            class: 'overlay-preroll'
           }]
         });
       }(window, window.videojs));
