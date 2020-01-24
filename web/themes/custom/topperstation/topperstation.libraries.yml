@@ -18,6 +18,13 @@ bower:
       # bower:css
       # endbower
 
+videojs-overlay:
+  css:
+    component:
+      js/videojs-overlay/videojs-overlay.css: {}
+  js:
+    js/videojs-overlay/videojs-overlay.min.js: {}
+
 fonts:
   css:
     theme:
