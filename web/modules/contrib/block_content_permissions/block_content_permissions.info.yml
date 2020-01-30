@@ -1,0 +1,13 @@
+name: Block Content Permissions
+description: 'Adds specific permissions for administering block content and block content types.'
+package: Block
+type: module
+dependencies:
+  - drupal:block_content
+# core: 8.x
+
+# Information added by Drupal.org packaging script on 2018-02-19
+version: '8.x-1.6'
+core: '8.x'
+project: 'block_content_permissions'
+datestamp: 1519041486
