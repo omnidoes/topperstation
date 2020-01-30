@@ -17,13 +17,15 @@
 #}
 <div style="max-width: 100%;">
 <video-js 
-data-video-id="{{- video_id -}}"
+data-video-id="{{- video_id -}}" 
 data-account="{{- account -}}" 
 data-player="{{- player -}}" 
 data-embed="{{- embed -}}" 
-data-usage="{{- data_usage -}}"
+data-usage="{{- data_usage -}}" 
 controls 
+playsinline="true" 
+webkit-playsinline 
 data-application-id 
-class="vjs-fluid" id="player"></video-js>
+class="vjs-fluid" id="player"></video-js> 
 </div>
 <script src="//players.brightcove.net/{{- account -}}/{{- player -}}_{{- embed -}}/index.min.js"></script>
