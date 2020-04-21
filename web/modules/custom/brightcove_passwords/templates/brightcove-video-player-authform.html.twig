@@ -1,0 +1,12 @@
+{%
+  set classes = [
+    'video-player',
+    'video-player--locked',
+  ]
+%}
+<div {{ attributes.addClass(classes) }}>
+  <div class="video-player__container">
+    <p>{{ 'The video you are trying to view is password protected.'|t }}</p>
+    {{ form }}
+  </div>
+</div>
