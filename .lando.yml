@@ -4,7 +4,10 @@ config:
   framework: drupal8
   site: topperstation
   id: db5fb5e4-3225-46f0-b0a9-1cc803600c48
-
+tooling:
+  drush:
+    service: appserver
+    cmd: drush --root=/app/web
 services:
   phpmyadmin:
     type: phpmyadmin
