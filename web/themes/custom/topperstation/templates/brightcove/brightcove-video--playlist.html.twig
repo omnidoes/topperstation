@@ -9,6 +9,11 @@
 <article {{ attributes.addClass(classes) }}>
   {{ title_prefix }}
   <header class="video__header">
+    {% if islocked %}
+    <div class="video__lock">
+      {{ include(directory ~ '/img/icons/icon--lock.svg') }}
+    </div>
+    {% endif %}
     <div class="video__image">
       {% if status %}
       <a href="{{ elements.url }}">

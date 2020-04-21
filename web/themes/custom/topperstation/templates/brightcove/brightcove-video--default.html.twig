@@ -28,9 +28,11 @@
     {% if overlay_content %}
     <script>
       (function(window, videojs) {
-        var player = window.player = videojs('player');
+        if (typeof videojs !== 'function') {
+          return false;
+        }
 
-        player.passwordToView();
+        var player = window.player = videojs('player');
 
         player.overlay({
           content: '{{ overlay_content }}',
