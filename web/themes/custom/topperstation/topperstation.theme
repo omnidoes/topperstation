@@ -260,7 +260,7 @@ function topperstation_form_views_exposed_form_alter(array &$form, FormStateInte
 
   switch ($form['#id']) {
     case 'views-exposed-form-show-videos-block-videos-gallery':
-      $form['seasons']['#options']['All'] = t('All Seasons');
+      $form['seasons']['#options']['All'] = t('All Videos');
       $form['keywords']['#placeholder'] = 'Search…';
       break;
 
