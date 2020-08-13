@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3bfa45bffc35f4c231583768f1313550",
+    "content-hash": "c54c3a59de605b7f88a9be85152f5160",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -4882,9 +4882,7 @@
             },
             "type": "drupal-module",
             "extra": {
-                "patches_applied": {
-                    "2804485-04: SQL error when adding multiple fields of the same type": "https://www.drupal.org/files/issues/2018-09-14/2804485-views_selective_filters-sql_error-4.patch"
-                }
+                "patches_applied": []
             },
             "license": [
                 "GPL-2.0+"
