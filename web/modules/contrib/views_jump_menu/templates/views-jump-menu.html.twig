@@ -24,9 +24,9 @@
 {% endif %}
   {% if title %}<h3>{{ title }}</h3>{% endif %}
   <select{{ select.attributes }}{% if select.select_label %} aria-label="{{ select.select_label }}"{% endif %}>
-    <option data-url="">{{ select.select_text }}</option>
+    <option>{{ select.select_text }}</option>
   {% for option in select.options %}
-    <option data-url="{{ option.url }}">{{ option.label|striptags }}</option>
+    <option data-url="{{ option.url }}">{{ option.label }}</option>
   {% endfor %}
   </select>
 {% if attributes -%}

@@ -6,6 +6,9 @@ use Drupal\Core\Entity\EntityInterface;
 use Drupal\entity_browser\FieldWidgetDisplayBase;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\Core\Entity\EntityRepositoryInterface;
 
 /**
  * Displays a label of the entity.
@@ -16,20 +19,50 @@ use Drupal\Core\Form\FormStateInterface;
  *   description = @Translation("Displays entity with a label.")
  * )
  */
-class EntityLabel extends FieldWidgetDisplayBase {
+class EntityLabel extends FieldWidgetDisplayBase implements ContainerFactoryPluginInterface {
 
   /**
-   * {@inheritdoc}
+   * The entity repository.
+   *
+   * @var \Drupal\Core\Entity\EntityRepositoryInterface
    */
-  public function view(EntityInterface $entity) {
-    return ['#markup' => $entity->label()];
+  protected $entityRepository;
+
+  /**
+   * Constructs entity label plugin.
+   *
+   * @param array $configuration
+   *   A configuration array containing information about the plugin instance.
+   * @param string $plugin_id
+   *   The plugin_id for the plugin instance.
+   * @param mixed $plugin_definition
+   *   The plugin implementation definition.
+   * @param Drupal\Core\Entity\EntityRepositoryInterface $entity_repository
+   *   The entity repository.
+   */
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, EntityRepositoryInterface $entity_repository) {
+    parent::__construct($configuration, $plugin_id, $plugin_definition);
+    $this->entityRepository = $entity_repository;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getColumnHeader(EntityTypeInterface $entity_type) {
-    return $this->t('Label');
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    return new static(
+      $configuration,
+      $plugin_id,
+      $plugin_definition,
+      $container->get('entity.repository')
+    );
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function view(EntityInterface $entity) {
+    $translation = $this->entityRepository->getTranslationFromContext($entity);
+    return $translation->label();
   }
 
   /**

@@ -12,7 +12,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class WebformEntitySettingsAccessForm extends WebformEntitySettingsBaseForm {
 
   /**
-   * Webform access rules manager.
+   * The webform access rules manager.
    *
    * @var \Drupal\webform\WebformAccessRulesManagerInterface
    */
@@ -86,7 +86,6 @@ class WebformEntitySettingsAccessForm extends WebformEntitySettingsBaseForm {
    */
   public function save(array $form, FormStateInterface $form_state) {
     $access = $form_state->getValue('access');
-
     /** @var \Drupal\webform\WebformInterface $webform */
     $webform = $this->getEntity();
 

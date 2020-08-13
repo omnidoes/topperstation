@@ -17,12 +17,12 @@
 #}
 {{ attach_library('webform/webform.element.more') }}
 {%
-set classes = [
-  'js-webform-element-more',
-  'webform-element-more',
-]
+  set classes = [
+    'js-webform-element-more',
+    'webform-element-more',
+  ]
 %}
 <div{{ attributes.addClass(classes) }}>
-  <div class="webform-element-more--link"><a role="button" href="#more">{{ more_title }}</a></div>
+  <div class="webform-element-more--link"><a role="button" href="#{{ attributes.id }}--content">{{ more_title }}</a></div>
   <div id="{{ attributes.id }}--content" class="webform-element-more--content">{{ more }}</div>
 </div>

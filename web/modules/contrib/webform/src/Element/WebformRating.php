@@ -57,11 +57,14 @@ class WebformRating extends Range {
    */
   public static function preRenderWebformRating(array $element) {
     $element['#attributes']['type'] = 'range';
+
+    $element['#attributes']['class'][] = 'js-webform-visually-hidden';
+
     Element::setAttributes($element, ['id', 'name', 'value', 'step', 'min', 'max']);
     static::setAttributes($element, ['form-webform-rating']);
 
     // If value is an empty string set it the min.
-    if ($element['#attributes']['value'] == '') {
+    if (isset($element['#attributes']['value']) && $element['#attributes']['value'] === '') {
       $element['#attributes']['value'] = $element['#attributes']['min'];
     }
 

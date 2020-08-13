@@ -15,6 +15,13 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 abstract class WebformSubmissionsDeleteFormBase extends WebformDeleteFormBase {
 
   /**
+   * Total number of submissions.
+   *
+   * @var int
+   */
+  protected $submissionTotal;
+
+  /**
    * Default number of submission to be deleted during batch processing.
    *
    * @var int
@@ -50,7 +57,7 @@ abstract class WebformSubmissionsDeleteFormBase extends WebformDeleteFormBase {
   protected $submissionStorage;
 
   /**
-   * Webform request handler.
+   * The webform request handler.
    *
    * @var \Drupal\webform\WebformRequestInterface
    */
@@ -195,7 +202,7 @@ abstract class WebformSubmissionsDeleteFormBase extends WebformDeleteFormBase {
 
     if (empty($context['sandbox'])) {
       $context['sandbox']['progress'] = 0;
-      $context['sandbox']['max'] = $this->submissionStorage->getTotal($webform, $entity);
+      $context['sandbox']['max'] = $this->submissionStorage->getTotal($webform, $entity, NULL, ['in_draft' => NULL]);
       $context['results']['webform'] = $webform;
       $context['results']['entity'] = $entity;
     }
@@ -206,7 +213,7 @@ abstract class WebformSubmissionsDeleteFormBase extends WebformDeleteFormBase {
     $context['message'] = $this->t('Deleting @count of @total submissions…', ['@count' => $context['sandbox']['progress'], '@total' => $context['sandbox']['max']]);
 
     // Track finished.
-    if ($context['sandbox']['progress'] != $context['sandbox']['max']) {
+    if ($context['sandbox']['progress'] !== $context['sandbox']['max']) {
       $context['finished'] = $context['sandbox']['progress'] / $context['sandbox']['max'];
     }
   }
@@ -228,6 +235,19 @@ abstract class WebformSubmissionsDeleteFormBase extends WebformDeleteFormBase {
     else {
       $this->messenger()->addStatus($this->getFinishedMessage());
     }
+  }
+
+  /**
+   * Get total number of submissions.
+   *
+   * @return int
+   *   Total number of submissions.
+   */
+  protected function getSubmissionTotal() {
+    if (!isset($this->submissionTotal)) {
+      $this->submissionTotal = $this->submissionStorage->getTotal($this->webform, $this->sourceEntity, NULL, ['in_draft' => NULL]);
+    }
+    return $this->submissionTotal;
   }
 
 }

@@ -3,8 +3,8 @@
 namespace Drupal\webform_devel\Commands;
 
 use Drupal\Core\Serialization\Yaml;
-use Drupal\Core\State\State;
-use Drupal\user\UserData;
+use Drupal\Core\State\StateInterface;
+use Drupal\user\UserDataInterface;
 use Drupal\webform\Utility\WebformYaml;
 use Drush\Commands\DrushCommands;
 use Drush\Exceptions\UserAbortException;
@@ -25,19 +25,19 @@ class WebformDevelCommands extends DrushCommands {
   /**
    * The user data service.
    *
-   * @var \Drupal\user\UserData
+   * @var \Drupal\user\UserDataInterface
    */
   protected $userData;
 
   /**
    * The construct method.
    *
-   * @param \Drupal\Core\State\State $state
+   * @param \Drupal\Core\State\StateInterface $state
    *   Provides the state system.
-   * @param \Drupal\user\UserData $user_data
+   * @param \Drupal\user\UserDataInterface $user_data
    *   The user data service.
    */
-  public function __construct(State $state, UserData $user_data) {
+  public function __construct(StateInterface $state, UserDataInterface $user_data) {
     parent::__construct();
     $this->state = $state;
     $this->userData = $user_data;
@@ -47,12 +47,12 @@ class WebformDevelCommands extends DrushCommands {
    * Executes devel export config.
    *
    * @command webform:devel:config:update
-   * @aliases wfdcu
+   * @aliases wfdcu,webform-devel-reset
    */
   public function drush_webform_devel_config_update() {
     module_load_include('inc', 'webform', 'includes/webform.install');
 
-    $files = file_scan_directory(drupal_get_path('module', 'webform'), '/^webform\.webform\..*\.yml$/');
+    $files = $files = \Drupal::service('file_system')->scanDirectory(drupal_get_path('module', 'webform'), '/^webform\.webform\..*\.yml$/');
     $total = 0;
     foreach ($files as $filename => $file) {
       try {
@@ -70,7 +70,7 @@ class WebformDevelCommands extends DrushCommands {
         $data = _webform_update_webform_setting($data);
         $tidied_yaml = WebformYaml::encode($data) . PHP_EOL;
 
-        if ($tidied_yaml != $original_yaml) {
+        if ($tidied_yaml !== $original_yaml) {
           $this->output()->writeln(dt('Updating @file…', ['@file' => $file->filename]));
           file_put_contents($file->uri, $tidied_yaml);
           $total++;

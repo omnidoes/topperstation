@@ -21,11 +21,20 @@ class WebformAttachmentUrl extends WebformAttachmentBase {
   /**
    * {@inheritdoc}
    */
-  public function getDefaultProperties() {
+  protected function defineDefaultProperties() {
     return [
       'url' => '',
-    ] + parent::getDefaultProperties();
+    ] + parent::defineDefaultProperties();
   }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function defineTranslatableProperties() {
+    return array_merge(parent::defineTranslatableProperties(), ['url']);
+  }
+
+  /****************************************************************************/
 
   /**
    * {@inheritdoc}
@@ -59,6 +68,11 @@ class WebformAttachmentUrl extends WebformAttachmentBase {
     // Prepend scheme and host to root relative path.
     if (strpos($value, '/') === 0) {
       $value = \Drupal::request()->getSchemeAndHttpHost() . $value;
+    }
+
+    // Skip validating [webform_submission] tokens which can't be replaced.
+    if (strpos($value, '[webform_submission:') !== FALSE) {
+      return;
     }
 
     // Validate URL formatting.

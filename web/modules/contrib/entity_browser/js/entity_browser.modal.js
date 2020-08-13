@@ -49,9 +49,16 @@
    */
   Drupal.behaviors.fluidModal = {
     attach: function (context) {
+      var $window = $(window);
+      var $document = $(document);
+
+      // Be sure to run only once per window document.
+      if ($document.once('fluid-modal').length === 0) {
+        return;
+      }
 
       // Recalculate dialog size on window resize.
-      $(window).resize(function (context) {
+      $window.resize(function (event) {
         Drupal.entityBrowserModal.fluidDialog();
       });
 
@@ -63,7 +70,7 @@
 
       // Disable scrolling of the whole browser window to not interfere with the
       // iframe scrollbar.
-      $(window).on({
+      $window.on({
         'dialog:aftercreate': function (event, dialog, $element, settings) {
           $('body').css({overflow: 'hidden'});
         },

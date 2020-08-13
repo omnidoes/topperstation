@@ -14,9 +14,25 @@ use Drupal\webform\Entity\Webform;
 use Drupal\webform\Utility\WebformYaml;
 use Drupal\Core\Serialization\Yaml;
 use Drupal\webform\Utility\WebformElementHelper;
+use Drupal\field\Entity\FieldConfig;
 
 /**
- * Implements hook_form_FORM_ID_alter().
+ * Implements hook_form_FORM_ID_alter() for language content settings form.
+ */
+function webform_form_language_content_settings_form_alter(array &$form, FormStateInterface $form_state) {
+  // Completely remove webform_submission from Content language admin
+  // settings form, only when there are no previously saved
+  // 'language.content_settings.webform_submission.*' config files.
+  $has_saved_webform_submissions = count(\Drupal::configFactory()->listAll('language.content_settings.webform_submission.')) ? TRUE : FALSE;
+  if (!$has_saved_webform_submissions) {
+    unset($form['#label']['webform_submission']);
+    unset($form['entity_types']['#options']['webform_submission']);
+    unset($form['settings']['webform_submission']);
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter() for locale translate edit form.
  */
 function webform_form_locale_translate_edit_form_alter(&$form, FormStateInterface $form_state) {
   // Don't allow YAML to be validated using locale string translation.
@@ -41,16 +57,32 @@ function webform_form_locale_translate_edit_form_alter(&$form, FormStateInterfac
 }
 
 /**
- * Implements hook_form_FORM_ID_alter().
+ * Implements hook_form_FORM_ID_alter() for config translation add form.
  */
 function webform_form_config_translation_add_form_alter(&$form, FormStateInterface $form_state, $is_new = TRUE) {
   // Manually apply YAML editor to text field that store YAML data.
   foreach ($form['config_names'] as $config_name => &$config_element) {
-    if ($config_name == 'webform.settings') {
+    if ($config_name === 'webform.settings') {
       _webform_form_config_translate_add_form_alter_yaml_element($config_element['test']['types']);
       _webform_form_config_translate_add_form_alter_yaml_element($config_element['test']['names']);
     }
-    elseif (strpos($config_name, 'webform.webform_options.') === 0) {
+    elseif ($config_name === 'block.block.webform') {
+      _webform_form_config_translate_add_form_alter_yaml_element($config_element['settings']['default_data']);;
+    }
+    elseif (strpos($config_name, 'field.field.') === 0
+      && preg_match('/^field\.field\.([_a-z0-9]+)\.([_a-z0-9]+)\.([_a-z0-9]+)$/', $config_name, $match)
+      && isset($config_element['default_value'])) {
+      $field = FieldConfig::loadByName($match[1], $match[2], $match[3]);
+      if ($field->getType() === 'webform') {
+        foreach (Element::children($config_element['default_value']) as $key) {
+          if (isset($config_element['default_value'][$key]['default_data'])) {
+            _webform_form_config_translate_add_form_alter_yaml_element($config_element['default_value'][$key]['default_data']);
+          }
+        }
+      }
+    }
+    elseif (strpos($config_name, 'webform.webform_options.') === 0
+      || strpos($config_name, 'webform_options_custom.webform_options_custom.') === 0) {
       _webform_form_config_translate_add_form_alter_yaml_element($config_element['options']);
     }
     elseif (strpos($config_name, 'webform.webform.') === 0) {
@@ -71,9 +103,49 @@ function webform_form_config_translation_add_form_alter(&$form, FormStateInterfa
       $form_state->set('webform_config_name', $config_name);
       $form_state->set('webform_source_elements', $source_elements);
 
+      // Tweak form elements.
+      $element_alterations = [
+        // Form settings.
+        'title' => ['#maxlength' => 255],
+        // Submission settings.
+        'submission_label' => ['#maxlength' => NULL],
+        // Email handler.
+        // @see \Drupal\webform\Plugin\WebformHandler\EmailWebformHandler
+        'subject' => ['#maxlength' => NULL],
+        'from_name' => ['#maxlength' => 255],
+        'sender_name' => ['#maxlength' => 255],
+      ];
+      _webform_form_config_translation_add_form_alter_elements($config_element, $element_alterations);
+
       $form['#validate'][] = '_webform_form_config_translate_add_form_validate';
 
     }
+  }
+}
+
+/**
+ * Alter form element recursively.
+ *
+ * @param array $elements
+ *   An associative array of form elements.
+ * @param array $element_alterations
+ *   An associative array of element alterations.
+ */
+function _webform_form_config_translation_add_form_alter_elements(array &$elements, array $element_alterations) {
+  foreach ($elements as $key => &$element) {
+    if (Element::property($key) || !is_array($element)) {
+      continue;
+    }
+
+    // Override/alter translation element.
+    if (array_key_exists($key, $element_alterations)
+      && isset($element['translation'])
+      && isset($element['translation']['#type'])) {
+      $element['translation'] = $element_alterations[$key] + $element['translation'];
+    }
+
+    _webform_form_config_translation_add_form_alter_elements($element, $element_alterations);
+
   }
 }
 
@@ -117,7 +189,7 @@ function _webform_form_config_translate_add_form_filter_elements(array &$transla
       continue;
     }
     $source_element = $source_elements[$key];
-    if ($translation_element == $source_element) {
+    if ($translation_element === $source_element) {
       unset($translation_elements[$key]);
     }
     elseif (is_array($translation_element)) {
@@ -130,7 +202,7 @@ function _webform_form_config_translate_add_form_filter_elements(array &$transla
 }
 
 /**
- * Implements hook_form_FORM_ID_alter().
+ * Implements hook_form_FORM_ID_alter() for config translation edit form.
  */
 function webform_form_config_translation_edit_form_alter(&$form, FormStateInterface $form_state) {
   webform_form_config_translation_add_form_alter($form, $form_state, FALSE);
@@ -148,11 +220,15 @@ function webform_form_config_translation_edit_form_alter(&$form, FormStateInterf
  */
 function _webform_form_config_translate_add_form_alter_yaml_element(array &$element, $source_value = NULL, $translation_value = NULL) {
   // Source.
+  $source_value = $source_value ?: trim(strip_tags($element['source']['#markup']));
+  if ($source_value === ((string) t('(Empty)'))) {
+    $source_value = '';
+  }
   $element['source']['#wrapper_attributes']['class'][] = 'webform-translation-source';
   $element['source']['value'] = [
     '#type' => 'webform_codemirror',
     '#mode' => 'yaml',
-    '#value' => WebformYaml::tidy($source_value ?: trim(strip_tags($element['source']['#markup']))),
+    '#value' => ($source_value) ? WebformYaml::tidy($source_value) : '',
     '#disabled' => TRUE,
     '#attributes' => ['readonly' => TRUE],
   ];
@@ -206,8 +282,24 @@ function webform_lingotek_config_entity_document_upload(array &$source_data, Con
       break;
 
     case 'webform_options';
+    case 'webform_options_custom';
       // Convert options YAML string to an associative array.
-      $source_data['options'] = Yaml::decode($source_data['options']);
+      $options = Yaml::decode($source_data['options']);;
+
+      // Extract optgroups from the options and append them as '_optgroups_'
+      // to the options so that the optgroups can be translated.
+      $optgroups = [];
+      foreach ($options as $option_value => $option_text) {
+        if (is_array($option_text)) {
+          $optgroups[$option_value] = $option_value;
+        }
+      }
+      if ($optgroups) {
+        $options['_optgroups_'] = $optgroups;
+      }
+
+      // Update source data's options.
+      $source_data['options'] = $options;
       break;
   }
 }
@@ -241,10 +333,32 @@ function webform_lingotek_config_entity_translation_presave(ConfigEntityInterfac
       break;
 
     case 'webform_options';
+    case 'webform_options_custom';
+      $options = $data['options'];
+      // If '_optgroups_' are defined we need to translate the optgroups.
+      if (isset($options['_optgroups_'])) {
+        // Get optgroup from options.
+        $optgroups = $options['_optgroups_'];
+        unset($options['_optgroups_']);
+
+        // Build translated optgroup options.
+        $optgroup_options = [];
+        foreach ($options as $option_value => $option_text) {
+          if (is_array($option_text)) {
+            $optgroups_options[$optgroups[$option_value]] = $option_text;
+          }
+          else {
+            $optgroup_options[$option_value] = $option_text;
+          }
+        }
+        // Replace options with optgroup options.
+        $options = $optgroups_options;
+      }
+
       /** @var \Drupal\webform\WebformOptionsInterface $translation */
       // Convert options associative array back to YAML string.
-      $translation->setOptions($data['options']);
-      $data['options'] = Yaml::encode($data['options']);
+      $translation->setOptions($options);
+      $data['options'] = Yaml::encode($options);
       break;
   }
 }

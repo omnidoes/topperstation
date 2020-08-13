@@ -115,6 +115,7 @@ function _webform_update_webform_setting(array $data) {
     'settings' => [],
     'access' => [],
     'handlers' => [],
+    'variants' => [],
   ];
 
   $default_settings = Webform::getDefaultSettings();
@@ -135,7 +136,7 @@ function _webform_update_webform_setting(array $data) {
     $settings[$name] = $value;
   }
   // Set settings.
-  $data['settings'] = $settings;
+  $data['settings'] = _webform_update_webform_setting_settings($settings);
 
   // Set access.
   /** @var \Drupal\webform\WebformAccessRulesManagerInterface $access_rules_manager */
@@ -143,6 +144,30 @@ function _webform_update_webform_setting(array $data) {
   $data['access'] += $access_rules_manager->getDefaultAccessRules();
 
   return $data;
+}
+
+/**
+ * Make sure outdated webform settings are up-to-date.
+ *
+ * @param array $settings
+ *   An associative array of webform settings.
+ *
+ * @return array
+ *   Updated webform settings.
+ */
+function _webform_update_webform_setting_settings(array $settings) {
+  // Issue #3153184: Allow a webform displayed as a page to have a custom theme.
+  // Convert 'page_admin_theme' setting to 'page_theme_name' setting.
+  // @see webform_update_8196()
+  if (isset($settings['page_admin_theme'])) {
+    if (empty($settings['page_theme_name'])) {
+      $settings['page_theme_name'] = ($settings['page_admin_theme'])
+        ? \Drupal::configFactory()->get('system.theme')->get('admin')
+        : '';
+    }
+    unset($settings['page_admin_theme']);
+  }
+  return $settings;
 }
 
 /**
@@ -176,24 +201,26 @@ function _webform_update_webform_handler_settings() {
 
     // Apply the default handler settings.
     $has_handler = FALSE;
-    foreach ($data['handlers'] as &$handler) {
-      if (!isset($default_handler_settings[$handler['id']])) {
-        continue;
+    if (!empty($data['handlers'])) {
+      foreach ($data['handlers'] as &$handler) {
+        if (!isset($default_handler_settings[$handler['id']])) {
+          continue;
+        }
+
+        $settings = $default_handler_settings[$handler['id']];
+        foreach ($handler['settings'] as $settings_key => $setting_value) {
+          $settings[$settings_key] = $setting_value;
+        }
+
+        if ($handler['settings'] !== $settings) {
+          $has_handler = TRUE;
+          $handler['settings'] = $settings;
+        }
       }
 
-      $settings = $default_handler_settings[$handler['id']];
-      foreach ($handler['settings'] as $settings_key => $setting_value) {
-        $settings[$settings_key] = $setting_value;
+      if ($has_handler) {
+        $webform_config->setData($data)->save();
       }
-
-      if ($handler['settings'] != $settings) {
-        $has_handler = TRUE;
-        $handler['settings'] = $settings;
-      }
-    }
-
-    if ($has_handler) {
-      $webform_config->setData($data)->save();
     }
   }
 }
@@ -217,8 +244,8 @@ function _webform_update_options_settings() {
     'options' => '',
   ];
 
-  $config_factory = \Drupal::configFactory();
   // Update 'webform.webform_options.*' configuration.
+  $config_factory = \Drupal::configFactory();
   foreach ($config_factory->listAll('webform.webform_options.') as $webform_config_name) {
     $webform_options_config = $config_factory->getEditable($webform_config_name);
 
@@ -244,7 +271,7 @@ function _webform_update_options_settings() {
  * Update or install any new system.actions.* config entities.
  */
 function _webform_update_actions() {
-  $files = file_scan_directory(drupal_get_path('module', 'webform') . '/config', '/^system.action..*\.yml$/');
+  $files = \Drupal::service('file_system')->scanDirectory(drupal_get_path('module', 'webform') . '/config', '/^system.action..*\.yml$/');
   foreach ($files as $path => $file) {
     $action_id = str_replace('system.action.', '', $file->name);
     $action = Action::load($action_id);
@@ -283,6 +310,23 @@ function _webform_update_field_storage_definitions() {
 function _webform_update_webform_submission_storage_schema() {
   $manager = \Drupal::entityDefinitionUpdateManager();
   $manager->updateEntityType($manager->getEntityType('webform_submission'));
+}
+
+/**
+ * Update webform submission translations.
+ */
+function _webform_update_webform_submission_translation() {
+  $config_factory = \Drupal::configFactory();
+  foreach ($config_factory->listAll('language.content_settings.webform_submission.') as $config_name) {
+    $config = $config_factory->getEditable($config_name);
+    // Make sure 'Default language' (default_langcode) and
+    // 'Show language selector on create and edit pages' (language_alterable)
+    // have not been customized.
+    if ($config->get('default_langcode') === 'site_default'
+      && $config->get('language_alterable') === FALSE) {
+      $config_factory->getEditable($config_name)->delete();
+    }
+  }
 }
 
 /**

@@ -3,11 +3,14 @@
 namespace Drupal\webform\EntitySettings;
 
 use Drupal\Component\Serialization\Json;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Entity\EntityWithPluginCollectionInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element;
 use Drupal\Core\Url;
 use Drupal\webform\Plugin\WebformHandlerInterface;
 use Drupal\webform\WebformMessageManagerInterface;
+use Drupal\webform\WebformThemeManagerInterface;
 use Drupal\webform\WebformThirdPartySettingsManagerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -31,16 +34,26 @@ class WebformEntitySettingsGeneralForm extends WebformEntitySettingsBaseForm {
   protected $thirdPartySettingsManager;
 
   /**
+   * The webform theme manager.
+   *
+   * @var \Drupal\webform\WebformThemeManagerInterface
+   */
+  protected $themeManager;
+
+  /**
    * Constructs a WebformEntitySettingsGeneralForm.
    *
    * @param \Drupal\webform\WebformMessageManagerInterface $message_manager
    *   The webform message manager.
    * @param \Drupal\webform\WebformThirdPartySettingsManagerInterface $third_party_settings_manager
    *   The webform third party settings manager.
+   * @param \Drupal\webform\WebformThemeManagerInterface $theme_manager
+   *   The webform theme manager.
    */
-  public function __construct(WebformMessageManagerInterface $message_manager, WebformThirdPartySettingsManagerInterface $third_party_settings_manager) {
+  public function __construct(WebformMessageManagerInterface $message_manager, WebformThirdPartySettingsManagerInterface $third_party_settings_manager, WebformThemeManagerInterface $theme_manager) {
     $this->messageManager = $message_manager;
     $this->thirdPartySettingsManager = $third_party_settings_manager;
+    $this->themeManager = $theme_manager;
   }
 
   /**
@@ -49,7 +62,8 @@ class WebformEntitySettingsGeneralForm extends WebformEntitySettingsBaseForm {
   public static function create(ContainerInterface $container) {
     return new static(
       $container->get('webform.message_manager'),
-      $container->get('webform.third_party_settings_manager')
+      $container->get('webform.third_party_settings_manager'),
+      $container->get('webform.theme_manager')
     );
   }
 
@@ -194,7 +208,7 @@ class WebformEntitySettingsGeneralForm extends WebformEntitySettingsBaseForm {
       '#default_value' => $settings['page'],
     ];
     if ($this->moduleHandler->moduleExists('path') && $settings['page']) {
-      $t_args[':path_alias'] = Url::fromRoute('path.admin_overview')->toString();
+      $t_args[':path_alias'] = Url::fromRoute('entity.path_alias.collection')->toString();
       $form['page_settings']['page_message_warning'] = [
         '#type' => 'webform_message',
         '#message_type' => 'warning',
@@ -217,7 +231,7 @@ class WebformEntitySettingsGeneralForm extends WebformEntitySettingsBaseForm {
       ],
     ];
     if ($this->moduleHandler->moduleExists('path')) {
-      $t_args[':path_alias'] = Url::fromRoute('path.admin_overview')->toString();
+      $t_args[':path_alias'] = Url::fromRoute('entity.path_alias.collection')->toString();
       $form['page_settings']['page_submit_path'] = [
         '#type' => 'textfield',
         '#title' => $this->t('Webform URL alias'),
@@ -241,6 +255,18 @@ class WebformEntitySettingsGeneralForm extends WebformEntitySettingsBaseForm {
         ],
       ];
     }
+    $form['page_settings']['page_theme_name'] = [
+      '#type' => 'select',
+      '#title' => $this->t('Page theme'),
+      '#description' => $this->t('Select the theme that will be used when the webform is displayed as a page with a dedicated URL.'),
+      '#options' => $this->themeManager->getThemeNames(),
+      '#default_value' => $settings['page_theme_name'],
+      '#states' => [
+        'visible' => [
+          ':input[name="page"]' => ['checked' => TRUE],
+        ],
+      ],
+    ];
 
     // Ajax settings.
     $elements = $webform->getElementsDecoded();
@@ -251,15 +277,25 @@ class WebformEntitySettingsGeneralForm extends WebformEntitySettingsBaseForm {
       '#open' => TRUE,
       '#access' => empty($elements['#method']),
     ];
-    $form['ajax_settings']['ajax'] = [
-      '#type' => 'checkbox',
-      '#title' => $this->t('Use Ajax'),
-      '#description' => $this->t('If checked, paging, saving of drafts, previews, submissions, and confirmations will not initiate a page refresh.'),
-      '#return_value' => TRUE,
-      '#default_value' => $settings['ajax'],
+
+    $ajax_behaviors = [
+      'ajax' => [
+        'title' => $this->t('Use Ajax'),
+        'all_description' => $this->t('Ajax is enabled for all forms.'),
+        'form_description' => $this->t('If checked, paging, saving of drafts, previews, submissions, and confirmations will not initiate a page refresh.'),
+      ],
     ];
-    $form['ajax_settings']['ajax_scroll_top'] = [
-      '#type' => 'radios',
+    $this->appendBehaviors($form['ajax_settings'], $ajax_behaviors, $settings, $default_settings);
+    $form['ajax_settings']['ajax_container'] = [
+      '#type' => 'container',
+      '#states' => [
+        'visible' => [
+          ':input[name="ajax"]' => ['checked' => TRUE],
+        ],
+      ],
+    ];
+    $form['ajax_settings']['ajax_container']['ajax_scroll_top'] = [
+      '#type' => 'select',
       '#title' => $this->t('On Ajax load, scroll to the top of the…'),
       '#description' => $this->t("Select where the page should be scrolled to when paging, saving of drafts, previews, submissions, and confirmations. Select 'None' to disable scrolling."),
       '#options' => [
@@ -267,12 +303,52 @@ class WebformEntitySettingsGeneralForm extends WebformEntitySettingsBaseForm {
         'form' => $this->t('Form'),
         'page' => $this->t('Page'),
       ],
+      '#default_value' => $settings['ajax_scroll_top'],
+      '#attributes' => ['data-webform-states-no-clear' => TRUE],
+    ];
+    $form['ajax_settings']['ajax_container']['ajax_progress_type'] = [
+      '#type' => 'select',
+      '#title' => $this->t('Ajax progress type'),
+      '#description' => $this->t("Select the progress indicator displayed when Ajax is triggered."),
+      '#options' => [
+        '' => '',
+        'throbber' => $this->t('Throbber'),
+        'fullscreen' => $this->t('Full screen'),
+
+      ],
+      '#default_value' => $settings['ajax_progress_type'],
+    ];
+    $form['ajax_settings']['ajax_container']['ajax_effect'] = [
+      '#type' => 'select',
+      '#title' => $this->t('Ajax effect'),
+      '#description' => $this->t("Select the effect displayed when Ajax is triggered."),
+      '#options' => [
+        '' => '',
+        'none' => $this->t('None'),
+        'fade' => $this->t('Fade'),
+        'slide' => $this->t('Slide'),
+      ],
+      '#default_value' => $settings['ajax_effect'],
+    ];
+    $form['ajax_settings']['ajax_container']['ajax_speed'] = [
+      '#type' => 'webform_select_other',
+      '#title' => $this->t('Ajax speed'),
+      '#description' => $this->t("Select the effect speed."),
+      '#other__type' => 'number',
+      '#other__placeholder' => '',
+      '#other__field_suffix' => $this->t('milliseconds'),
+      '#options' => [
+        '' => '',
+        '500' => $this->t('@number milliseconds', ['@number' => '500']),
+        '1000' => $this->t('@number milliseconds', ['@number' => '1000']),
+        '1500' => $this->t('@number milliseconds', ['@number' => '1500']),
+      ],
       '#states' => [
         'visible' => [
-          ':input[name="ajax"]' => ['checked' => TRUE],
+          ':input[name="ajax_effect]"]' => ['!value' => 'none'],
         ],
       ],
-      '#default_value' => $settings['ajax_scroll_top'],
+      '#default_value' => $settings['ajax_speed'],
     ];
 
     // Dialog settings.
@@ -369,6 +445,49 @@ class WebformEntitySettingsGeneralForm extends WebformEntitySettingsBaseForm {
       ];
     }
 
+    // Share settings.
+    $form['share_settings'] = [
+      '#type' => 'details',
+      '#title' => $this->t('Share settings'),
+      '#open' => TRUE,
+      '#access' => $this->moduleHandler->moduleExists('webform_share'),
+    ];
+    $share_behaviors = [
+      'share' => [
+        'title' => $this->t('Form sharing enabled'),
+        'all_description' => $this->t('Form sharing is enabled for all webforms.'),
+        'form_description' => $this->t('If checked, form sharing will be enabled for this webform.'),
+      ],
+      'share_node' => [
+        'title' => $this->t('Form sharing enabled for webform nodes'),
+        'all_description' => $this->t('Form sharing is enabled for all webforms node.'),
+        'form_description' => $this->t('If checked, form sharing will be enabled for webform nodes that use this webform.'),
+        'access' => $this->moduleHandler->moduleExists('webform_node'),
+      ],
+      'share_title' => [
+        'title' => $this->t('Display title on shared form'),
+        'form_description' => $this->t('If checked, the page title will displayed on this shared webform.'),
+      ],
+    ];
+    $form['share_settings']['behaviors'] = [];
+    $this->appendBehaviors($form['share_settings']['behaviors'], $share_behaviors, $settings, $default_settings);
+    $form['share_settings']['share_theme_name'] = [
+      '#type' => 'select',
+      '#title' => $this->t('Shared form theme'),
+      '#description' => $this->t('Select the theme that will be used to render this shared webform.'),
+      '#options' => $this->themeManager->getThemeNames(),
+      '#default_value' => $settings['share_theme_name'],
+    ];
+    $form['share_settings']['share_page_body_attributes_container'] = [
+      '#type' => 'details',
+      '#title' => $this->t('Page body attributes'),
+    ];
+    $form['share_settings']['share_page_body_attributes_container']['share_page_body_attributes'] = [
+      '#type' => 'webform_element_attributes',
+      '#title' => $this->t('Page body attributes'),
+      '#default_value' => $settings['share_page_body_attributes'],
+    ];
+
     // Advanced settings.
     $form['advanced_settings'] = [
       '#type' => 'details',
@@ -402,6 +521,26 @@ class WebformEntitySettingsGeneralForm extends WebformEntitySettingsBaseForm {
     $form['#attached']['library'][] = 'webform/webform.admin.settings';
 
     return parent::form($form, $form_state);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function copyFormValuesToEntity(EntityInterface $entity, array $form, FormStateInterface $form_state) {
+    $values = $form_state->getValues();
+
+    if ($this->entity instanceof EntityWithPluginCollectionInterface) {
+      // Do not manually update values represented by plugin collections.
+      $values = array_diff_key($values, $this->entity->getPluginCollections());
+    }
+
+    // Do not manually update third party settings.
+    // @see \Drupal\webform\EntitySettings\WebformEntitySettingsGeneralForm::save
+    unset($values['third_party_settings']);
+
+    foreach ($values as $key => $value) {
+      $entity->set($key, $value);
+    }
   }
 
   /**

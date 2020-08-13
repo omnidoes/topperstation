@@ -2,12 +2,12 @@
 
 namespace Drupal\Tests\webform_node\Unit;
 
-use Drupal\simpletest\AssertHelperTrait;
+use Drupal\Tests\AssertHelperTrait;
 use Drupal\Tests\UnitTestCase;
 
 /**
  * @coversDefaultClass \Drupal\webform_node\WebformNodeUninstallValidator
- * @group webform
+ * @group webform_node
  */
 class WebformNodeUninstallValidatorTest extends UnitTestCase {
 

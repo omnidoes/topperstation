@@ -5,7 +5,23 @@
  * Contains views_jump_menu.module.
  */
 
-\Drupal::moduleHandler()->loadInclude('views_jump_menu', 'inc', 'views_jump_menu.theme');
+use Drupal\Component\Utility\Html;
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Template\Attribute;
+
+/**
+ * Implements hook_help().
+ */
+function views_jump_menu_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'help.page.views_jump_menu':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Displays Views results as a Select list that links to an entity when clicked.') . '</p>';
+      return $output;
+  }
+  return '';
+}
 
 /**
  * Implements hook_theme().
@@ -27,7 +43,7 @@ function views_jump_menu_theme($existing, $type, $theme, $path) {
  * @return array
  *   A cleaned array of class names.
  */
-function views_jump_menu_get_select_classes(array $options) {
+function _views_jump_menu_get_select_classes(array $options) {
   $class = $options['class'] ?: '';
   $class = explode(' ', $class);
   $class[] = 'ViewsJumpMenu';
@@ -52,8 +68,8 @@ function views_jump_menu_preprocess_views_jump_menu(&$variables) {
   $select = [
     'select_text' => $options['select_text'],
     'select_label' => $options['select_label'],
-    'attributes' => new Drupal\Core\Template\Attribute([
-      'class' => views_jump_menu_get_select_classes($options),
+    'attributes' => new Attribute([
+      'class' => _views_jump_menu_get_select_classes($options),
       'title' => $options['select_text'],
     ]),
     'options' => [],
@@ -71,17 +87,14 @@ function views_jump_menu_preprocess_views_jump_menu(&$variables) {
       // Make sure each field handler has cached the right contents before
       // rendering them in the select field.
       foreach (['label_field', 'url_field'] as $fieldType) {
-        /**
-         * @var string $field
-         * @var \Drupal\views\Plugin\views\field\FieldHandlerInterface $handler
-         */
-        foreach ($view->field[$options[$fieldType]]->displayHandler->getHandlers('field') as $field => $handler) {
+        /** @var \Drupal\views\Plugin\views\field\FieldHandlerInterface $handler */
+        foreach ($view->field[$options[$fieldType]]->displayHandler->getHandlers('field') as $handler) {
           $handler->advancedRender($row);
         }
       }
 
       $select['options'][$id] = [
-        'label' => $view->field[$options['label_field']]->advancedRender($row),
+        'label' => Html::decodeEntities(strip_tags($view->field[$options['label_field']]->advancedRender($row))),
         'url' => $view->field[$options['url_field']]->advancedRender($row),
       ];
     }

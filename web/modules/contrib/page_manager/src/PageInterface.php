@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\page_manager\PageInterface.
- */
-
 namespace Drupal\page_manager;
 
 use Drupal\Component\Plugin\Context\ContextInterface;
@@ -198,11 +193,11 @@ interface PageInterface extends ConfigEntityInterface, EntityWithPluginCollectio
 
   /**
    * Gets the values for all defined contexts.
-   *
+   * 
    * @param \Symfony\Component\HttpFoundation\Request| null $request
-   *   The request to fetch contexts for
+   *   The request to fetch contexts for.
    * @param bool $reset_cache
-   *   Boolean indicating whether or not to reset the internal contexts cache
+   *   Boolean indicating whether or not to reset the internal contexts cache.
    *
    * @return \Drupal\Core\Plugin\Context\ContextInterface[]
    *   An array of set context values, keyed by context name.

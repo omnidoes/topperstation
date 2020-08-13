@@ -23,7 +23,7 @@
     ],
     "require": {
         "php": ">=7.0.8",
-        "composer/installers": "^1.0.20",
+        "composer/installers": "^1.7",
         "cweagans/composer-patches": "^1.0",
         "drupal-composer/drupal-scaffold": "^2.0.1",
         "drupal/addtoany": "^1.12",
@@ -36,16 +36,17 @@
         "drupal/config_ignore": "^2.1",
         "drupal/config_installer": "^1.0",
         "drupal/console": "^1",
-        "drupal/core": "^8",
+        "drupal/core-recommended": "^8.8",
         "drupal/ctools": "^3.2",
         "drupal/devel": "^2.0",
-        "drupal/entity_browser": "2.x-dev",
+        "drupal/entity_browser": "^2.5",
+        "drupal/entity_browser_table": "^1.2",
         "drupal/entityqueue": "^1.0@beta",
         "drupal/field_group": "^1.0",
         "drupal/focal_point": "^1.0",
         "drupal/google_analytics": "^3.0",
         "drupal/inline_entity_form": "~1.0",
-        "drupal/menu_block": "^1.5",
+        "drupal/menu_block": "^1.6",
         "drupal/menu_link_attributes": "^1.0",
         "drupal/menu_reference_render": "^2.0@alpha",
         "drupal/metatag": "^1.8",
@@ -75,7 +76,6 @@
         "oomphinc/composer-installers-extender": "^1.1",
         "pantheon-systems/quicksilver-pushback": "~1",
         "rvtraveller/qs-composer-installer": "^1.1",
-        "webflo/drupal-core-strict": "^8",
         "zaporylie/composer-drupal-optimizations": "^1.0"
     },
     "require-dev": {
@@ -174,14 +174,10 @@
         "enable-patching": true,
         "patches": {
             "drupal/page_manager": {
-                "2665328-87: Variants take entity label not the variant title (breadcrumb issue)":
-                    "https://www.drupal.org/files/issues/2018-12-12/2665328-variants-take-entity-label-87.patch",
+                "2665328-106: Variants take entity label not the variant title (breadcrumb issue)":
+                    "https://www.drupal.org/files/issues/2020-06-09/2665328-106.patch",
                 "2820218-52: Page manager does not respect existing route defaults for title callbacks":
                     "https://www.drupal.org/files/issues/2018-03-22/2820218-52.patch"
-            },
-            "drupal/entity_browser": {
-                "2973457-146: Add option for field widget to display as table":
-                    "https://www.drupal.org/files/issues/2019-05-17/entity-browser-add-table-widget--includes-2851580-52--2973457-146.patch"
             },
             "drupal/brightcove": {
                 "2875507-8: Hoping someone can tell me how to use a template for brightcove...":
@@ -199,7 +195,7 @@
             },
             "drupal/menu_block": {
                 "2809699-82: Menu parent as block title":
-                    "https://www.drupal.org/files/issues/2018-10-26/menu_block-label_configuration-2809699-82.patch"
+                    "https://www.drupal.org/files/issues/2020-05-03/2809699-162-dynamic-block-titles.patch"
             }
         }
     },

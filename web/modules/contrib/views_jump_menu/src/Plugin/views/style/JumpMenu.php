@@ -2,9 +2,7 @@
 
 namespace Drupal\views_jump_menu\Plugin\views\style;
 
-use Drupal\Core\Annotation\Translation;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\views\Annotation\ViewsStyle;
 use Drupal\views\Plugin\views\style\StylePluginBase;
 
 /**
@@ -22,8 +20,19 @@ use Drupal\views\Plugin\views\style\StylePluginBase;
  */
 class JumpMenu extends StylePluginBase {
 
+  /**
+   * {@inheritdoc}
+   */
   protected $usesRowPlugin = FALSE;
+
+  /**
+   * {@inheritdoc}
+   */
   protected $usesRowClass = FALSE;
+
+  /**
+   * {@inheritdoc}
+   */
   protected $usesFields = TRUE;
 
   /**
@@ -41,7 +50,10 @@ class JumpMenu extends StylePluginBase {
   }
 
   /**
-   * {@inheritdoc}
+   * Generate options array for the select inputs with available field labels.
+   *
+   * @return array
+   *   Options array for the select.
    */
   public function getFieldOptions() {
     $labels = $this->displayHandler->getFieldLabels(TRUE);

@@ -2,6 +2,7 @@
 
 namespace Drupal\webform\Routing;
 
+use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Routing\RouteSubscriberBase;
 use Symfony\Component\Routing\RouteCollection;
 
@@ -11,15 +12,26 @@ use Symfony\Component\Routing\RouteCollection;
 class WebformRouteSubscriber extends RouteSubscriberBase {
 
   /**
+   * The module handler.
+   *
+   * @var \Drupal\Core\Extension\ModuleHandlerInterface
+   */
+  protected $moduleHandler;
+
+  /**
+   * Constructs a WebformShareRouteSubscriber object.
+   *
+   * @param \Drupal\Core\Extension\ModuleHandlerInterface $module_handler
+   *   The module handler.
+   */
+  public function __construct(ModuleHandlerInterface $module_handler) {
+    $this->moduleHandler = $module_handler;
+  }
+
+  /**
    * {@inheritdoc}
    */
   protected function alterRoutes(RouteCollection $collection) {
-    // Remove 'Contribute' route if explicitly disabled or the Contribute module
-    // is installed.
-    if (\Drupal::config('webform.settings')->get('ui.contribute_disabled') || \Drupal::moduleHandler()->moduleExists('contribute')) {
-      $collection->remove('webform.contribute');
-    }
-
     // Set admin route for webform admin routes.
     foreach ($collection->all() as $route) {
       if (!$route->hasOption('_admin_route') && (
@@ -28,6 +40,11 @@ class WebformRouteSubscriber extends RouteSubscriberBase {
         )) {
         $route->setOption('_admin_route', TRUE);
       }
+    }
+
+    // If the webform_share.module is not enabled, remove variant share route.
+    if (!$this->moduleHandler->moduleExists('webform_share')) {
+      $collection->remove('entity.webform.variant.share_form');
     }
   }
 

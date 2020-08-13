@@ -125,8 +125,8 @@ class AccessControlHandler implements ContainerInjectionInterface {
    * @return \Drupal\Core\Access\AccessResult
    *   An access result.
    */
-  public function blockContentAddFormAccess() {
-    if ($block_content_type = $this->currentRouteMatch->getParameter('block_content_type')) {
+  public function blockContentAddFormAccess(RouteMatchInterface $route_match) {
+    if ($block_content_type = $route_match->getParameter('block_content_type')) {
       $bundle_type = $block_content_type->get('id');
       $account = $this->currentUser();
       return AccessResult::allowedIfHasPermission($account, "create $bundle_type block content");

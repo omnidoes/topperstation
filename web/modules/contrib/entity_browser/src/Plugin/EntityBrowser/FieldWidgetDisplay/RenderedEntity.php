@@ -73,12 +73,13 @@ class RenderedEntity extends FieldWidgetDisplayBase implements ContainerFactoryP
    * {@inheritdoc}
    */
   public function view(EntityInterface $entity) {
-
-    if (empty($this->configuration['view_mode'])) {
-      return ['#markup' => $entity->label()];
-    }
-    return $this->entityTypeManager->getViewBuilder($entity->getEntityTypeId())
+    $build = $this->entityTypeManager->getViewBuilder($this->configuration['entity_type'])
       ->view($entity, $this->configuration['view_mode']);
+
+    $build['#entity_browser_suppress_contextual'] = TRUE;
+    $build['#cache']['keys'][] = 'entity_browser';
+
+    return $build;
   }
 
   /**

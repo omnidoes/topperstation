@@ -68,7 +68,7 @@ class WebformRequest implements WebformRequestInterface {
   protected $webformEntityReferenceManager;
 
   /**
-   * Webform source entity plugin manager.
+   * The webform source entity plugin manager.
    *
    * @var \Drupal\webform\Plugin\WebformSourceEntityManagerInterface
    */
@@ -133,6 +133,7 @@ class WebformRequest implements WebformRequestInterface {
     else {
       $this->isAdminRoute = (preg_match('/^(webform\.|^entity\.([^.]+\.)?webform)/', $route_name)) ? TRUE : FALSE;
     }
+
     return $this->isAdminRoute;
   }
 
@@ -149,16 +150,20 @@ class WebformRequest implements WebformRequestInterface {
    * {@inheritdoc}
    */
   public function getCurrentWebform() {
-    $source_entity = static::getCurrentSourceEntity('webform');
-    if ($source_entity && ($webform = $this->webformEntityReferenceManager->getWebform($source_entity))) {
-      return $webform;
-    }
-
     $webform = $this->routeMatch->getParameter('webform');
     if (is_string($webform)) {
       $webform = $this->entityTypeManager->getStorage('webform')->load($webform);
     }
-    return $webform;
+    if ($webform) {
+      return $webform;
+    }
+
+    $source_entity = static::getCurrentSourceEntity('webform');
+    if ($source_entity && ($source_entity_webform = $this->webformEntityReferenceManager->getWebform($source_entity))) {
+      return $source_entity_webform;
+    }
+
+    return NULL;
   }
 
   /**
@@ -328,7 +333,7 @@ class WebformRequest implements WebformRequestInterface {
 
     // Validate that source entity's field target id is the correct webform.
     $webform_target = $this->webformEntityReferenceManager->getWebform($source_entity);
-    if ($webform_target && $webform_target->id() == $webform->id()) {
+    if ($webform_target && $webform_target->id() === $webform->id()) {
       return TRUE;
     }
     else {

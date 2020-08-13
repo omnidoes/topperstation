@@ -1,9 +1,5 @@
 <?php
 
-/**
- * Contains Drupal\page_manager\Entity\PageVariant.
- */
-
 namespace Drupal\page_manager\Entity;
 
 use Drupal\Component\Render\HtmlEscapedText;
@@ -443,6 +439,7 @@ class PageVariant extends ConfigEntityBase implements PageVariantInterface {
    * Wraps the condition plugin manager.
    *
    * @return \Drupal\Core\Condition\ConditionManager object
+   *   The condition manager service.
    */
   protected function getConditionManager() {
     return \Drupal::service('plugin.manager.condition');
@@ -452,6 +449,7 @@ class PageVariant extends ConfigEntityBase implements PageVariantInterface {
    * Wraps the context mapper.
    *
    * @return \Drupal\page_manager\ContextMapperInterface object
+   *   The context mapper service.
    */
   protected function getContextMapper() {
     return \Drupal::service('page_manager.context_mapper');
@@ -461,6 +459,7 @@ class PageVariant extends ConfigEntityBase implements PageVariantInterface {
    * Wraps the page entity storage.
    *
    * @return \Drupal\Core\Entity\EntityStorageInterface object
+   *   The Page entity storage service.
    */
   protected function getPageStorage() {
     return \Drupal::entityTypeManager()->getStorage('page');

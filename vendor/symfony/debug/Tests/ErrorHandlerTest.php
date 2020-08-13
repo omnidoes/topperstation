@@ -70,8 +70,8 @@ class ErrorHandlerTest extends TestCase
 
     public function testErrorGetLast()
     {
-        $handler = ErrorHandler::register();
         $logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
+        $handler = ErrorHandler::register();
         $handler->setDefaultLogger($logger);
         $handler->screamAt(E_ALL);
 
@@ -101,9 +101,14 @@ class ErrorHandlerTest extends TestCase
             $this->fail('ErrorException expected');
         } catch (\ErrorException $exception) {
             // if an exception is thrown, the test passed
-            $this->assertEquals(E_NOTICE, $exception->getSeverity());
+            if (\PHP_VERSION_ID < 80000) {
+                $this->assertEquals(E_NOTICE, $exception->getSeverity());
+                $this->assertRegExp('/^Notice: Undefined variable: (foo|bar)/', $exception->getMessage());
+            } else {
+                $this->assertEquals(E_WARNING, $exception->getSeverity());
+                $this->assertRegExp('/^Warning: Undefined variable \$(foo|bar)/', $exception->getMessage());
+            }
             $this->assertEquals(__FILE__, $exception->getFile());
-            $this->assertRegExp('/^Notice: Undefined variable: (foo|bar)/', $exception->getMessage());
 
             $trace = $exception->getTrace();
 
@@ -143,9 +148,8 @@ class ErrorHandlerTest extends TestCase
     public function testDefaultLogger()
     {
         try {
-            $handler = ErrorHandler::register();
-
             $logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
+            $handler = ErrorHandler::register();
 
             $handler->setDefaultLogger($logger, E_NOTICE);
             $handler->setDefaultLogger($logger, [E_USER_NOTICE => LogLevel::CRITICAL]);
@@ -234,7 +238,7 @@ class ErrorHandlerTest extends TestCase
             $logger
                 ->expects($this->once())
                 ->method('log')
-                ->will($this->returnCallback($warnArgCheck))
+                ->willReturnCallback($warnArgCheck)
             ;
 
             $handler = ErrorHandler::register();
@@ -248,11 +252,17 @@ class ErrorHandlerTest extends TestCase
 
             $line = null;
             $logArgCheck = function ($level, $message, $context) use (&$line) {
-                $this->assertEquals('Notice: Undefined variable: undefVar', $message);
                 $this->assertArrayHasKey('exception', $context);
                 $exception = $context['exception'];
+
+                if (\PHP_VERSION_ID < 80000) {
+                    $this->assertEquals('Notice: Undefined variable: undefVar', $message);
+                    $this->assertSame(E_NOTICE, $exception->getSeverity());
+                } else {
+                    $this->assertEquals('Warning: Undefined variable $undefVar', $message);
+                    $this->assertSame(E_WARNING, $exception->getSeverity());
+                }
                 $this->assertInstanceOf(SilencedErrorContext::class, $exception);
-                $this->assertSame(E_NOTICE, $exception->getSeverity());
                 $this->assertSame(__FILE__, $exception->getFile());
                 $this->assertSame($line, $exception->getLine());
                 $this->assertNotEmpty($exception->getTrace());
@@ -262,12 +272,17 @@ class ErrorHandlerTest extends TestCase
             $logger
                 ->expects($this->once())
                 ->method('log')
-                ->will($this->returnCallback($logArgCheck))
+                ->willReturnCallback($logArgCheck)
             ;
 
             $handler = ErrorHandler::register();
-            $handler->setDefaultLogger($logger, E_NOTICE);
-            $handler->screamAt(E_NOTICE);
+            if (\PHP_VERSION_ID < 80000) {
+                $handler->setDefaultLogger($logger, E_NOTICE);
+                $handler->screamAt(E_NOTICE);
+            } else {
+                $handler->setDefaultLogger($logger, E_WARNING);
+                $handler->screamAt(E_WARNING);
+            }
             unset($undefVar);
             $line = __LINE__ + 1;
             @$undefVar++;
@@ -284,6 +299,10 @@ class ErrorHandlerTest extends TestCase
 
     public function testHandleUserError()
     {
+        if (\PHP_VERSION_ID >= 70400) {
+            $this->markTestSkipped('PHP 7.4 allows __toString to throw exceptions');
+        }
+
         try {
             $handler = ErrorHandler::register();
             $handler->throwAt(0, true);
@@ -318,14 +337,12 @@ class ErrorHandlerTest extends TestCase
         $logger
             ->expects($this->once())
             ->method('log')
-            ->will($this->returnCallback($logArgCheck))
+            ->willReturnCallback($logArgCheck)
         ;
 
         $handler = new ErrorHandler();
         $handler->setDefaultLogger($logger);
         @$handler->handleError(E_USER_DEPRECATED, 'Foo deprecation', __FILE__, __LINE__, []);
-
-        restore_error_handler();
     }
 
     /**
@@ -334,11 +351,10 @@ class ErrorHandlerTest extends TestCase
     public function testHandleException()
     {
         try {
+            $logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
             $handler = ErrorHandler::register();
 
             $exception = new \Exception('foo');
-
-            $logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
 
             $logArgCheck = function ($level, $message, $context) {
                 $this->assertSame('Uncaught Exception: foo', $message);
@@ -349,7 +365,7 @@ class ErrorHandlerTest extends TestCase
             $logger
                 ->expects($this->exactly(2))
                 ->method('log')
-                ->will($this->returnCallback($logArgCheck))
+                ->willReturnCallback($logArgCheck)
             ;
 
             $handler->setDefaultLogger($logger, E_ERROR);
@@ -483,6 +499,7 @@ class ErrorHandlerTest extends TestCase
     public function testHandleFatalError()
     {
         try {
+            $logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
             $handler = ErrorHandler::register();
 
             $error = [
@@ -491,8 +508,6 @@ class ErrorHandlerTest extends TestCase
                 'file' => 'bar',
                 'line' => 123,
             ];
-
-            $logger = $this->getMockBuilder('Psr\Log\LoggerInterface')->getMock();
 
             $logArgCheck = function ($level, $message, $context) {
                 $this->assertEquals('Fatal Parse Error: foo', $message);
@@ -503,7 +518,7 @@ class ErrorHandlerTest extends TestCase
             $logger
                 ->expects($this->once())
                 ->method('log')
-                ->will($this->returnCallback($logArgCheck))
+                ->willReturnCallback($logArgCheck)
             ;
 
             $handler->setDefaultLogger($logger, E_PARSE);
@@ -576,11 +591,11 @@ class ErrorHandlerTest extends TestCase
     }
 
     /**
-     * @expectedException \Exception
      * @group no-hhvm
      */
     public function testCustomExceptionHandler()
     {
+        $this->expectException('Exception');
         $handler = new ErrorHandler();
         $handler->setExceptionHandler(function ($e) use ($handler) {
             $handler->handleException($e);

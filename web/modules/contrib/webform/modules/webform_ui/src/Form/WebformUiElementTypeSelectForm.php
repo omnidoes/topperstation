@@ -46,11 +46,6 @@ class WebformUiElementTypeSelectForm extends WebformUiElementTypeFormBase {
         continue;
       }
 
-      // Skip wizard page which has a dedicated URL.
-      if ($element_type === 'webform_wizard_page') {
-        continue;
-      }
-
       $category_name = (string) $webform_element->getPluginCategory();
       if (!isset($categories[$category_name])) {
         $categories[$category_name] = $category_index++;

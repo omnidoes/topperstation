@@ -1,9 +1,5 @@
 <?php
 
-/**
- * Contains \Drupal\Tests\page_manager\Unit\PageManagerRoutesTest.
- */
-
 namespace Drupal\Tests\page_manager\Unit;
 
 use Drupal\Core\Cache\CacheTagsInvalidatorInterface;
@@ -242,16 +238,16 @@ class PageManagerRoutesTest extends UnitTestCase {
     $data['placeholder'] = ['/test_route/%', '/test_route/{test_route}'];
     $data['slug_with_default'] = [
       '/test_route/{default_exists}',
-      '/test_route/{default_exists}'
+      '/test_route/{default_exists}',
     ];
     $data['placeholder_with_default'] = [
       '/test_route/%',
-      '/test_route/{default_exists}'
+      '/test_route/{default_exists}',
     ];
     $data['with_requirement'] = [
       '/test_route/{foo}',
       '/test_route/{foo}',
-      ['foo' => '\d+']
+      ['foo' => '\d'],
     ];
     return $data;
   }
@@ -387,13 +383,13 @@ class PageManagerRoutesTest extends UnitTestCase {
       'foo' => [
         'machine_name' => 'foo',
         'type' => 'integer',
-        'label' => 'Foo'
+        'label' => 'Foo',
       ],
       'test_route' => [
         'machine_name' => 'test_route',
         'type' => '',
-        'label' => ''
-      ]
+        'label' => '',
+      ],
     ]);
 
     $variant1 = $this->prophesize(PageVariantInterface::class);

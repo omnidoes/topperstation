@@ -6,6 +6,7 @@ use Drupal\Component\Serialization\Json;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Routing\RedirectDestinationInterface;
+use Drupal\Core\Url;
 use Drupal\webform\Entity\Webform;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -64,7 +65,7 @@ class WebformTestAjaxBlock extends BlockBase implements ContainerFactoryPluginIn
 
     $ajax_links = [];
     foreach ($webforms as $webform_id => $webform) {
-      if (strpos($webform_id, 'test_ajax') !== 0 && $webform_id != 'test_form_wizard_long_100') {
+      if (strpos($webform_id, 'test_ajax') !== 0 && $webform_id !== 'test_form_wizard_long_100') {
         continue;
       }
 
@@ -108,9 +109,34 @@ class WebformTestAjaxBlock extends BlockBase implements ContainerFactoryPluginIn
           'class' => ['webform-dialog', 'webform-dialog-normal'],
         ],
       ],
+      'javascript' => [
+        'title' => "Drupal.webformOpenDialog('" . $webform->toUrl('canonical')->toString() . "', 'webform-dialog-normal'); return false;",
+        'url' => Url::fromRoute('<none>'),
+        'attributes' => [
+          'onclick' => "Drupal.webformOpenDialog('" . $webform->toUrl('canonical')->toString() . "', 'webform-dialog-normal'); return false;",
+        ],
+      ],
     ];
 
-    return [
+    $webform_style_guide = Webform::load('example_style_guide');
+    $dialog_links = [
+      'style_guide' => [
+        'title' => $this->t('Open style guide'),
+        'url' => $webform_style_guide->toUrl('canonical'),
+        'attributes' => [
+          'data-dialog-type' => 'dialog',
+          'data-dialog-renderer' => 'off_canvas',
+          'data-dialog-options' => Json::encode([
+            'width' => 600,
+            'dialogClass' => 'ui-dialog-off-canvas webform-off-canvas',
+          ]),
+          'class' => [
+            'use-ajax',
+          ],
+        ],
+      ],
+    ];
+    $build = [
       'ajax' => [
         '#prefix' => '<h3>' . $this->t('Ajax links') . '</h3>',
         '#theme' => 'links',
@@ -121,8 +147,15 @@ class WebformTestAjaxBlock extends BlockBase implements ContainerFactoryPluginIn
         '#theme' => 'links',
         '#links' => $inline_links,
       ],
-      '#attached' => ['library' => ['core/drupal.ajax']],
+      'dialog' => [
+        '#prefix' => '<h3>' . $this->t('Dialog/Offcanvas links') . '</h3>',
+        '#theme' => 'links',
+        '#links' => $dialog_links,
+      ],
     ];
+    $build['#attached']['library'][] = 'webform/webform.dialog';
+    $build['#attached']['drupalSettings']['webform']['dialog']['options'] = \Drupal::config('webform.settings')->get('settings.dialog_options');
+    return $build;
   }
 
   /**

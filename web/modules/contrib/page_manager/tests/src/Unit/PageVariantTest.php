@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\Tests\page_manager\Unit\PageVariantTest.
- */
-
 namespace Drupal\Tests\page_manager\Unit;
 
 use Drupal\Core\DependencyInjection\ContainerBuilder;
@@ -74,6 +69,9 @@ class PageVariantTest extends UnitTestCase {
     $this->assertSame($expected, $contexts);
   }
 
+  /**
+   * Provider Test Get Contexts.
+   */
   public function providerTestGetContexts() {
     $data = [];
     $data['empty'] = [

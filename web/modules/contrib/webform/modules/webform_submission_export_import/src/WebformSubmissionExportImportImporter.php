@@ -2,9 +2,11 @@
 
 namespace Drupal\webform_submission_export_import;
 
+use Drupal\Component\Utility\Crypt;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 use Drupal\Core\Serialization\Yaml;
 use Drupal\Core\Site\Settings;
@@ -49,14 +51,14 @@ class WebformSubmissionExportImportImporter implements WebformSubmissionExportIm
   protected $entityTypeManager;
 
   /**
-   * Webform submission storage.
+   * The webform submission storage.
    *
    * @var \Drupal\webform\WebformSubmissionStorageInterface
    */
   protected $entityStorage;
 
   /**
-   * Webform element manager.
+   * The webform element manager.
    *
    * @var \Drupal\webform\Plugin\WebformElementManagerInterface
    */
@@ -112,6 +114,13 @@ class WebformSubmissionExportImportImporter implements WebformSubmissionExportIm
   protected $fieldDefinitions;
 
   /**
+   * The file system service.
+   *
+   * @var \Drupal\Core\File\FileSystemInterface
+   */
+  protected $fileSystem;
+
+  /**
    * Constructs a WebformSubmissionExportImport object.
    *
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
@@ -122,13 +131,16 @@ class WebformSubmissionExportImportImporter implements WebformSubmissionExportIm
    *   The entity type manager.
    * @param \Drupal\webform\Plugin\WebformElementManagerInterface $element_manager
    *   The webform element manager.
+   * @param \Drupal\Core\File\FileSystemInterface $file_system
+   *   The file system service.
    */
-  public function __construct(ConfigFactoryInterface $config_factory, LoggerChannelFactoryInterface $logger_factory, EntityTypeManagerInterface $entity_type_manager, WebformElementManagerInterface $element_manager) {
+  public function __construct(ConfigFactoryInterface $config_factory, LoggerChannelFactoryInterface $logger_factory, EntityTypeManagerInterface $entity_type_manager, WebformElementManagerInterface $element_manager, FileSystemInterface $file_system) {
     $this->configFactory = $config_factory;
     $this->loggerFactory = $logger_factory;
     $this->entityTypeManager = $entity_type_manager;
     $this->entityStorage = $entity_type_manager->getStorage('webform_submission');
     $this->elementManager = $element_manager;
+    $this->fileSystem = $file_system;
   }
 
   /**
@@ -207,7 +219,7 @@ class WebformSubmissionExportImportImporter implements WebformSubmissionExportIm
    * {@inheritdoc}
    */
   public function getImportOption($name) {
-    return $this->importOptions[$name];
+    return $this->importOptions[$name] ?? NULL;
   }
 
   /**
@@ -404,17 +416,9 @@ class WebformSubmissionExportImportImporter implements WebformSubmissionExportIm
       // Get CSV values.
       $values = fgetcsv($handle);
       // Complete ignored empty rows.
-      if (empty($values)) {
+      if (empty($values) || $values === ['']) {
         continue;
       }
-
-      // Create CSV record.
-      $record = array_combine($column_names, $values);
-      // Trim all values.
-      foreach ($record as $key => $value) {
-        $record[$key] = trim($value);
-      }
-
       $index++;
       $stats['total']++;
 
@@ -424,6 +428,28 @@ class WebformSubmissionExportImportImporter implements WebformSubmissionExportIm
       $row_warnings =& $stats['warnings'][$index];
       $row_errors =& $stats['errors'][$index];
 
+      // Make sure expected number of columns and values are equal.
+      if (count($column_names) !== count($values)) {
+        $t_args = [
+          '@expected' => count($column_names),
+          '@found' => count($values),
+        ];
+        $error = $this->t('@expected values expected and only @found found.', $t_args);
+        if (!empty($import_options['treat_warnings_as_errors'])) {
+          $row_errors[] = $error;
+        }
+        else {
+          $row_warnings[] = $error;
+        }
+        continue;
+      }
+
+      // Create record and trim all values.
+      $record = array_combine($column_names, $values);
+      foreach ($record as $key => $value) {
+        $record[$key] = trim($value);
+      }
+
       // Track original record.
       $original_record = $record;
 
@@ -432,7 +458,7 @@ class WebformSubmissionExportImportImporter implements WebformSubmissionExportIm
 
       // Token: Generate token from the original CSV record.
       if (empty($record['token'])) {
-        $record['token'] = md5(Settings::getHashSalt() . serialize($original_record));
+        $record['token'] = Crypt::hashBase64(Settings::getHashSalt() . serialize($original_record));
       }
 
       // Prepare.
@@ -610,7 +636,7 @@ class WebformSubmissionExportImportImporter implements WebformSubmissionExportIm
         $record[$element_key][$composite_key] = $value;
       }
       elseif ($element_plugin instanceof WebformCompositeBase) {
-        // Get the the composite element element and make sure it exists.
+        // Get the composite element and make sure it exists.
         $composite_elements = $element_plugin->getCompositeElements();
         if (!isset($composite_elements[$composite_key])) {
           continue;
@@ -693,7 +719,7 @@ class WebformSubmissionExportImportImporter implements WebformSubmissionExportIm
 
     // Get file destination.
     $file_destination = isset($element['#upload_location']) ? $element['#upload_location'] : NULL;
-    if (isset($file_destination) && !file_prepare_directory($file_destination, FILE_CREATE_DIRECTORY)) {
+    if (isset($file_destination) && !$this->fileSystem->prepareDirectory($file_destination, FileSystemInterface::CREATE_DIRECTORY)) {
       $this->loggerFactory->get('file')
         ->notice('The upload directory %directory for the file element %name could not be created or is not accessible. A newly uploaded file could not be saved in this directory as a consequence, and the upload was canceled.', [
           '%directory' => $file_destination,
@@ -740,7 +766,7 @@ class WebformSubmissionExportImportImporter implements WebformSubmissionExportIm
 
       // Check URL status code.
       $file_headers = @get_headers($new_file_uri);
-      if (!$file_headers || $file_headers[0] == 'HTTP/1.1 404 Not Found') {
+      if (!$file_headers || $file_headers[0] === 'HTTP/1.1 404 Not Found') {
         $errors[] = $this->t('[@element_key] URL (@url) returns 404 file not found.', $t_args);
         continue;
       }
@@ -862,7 +888,7 @@ class WebformSubmissionExportImportImporter implements WebformSubmissionExportIm
    * Import multiple element.
    *
    * @param array $element
-   *   An element with multiple values..
+   *   An element with multiple values.
    * @param mixed $value
    *   File URI(s) from CSV record.
    * @param \Drupal\webform\WebformSubmissionInterface|null $webform_submission

@@ -1,9 +1,5 @@
 <?php
 
-/**
- * Contains Drupal\page_manager\PageVariantInterface.
- */
-
 namespace Drupal\page_manager;
 
 use Drupal\Core\Config\Entity\ConfigEntityInterface;
@@ -18,7 +14,7 @@ interface PageVariantInterface extends ConfigEntityInterface, EntityWithPluginCo
   /**
    * Gets the variant plugin.
    *
-   * @return \Drupal\Core\Display\VariantInterface object
+   * @return \Drupal\Core\Display\VariantInterface
    */
   public function getVariantPlugin();
 
@@ -75,9 +71,9 @@ interface PageVariantInterface extends ConfigEntityInterface, EntityWithPluginCo
    * Gets the values for all defined contexts.
    *
    * @param \Symfony\Component\HttpFoundation\Request| null $request
-   *   The request to fetch contexts for
+   *   The request to fetch contexts for.
    * @param bool $reset_cache
-   *   Boolean indicating whether or not to reset the internal contexts cache
+   *   Boolean indicating whether or not to reset the internal contexts cache.
    *
    * @return \Drupal\Core\Plugin\Context\ContextInterface[]
    *   An array of set context values, keyed by context name.
@@ -94,7 +90,7 @@ interface PageVariantInterface extends ConfigEntityInterface, EntityWithPluginCo
   /**
    * Gets the weight of this variant (compared to other variants on the page).
    *
-   * @return integer
+   * @return int
    */
   public function getWeight();
 

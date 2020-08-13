@@ -1,0 +1,17 @@
+{
+    "name": "entity_browser_table",
+    "type": "drupal-module",
+    "description": "Creates a new Entity Browser display widget to display referenced content as a table.",
+    "keywords": [
+    ],
+    "homepage": "https://www.drupal.org/project/entity_browser_table",
+    "minimum-stability": "dev",
+    "support": {
+        "issues": "https://www.drupal.org/project/issues/entity_browser_table",
+        "source": "http://cgit.drupalcode.org/entity_browser_table"
+    },
+    "require": {
+        "drupal/entity_browser" : "~2.2",
+        "drupal/core": "^8 || ^9"
+    }
+}

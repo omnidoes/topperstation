@@ -52,6 +52,20 @@ function block_content_permissions_block_content_type_access(EntityInterface $en
 }
 
 /**
+ * Implements hook_ENTITY_TYPE_create_access().
+ */
+function block_content_permissions_block_content_create_access(AccountInterface $account, array $context, $entity_bundle) {
+  // Check 'create' permission for block content types.
+  // Needed for inline form creation of block content (ex. Inline Entity Form).
+  if ($account->hasPermission("create $entity_bundle block content")) {
+    return AccessResult::allowed();
+  }
+  else {
+    return AccessResult::forbidden();
+  }
+}
+
+/**
  * Implements hook_views_pre_build().
  */
 function block_content_permissions_views_pre_build(ViewExecutable $view) {
@@ -100,9 +114,11 @@ function block_content_permissions_views_query_alter(ViewExecutable $view, Query
       }
 
       // Restrict exposed "type" field options to allowed block content types.
-      foreach ($view->exposed_widgets['type']['#options'] as $key => $value) {
-        if ($key != 'All' && !in_array($key, $allowedBlockContentTypes)) {
-          unset($view->exposed_widgets['type']['#options'][$key]);
+      if (!empty($view->exposed_widgets['type']['#options'])) {
+        foreach ($view->exposed_widgets['type']['#options'] as $key => $value) {
+          if ($key != 'All' && !in_array($key, $allowedBlockContentTypes)) {
+            unset($view->exposed_widgets['type']['#options'][$key]);
+          }
         }
       }
     }

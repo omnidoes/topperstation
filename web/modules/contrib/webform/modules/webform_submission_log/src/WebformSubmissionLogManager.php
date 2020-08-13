@@ -13,12 +13,8 @@ use Drupal\Core\DependencyInjection\DependencySerializationTrait;
  * Webform submission log manager.
  */
 class WebformSubmissionLogManager implements WebformSubmissionLogManagerInterface {
-  use DependencySerializationTrait;
 
-  /**
-   * Name of the table where log entries are stored.
-   */
-  const TABLE = 'webform_submission_log';
+  use DependencySerializationTrait;
 
   /**
    * The database service.
@@ -30,11 +26,11 @@ class WebformSubmissionLogManager implements WebformSubmissionLogManagerInterfac
   /**
    * WebformSubmissionLogManager constructor.
    *
-   * @param \Drupal\Core\Database\Connection $datababse
+   * @param \Drupal\Core\Database\Connection $database
    *   The database service.
    */
-  public function __construct(Connection $datababse) {
-    $this->database = $datababse;
+  public function __construct(Connection $database) {
+    $this->database = $database;
   }
 
   /**
@@ -52,7 +48,7 @@ class WebformSubmissionLogManager implements WebformSubmissionLogManagerInterfac
       'data' => serialize([]),
       'timestamp' => '',
     ];
-    $this->database->insert(self::TABLE)
+    $this->database->insert(WebformSubmissionLogManagerInterface::TABLE)
       ->fields($fields)
       ->execute();
   }
@@ -67,7 +63,7 @@ class WebformSubmissionLogManager implements WebformSubmissionLogManagerInterfac
       'limit' => NULL,
     ];
 
-    $query = $this->database->select(static::TABLE, 'log');
+    $query = $this->database->select(WebformSubmissionLogManagerInterface::TABLE, 'log');
 
     // Log fields.
     $query->fields('log', [

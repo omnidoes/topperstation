@@ -37,6 +37,9 @@
   {% if uri %}
     <div><b>{{ 'Submission URI'|t }}:</b> {{ uri }}</div>
   {% endif %}
+  {% if token_view %}
+    <div><b>{{ 'Submission View'|t }}:</b> {{ token_view }}</div>
+  {% endif %}
   {% if token_update %}
     <div><b>{{ 'Submission Update'|t }}:</b> {{ token_update }}</div>
   {% endif %}
@@ -71,7 +74,6 @@
       </div>
     {% endif %}
   {% endif %}
-
 {% else %}
   <div><b>{{ 'Submission Number'|t }}:</b> {{ serial }}</div>
   <div><b>{{ 'Created'|t }}:</b> {{ created }}</div>

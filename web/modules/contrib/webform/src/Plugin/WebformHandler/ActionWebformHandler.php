@@ -70,7 +70,8 @@ class ActionWebformHandler extends WebformHandlerBase {
 
     // Get state labels.
     $states = [
-      WebformSubmissionInterface::STATE_DRAFT => $this->t('Draft Saved'),
+      WebformSubmissionInterface::STATE_DRAFT_CREATED => $this->t('Draft created'),
+      WebformSubmissionInterface::STATE_DRAFT_UPDATED => $this->t('Draft updated'),
       WebformSubmissionInterface::STATE_CONVERTED => $this->t('Converted'),
       WebformSubmissionInterface::STATE_COMPLETED => $this->t('Completed'),
       WebformSubmissionInterface::STATE_UPDATED => $this->t('Updated'),
@@ -80,10 +81,10 @@ class ActionWebformHandler extends WebformHandlerBase {
 
     // Get message type.
     $message_types = [
-      'status' => t('Status'),
-      'error' => t('Error'),
-      'warning' => t('Warning'),
-      'info' => t('Info'),
+      'status' => $this->t('Status'),
+      'error' => $this->t('Error'),
+      'warning' => $this->t('Warning'),
+      'info' => $this->t('Info'),
     ];
     $settings['message'] = $settings['message'] ? WebformHtmlEditor::checkMarkup($settings['message']) : NULL;
     $settings['message_type'] = $message_types[$settings['message_type']];
@@ -127,10 +128,11 @@ class ActionWebformHandler extends WebformHandlerBase {
       '#type' => 'checkboxes',
       '#title' => $this->t('Execute'),
       '#options' => [
-        WebformSubmissionInterface::STATE_DRAFT => $this->t('…when <b>draft</b> is saved.'),
-        WebformSubmissionInterface::STATE_CONVERTED => $this->t('…when anonymous submission is <b>converted</b> to authenticated.'),
-        WebformSubmissionInterface::STATE_COMPLETED => $this->t('…when submission is <b>completed</b>.'),
-        WebformSubmissionInterface::STATE_UPDATED => $this->t('…when submission is <b>updated</b>.'),
+        WebformSubmissionInterface::STATE_DRAFT_CREATED => $this->t('…when <b>draft is created</b>.'),
+        WebformSubmissionInterface::STATE_DRAFT_UPDATED => $this->t('…when <b>draft is updated</b>.'),
+        WebformSubmissionInterface::STATE_CONVERTED => $this->t('…when anonymous <b>submission is converted</b> to authenticated.'),
+        WebformSubmissionInterface::STATE_COMPLETED => $this->t('…when <b>submission is completed</b>.'),
+        WebformSubmissionInterface::STATE_UPDATED => $this->t('…when <b>submission is updated</b>.'),
       ],
       '#required' => TRUE,
       '#access' => $results_disabled ? FALSE : TRUE,
@@ -178,10 +180,10 @@ class ActionWebformHandler extends WebformHandlerBase {
       '#type' => 'select',
       '#title' => $this->t('Display message type'),
       '#options' => [
-        'status' => t('Status'),
-        'error' => t('Error'),
-        'warning' => t('Warning'),
-        'info' => t('Info'),
+        'status' => $this->t('Status'),
+        'error' => $this->t('Error'),
+        'warning' => $this->t('Warning'),
+        'info' => $this->t('Info'),
       ],
       '#default_value' => $this->configuration['message_type'],
     ];
@@ -258,13 +260,14 @@ class ActionWebformHandler extends WebformHandlerBase {
     $this->configuration['states'] = array_values(array_filter($this->configuration['states']));
 
     // Cleanup sticky.
-    $this->configuration['sticky'] = ($this->configuration['sticky'] === '') ? NULL : (bool) $this->configuration['sticky'];
+    if ($form_state->getValue('sticky') === '') {
+      $this->configuration['sticky'] = NULL;
+    }
 
     // Cleanup locked.
-    $this->configuration['locked'] = ($this->configuration['locked'] === '') ? NULL : (bool) $this->configuration['locked'];
-
-    // Cast debug.
-    $this->configuration['debug'] = (bool) $this->configuration['debug'];
+    if ($form_state->getValue('locked') === '') {
+      $this->configuration['locked'] = NULL;
+    }
   }
 
   /**

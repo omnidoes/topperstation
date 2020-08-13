@@ -1,9 +1,5 @@
 <?php
 
-/**
- * Contains \Drupal\Tests\page_manager\Unit\PageBlockDisplayVariantTest.
- */
-
 namespace Drupal\Tests\page_manager\Unit;
 
 use Drupal\Component\Uuid\UuidInterface;
@@ -145,6 +141,7 @@ class PageBlockDisplayVariantTest extends UnitTestCase {
     $context_handler->applyContextMapping($block2->reveal(), [])->shouldBeCalledTimes(1);
 
     $module_handler = $this->prophesize(ModuleHandlerInterface::class);
+    $page_manager_helper = $this->prophesize(PageManagerHelper::class);
     $module_handler->alter();
     $uuid_generator = $this->prophesize(UuidInterface::class);
     $page_title = 'Page title';
@@ -153,24 +150,8 @@ class PageBlockDisplayVariantTest extends UnitTestCase {
       ->getMock();
     $block_manager = $this->prophesize(BlockManager::class);
     $condition_manager = $this->prophesize(ConditionManager::class);
-    $page_manager_helper = $this->prophesize(PageManagerHelper::class);
     $variant_plugin = $this->getMockBuilder(PageBlockDisplayVariant::class)
-      ->setConstructorArgs(
-        [
-          [
-            'page_title' => $page_title,
-            'uuid' => 'UUID',
-          ],
-          'test',
-          [],
-          $context_handler->reveal(),
-          $account->reveal(),
-          $uuid_generator->reveal(),
-          $token, $block_manager->reveal(),
-          $condition_manager->reveal(),
-          $module_handler->reveal(),
-          $page_manager_helper->reveal(),
-        ])
+      ->setConstructorArgs([['page_title' => $page_title, 'uuid' => 'UUID'], 'test', [], $context_handler->reveal(), $account->reveal(), $uuid_generator->reveal(), $token, $block_manager->reveal(), $condition_manager->reveal(), $module_handler->reveal(), $page_manager_helper->reveal()])
       ->setMethods(['renderPageTitle'])
       ->getMock();
 
@@ -236,7 +217,6 @@ class PageBlockDisplayVariantTest extends UnitTestCase {
     $block_manager = $this->prophesize(BlockManager::class);
     $condition_manager = $this->prophesize(ConditionManager::class);
     $module_handler = $this->prophesize(ModuleHandlerInterface::class);
-    $page_manager_helper = $this->prophesize(PageManagerHelper::class);
 
     $variant_plugin = new PageBlockDisplayVariant([], '', [], $context_handler->reveal(), $account->reveal(), $uuid_generator->reveal(), $token->reveal(), $block_manager->reveal(), $condition_manager->reveal(), $module_handler->reveal(), $page_manager_helper->reveal());
 

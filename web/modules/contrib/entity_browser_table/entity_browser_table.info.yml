@@ -1,0 +1,23 @@
+name: 'Entity Browser - Table Layout'
+type: module
+description: 'Creates a new Entity Browser display widget to display referenced content as a table.'
+core: 8.x
+core_version_requirement: ^8 || ^9
+package: 'Media'
+dependencies:
+  - entity_browser:entity_browser
+test_dependencies:
+  - media
+  - image
+  - user
+  - file
+  - system
+  - language
+  - taxonomy
+  - text
+  - content_translation
+
+# Information added by Drupal.org packaging script on 2020-05-31
+version: '8.x-1.2'
+project: 'entity_browser_table'
+datestamp: 1590911678

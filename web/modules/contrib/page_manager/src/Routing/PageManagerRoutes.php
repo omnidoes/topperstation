@@ -1,9 +1,5 @@
 <?php
 
-/**
- * Contains \Drupal\page_manager\Routing\PageManagerRoutes.
- */
-
 namespace Drupal\page_manager\Routing;
 
 use Drupal\Core\Cache\CacheTagsInvalidatorInterface;

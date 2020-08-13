@@ -12,4 +12,5 @@ social_link_field.font_awesome_formatter:
 fontawesome.component:
   css:
     component:
-      //maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css: { type: external }
+      //cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css: { type: external, minified: true }

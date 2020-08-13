@@ -92,7 +92,7 @@ abstract class FocalPointEffectBase extends ResizeImageEffect implements Contain
       $plugin_id,
       $plugin_definition,
       $container->get('logger.factory')->get('image'),
-      new FocalPointManager($container->get('entity_type.manager')),
+      $container->get('focal_point.manager'),
       $container->get('entity_type.manager')->getStorage('crop'),
       $container->get('config.factory')->get('focal_point.settings'),
       \Drupal::request()
@@ -215,6 +215,26 @@ abstract class FocalPointEffectBase extends ResizeImageEffect implements Contain
     }
 
     return $crop;
+  }
+
+  /**
+   * Returns the focal point config.
+   *
+   * @return \Drupal\Core\Config\ImmutableConfig
+   *   The focal point config.
+   */
+  public function getFocalPointConfig() {
+    return $this->focalPointConfig;
+  }
+
+  /**
+   * Returns the crop storage.
+   *
+   * @return \Drupal\crop\CropStorageInterface
+   *   The crop storage.
+   */
+  public function getCropStorage() {
+    return $this->cropStorage;
   }
 
   /**

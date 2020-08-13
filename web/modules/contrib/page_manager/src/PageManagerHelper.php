@@ -85,7 +85,7 @@ class PageManagerHelper {
     // object to avoid double escaping.
     // @todo: Simplify this when core provides an API for this in
     //   https://www.drupal.org/node/2580723.
-    $title = (string) $this->token->replace(new HtmlEscapedText($title), $this->getContextAsTokenData($contexts));
+    $title = (string) $this->token->replace($title, $this->getContextAsTokenData($contexts));
     return Markup::create($title);
   }
 

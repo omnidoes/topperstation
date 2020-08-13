@@ -1,16 +1,11 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\page_manager\Entity\Page.
- */
-
 namespace Drupal\page_manager\Entity;
 
 use Drupal\Component\Plugin\Context\ContextInterface;
 use Drupal\Core\Cache\CacheableMetadata;
 use Drupal\Core\Plugin\Context\Context;
-use Drupal\Core\Plugin\Context\ContextDefinition;
+use Drupal\page_manager\Context\ContextDefinitionFactory;
 use Drupal\page_manager\Event\PageManagerContextEvent;
 use Drupal\page_manager\Event\PageManagerEvents;
 use Drupal\page_manager\PageInterface;
@@ -80,7 +75,7 @@ class Page extends ConfigEntityBase implements PageInterface {
   /**
    * The page variant entities.
    *
-   * @var \Drupal\page_manager\PageVariantInterface[].
+   * @var \Drupal\page_manager\PageVariantInterface[]
    */
   protected $variants;
 
@@ -338,6 +333,7 @@ class Page extends ConfigEntityBase implements PageInterface {
    */
   public function addContext($name, ContextInterface $value) {
     $this->contexts[$name] = $value;
+    return $this;
   }
 
   /**
@@ -345,13 +341,13 @@ class Page extends ConfigEntityBase implements PageInterface {
    */
   public function getContexts(Request $request = NULL, $reset_cache = FALSE) {
     if ($reset_cache) {
-      // Reset contexts when requested
+      // Reset contexts when requested.
       $this->contexts = [];
     }
     // @todo add the other global contexts here as they are added
     // @todo maybe come up with a non-hardcoded way of doing this?
     $global_contexts = [
-      'current_user'
+      'current_user',
     ];
     if (!$this->contexts) {
       $this->eventDispatcher()->dispatch(PageManagerEvents::PAGE_CONTEXT, new PageManagerContextEvent($this, $request));
@@ -365,7 +361,8 @@ class Page extends ConfigEntityBase implements PageInterface {
             $cacheability = new CacheableMetadata();
             $cacheability->setCacheContexts(['route']);
 
-            $context_definition = new ContextDefinition($configuration['type'], $configuration['label']);
+            $context_definition = ContextDefinitionFactory::create($configuration['type'])
+              ->setLabel($configuration['label']);
             $context = new Context($context_definition);
             $context->addCacheableDependency($cacheability);
             $this->contexts[$machine_name] = $context;

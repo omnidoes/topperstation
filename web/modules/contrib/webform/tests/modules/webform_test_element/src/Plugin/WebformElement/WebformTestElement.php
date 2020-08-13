@@ -59,7 +59,7 @@ class WebformTestElement extends WebformElementBase {
   /**
    * {@inheritdoc}
    */
-  public function preCreate(array &$element, array $values) {
+  public function preCreate(array &$element, array &$values) {
     $this->displayMessage(__FUNCTION__);
   }
 
@@ -121,7 +121,7 @@ class WebformTestElement extends WebformElementBase {
    *   Additional parameter passed to the invoked method name.
    */
   protected function displayMessage($method_name, $context1 = NULL) {
-    if (PHP_SAPI != 'cli') {
+    if (PHP_SAPI !== 'cli') {
       $t_args = ['@class_name' => get_class($this), '@method_name' => $method_name, '@context1' => $context1];
       $this->messenger()->addStatus($this->t('Invoked: @class_name:@method_name @context1', $t_args));
     }

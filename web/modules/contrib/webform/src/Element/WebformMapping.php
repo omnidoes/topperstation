@@ -6,6 +6,7 @@ use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element\FormElement;
 use Drupal\webform\Utility\WebformElementHelper;
+use Drupal\webform\Utility\WebformOptionsHelper;
 
 /**
  * Provides a mapping element.
@@ -33,6 +34,7 @@ class WebformMapping extends FormElement {
       '#theme_wrappers' => ['form_element'],
       '#required' => FALSE,
       '#source' => [],
+      '#source__description_display' => 'description',
       '#destination' => [],
       '#arrow' => '→',
     ];
@@ -51,6 +53,26 @@ class WebformMapping extends FormElement {
 
     $arrow = htmlentities($element['#arrow']);
 
+    // Process sources.
+    $sources = [];
+    foreach ($element['#source'] as $source_key => $source) {
+      $source = (string) $source;
+      if (strpos($source, WebformOptionsHelper::DESCRIPTION_DELIMITER) === FALSE) {
+        $source_description_property_name = NULL;
+        $source_title = $source;
+        $source_description = '';
+      }
+      else {
+        $source_description_property_name = ($element['#source__description_display'] === 'help') ? 'help' : 'description';
+        list($source_title, $source_description) = explode(WebformOptionsHelper::DESCRIPTION_DELIMITER, $source);
+      }
+      $sources[$source_key] = [
+        'description_property_name' => $source_description_property_name,
+        'title' => $source_title,
+        'description' => $source_description,
+      ];
+    }
+
     // Setup destination__type depending if #destination is defined.
     if (empty($element['#destination__type'])) {
       $element['#destination__type'] = (empty($element['#destination'])) ? 'textfield' : 'select';
@@ -59,8 +81,8 @@ class WebformMapping extends FormElement {
     // Set base destination element.
     $destination_element_base = [
       '#title_display' => 'invisible',
-      '#required' => ($element['#required'] === self::REQUIRED_ALL) ? TRUE : FALSE,
-      '#error_no_message'  => ($element['#required'] !== self::REQUIRED_ALL) ? TRUE : FALSE,
+      '#required' => ($element['#required'] === static::REQUIRED_ALL) ? TRUE : FALSE,
+      '#error_no_message'  => ($element['#required'] !== static::REQUIRED_ALL) ? TRUE : FALSE,
     ];
 
     // Get base #destination__* properties.
@@ -78,11 +100,31 @@ class WebformMapping extends FormElement {
 
     // Build rows.
     $rows = [];
-    foreach ($element['#source'] as $source_key => $source_title) {
+    foreach ($sources as $source_key => $source) {
       $default_value = (isset($element['#default_value'][$source_key])) ? $element['#default_value'][$source_key] : NULL;
 
+      // Source element.
+      $source_element = ['data' => []];
+      $source_element['data']['title'] = ['#markup' => $source['title']];
+      if ($source['description_property_name'] === 'help') {
+        $source_element['data']['help'] = [
+          '#type' => 'webform_help',
+          '#help' => $source['description'],
+          '#help_title' => $source['title'],
+        ];
+      }
+      $source_element['data']['arrow'] = ['#markup' => $arrow, '#prefix' => ' '];
+      if ($source['description_property_name'] === 'description') {
+        $source_element['data']['description'] = [
+          '#type' => 'container',
+          '#markup' => $source['description'],
+          '#attributes' => ['class' => ['description']],
+        ];
+      }
+
+      // Destination element.
       $destination_element = $destination_element_base + [
-        '#title' => $source_title,
+        '#title' => $source['title'],
         '#required' => $element['#required'],
         '#default_value' => $default_value,
       ];
@@ -102,8 +144,9 @@ class WebformMapping extends FormElement {
           break;
       }
 
+      // Add row.
       $rows[$source_key] = [
-        'source' => ['#markup' => $source_title . ' ' . $arrow],
+        'source' => $source_element,
         $source_key => $destination_element,
       ];
     }
@@ -147,7 +190,7 @@ class WebformMapping extends FormElement {
     // Note: Not validating REQUIRED_ALL because each destination element is
     // already required.
     $has_access = (!isset($element['#access']) || $element['#access'] === TRUE);
-    if ($element['#required'] && $element['#required'] !== self::REQUIRED_ALL && empty($value) && $has_access) {
+    if ($element['#required'] && $element['#required'] !== static::REQUIRED_ALL && empty($value) && $has_access) {
       WebformElementHelper::setRequiredError($element, $form_state);
     }
 

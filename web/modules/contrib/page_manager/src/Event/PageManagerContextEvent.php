@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\page_manager\Event\PageManagerContextEvent.
- */
-
 namespace Drupal\page_manager\Event;
 
 use Drupal\page_manager\PageInterface;
@@ -26,7 +21,7 @@ class PageManagerContextEvent extends Event {
   protected $page;
 
   /**
-   * The request for this event
+   * The request for this event.
    *
    * @var null|\Symfony\Component\HttpFoundation\Request
    */
@@ -38,7 +33,7 @@ class PageManagerContextEvent extends Event {
    * @param \Drupal\page_manager\PageInterface $page
    *   The page entity.
    * @param \Symfony\Component\HttpFoundation\Request|null $request
-   *   The request for this event
+   *   The request for this event.
    */
   public function __construct(PageInterface $page, Request $request = NULL) {
     $this->page = $page;

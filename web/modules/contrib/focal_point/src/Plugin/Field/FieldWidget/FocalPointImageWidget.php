@@ -96,7 +96,6 @@ class FocalPointImageWidget extends ImageWidget {
    */
   public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
     $element = parent::formElement($items, $delta, $element, $form, $form_state);
-    $element['#process'][] = [static::class, 'process'];
     $element['#focal_point'] = [
       'preview_link' => $this->getSetting('preview_link'),
       'offsets' => $this->getSetting('offsets'),
@@ -132,7 +131,7 @@ class FocalPointImageWidget extends ImageWidget {
     // Override the default Image Widget template when using the Media Library
     // module so we can use the image field's preview rather than the preview
     // provided by Media Library.
-    if ($form['#form_id'] == 'media_library_upload_form') {
+    if ($form['#form_id'] == 'media_library_upload_form' || $form['#form_id'] == 'media_library_add_form') {
       $element['#theme'] = 'focal_point_media_library_image_widget';
       unset($form['media'][0]['preview']);
     }

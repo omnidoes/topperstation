@@ -1,0 +1,6 @@
+entity_browser_table:
+  js:
+    js/entity_browser.table.js: {}
+  css:
+    theme:
+      css/entity_browser.table.css: {}

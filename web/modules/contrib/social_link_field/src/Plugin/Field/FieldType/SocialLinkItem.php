@@ -51,4 +51,12 @@ class SocialLinkItem extends FieldItemBase {
     return $schema;
   }
 
+/**
+ * {@inheritdoc}
+ */
+  public function isEmpty() {
+    $value = $this->get('link')->getValue();
+
+    return $value === NULL || $value === '';
+  }
 }

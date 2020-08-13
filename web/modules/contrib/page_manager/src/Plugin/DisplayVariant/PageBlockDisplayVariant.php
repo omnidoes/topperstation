@@ -1,9 +1,5 @@
 <?php
 
-/**
- * Contains \Drupal\page_manager\Plugin\DisplayVariant\PageBlockDisplayVariant.
- */
-
 namespace Drupal\page_manager\Plugin\DisplayVariant;
 
 use Drupal\Component\Uuid\UuidInterface;
@@ -17,6 +13,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\Context\ContextHandlerInterface;
 use Drupal\Core\Plugin\ContextAwarePluginInterface;
 use Drupal\Core\Render\Element;
+use Drupal\Core\Security\TrustedCallbackInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Utility\Token;
 use Drupal\ctools\Plugin\DisplayVariant\BlockDisplayVariant;
@@ -33,7 +30,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *   admin_label = @Translation("Block page")
  * )
  */
-class PageBlockDisplayVariant extends BlockDisplayVariant implements PluginWizardInterface {
+class PageBlockDisplayVariant extends BlockDisplayVariant implements PluginWizardInterface, TrustedCallbackInterface {
 
   /**
    * The module handler.
@@ -77,6 +74,7 @@ class PageBlockDisplayVariant extends BlockDisplayVariant implements PluginWizar
    */
   public function __construct(array $configuration, $plugin_id, $plugin_definition, ContextHandlerInterface $context_handler, AccountInterface $account, UuidInterface $uuid_generator, Token $token, BlockManager $block_manager, ConditionManager $condition_manager, ModuleHandlerInterface $module_handler, PageManagerHelper $page_manager_helper) {
     parent::__construct($configuration, $plugin_id, $plugin_definition, $context_handler, $account, $uuid_generator, $token, $block_manager, $condition_manager);
+
     $this->pageManagerHelper = $page_manager_helper;
     $this->moduleHandler = $module_handler;
   }
@@ -103,6 +101,13 @@ class PageBlockDisplayVariant extends BlockDisplayVariant implements PluginWizar
   /**
    * {@inheritdoc}
    */
+  public static function trustedCallbacks() {
+    return ['buildRegions', 'buildBlock'];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function build() {
     // Set default page cache keys that include the display.
     $build['#cache']['keys'] = [
@@ -114,7 +119,7 @@ class PageBlockDisplayVariant extends BlockDisplayVariant implements PluginWizar
   }
 
   /**
-   * Pre_render callback #pre_render for building the regions.
+   * #pre_render callback for building the regions.
    */
   public function buildRegions(array $build) {
     $cacheability = CacheableMetadata::createFromRenderArray($build)
@@ -153,11 +158,7 @@ class PageBlockDisplayVariant extends BlockDisplayVariant implements PluginWizar
           '#block_plugin' => $block,
           '#pre_render' => [[$this, 'buildBlock']],
           '#cache' => [
-            'keys' => [
-              'page_manager_block_display',
-              $this->id(), 'block',
-              $block_id
-            ],
+            'keys' => ['page_manager_block_display', $this->id(), 'block', $block_id],
             // Each block needs cache tags of the page and the block plugin, as
             // only the page is a config entity that will trigger cache tag
             // invalidations in case of block configuration changes.
@@ -235,7 +236,7 @@ class PageBlockDisplayVariant extends BlockDisplayVariant implements PluginWizar
     // Don't call VariantBase::buildConfigurationForm() on purpose, because it
     // adds a 'Label' field that we don't actually want to use - we store the
     // label on the page variant entity.
-    // $form = parent::buildConfigurationForm($form, $form_state);.
+    // $form = parent::buildConfigurationForm($form, $form_state);
     // Allow to configure the page title, even when adding a new display.
     // Default to the page label in that case.
     $form['page_title'] = [

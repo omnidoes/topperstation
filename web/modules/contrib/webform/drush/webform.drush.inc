@@ -9,6 +9,8 @@
  * @see \Drupal\webform\Commands\DrushCliServiceBase::generate_commands_drush8
  */
 
+require_once __DIR__ . '/webform.drush.hooks.inc';
+
 /**
  * Implements hook_drush_command().
  */
@@ -28,6 +30,7 @@ function webform_drush_command() {
         'delimiter' => 'Delimiter between columns (defaults to site-wide setting). This option may need to be wrapped in quotes. i.e. --delimiter="\t".',
         'multiple-delimiter' => 'Delimiter between an element with multiple values (defaults to site-wide setting).',
         'file-name' => 'File name used to export submission and uploaded filed. You may use tokens.',
+        'archive-type' => 'Archive file type for submission file uploadeds and generated records. (tar or zip)',
         'header-format' => 'Set to "label" (default) or "key"',
         'options-item-format' => 'Set to "label" (default) or "key". Set to "key" to print select list values by their keys instead of labels.',
         'options-single-format' => 'Set to "separate" (default) or "compact" to determine how single select list values are exported.',
@@ -49,6 +52,7 @@ function webform_drush_command() {
       ),
       'aliases' => array(
         'wfx',
+        'webform:export',
       ),
     ),
     'webform-import' => array(
@@ -69,6 +73,7 @@ function webform_drush_command() {
       ),
       'aliases' => array(
         'wfi',
+        'webform:import',
       ),
     ),
     'webform-purge' => array(
@@ -92,6 +97,7 @@ function webform_drush_command() {
       ),
       'aliases' => array(
         'wfp',
+        'webform:purge',
       ),
     ),
     'webform-tidy' => array(
@@ -112,6 +118,7 @@ function webform_drush_command() {
       ),
       'aliases' => array(
         'wft',
+        'webform:tidy',
       ),
     ),
     'webform-libraries-status' => array(
@@ -125,6 +132,7 @@ function webform_drush_command() {
       ),
       'aliases' => array(
         'wfls',
+        'webform:libraries:status',
       ),
     ),
     'webform-libraries-make' => array(
@@ -138,6 +146,7 @@ function webform_drush_command() {
       ),
       'aliases' => array(
         'wflm',
+        'webform:libraries:make',
       ),
     ),
     'webform-libraries-composer' => array(
@@ -154,6 +163,7 @@ function webform_drush_command() {
       ),
       'aliases' => array(
         'wflc',
+        'webform:libraries:composer',
       ),
     ),
     'webform-libraries-download' => array(
@@ -167,6 +177,7 @@ function webform_drush_command() {
       ),
       'aliases' => array(
         'wfld',
+        'webform:libraries:download',
       ),
     ),
     'webform-libraries-remove' => array(
@@ -180,6 +191,7 @@ function webform_drush_command() {
       ),
       'aliases' => array(
         'wflr',
+        'webform:libraries:remove',
       ),
     ),
     'webform-generate' => array(
@@ -196,6 +208,7 @@ function webform_drush_command() {
       ),
       'aliases' => array(
         'wfg',
+        'webform:generate',
       ),
     ),
     'webform-repair' => array(
@@ -209,6 +222,21 @@ function webform_drush_command() {
       ),
       'aliases' => array(
         'wfr',
+        'webform:repair',
+      ),
+    ),
+    'webform-remove-orphans' => array(
+      'description' => "Removes orphaned submissions where the submission's webform was deleted.",
+      'core' => array(
+        '8+',
+      ),
+      'bootstrap' => 1,
+      'examples' => array(
+        'webform-remove-orphans' => "Removes orphaned submissions where the submission's webform was deleted.",
+      ),
+      'aliases' => array(
+        'wfro',
+        'webform:remove:orphans',
       ),
     ),
     'webform-docs' => array(
@@ -222,6 +250,7 @@ function webform_drush_command() {
       ),
       'aliases' => array(
         'wfd',
+        'webform:docs',
       ),
     ),
     'webform-composer-update' => array(
@@ -238,6 +267,7 @@ function webform_drush_command() {
       ),
       'aliases' => array(
         'wfcu',
+        'webform:composer:update',
       ),
     ),
     'webform-generate-commands' => array(
@@ -251,6 +281,7 @@ function webform_drush_command() {
       ),
       'aliases' => array(
         'wfgc',
+        'webform:generate:commands',
       ),
     ),
   );
@@ -410,6 +441,17 @@ function drush_webform_generate() {
  */
 function drush_webform_repair() {
   return call_user_func_array([\Drupal::service('webform.cli_service'), 'drush_webform_repair'], func_get_args());
+}
+
+/******************************************************************************/
+// drush webform-remove-orphans. DO NOT EDIT.
+/******************************************************************************/
+
+/**
+ * Implements drush_hook_COMMAND().
+ */
+function drush_webform_remove_orphans() {
+  return call_user_func_array([\Drupal::service('webform.cli_service'), 'drush_webform_remove_orphans'], func_get_args());
 }
 
 /******************************************************************************/

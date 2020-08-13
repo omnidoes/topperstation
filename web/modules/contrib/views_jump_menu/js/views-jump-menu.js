@@ -9,7 +9,7 @@
   Drupal.behaviors.viewsJumpMenu = {
     attach: function (context, settings) {
       $('.js-viewsJumpMenu', context).on('change', function () {
-        window.location = $(this).find(':selected').data('url');
+        window.location = settings.path.baseUrl + settings.path.pathPrefix + $(this).find(':selected').data('url').replace(/^\//, "");
       });
     }
   };
