@@ -31,10 +31,15 @@
   ]
 %}
 <div{{ attributes.addClass(classes) }}>
-  {{ title_prefix }}
-  {% if not page %}
-    <h2><a href="{{ url }}">{{ name }}</a></h2>
-  {% endif %}
-  {{ title_suffix }}
-  {{ content }}
+  {% block title %}
+    {{ title_prefix }}
+    {% if not page %}
+      <h2><a href="{{ url }}">{{ name }}</a></h2>
+    {% endif %}
+    {{ title_suffix }}
+  {% endblock %}
+
+  {% block main %}
+    {{ content }}
+  {% endblock %}
 </div>
