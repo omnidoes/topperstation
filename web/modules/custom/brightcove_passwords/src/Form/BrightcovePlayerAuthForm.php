@@ -20,7 +20,7 @@ class BrightcovePlayerAuthForm extends FormBase {
   protected $password;
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   public function __construct(PasswordInterface $password) {
     $this->password = $password;
