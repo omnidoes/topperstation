@@ -5691,6 +5691,76 @@
         }
     },
     {
+        "name": "drupal/views_block_filter_block",
+        "version": "1.0.0",
+        "version_normalized": "1.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://git.drupalcode.org/project/views_block_filter_block.git",
+            "reference": "8.x-1.0"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://ftp.drupal.org/files/projects/views_block_filter_block-8.x-1.0.zip",
+            "reference": "8.x-1.0",
+            "shasum": "39733c381750d47d1f256b1371ddb6e4c0404b6a"
+        },
+        "require": {
+            "drupal/core": "^8 || ^9"
+        },
+        "type": "drupal-module",
+        "extra": {
+            "drupal": {
+                "version": "8.x-1.0",
+                "datestamp": "1575129180",
+                "security-coverage": {
+                    "status": "not-covered",
+                    "message": "Project has not opted into security advisory coverage!"
+                }
+            }
+        },
+        "installation-source": "dist",
+        "notification-url": "https://packages.drupal.org/8/downloads",
+        "license": [
+            "GPL-2.0-or-later"
+        ],
+        "authors": [
+            {
+                "name": "Etroid",
+                "homepage": "https://www.drupal.org/user/3048985"
+            },
+            {
+                "name": "angrytoast",
+                "homepage": "https://www.drupal.org/user/2468092"
+            },
+            {
+                "name": "iamEAP",
+                "homepage": "https://www.drupal.org/user/1467594"
+            },
+            {
+                "name": "jkopel",
+                "homepage": "https://www.drupal.org/user/66207"
+            },
+            {
+                "name": "nehajyoti",
+                "homepage": "https://www.drupal.org/user/2804915"
+            },
+            {
+                "name": "sumitmadan",
+                "homepage": "https://www.drupal.org/user/1538790"
+            },
+            {
+                "name": "yogeshmpawar",
+                "homepage": "https://www.drupal.org/user/2922907"
+            }
+        ],
+        "description": "Provides blocks for Views exposed filters on View blocks.",
+        "homepage": "https://www.drupal.org/project/views_block_filter_block",
+        "support": {
+            "source": "https://git.drupalcode.org/project/views_block_filter_block"
+        }
+    },
+    {
         "name": "drupal/views_jump_menu",
         "version": "1.0.0-beta3",
         "version_normalized": "1.0.0.0-beta3",
@@ -5754,7 +5824,7 @@
         "type": "drupal-module",
         "extra": {
             "patches_applied": {
-                "2804485-04: SQL error when adding multiple fields of the same type": "https://www.drupal.org/files/issues/2018-09-14/2804485-views_selective_filters-sql_error-4.patch"
+                "3161947-2: Notice on getOids() method, 2804485-4": "patches/views_selective_filters/views_selective_filters-2804485-and-3161947.patch"
             }
         },
         "installation-source": "source",

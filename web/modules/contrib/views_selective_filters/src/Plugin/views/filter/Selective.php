@@ -46,7 +46,7 @@ class Selective extends InOperator {
         parent::init($view, $display, $options);
 
         $this->options['exposed'] = TRUE;
-        $this->realField = $this->options['selective_display_field'];
+        $this->realField = $this->definition['field'];
     }
 
     /**
