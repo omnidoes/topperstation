@@ -40,11 +40,10 @@ function topperstation_preprocess_brightcove_video(array &$variables, $hook) {
   $variables['status'] = $brightcoveVideo->get('status')->getValue()[0]['value'];
   $customFieldValues = $brightcoveVideo->getCustomFieldValues();
 
-  $variables['islocked'] = false;
+  $variables['islocked'] = FALSE;
   if (isset($customFieldValues['password'])) {
-    $variables['islocked'] = true;
+    $variables['islocked'] = TRUE;
   }
-
 
   if ($variables['elements']['#view_mode'] == 'default') {
 

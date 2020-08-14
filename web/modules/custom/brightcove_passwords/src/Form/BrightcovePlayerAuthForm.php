@@ -83,7 +83,7 @@ class BrightcovePlayerAuthForm extends FormBase {
 
     if ($form_state->getValue('password') == $form_state->get('password')) {
       $session = \Drupal::request()->getSession();
-      $session_auth = $session->set('brightcove.passwords.' . $form_state->get('videoid'), REQUEST_TIME);
+      $session->set('brightcove.passwords.' . $form_state->get('videoid'), REQUEST_TIME);
     }
   }
 
