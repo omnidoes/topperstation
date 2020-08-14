@@ -7,7 +7,6 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Password\PasswordInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-
 /**
  * Provides login screen for password-protected Brightcove Videos.
  */
@@ -20,6 +19,9 @@ class BrightcovePlayerAuthForm extends FormBase {
    */
   protected $password;
 
+  /**
+   * @inheritDoc
+   */
   public function __construct(PasswordInterface $password) {
     $this->password = $password;
   }
@@ -49,7 +51,7 @@ class BrightcovePlayerAuthForm extends FormBase {
       '#type' => 'password',
       '#title' => 'Password',
       '#attributes' => [
-        'placeholder' => 'Password'
+        'placeholder' => 'Password',
       ],
       '#title_display' => 'invisible',
       '#size' => 20,
@@ -64,13 +66,12 @@ class BrightcovePlayerAuthForm extends FormBase {
     return $form;
   }
 
-
   /**
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
 
-    if( $form_state->getValue('password') != $form_state->get('password') ) {
+    if ($form_state->getValue('password') != $form_state->get('password')) {
       $form_state->setErrorByName('password', 'Sorry, the password you\'ve entered is incorrect.');
     }
   }
@@ -80,9 +81,9 @@ class BrightcovePlayerAuthForm extends FormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
 
-    if( $form_state->getValue('password') == $form_state->get('password') ) {
+    if ($form_state->getValue('password') == $form_state->get('password')) {
       $session = \Drupal::request()->getSession();
-      $session_auth = $session->set('brightcove.passwords.'.$form_state->get('videoid'), REQUEST_TIME);
+      $session_auth = $session->set('brightcove.passwords.' . $form_state->get('videoid'), REQUEST_TIME);
     }
   }
 
