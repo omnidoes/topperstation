@@ -3,19 +3,26 @@
 }
 
 label {
+  @include font('body', 700);
+  margin-bottom: 0.2em;
   display: block;
+  font-size: 0.9em;
 }
 
 select, input, textarea, button, option {
-  font-size: 1rem;
   @include font('body', normal);
-  appearance: none;
+
+  max-width: 100%;
+  padding: 0.2em 0.6em;
+
   border: 1px solid #ccc;
   border-radius: 4px;
-  padding: 0.2em 0.6em;
+  font-size: 1rem;
+
+  appearance: none;
 }
 
-input[type=text], input[type=search] {
+input[type=text], input[type=search], select {
   padding: 0.4em 0.75em;
   border-radius: 4px;
   background: #f1f1f1;

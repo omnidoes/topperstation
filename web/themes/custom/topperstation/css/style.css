@@ -1057,6 +1057,32 @@ strong, b {
         grid-row: 1;
         grid-column: 1 / span 3; } }
 
+.l-directory {
+  margin: 0 auto;
+  max-width: 74em; }
+  @media only screen and (min-width: 42em) {
+    .l-directory {
+      display: grid;
+      grid-column-gap: 2.125rem;
+      grid-template-columns: repeat(6, minmax(0, 1fr)); } }
+  @media only screen and (min-width: 60em) {
+    .l-directory {
+      grid-template-columns: repeat(12, minmax(0, 1fr)); } }
+  .l-directory .l-region--sidebar {
+    grid-row: 1;
+    grid-column: 1 / -1; }
+    @media only screen and (min-width: 60em) {
+      .l-directory .l-region--sidebar {
+        grid-row: 1;
+        grid-column: 1 / span 3; } }
+  .l-directory .l-region--content {
+    grid-row: 2;
+    grid-column: 1 / -1; }
+    @media only screen and (min-width: 60em) {
+      .l-directory .l-region--content {
+        grid-row: 1;
+        grid-column: 4 / -1; } }
+
 .site__footer {
   padding: 3rem 0;
   text-align: center;
@@ -1374,6 +1400,40 @@ body {
     .person--teaser .person__contact .list--icons {
       margin-bottom: 0; }
 
+.person--directory-listing {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: row;
+      flex-direction: row;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  -ms-flex-align: center;
+      align-items: center; }
+  .person--directory-listing .person__portrait {
+    margin-right: 1rem;
+    width: 30px;
+    -ms-flex-negative: 0;
+        flex-shrink: 0;
+    -ms-flex-preferred-size: 30px;
+        flex-basis: 30px; }
+    @media only screen and (min-width: 42em) {
+      .person--directory-listing .person__portrait {
+        width: 40px;
+        -ms-flex-preferred-size: 40px;
+            flex-basis: 40px; } }
+    .person--directory-listing .person__portrait img {
+      display: block;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      overflow: hidden; }
+      @media only screen and (min-width: 42em) {
+        .person--directory-listing .person__portrait img {
+          width: 40px;
+          height: 40px; } }
+  .person--directory-listing .person__name {
+    font-size: 0.85rem; }
+
 .schedule-entry .paragraph__start-time {
   font-size: 1.2em; }
   .schedule-entry .paragraph__start-time span {
@@ -1627,6 +1687,56 @@ html.flexbox .show--text-listing .icongroup__icon {
 
 .skin--dark .show--text-listing .icongroup__text a {
   color: #FFCD33; }
+
+/**
+ * Directory Listing
+ */
+@media only screen and (min-width: 42em) {
+  .show--directory-listing {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: row;
+        flex-direction: row;
+    -ms-flex-pack: justify;
+        justify-content: space-between;
+    -ms-flex-align: center;
+        align-items: center; } }
+
+.show--directory-listing .show__title {
+  margin-bottom: 0.5em;
+  font-size: 1.2rem; }
+  @media only screen and (min-width: 42em) {
+    .show--directory-listing .show__title {
+      margin: 0;
+      width: 60%;
+      -ms-flex: 1 0 60%;
+          flex: 1 0 60%; } }
+  .show--directory-listing .show__title:hover .icon--play__circle {
+    fill: #FFAA33;
+    stroke: #FFAA33; }
+  .show--directory-listing .show__title:hover .icon--play__play {
+    fill: white; }
+  .show--directory-listing .show__title a {
+    color: inherit; }
+  .show--directory-listing .show__title .icon {
+    margin-left: 0.5em;
+    width: 18px;
+    height: 18px; }
+  .show--directory-listing .show__title .icon--play__circle {
+    stroke: #292929;
+    fill: white;
+    fill-opacity: 1; }
+  .show--directory-listing .show__title .icon--play__play {
+    fill: #292929; }
+
+.show--directory-listing .show__hosts {
+  padding-left: 1rem; }
+  @media only screen and (min-width: 42em) {
+    .show--directory-listing .show__hosts {
+      width: 40%;
+      padding-left: 0;
+      -ms-flex: 1 0 40%;
+          flex: 1 0 40%; } }
 
 .video-list {
   padding: 2rem 0; }
@@ -2109,6 +2219,33 @@ html.flexbox .show--text-listing .icongroup__icon {
 .block--site-search-index .view__empty {
   text-align: center; }
 
+.block--title-poster {
+  position: relative; }
+  .block--title-poster .block--title-poster__title {
+    background: white;
+    position: absolute;
+    z-index: 10;
+    display: inline;
+    bottom: 4rem;
+    padding: 0.2em; }
+  .block--title-poster .block--title-poster__background {
+    width: 100%;
+    min-height: 200px;
+    background: #292929; }
+    .block--title-poster .block--title-poster__background::before {
+      content: '';
+      position: absolute;
+      z-index: 5;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 40%;
+      background-image: linear-gradient(transparent 0%, rgba(0, 0, 0, 0.56) 50%, rgba(0, 0, 0, 0.68) 65%, rgba(0, 0, 0, 0.74) 75.5%, rgba(0, 0, 0, 0.7704) 82.85%, rgba(0, 0, 0, 0.7848) 88%, rgba(0, 0, 0, 0.8) 100%); }
+    .block--title-poster .block--title-poster__background img {
+      width: 100%; }
+  .block--title-poster .l-contain {
+    position: unset; }
+
 .breadcrumb {
   font-size: 0.888em; }
 
@@ -2149,21 +2286,27 @@ html.flexbox .show--text-listing .icongroup__icon {
   margin-bottom: 1rem; }
 
 label {
-  display: block; }
+  font-family: "open-sans-n7", "open-sans", Arial, sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  margin-bottom: 0.2em;
+  display: block;
+  font-size: 0.9em; }
 
 select, input, textarea, button, option {
-  font-size: 1rem;
   font-family: "open-sans-n4", "open-sans", Arial, sans-serif;
   font-style: normal;
   font-weight: normal;
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
+  max-width: 100%;
+  padding: 0.2em 0.6em;
   border: 1px solid #ccc;
   border-radius: 4px;
-  padding: 0.2em 0.6em; }
+  font-size: 1rem;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none; }
 
-input[type=text], input[type=search] {
+input[type=text], input[type=search], select {
   padding: 0.4em 0.75em;
   border-radius: 4px;
   background: #f1f1f1;
@@ -2353,6 +2496,10 @@ img {
   border-bottom: 1px solid rgba(41, 41, 41, 0.2); }
   .list--segmented-v li:last-child {
     border-bottom: 0; }
+
+.list--segmented-v.skinny li {
+  padding-top: 1rem;
+  padding-bottom: 1rem; }
 
 .menu__item a.is-live {
   margin-left: 0.5em;
