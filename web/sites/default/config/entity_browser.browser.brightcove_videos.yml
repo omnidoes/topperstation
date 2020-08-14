@@ -1,0 +1,31 @@
+uuid: f91f65ed-8fc4-450d-ab56-dea233b075a5
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.brightcove_video
+  module:
+    - views
+name: brightcove_videos
+label: 'Brightcove Videos'
+display: modal
+display_configuration:
+  width: ''
+  height: ''
+  link_text: 'Select videos'
+  auto_open: false
+selection_display: no_display
+selection_display_configuration: {  }
+widget_selector: tabs
+widget_selector_configuration: {  }
+widgets:
+  d3e77a1a-eaa1-4b0e-9eb7-254402efebec:
+    settings:
+      view: brightcove_video
+      view_display: entity_browser_1
+      submit_text: 'Select videos'
+      auto_select: false
+    uuid: d3e77a1a-eaa1-4b0e-9eb7-254402efebec
+    weight: 1
+    label: view
+    id: view

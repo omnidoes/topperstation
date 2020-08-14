@@ -1,0 +1,19 @@
+uuid: 31ef23fe-19a4-4df5-9cef-25f624f16ff4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_billboard_subtitle
+    - node.type.billboard
+id: node.billboard.field_billboard_subtitle
+field_name: field_billboard_subtitle
+entity_type: node
+bundle: billboard
+label: Subtitle
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

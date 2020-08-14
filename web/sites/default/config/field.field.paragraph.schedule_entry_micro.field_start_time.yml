@@ -1,0 +1,21 @@
+uuid: 02c46bee-99d7-4364-b15a-48c2435a6edd
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_start_time
+    - paragraphs.paragraphs_type.schedule_entry_micro
+  module:
+    - time_field
+id: paragraph.schedule_entry_micro.field_start_time
+field_name: field_start_time
+entity_type: paragraph
+bundle: schedule_entry_micro
+label: 'Start Time'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: time

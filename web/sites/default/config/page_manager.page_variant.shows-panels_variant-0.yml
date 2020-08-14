@@ -1,0 +1,41 @@
+uuid: 37bf0c4b-04bd-47af-9817-9dfc600d9bfd
+langcode: en
+status: true
+dependencies:
+  config:
+    - page_manager.page.shows
+    - views.view.shows
+  module:
+    - panels
+    - views
+id: shows-panels_variant-0
+label: Default
+variant: panels_variant
+variant_settings:
+  blocks:
+    5227d231-9546-4b51-8fd8-a9a26cd5db65:
+      id: 'views_block:shows-block_shows_index'
+      label: Channels
+      provider: views
+      label_display: visible
+      views_label: Channels
+      items_per_page: none
+      region: top
+      weight: 1
+      uuid: 5227d231-9546-4b51-8fd8-a9a26cd5db65
+      context_mapping: {  }
+  id: panels_variant
+  uuid: e7a2a058-0ad5-4269-9cdf-ea61f84308ac
+  label: null
+  weight: 0
+  layout: layout_threecol_33_34_33
+  layout_settings: {  }
+  page_title: Channels
+  storage_type: page_manager
+  storage_id: shows-panels_variant-0
+  builder: ipe
+page: shows
+weight: 0
+selection_criteria: {  }
+selection_logic: and
+static_context: {  }

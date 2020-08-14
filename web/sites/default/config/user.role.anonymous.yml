@@ -1,0 +1,20 @@
+uuid: 6fda9d74-c5ed-4168-a7bc-9d18d88de84f
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: j5zLMOdJBqC0bMvSdth5UebkprJB8g_2FXHqhfpJzow
+id: anonymous
+label: 'Anonymous user'
+weight: 0
+is_admin: false
+permissions:
+  - 'access comments'
+  - 'access content'
+  - 'access site-wide contact form'
+  - 'search content'
+  - 'use text format restricted_html'
+  - 'view media'
+  - 'view published brightcove playlists'
+  - 'view published brightcove text track entities'
+  - 'view published brightcove videos'

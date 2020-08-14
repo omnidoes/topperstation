@@ -1,0 +1,22 @@
+uuid: 5bab0c67-d22a-45ae-9141-e2e25999504e
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.mobile_navbar
+    - field.field.block_content.mobile_navbar.field_menu_ref
+  module:
+    - menu_reference_render
+id: block_content.mobile_navbar.default
+targetEntityType: block_content
+bundle: mobile_navbar
+mode: default
+content:
+  field_menu_ref:
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: menu_reference_render
+    region: content
+hidden: {  }

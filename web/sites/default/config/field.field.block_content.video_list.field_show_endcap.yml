@@ -1,0 +1,29 @@
+uuid: d6163cd1-158d-4a53-8689-429e47a178ab
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.video_list
+    - field.storage.block_content.field_show_endcap
+    - node.type.show
+id: block_content.video_list.field_show_endcap
+field_name: field_show_endcap
+entity_type: block_content
+bundle: video_list
+label: 'Show Endcap'
+description: 'Add a teaser for a show to the end of the list. This is good for when you''re putting together ''Best of [insert show]'' lists.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      show: show
+    sort:
+      field: title
+      direction: DESC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

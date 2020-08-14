@@ -1,0 +1,41 @@
+uuid: 61ec9543-85ab-4cc9-9c6e-dc0133d8ce49
+langcode: en
+status: true
+dependencies:
+  config:
+    - entity_browser.browser.brightcove_videos
+    - field.field.paragraph.video_collection.field_collection_name
+    - field.field.paragraph.video_collection.field_collection_videos
+    - paragraphs.paragraphs_type.video_collection
+  module:
+    - entity_browser_table
+id: paragraph.video_collection.default
+targetEntityType: paragraph
+bundle: video_collection
+mode: default
+content:
+  field_collection_name:
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_collection_videos:
+    type: entity_reference_browser_table_widget
+    weight: 1
+    settings:
+      entity_browser: brightcove_videos
+      field_widget_display: label
+      field_widget_remove: true
+      open: true
+      selection_mode: selection_append
+      field_widget_edit: false
+      field_widget_replace: false
+      field_widget_display_settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  created: true
+  status: true

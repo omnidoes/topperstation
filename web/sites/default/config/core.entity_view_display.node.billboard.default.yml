@@ -1,0 +1,63 @@
+uuid: 7f79a7f1-7e74-44fd-9d2c-bd013f3e3a05
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.billboard.field_billboard_background
+    - field.field.node.billboard.field_billboard_subtitle
+    - field.field.node.billboard.field_billboard_text
+    - field.field.node.billboard.field_link
+    - node.type.billboard
+    - responsive_image.styles.slider
+  module:
+    - link
+    - responsive_image
+    - user
+id: node.billboard.default
+targetEntityType: node
+bundle: billboard
+mode: default
+content:
+  field_billboard_background:
+    weight: 2
+    label: hidden
+    settings:
+      responsive_image_style: slider
+      image_link: ''
+    third_party_settings: {  }
+    type: responsive_image
+    region: content
+  field_billboard_subtitle:
+    weight: 1
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_billboard_text:
+    weight: 0
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_link:
+    weight: 3
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+  links:
+    weight: 4
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden: {  }

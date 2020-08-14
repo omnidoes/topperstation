@@ -1,0 +1,64 @@
+uuid: 3a63e388-3911-41f6-9ba6-c5877baa1c45
+langcode: en
+status: true
+dependencies:
+  config:
+    - page_manager.page.channel_category
+    - views.view.shows
+  module:
+    - ctools
+    - panels
+    - system
+    - views
+id: channel_category-panels_variant-1
+label: 'Filtered Directory'
+variant: panels_variant
+variant_settings:
+  blocks:
+    a2b09e0d-f09c-4118-b237-df33f2fa34f5:
+      id: 'views_block:shows-filtered_category_directory'
+      label: ''
+      provider: views
+      label_display: '0'
+      views_label: ''
+      items_per_page: none
+      region: content
+      weight: 0
+      uuid: a2b09e0d-f09c-4118-b237-df33f2fa34f5
+      context_mapping: {  }
+    72b322ca-340f-40c2-b4d3-d2ac8270c17c:
+      id: 'entity_view:taxonomy_term'
+      label: 'Entity view (Taxonomy term)'
+      provider: ctools
+      label_display: '0'
+      view_mode: default
+      region: top
+      weight: 0
+      uuid: 72b322ca-340f-40c2-b4d3-d2ac8270c17c
+      context_mapping:
+        entity: taxonomy_term
+  id: panels_variant
+  uuid: e20aa0ee-6021-4d07-9027-85b12629d97e
+  label: null
+  weight: 0
+  layout: channel_category
+  layout_settings: {  }
+  page_title: ''
+  storage_type: page_manager
+  storage_id: channel_category-panels_variant-1
+  builder: standard
+page: channel_category
+weight: -10
+selection_criteria:
+  1:
+    id: request_path
+    pages: /channels/academics
+    negate: false
+    context_mapping: {  }
+selection_logic: and
+static_context:
+  academics:
+    label: 'Academics Term'
+    type: 'entity:taxonomy_term'
+    description: ''
+    value: 74bd37f7-d9e2-41ea-9891-62ceca0208fe

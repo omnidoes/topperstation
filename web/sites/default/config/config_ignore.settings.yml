@@ -1,0 +1,15 @@
+ignored_config_entities:
+  - brightcove.brightcove_api_client.brightcove_west_liberty_university
+  - page_manager.page_variant.home-panels_variant-0
+  - page_manager.page_variant.node_view-panels_variant-1
+  - page_manager.page_variant.player-panels_variant-0
+  - page_manager.page_variant.schedule-panels_variant-0
+  - page_manager.page_variant.search-panels_variant-0
+  - page_manager.page_variant.shows-panels_variant-0
+  - block.block.mainnavigation_2
+  - block.block.socialmedialinks
+  - system.performance
+  - simple_block.simple_block.schedule_intro
+  - simple_block.simple_block.watch_videos_intro
+_core:
+  default_config_hash: UVH1aJ4b44UM-VdPVN7hNNuuVqfReJxwfVeDQH1Hvsk

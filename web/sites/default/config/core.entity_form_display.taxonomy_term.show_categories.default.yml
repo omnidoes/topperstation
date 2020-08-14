@@ -1,0 +1,57 @@
+uuid: c3952290-27b0-4d0f-82ff-ab8144e70611
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.show_categories.field_image
+    - image.style.large
+    - taxonomy.vocabulary.show_categories
+  module:
+    - focal_point
+    - path
+    - text
+id: taxonomy_term.show_categories.default
+targetEntityType: taxonomy_term
+bundle: show_categories
+mode: default
+content:
+  description:
+    type: text_textarea
+    weight: 2
+    region: content
+    settings:
+      placeholder: ''
+      rows: 5
+    third_party_settings: {  }
+  field_image:
+    weight: 5
+    settings:
+      preview_image_style: large
+      preview_link: true
+      offsets: '50,50'
+      progress_indicator: throbber
+    third_party_settings: {  }
+    type: image_focal_point
+    region: content
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 4
+    region: content
+    third_party_settings: {  }
+hidden: {  }

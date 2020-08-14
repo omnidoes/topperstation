@@ -1,0 +1,23 @@
+uuid: c47fddb8-568c-4da7-a032-b4f9226a31dc
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.video_list
+    - field.storage.block_content.field_width
+  module:
+    - options
+id: block_content.video_list.field_width
+field_name: field_width
+entity_type: block_content
+bundle: video_list
+label: Width
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: l-contain
+default_value_callback: ''
+settings: {  }
+field_type: list_string

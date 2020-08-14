@@ -1,0 +1,7 @@
+entity_type_groups:
+  brightcove_video:
+    brightcove_video:
+      basic: basic
+      advanced: advanced
+      open_graph: open_graph
+      mobile: mobile

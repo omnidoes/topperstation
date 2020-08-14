@@ -1,0 +1,13 @@
+uuid: 489316d2-bf0d-4297-b69d-13eb41d9dece
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: sL588ui1E_8-2c_UupwyYxcqX2OVyMFp3HTLbbFqvPc
+id: global
+label: Global
+tags:
+  title: '[current-page:title] | [site:name]'
+  canonical_url: '[current-page:url]'
+  theme_color: '#292929'
+  og_image: /themes/custom/topperstation/screenshot.png

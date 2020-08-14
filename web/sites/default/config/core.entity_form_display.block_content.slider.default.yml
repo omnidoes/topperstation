@@ -1,0 +1,40 @@
+uuid: 43e62848-8ec5-4ce9-abd6-edb07534a5c8
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.slider
+    - core.entity_form_mode.node.embed
+    - field.field.block_content.slider.field_slide
+  module:
+    - inline_entity_form
+id: block_content.slider.default
+targetEntityType: block_content
+bundle: slider
+mode: default
+content:
+  field_slide:
+    weight: 27
+    settings:
+      form_mode: embed
+      override_labels: true
+      label_singular: slide
+      label_plural: slides
+      allow_new: true
+      allow_existing: true
+      match_operator: CONTAINS
+      collapsible: false
+      collapsed: false
+      allow_duplicate: false
+    third_party_settings: {  }
+    type: inline_entity_form_complex
+    region: content
+  info:
+    type: string_textfield
+    weight: -5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden: {  }

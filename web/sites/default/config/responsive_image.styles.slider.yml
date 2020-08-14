@@ -1,0 +1,30 @@
+uuid: e50f7dd3-ba24-40f9-9afe-a01754cf5404
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.slider_large
+    - image.style.slider_medium
+    - image.style.slider_small
+  theme:
+    - topperstation
+id: slider
+label: Slider
+image_style_mappings:
+  -
+    breakpoint_id: topperstation.desk
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: slider_large
+  -
+    breakpoint_id: topperstation.lap
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: slider_medium
+  -
+    breakpoint_id: topperstation.palm
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: slider_small
+breakpoint_group: topperstation
+fallback_image_style: slider_medium

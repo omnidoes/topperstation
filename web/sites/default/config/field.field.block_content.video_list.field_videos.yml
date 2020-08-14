@@ -1,0 +1,25 @@
+uuid: 1b1d26b5-3bce-429e-9034-90f71c5df66f
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.video_list
+    - field.storage.block_content.field_videos
+id: block_content.video_list.field_videos
+field_name: field_videos
+entity_type: block_content
+bundle: video_list
+label: Videos
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:brightcove_video'
+  handler_settings:
+    target_bundles: null
+    sort:
+      field: _none
+    auto_create: false
+field_type: entity_reference

@@ -1,0 +1,10 @@
+uuid: 1c8bfeb9-ef9d-4f77-bf5e-b27c77f8289e
+langcode: en
+status: true
+dependencies:
+  module:
+    - brightcove
+id: brightcove_video.search_index
+label: 'Search index'
+targetEntityType: brightcove_video
+cache: true

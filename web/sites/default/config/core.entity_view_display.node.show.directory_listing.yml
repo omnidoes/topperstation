@@ -1,0 +1,47 @@
+uuid: 7ffaeea9-861b-41e7-8b05-e3ed8249961b
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.directory_listing
+    - field.field.node.show.field_cast
+    - field.field.node.show.field_show_category
+    - field.field.node.show.field_show_collections
+    - field.field.node.show.field_show_description
+    - field.field.node.show.field_show_hosts
+    - field.field.node.show.field_show_promo_images
+    - field.field.node.show.field_teaser_image
+    - node.type.show
+  module:
+    - text
+    - user
+id: node.show.directory_listing
+targetEntityType: node
+bundle: show
+mode: directory_listing
+content:
+  field_show_description:
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_show_hosts:
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: directory_listing
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
+hidden:
+  addtoany: true
+  field_cast: true
+  field_show_category: true
+  field_show_collections: true
+  field_show_promo_images: true
+  field_teaser_image: true
+  links: true
+  search_api_excerpt: true

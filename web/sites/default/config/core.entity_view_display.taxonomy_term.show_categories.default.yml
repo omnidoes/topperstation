@@ -1,0 +1,27 @@
+uuid: 650fc8c2-a983-477d-ab05-2bf1aa329ad1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.show_categories.field_image
+    - responsive_image.styles.show_poster
+    - taxonomy.vocabulary.show_categories
+  module:
+    - responsive_image
+id: taxonomy_term.show_categories.default
+targetEntityType: taxonomy_term
+bundle: show_categories
+mode: default
+content:
+  field_image:
+    weight: -4
+    label: hidden
+    settings:
+      responsive_image_style: show_poster
+      image_link: ''
+    third_party_settings: {  }
+    type: responsive_image
+    region: content
+hidden:
+  description: true
+  search_api_excerpt: true

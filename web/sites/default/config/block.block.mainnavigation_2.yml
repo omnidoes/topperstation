@@ -1,0 +1,30 @@
+uuid: 5c1f3c66-ba51-41ee-8b26-f650868e0735
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.main
+  module:
+    - menu_block
+  theme:
+    - topperstation
+id: mainnavigation_2
+theme: topperstation
+region: footer_second
+weight: 0
+provider: null
+plugin: 'menu_block:main'
+settings:
+  id: 'menu_block:main'
+  label: About
+  provider: menu_block
+  label_display: visible
+  follow: false
+  follow_parent: child
+  level: 1
+  depth: 2
+  expand: 0
+  parent: 'main:menu_link_content:6e712263-4b61-4a74-925c-717f8a969938'
+  suggestion: vertical
+  label_type: fixed_parent
+visibility: {  }

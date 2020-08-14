@@ -1,0 +1,17 @@
+uuid: 8814cbe9-f924-4a0f-8b69-651c0c2c1be9
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: slider_small
+label: 'Slider: Small'
+effects:
+  88081321-acbd-40dd-85f3-57baf9f32645:
+    uuid: 88081321-acbd-40dd-85f3-57baf9f32645
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 660
+      height: 900
+      crop_type: focal_point
