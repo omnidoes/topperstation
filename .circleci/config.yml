@@ -91,9 +91,9 @@ jobs:
                 name: lint php code for syntax errors
                 command: composer -n lint
 
-            - run:
-                name: check coding standards
-                command: composer -n code-sniff
+            # - run:
+            #     name: check coding standards
+            #     command: composer -n code-sniff
 
             - run:
                 name: run unit tests
