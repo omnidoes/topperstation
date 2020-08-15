@@ -8,16 +8,6 @@ global:
     - core/drupal
     - core/modernizr
 
-bower:
-  js:
-    # DO NOT REMOVE OR EDIT BETWEEN THESE LINES
-    # bower:js
-    # endbower
-  css:
-    theme:
-      # bower:css
-      # endbower
-
 videojs-overlay:
   css:
     component:

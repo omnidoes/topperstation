@@ -28,6 +28,10 @@
     {% if overlay_content %}
     <script>
       (function(window, videojs) {
+        if (typeof videojs !== 'function') {
+          return false;
+        }
+
         var player = window.player = videojs('player');
 
         player.overlay({

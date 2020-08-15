@@ -1,0 +1,128 @@
+uuid: 4efa63cd-0d55-4026-9975-1809f102c498
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.show.field_cast
+    - field.field.node.show.field_show_category
+    - field.field.node.show.field_show_collections
+    - field.field.node.show.field_show_description
+    - field.field.node.show.field_show_hosts
+    - field.field.node.show.field_show_promo_images
+    - field.field.node.show.field_teaser_image
+    - node.type.show
+  module:
+    - slick
+    - text
+    - user
+id: node.show.default
+targetEntityType: node
+bundle: show
+mode: default
+content:
+  field_cast:
+    weight: 2
+    label: hidden
+    settings:
+      view_mode: teaser
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
+  field_show_description:
+    weight: 3
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_show_hosts:
+    weight: 1
+    label: hidden
+    settings:
+      view_mode: teaser
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
+  field_show_promo_images:
+    weight: 0
+    label: hidden
+    settings:
+      style: ''
+      optionset: show_poster
+      optionset_thumbnail: ''
+      skin: ''
+      skin_thumbnail: ''
+      image_style: ''
+      thumbnail_style: ''
+      responsive_image_style: show_poster
+      thumbnail_effect: ''
+      thumbnail_position: ''
+      media_switch: ''
+      ratio: ''
+      grid: null
+      grid_medium: null
+      grid_small: null
+      visible_items: null
+      layout: ''
+      thumbnail_caption: ''
+      cache: 0
+      sizes: ''
+      breakpoints:
+        xs:
+          image_style: ''
+          width: ''
+          breakpoint: ''
+        sm:
+          image_style: ''
+          width: ''
+          breakpoint: ''
+        md:
+          image_style: ''
+          width: ''
+          breakpoint: ''
+        lg:
+          image_style: ''
+          width: ''
+          breakpoint: ''
+        xl:
+          image_style: ''
+          width: ''
+          breakpoint: ''
+      current_view_mode: default
+      background: false
+      caption:
+        title: '0'
+        alt: '0'
+      grid_header: ''
+      preserve_keys: false
+      override: false
+      overridables:
+        arrows: '0'
+        autoplay: '0'
+        dots: '0'
+        draggable: '0'
+        infinite: '0'
+        mouseWheel: '0'
+        randomize: '0'
+        variableWidth: '0'
+      skin_arrows: ''
+      skin_dots: ''
+      iframe_lazy: true
+      icon: ''
+      view_mode: ''
+      box_caption: ''
+      box_caption_custom: ''
+      box_style: ''
+      box_media_style: ''
+    third_party_settings: {  }
+    type: slick_image
+    region: content
+hidden:
+  addtoany: true
+  field_show_category: true
+  field_show_collections: true
+  field_teaser_image: true
+  links: true
+  search_api_excerpt: true

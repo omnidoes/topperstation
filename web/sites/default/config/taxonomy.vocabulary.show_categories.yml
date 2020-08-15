@@ -1,0 +1,8 @@
+uuid: 61384867-92ad-4ff3-89b4-93ceefa9cd99
+langcode: en
+status: true
+dependencies: {  }
+name: 'Channel Categories'
+vid: show_categories
+description: ''
+weight: 0

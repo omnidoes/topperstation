@@ -1,0 +1,20 @@
+uuid: 544bf17d-43d8-4651-a165-8234007f90dc
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_content
+    - brightcove
+id: block_content.field_videos
+field_name: field_videos
+entity_type: block_content
+type: entity_reference
+settings:
+  target_type: brightcove_video
+module: core
+locked: false
+cardinality: 4
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

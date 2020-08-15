@@ -1,0 +1,8 @@
+uuid: 6f55859f-51ac-4e73-9f50-fbe86bdf5c9a
+langcode: en
+status: true
+dependencies: {  }
+id: mobile-tab-menu
+label: 'Mobile Tab Menu'
+description: 'A fixed position menu that adheres to the bottom of the screen on mobile devices.'
+locked: false

@@ -1,0 +1,16 @@
+social_link_field.social_select:
+  js:
+    js/social-link-field-social-select.js: {}
+  dependencies:
+    - core/jquery
+
+social_link_field.font_awesome_formatter:
+  css:
+    theme:
+      css/social-link-field-font-awesome-formatter.css: {}
+
+fontawesome.component:
+  css:
+    component:
+      //cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css: { type: external, minified: true }
+      //cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css: { type: external, minified: true }

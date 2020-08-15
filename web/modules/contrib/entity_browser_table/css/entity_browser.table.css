@@ -1,0 +1,19 @@
+.table--widget-entity_reference_browser_table_widget tr.item-container{
+  display: table-row;
+  cursor: default!important;
+}
+.table--widget-entity_reference_browser_table_widget tr.item-container td:first-child {
+  width: 14px;
+  padding: 0;
+}
+.table--widget-entity_reference_browser_table_widget tr.item-container .handle {
+  cursor: grab;
+  width: 14px;
+  height: 14px;
+  margin: -0.4em 0.5em 0;
+  padding: 0.5em 1em;
+  background: url(/core/themes/stable/images/core/icons/787878/move.svg) no-repeat 6px 7px;
+}
+.table--widget-entity_reference_browser_table_widget tr.item-container .handle:active {
+  cursor: grabbing;
+}

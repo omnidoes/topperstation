@@ -142,13 +142,13 @@
   @extend %default-image-mask;
 
   position: relative;
-  max-width: $lap-start; 
+  max-width: $lap-start;
   margin-bottom: 1rem;
   text-align: left;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  
+
   transition: transform 0.1s ease-in-out;
 
   &:hover {
@@ -169,7 +169,7 @@
     @include font('body', 700);
     background: $black;
   }
-  
+
   .show__content {
     position: absolute;
     top: 0;
@@ -184,18 +184,18 @@
       left: 0;
       width: 100%;
       height: 100%;
-      
+
       display: flex;
       flex-direction: column;
       justify-content: center;
-  
+
       color: inherit;
-  
+
       &:hover {
         text-decoration: none;
       }
     }
-  
+
   }
 
   .show__teaser-image {
@@ -295,6 +295,72 @@
 
     .icongroup__text a {
       color: $yellow;
+    }
+  }
+}
+
+/**
+ * Directory Listing
+ */
+.show--directory-listing {
+
+  @include media-query(lap-and-up) {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .show__title {
+    margin-bottom: 0.5em;
+    font-size: 1.2rem;
+
+    @include media-query(lap-and-up) {
+      margin: 0;
+      width: 60%;
+      flex: 1 0 60%;
+    }
+
+    &:hover {
+
+      .icon--play__circle {
+        fill: $yellow-orange;
+        stroke: $yellow-orange;
+      }
+
+      .icon--play__play {
+        fill: white;
+      }
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .icon {
+      margin-left: 0.5em;
+      width: 18px;
+      height: 18px;
+    }
+
+      .icon--play__circle {
+        stroke: $black;
+        fill: white;
+        fill-opacity: 1;
+      }
+
+      .icon--play__play {
+        fill: $black;
+      }
+  }
+
+  .show__hosts {
+    padding-left: 1rem;
+
+    @include media-query(lap-and-up) {
+      width: 40%;
+      padding-left: 0;
+      flex: 1 0 40%;
     }
   }
 }

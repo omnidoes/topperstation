@@ -1,0 +1,22 @@
+diff --git a/src/Plugin/views/filter/Selective.php b/src/Plugin/views/filter/Selective.php
+index 66e3523..28f1ee3 100644
+--- a/src/Plugin/views/filter/Selective.php
++++ b/src/Plugin/views/filter/Selective.php
+@@ -46,7 +46,7 @@ class Selective extends InOperator {
+         parent::init($view, $display, $options);
+ 
+         $this->options['exposed'] = TRUE;
+-        $this->realField = $this->options['selective_display_field'];
++        $this->realField = $this->definition['field'];
+     }
+ 
+     /**
+@@ -367,7 +367,7 @@ class Selective extends InOperator {
+             $display = $view_copy->getDisplay();
+ 
+             // Remove any exposed form configuration. This showed up with BEF module!
+-            unset($display->display_options['exposed_form']);
++            unset($display->display['display_options']['exposed_form']);
+ 
+             $fields =& $display->getHandlers('field');
+             $fields = array_intersect_key($fields, [$this->options['selective_display_field'] => TRUE]);

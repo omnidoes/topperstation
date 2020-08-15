@@ -1,0 +1,61 @@
+<?php
+
+/**
+ * @file
+ * Contains entity_browser_table.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function entity_browser_table_help($route_name, RouteMatchInterface $route_match) {
+  $output = '';
+  switch ($route_name) {
+    case 'help.page.entity_browser_table':
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t(
+          'Entity Browser - Table is a light weight module that extends the
+         functionality of the Entity Browser module
+         (https://www.drupal.org/project/entity_browser) by offering a new 
+         Field Widget.') . '</p>';
+      $output .= '<p>' . t('The new Field Widget displays the referenced
+       entities in a table as apposed to the original grid format. 
+       This is useful when needing to only display the label/title of the 
+       referencing entities, thus improving the UI of the edit form.') . '</p>';
+      $output .= '<h3>' . t('Setup') . '</h3>';
+
+      $output .= '<ul>';
+      $output .= '<li>' . t('Install the Entity Browser and Entity Browser - 
+  Table modules in the usual way') . '</li>';
+      $output .= '<li>' . t('Instructions for setting up a simple Entity 
+Browser can be found <a href=":url">here</a>',
+          [':url' => 'https://drupal-media.gitbooks.io/drupal8-guide/content/modules/entity_browser/creating_browser_through_ui.html']) . '</li>';
+      $output .= '<li>' . t("If the default Entity Browser view is not installed:") .
+        '<ul>
+      <li>' . t('Create a new view with no displays.') . '</li>
+      <li>' . t('Create a new display of Entity Browser with at minimum the')
+        . '<code> ' . t('Title') . '</code> ' . t('field and the')
+        . '<code> ' . t('Entity browser bulk select form')
+        . '</code> ' . t('field.') .
+        '</li>
+      <li>' . t("You will then be able to add this View to the new Entity
+       Browser's View widget") .
+        '</li>
+    </ul>
+  </li>
+  <li>' . t('Add a Content reference field to any content type') . '</li>
+  <li>' . t('Set the Form Display for the field to') .
+        '<code> ' . t('Entity Browser - Table') .
+        '</code> ' . t('ensuring the Entity Display configuration is set to') .
+        '<code> ' . t('Entity label') .
+        '</code>
+  </li>
+</ul>';
+
+    default:
+  }
+
+  return $output;
+}

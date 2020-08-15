@@ -1,0 +1,48 @@
+uuid: 5c4be154-bbf7-4792-8793-33c21c120656
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.person.field_contact_options
+    - field.field.node.person.field_portrait
+    - node.type.person
+  module:
+    - social_link_field
+    - svg_image
+    - user
+id: node.person.default
+targetEntityType: node
+bundle: person
+mode: default
+content:
+  field_contact_options:
+    weight: 103
+    label: above
+    settings:
+      icon_type: common
+      orientation: vertical
+      new_tab: true
+    third_party_settings: {  }
+    type: font_awesome
+    region: content
+  field_portrait:
+    weight: 102
+    label: above
+    settings:
+      image_style: ''
+      image_link: ''
+      svg_attributes:
+        width: null
+        height: null
+      svg_render_as_image: true
+    third_party_settings: {  }
+    type: image
+    region: content
+  links:
+    weight: 100
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  addtoany: true
+  search_api_excerpt: true

@@ -1,0 +1,30 @@
+uuid: 9bc2a908-cd6b-430a-8c8a-439b78021f64
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.mobile-utilities
+  module:
+    - menu_block
+  theme:
+    - topperstation
+id: mobileutilities
+theme: topperstation
+region: mobile
+weight: -5
+provider: null
+plugin: 'menu_block:mobile-utilities'
+settings:
+  id: 'menu_block:mobile-utilities'
+  label: 'Mobile Utilities'
+  provider: menu_block
+  label_display: '0'
+  follow: false
+  follow_parent: child
+  level: 1
+  depth: 0
+  expand: 0
+  parent: 'mobile-utilities:'
+  suggestion: mobile_utilities
+  label_type: block
+visibility: {  }

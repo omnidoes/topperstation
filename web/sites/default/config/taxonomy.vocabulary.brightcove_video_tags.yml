@@ -1,0 +1,10 @@
+uuid: d7ed7bdb-aa0b-4e56-9530-64ee7ecb8942
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: xXDa97dWpBYxcCflgiFNClEX1ric3B7MMrM8-4RF6OE
+name: 'Brightcove video tags'
+vid: brightcove_video_tags
+description: null
+weight: 0

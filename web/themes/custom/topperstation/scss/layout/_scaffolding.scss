@@ -1,4 +1,4 @@
-.l-contain, 
+.l-contain,
 %l-contain {
   @extend %cf;
 
@@ -10,7 +10,7 @@
   padding-right: 5vw;
   width: 100%;
   max-width: $desk-wide-start;
-  
+
   @include media-query(lap-and-up) {
     padding-left: 2rem;
     padding-right: 2rem;
@@ -59,7 +59,7 @@
   @include media-query(lap-and-up) {
     padding: 4rem 2rem;
   }
-  
+
   @include media-query(desk) {
     padding: 4rem 3rem;
   }
@@ -83,7 +83,7 @@
   @include media-query(lap-and-up) {
     padding: 2rem;
   }
-  
+
   @include media-query(desk) {
     padding: 2rem;
   }

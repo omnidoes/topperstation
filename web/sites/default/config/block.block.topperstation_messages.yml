@@ -1,0 +1,22 @@
+uuid: b7393d8f-d502-420e-9487-fb2c0ee2b80c
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - topperstation
+_core:
+  default_config_hash: KHQIJ7Vfl25lTjzIc7qIvnuistt-Mw2O0kG4jCofmkI
+id: topperstation_messages
+theme: topperstation
+region: content
+weight: -5
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: 'Status messages'
+  provider: system
+  label_display: '0'
+visibility: {  }

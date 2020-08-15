@@ -1,0 +1,23 @@
+uuid: 1cfd931d-7dcc-4a78-b408-10c0fabb8890
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.mobile_navbar
+    - field.storage.block_content.field_menu_ref
+id: block_content.mobile_navbar.field_menu_ref
+field_name: field_menu_ref
+entity_type: block_content
+bundle: mobile_navbar
+label: Menu
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:menu'
+  handler_settings:
+    target_bundles: null
+    auto_create: false
+field_type: entity_reference

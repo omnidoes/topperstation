@@ -1,0 +1,17 @@
+uuid: 38995407-1b54-4253-93ac-5ea7df47e65f
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: show_poster_large
+label: 'Show Poster Large'
+effects:
+  bd4f73f2-b883-43ee-84ec-28ba76c39b75:
+    uuid: bd4f73f2-b883-43ee-84ec-28ba76c39b75
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 1400
+      height: 600
+      crop_type: focal_point

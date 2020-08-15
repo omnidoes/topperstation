@@ -1,0 +1,9 @@
+
+Slick views 8.x-2.0-dev, 2019-01-06
+-----------------------------------
+- Made Dots thumbnail effect option available for both View styles.
+
+Slick views 8.x-2.0-dev, 2019-01-02
+-----------------------------------
+- Issue #3023416 by gausarts: Create a new branch for core Media.
+- Initial commit.

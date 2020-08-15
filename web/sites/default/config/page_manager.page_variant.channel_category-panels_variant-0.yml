@@ -1,0 +1,53 @@
+uuid: c769e511-afcb-4224-88a0-52a22d82dffe
+langcode: en
+status: true
+dependencies:
+  config:
+    - page_manager.page.channel_category
+    - views.view.shows
+  module:
+    - ctools
+    - panels
+    - views
+id: channel_category-panels_variant-0
+label: Default
+variant: panels_variant
+variant_settings:
+  blocks:
+    c61a89e4-f479-4cb7-9d4e-1fe456136d1a:
+      id: 'entity_view:taxonomy_term'
+      label: 'Entity view (Taxonomy term)'
+      provider: ctools
+      label_display: '0'
+      view_mode: default
+      region: top
+      weight: -1
+      uuid: c61a89e4-f479-4cb7-9d4e-1fe456136d1a
+      context_mapping:
+        entity: taxonomy_term
+    6e22c39e-63e4-4c59-8d6d-d1682e4385fe:
+      id: 'views_block:shows-channels_by_term'
+      label: Browse
+      provider: views
+      label_display: visible
+      views_label: Browse
+      items_per_page: none
+      region: content
+      weight: 0
+      uuid: 6e22c39e-63e4-4c59-8d6d-d1682e4385fe
+      context_mapping: {  }
+  id: panels_variant
+  uuid: e12c73cd-d25d-4e78-8901-2d5a4e64fa12
+  label: null
+  weight: 0
+  layout: channel_category
+  layout_settings: {  }
+  page_title: ''
+  storage_type: page_manager
+  storage_id: channel_category-panels_variant-0
+  builder: standard
+page: channel_category
+weight: -9
+selection_criteria: {  }
+selection_logic: and
+static_context: {  }

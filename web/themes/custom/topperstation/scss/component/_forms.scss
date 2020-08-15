@@ -1,11 +1,39 @@
-select, input, textarea, button, option {
-  font-size: 1rem;
-  @include font('body', normal);
+.form-item {
+  margin-bottom: 1rem;
 }
 
-input[type=text], input[type=search] {
+label {
+  @include font('body', 700);
+  margin-bottom: 0.2em;
+  display: block;
+  font-size: 0.9em;
+}
+
+select, input, textarea, button, option {
+  @include font('body', normal);
+
+  max-width: 100%;
+  padding: 0.2em 0.6em;
+
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+
+  appearance: none;
+}
+
+input[type=text], input[type=search], select {
   padding: 0.4em 0.75em;
   border-radius: 4px;
   background: #f1f1f1;
   border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+input[type=submit] {
+  padding: 0.4em 0.8em;
+  border-radius: 4px;
+  background: $color-yellow;
+  appearance: none;
+  border: 0;
+  box-shadow: inset 0px -1px rgba(0, 0, 0, 0.2);
 }

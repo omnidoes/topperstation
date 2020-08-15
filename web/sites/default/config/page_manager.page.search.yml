@@ -1,0 +1,19 @@
+uuid: e3aa54cd-bbaa-48de-81fa-a84cbdb52e23
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+id: search
+label: Search
+description: ''
+use_admin_theme: false
+path: /search
+access_logic: and
+access_conditions:
+  -
+    id: request_path
+    pages: /search
+    negate: false
+    context_mapping: {  }
+parameters: {  }

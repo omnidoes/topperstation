@@ -1,0 +1,17 @@
+uuid: 38d92cdd-08a3-457e-847d-2683d01e8ce6
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: 'Slide: Billboard'
+type: billboard
+description: 'Create a Billboard slide that be placed into a slider or presented on it''s own.'
+help: ''
+new_revision: false
+preview_mode: 0
+display_submitted: false

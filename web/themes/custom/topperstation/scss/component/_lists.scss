@@ -3,7 +3,7 @@
   list-style-type: none;
 
   li {
-    
+
   }
 }
 
@@ -13,7 +13,7 @@
   list-style-type: none;
 
   li {
-    
+
   }
 }
 
@@ -48,6 +48,14 @@
 
     &:last-child {
       border-bottom: 0;
+    }
+  }
+
+  &.skinny {
+
+    li {
+      padding-top: 1rem;
+      padding-bottom: 1rem;
     }
   }
 }

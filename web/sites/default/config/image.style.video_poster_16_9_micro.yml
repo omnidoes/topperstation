@@ -1,0 +1,17 @@
+uuid: 4fb3fd47-1dd5-4b1a-a1e0-e27137e14bd8
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: video_poster_16_9_micro
+label: 'Video Poster 16:9 Micro'
+effects:
+  224c8244-e54f-4b60-a059-0a082d43ff5f:
+    uuid: 224c8244-e54f-4b60-a059-0a082d43ff5f
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 16
+      height: 9
+      crop_type: focal_point

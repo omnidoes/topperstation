@@ -1,0 +1,28 @@
+buttons_size: 24
+additional_html: "<a class=\"a2a_button_facebook\"></a>\r\n<a class=\"a2a_button_twitter\"></a>\r\n<a class=\"a2a_button_linkedin\"></a>\r\n<a class=\"a2a_button_reddit\"></a>"
+additional_css: ''
+additional_js: 'a2a_config.templates.twitter = ''Watching "${title}" by @WLUTV14. ${link}'';'
+universal_button: none
+custom_universal_button: ''
+universal_button_placement: before
+no_3p: false
+entities:
+  media: 0
+  node: 1
+  comment: 0
+  block_content: 0
+  brightcove_custom_field: 0
+  brightcove_player: 0
+  brightcove_playlist: 0
+  brightcove_text_track: 0
+  brightcove_video: 1
+  contact_message: 0
+  crop: 0
+  file: 0
+  shortcut: 0
+  taxonomy_term: 0
+  user: 0
+  menu_link_content: 0
+  paragraph: 0
+_core:
+  default_config_hash: 9YPlBuinIKLe5jVEf-aIhZvKFn77i18yD4CrNR0BbVQ

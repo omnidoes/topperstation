@@ -1,0 +1,29 @@
+uuid: ababeb48-8034-47bd-9ab3-0828e1bbb5f0
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.show_poster_large
+    - image.style.show_poster_small
+  theme:
+    - topperstation
+id: show_poster
+label: 'Show Poster'
+image_style_mappings:
+  -
+    breakpoint_id: topperstation.desk
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: show_poster_large
+  -
+    breakpoint_id: topperstation.lap
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: show_poster_large
+  -
+    breakpoint_id: topperstation.palm
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: show_poster_small
+breakpoint_group: topperstation
+fallback_image_style: show_poster_large

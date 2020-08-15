@@ -1,0 +1,81 @@
+uuid: ba2e276a-6f48-418f-b655-446dedce332d
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.show.field_cast
+    - field.field.node.show.field_show_collections
+    - field.field.node.show.field_show_description
+    - field.field.node.show.field_show_promo_images
+    - field.field.node.show.field_teaser_image
+    - node.type.show
+  module:
+    - blazy
+    - user
+id: node.show.teaser
+targetEntityType: node
+bundle: show
+mode: teaser
+content:
+  field_teaser_image:
+    type: blazy
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      image_style: show_teaser_image
+      thumbnail_style: ''
+      responsive_image_style: ''
+      media_switch: ''
+      ratio: '16:9'
+      sizes: ''
+      breakpoints:
+        xs:
+          image_style: ''
+          width: ''
+          breakpoint: ''
+        sm:
+          image_style: ''
+          width: ''
+          breakpoint: ''
+        md:
+          image_style: ''
+          width: ''
+          breakpoint: ''
+        lg:
+          image_style: ''
+          width: ''
+          breakpoint: ''
+        xl:
+          image_style: ''
+          width: ''
+          breakpoint: ''
+      current_view_mode: teaser
+      background: false
+      caption:
+        title: '0'
+        alt: '0'
+      iframe_lazy: true
+      icon: ''
+      layout: ''
+      view_mode: ''
+      cache: 0
+      optionset: default
+      skin: ''
+      style: ''
+      box_caption: ''
+      box_caption_custom: ''
+      box_style: ''
+      box_media_style: ''
+      grid: 0
+      grid_header: ''
+      grid_medium: 0
+      grid_small: 0
+    third_party_settings: {  }
+hidden:
+  field_cast: true
+  field_show_collections: true
+  field_show_description: true
+  field_show_promo_images: true
+  links: true

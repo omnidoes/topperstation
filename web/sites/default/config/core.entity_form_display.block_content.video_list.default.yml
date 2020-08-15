@@ -1,0 +1,69 @@
+uuid: 2150632e-7818-42e3-80f2-518d57adf338
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.video_list
+    - entity_browser.browser.brightcove_videos
+    - field.field.block_content.video_list.field_show_endcap
+    - field.field.block_content.video_list.field_subtitle
+    - field.field.block_content.video_list.field_videos
+    - field.field.block_content.video_list.field_width
+  module:
+    - entity_browser_table
+id: block_content.video_list.default
+targetEntityType: block_content
+bundle: video_list
+mode: default
+content:
+  field_show_endcap:
+    weight: 3
+    settings:
+      entity_browser: shows
+      field_widget_display: label
+      field_widget_remove: true
+      open: true
+      selection_mode: selection_append
+      field_widget_edit: false
+      field_widget_replace: false
+      field_widget_display_settings: {  }
+    third_party_settings: {  }
+    type: entity_reference_browser_table_widget
+    region: content
+  field_subtitle:
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_videos:
+    weight: 2
+    settings:
+      entity_browser: brightcove_videos
+      field_widget_display: label
+      field_widget_remove: true
+      open: true
+      selection_mode: selection_append
+      field_widget_edit: false
+      field_widget_replace: false
+      field_widget_display_settings: {  }
+    third_party_settings: {  }
+    type: entity_reference_browser_table_widget
+    region: content
+  field_width:
+    weight: 4
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  info:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden: {  }

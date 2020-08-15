@@ -1,0 +1,28 @@
+uuid: b81bac99-3a91-48e8-bc78-2eb51bf28548
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.slider
+    - field.storage.block_content.field_slide
+    - node.type.billboard
+id: block_content.slider.field_slide
+field_name: field_slide
+entity_type: block_content
+bundle: slider
+label: Slide
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      billboard: billboard
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

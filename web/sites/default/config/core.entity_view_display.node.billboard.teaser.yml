@@ -1,0 +1,28 @@
+uuid: 0ea88495-22d2-4904-8e90-e6a889c0edbe
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.billboard.field_billboard_background
+    - field.field.node.billboard.field_billboard_subtitle
+    - field.field.node.billboard.field_billboard_text
+    - field.field.node.billboard.field_link
+    - node.type.billboard
+  module:
+    - user
+id: node.billboard.teaser
+targetEntityType: node
+bundle: billboard
+mode: teaser
+content:
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_billboard_background: true
+  field_billboard_subtitle: true
+  field_billboard_text: true
+  field_link: true

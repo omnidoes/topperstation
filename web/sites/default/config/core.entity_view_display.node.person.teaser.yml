@@ -1,0 +1,38 @@
+uuid: acd07b7c-85d9-4e24-9859-8fa5cfe83040
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.person.field_contact_options
+    - field.field.node.person.field_portrait
+    - image.style.portrait_small
+    - node.type.person
+  module:
+    - image
+    - social_link_field_ts
+    - user
+id: node.person.teaser
+targetEntityType: node
+bundle: person
+mode: teaser
+content:
+  field_contact_options:
+    type: topperstation
+    weight: 1
+    region: content
+    label: hidden
+    settings:
+      new_tab: 0
+    third_party_settings: {  }
+  field_portrait:
+    type: image
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      image_style: portrait_small
+      image_link: ''
+    third_party_settings: {  }
+hidden:
+  links: true

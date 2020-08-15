@@ -38,6 +38,12 @@ function topperstation_preprocess_brightcove_video(array &$variables, $hook) {
   $variables['elements']['url'] = $brightcoveVideo->url();
   $variables['elements']['id'] = $brightcoveVideo->id();
   $variables['status'] = $brightcoveVideo->get('status')->getValue()[0]['value'];
+  $customFieldValues = $brightcoveVideo->getCustomFieldValues();
+
+  $variables['islocked'] = FALSE;
+  if (isset($customFieldValues['password'])) {
+    $variables['islocked'] = TRUE;
+  }
 
   if ($variables['elements']['#view_mode'] == 'default') {
 
@@ -253,7 +259,7 @@ function topperstation_form_views_exposed_form_alter(array &$form, FormStateInte
 
   switch ($form['#id']) {
     case 'views-exposed-form-show-videos-block-videos-gallery':
-      $form['seasons']['#options']['All'] = t('All Seasons');
+      $form['seasons']['#options']['All'] = t('All Videos');
       $form['keywords']['#placeholder'] = 'Search…';
       break;
 

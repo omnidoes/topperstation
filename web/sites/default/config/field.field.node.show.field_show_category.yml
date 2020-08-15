@@ -1,0 +1,29 @@
+uuid: 088c3ba6-b6c5-4896-ad38-945b12a9164b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_show_category
+    - node.type.show
+    - taxonomy.vocabulary.show_categories
+id: node.show.field_show_category
+field_name: field_show_category
+entity_type: node
+bundle: show
+label: 'Show Category'
+description: 'Categorizing this show impacts where it is presented on the site.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      show_categories: show_categories
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

@@ -1,0 +1,16 @@
+uuid: d19af0e3-11b8-4585-969f-850f8b33b3c3
+langcode: en
+status: true
+dependencies: {  }
+id: channel_category
+label: 'Channel Category'
+description: ''
+use_admin_theme: false
+path: '/taxonomy/term/{taxonomy_term}'
+access_logic: and
+access_conditions: {  }
+parameters:
+  taxonomy_term:
+    machine_name: taxonomy_term
+    type: 'entity:taxonomy_term'
+    label: 'Taxonomy Term'

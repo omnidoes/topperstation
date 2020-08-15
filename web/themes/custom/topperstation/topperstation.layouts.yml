@@ -66,3 +66,16 @@ page_1col_dark:
       label: Content
     bottom:
       label: Bottom
+
+channel_category:
+  label: 'Channel Category'
+  category: 'Topper Station'
+  template: layouts/channel-category
+  default_region: content
+  regions:
+    top:
+      label: Top
+    content:
+      label: Content
+    bottom:
+      label: Bottom

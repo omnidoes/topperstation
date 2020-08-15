@@ -1,0 +1,17 @@
+uuid: 0f067d6f-641d-4e78-b739-16c17912c462
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: Show
+type: show
+description: 'Create a <em>Show</em> to group series of videos with shared details.'
+help: ''
+new_revision: true
+preview_mode: 0
+display_submitted: false

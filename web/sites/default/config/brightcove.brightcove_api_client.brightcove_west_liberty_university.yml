@@ -1,0 +1,11 @@
+uuid: bf9548a5-32dd-4a76-b17c-035aafcea3b1
+langcode: en
+status: false
+dependencies: {  }
+id: brightcove_west_liberty_university
+label: 'Brightcove: West Liberty University'
+account_id: '6015698153001'
+client_id: 75774b30-bff6-4fcf-9de0-1e4e8cca6dd2
+default_player: BxtQhCfiv
+secret_key: xB1RNc4sEmUlZPig9JMdO3qWEV20xURQ7NVs7PbExjI7Zu2yvJ2gNXv7tWj8qEr2MRGKHqpp7OUxVFGIatLSFw
+max_custom_fields: 10

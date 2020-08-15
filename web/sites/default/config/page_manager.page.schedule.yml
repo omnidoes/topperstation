@@ -1,0 +1,12 @@
+uuid: b4fa0ee0-7872-49d2-9b75-c80737338cbf
+langcode: en
+status: true
+dependencies: {  }
+id: schedule
+label: Schedule
+description: ''
+use_admin_theme: false
+path: /schedule
+access_logic: and
+access_conditions: {  }
+parameters: {  }

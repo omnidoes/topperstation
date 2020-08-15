@@ -1,0 +1,10 @@
+uuid: c9440ce9-3b8c-408e-b6c5-14fae16f9611
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.directory_listing
+label: 'Directory Listing'
+targetEntityType: node
+cache: true

@@ -1,0 +1,10 @@
+uuid: d195ef82-a99e-4d1c-a95d-f73c44bdd58f
+langcode: en
+status: true
+dependencies:
+  module:
+    - brightcove
+id: brightcove_video.teaser
+label: Teaser
+targetEntityType: brightcove_video
+cache: true

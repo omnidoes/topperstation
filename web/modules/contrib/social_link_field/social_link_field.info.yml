@@ -1,0 +1,12 @@
+type: module
+name: Social Link Field
+description: Provide field type with social links.
+configure: social_link_field.settings
+core: 8.x
+core_version_requirement: ^8 || ^9
+package: Field types
+
+# Information added by Drupal.org packaging script on 2020-05-23
+version: '8.x-1.1-alpha1'
+project: 'social_link_field'
+datestamp: 1590232339
