@@ -9,11 +9,6 @@ dependencies:
     - field.storage.node.field_show_description
     - field.storage.node.field_show_hosts
     - node.type.show
-    - taxonomy.vocabulary.show_categories
-  content:
-    - 'taxonomy_term:show_categories:b03ebac6-fac6-43f0-ba1b-9662bf8ba774'
-    - 'taxonomy_term:show_categories:cc1f62ea-6f62-40eb-a57f-465f03de55b7'
-    - 'taxonomy_term:show_categories:d4cc17f9-bead-4015-85f5-d3db2c5d170a'
   module:
     - brightcove
     - entity_browser
@@ -240,56 +235,6 @@ display:
           expose:
             operator_limit_selection: false
             operator_list: {  }
-        term_node_tid_depth:
-          id: term_node_tid_depth
-          table: node_field_data
-          field: term_node_tid_depth
-          relationship: none
-          group_type: group
-          admin_label: 'Has terms or child terms of Athletics, Campus, Community'
-          operator: or
-          value:
-            1136: 1136
-            1138: 1138
-            1137: 1137
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            reduce: false
-            operator_limit_selection: false
-            operator_list: {  }
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          reduce_duplicates: false
-          type: select
-          limit: true
-          vid: show_categories
-          hierarchy: true
-          error_message: true
-          depth: 3
-          entity_type: node
-          plugin_id: taxonomy_index_tid_depth
       filter_groups:
         operator: AND
         groups:
@@ -298,7 +243,6 @@ display:
       max-age: -1
       contexts:
         - 'languages:language_interface'
-        - user
         - 'user.node_grants:view'
         - user.permissions
       tags:
