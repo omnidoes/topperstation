@@ -230,10 +230,7 @@ class FileBrowserWidget extends EntityReferenceBrowserWidget {
     $current = [
       '#type' => 'table',
       '#empty' => $this->t('No files yet'),
-      '#attributes' => [
-        'class' => ['entities-list'],
-        'data-entity-browser-entities-list' => 1,
-      ],
+      '#attributes' => ['class' => ['entities-list']],
       '#tabledrag' => [
         [
           'action' => 'order',
@@ -299,9 +296,9 @@ class FileBrowserWidget extends EntityReferenceBrowserWidget {
         }
       }
 
-      $current[$delta] = [
+      $current[$entity_id] = [
         '#attributes' => [
-          'class' => ['item-container', 'draggable'],
+          'class' => ['draggable'],
           'data-entity-id' => $entity->getEntityTypeId() . ':' . $entity_id,
           'data-row-id' => $delta,
         ],
@@ -309,12 +306,12 @@ class FileBrowserWidget extends EntityReferenceBrowserWidget {
 
       // Provide a rendered entity if a view builder is available.
       if ($has_file_entity) {
-        $current[$delta]['display'] = $this->entityTypeManager->getViewBuilder('file')->view($entity, $view_mode);
+        $current[$entity_id]['display'] = $this->entityTypeManager->getViewBuilder('file')->view($entity, $view_mode);
       }
       // For images, support a preview image style as an alternative.
       elseif ($field_type == 'image' && !empty($widget_settings['preview_image_style'])) {
         $uri = $entity->getFileUri();
-        $current[$delta]['display'] = [
+        $current[$entity_id]['display'] = [
           '#weight' => -10,
           '#theme' => 'image_style',
           '#width' => $width,
@@ -326,9 +323,9 @@ class FileBrowserWidget extends EntityReferenceBrowserWidget {
       // Assume that the file name is part of the preview output if
       // file entity is installed, do not show this column in that case.
       if (!$has_file_entity) {
-        $current[$delta]['filename'] = ['#markup' => $entity->label()];
+        $current[$entity_id]['filename'] = ['#markup' => $entity->label()];
       }
-      $current[$delta] += [
+      $current[$entity_id] += [
         'meta' => [
           'display_field' => [
             '#type' => 'checkbox',
@@ -400,6 +397,11 @@ class FileBrowserWidget extends EntityReferenceBrowserWidget {
         'remove_button' => [
           '#type' => 'submit',
           '#value' => $this->t('Remove'),
+          '#ajax' => [
+            'callback' => [get_class($this), 'updateWidgetCallback'],
+            'wrapper' => $details_id,
+          ],
+          '#submit' => [[get_class($this), 'removeItemSubmit']],
           '#name' => $field_machine_name . '_remove_' . $entity_id . '_' . md5(json_encode($field_parents)),
           '#limit_validation_errors' => [array_merge($field_parents, [$field_machine_name, 'target_id'])],
           '#attributes' => [
@@ -434,27 +436,27 @@ class FileBrowserWidget extends EntityReferenceBrowserWidget {
   public function massageFormValues(array $values, array $form, FormStateInterface $form_state) {
     $ids = empty($values['target_id']) ? [] : explode(' ', trim($values['target_id']));
     $return = [];
-    foreach ($ids as $delta => $id) {
+    foreach ($ids as $id) {
       $id = explode(':', $id)[1];
-      if (is_array($values['current']) && isset($values['current'][$delta])) {
+      if (is_array($values['current']) && isset($values['current'][$id])) {
         $item_values = [
           'target_id' => $id,
-          '_weight' => $values['current'][$delta]['_weight'],
+          '_weight' => $values['current'][$id]['_weight'],
         ];
         if ($this->fieldDefinition->getType() == 'file') {
-          if (isset($values['current'][$delta]['meta']['description'])) {
-            $item_values['description'] = $values['current'][$delta]['meta']['description'];
+          if (isset($values['current'][$id]['meta']['description'])) {
+            $item_values['description'] = $values['current'][$id]['meta']['description'];
           }
-          if ($this->fieldDefinition->getSetting('display_field') && isset($values['current'][$delta]['meta']['display_field'])) {
-            $item_values['display'] = $values['current'][$delta]['meta']['display_field'];
+          if ($this->fieldDefinition->getSetting('display_field') && isset($values['current'][$id]['meta']['display_field'])) {
+            $item_values['display'] = $values['current'][$id]['meta']['display_field'];
           }
         }
         if ($this->fieldDefinition->getType() == 'image') {
-          if (isset($values['current'][$delta]['meta']['alt'])) {
-            $item_values['alt'] = $values['current'][$delta]['meta']['alt'];
+          if (isset($values['current'][$id]['meta']['alt'])) {
+            $item_values['alt'] = $values['current'][$id]['meta']['alt'];
           }
-          if (isset($values['current'][$delta]['meta']['title'])) {
-            $item_values['title'] = $values['current'][$delta]['meta']['title'];
+          if (isset($values['current'][$id]['meta']['title'])) {
+            $item_values['title'] = $values['current'][$id]['meta']['title'];
           }
         }
         $return[] = $item_values;

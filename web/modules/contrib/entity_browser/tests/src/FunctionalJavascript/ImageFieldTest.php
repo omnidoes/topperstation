@@ -141,14 +141,14 @@ class ImageFieldTest extends EntityBrowserWebDriverTestBase {
     $this->waitForAjaxToFinish();
     // Check if the image thumbnail exists.
     $this->assertSession()
-      ->waitForElementVisible('xpath', '//tr[@data-drupal-selector="edit-field-image-current-0"]');
+      ->waitForElementVisible('xpath', '//tr[@data-drupal-selector="edit-field-image-current-1"]');
     // Test if the image filename is present.
     $this->assertSession()->pageTextContains('example.jpg');
     // Test specifying Alt and Title texts and saving the node.
     $alt_text = 'Test alt text.';
     $title_text = 'Test title text.';
-    $this->getSession()->getPage()->fillField('field_image[current][0][meta][alt]', $alt_text);
-    $this->getSession()->getPage()->fillField('field_image[current][0][meta][title]', $title_text);
+    $this->getSession()->getPage()->fillField('field_image[current][1][meta][alt]', $alt_text);
+    $this->getSession()->getPage()->fillField('field_image[current][1][meta][title]', $title_text);
     $this->getSession()->getPage()->fillField('title[0][value]', 'Node 1');
     $this->getSession()->getPage()->pressButton('Save');
     $this->assertSession()->pageTextContains('Article Node 1 has been created.');
@@ -253,196 +253,6 @@ class ImageFieldTest extends EntityBrowserWebDriverTestBase {
     $fid = explode(':', $entity_id)[1];
     $file = File::load($fid);
     $this->assertStringContainsString('entity-browser-test', $file->getFileUri());
-  }
-
-  /**
-   * Tests that reorder plus remove functions properly.
-   */
-  public function testDragAndDropAndRemove() {
-
-    // Test reorder plus remove.
-    $current_user = \Drupal::currentUser();
-
-    $files = [
-      1 => 'file1',
-      2 => 'file2',
-      3 => 'file3',
-      4 => 'file4',
-      5 => 'file5',
-      6 => 'file6',
-      7 => 'file7',
-      8 => 'file8',
-    ];
-    $values = [];
-    foreach ($files as $key => $filename) {
-      file_unmanaged_copy(\Drupal::root() . '/core/misc/druplicon.png', 'public://' . $filename . '.jpg');
-      /** @var \Drupal\file\FileInterface $file */
-      $file = File::create([
-        'uri' => 'public://' . $filename . '.jpg',
-        'uid' => $current_user->id(),
-      ]);
-      $file->save();
-      $values[] = ['target_id' => $file->id()];
-    }
-
-    $node = Node::create(
-      [
-        'title' => 'Testing file sort and remove',
-        'type' => 'article',
-        'field_image' => $values,
-      ]
-    );
-
-    $node->save();
-    $edit_link = $node->toUrl('edit-form')->toString();
-    $this->drupalGet($edit_link);
-
-    $this->assertItemOrder([
-      1 => 'file1.jpg',
-      2 => 'file2.jpg',
-      3 => 'file3.jpg',
-      4 => 'file4.jpg',
-      5 => 'file5.jpg',
-      6 => 'file6.jpg',
-      7 => 'file7.jpg',
-      8 => 'file8.jpg',
-    ]);
-
-    $file1_handle = $this->assertSession()->elementExists('xpath', "(//a[contains(@class, 'tabledrag-handle')])[1]");
-    $file2 = $this->assertSession()->elementExists('xpath', "(//tr[contains(@class, 'item-container')])[2]");
-    $file1_handle->dragTo($file2);
-
-    $this->assertItemOrder([
-      1 => 'file2.jpg',
-      2 => 'file1.jpg',
-    ]);
-
-    // Test that order is preserved after removing item.
-    $this->removeItemAtPosition(2);
-
-    $this->assertItemOrder([
-      1 => 'file2.jpg',
-      2 => 'file3.jpg',
-    ]);
-
-    $file3 = $this->assertSession()->elementExists('xpath', "(//tr[contains(@class, 'item-container')])[2]");
-    $this->dragDropElement($file3, 160, 0);
-
-    $file3_handle = $this->assertSession()->elementExists('xpath', "(//a[contains(@class, 'tabledrag-handle')])[2]");
-    $file4 = $this->assertSession()->elementExists('xpath', "(//tr[contains(@class, 'item-container')])[3]");
-    $file3_handle->dragTo($file4);
-
-    $this->assertItemOrder([
-      2 => 'file4.jpg',
-      3 => 'file3.jpg',
-    ]);
-
-    // Test that order is preserved after removing item.
-    $this->removeItemAtPosition(3);
-
-    $this->assertItemOrder([
-      2 => 'file4.jpg',
-      3 => 'file5.jpg',
-    ]);
-
-    $file5 = $this->assertSession()->elementExists('xpath', "(//tr[contains(@class, 'item-container')])[3]");
-    $this->dragDropElement($file5, 160, 0);
-
-    $file5_handle = $this->assertSession()->elementExists('xpath', "(//a[contains(@class, 'tabledrag-handle')])[3]");
-    $file6 = $this->assertSession()->elementExists('xpath', "(//tr[contains(@class, 'item-container')])[4]");
-    $file5_handle->dragTo($file6);
-
-    $this->assertItemOrder([
-      3 => 'file6.jpg',
-      4 => 'file5.jpg',
-    ]);
-
-    // Test that order is preserved after removing item.
-    $this->removeItemAtPosition(4);
-
-    $this->assertItemOrder([
-      3 => 'file6.jpg',
-      4 => 'file7.jpg',
-    ]);
-
-    $file2_handle = $this->assertSession()->elementExists('xpath', "(//a[contains(@class, 'tabledrag-handle')])[1]");
-    $file8 = $this->assertSession()->elementExists('xpath', "(//tr[contains(@class, 'item-container')])[5]");
-    $file2_handle->dragTo($file8);
-
-    $this->assertItemOrder([
-      1 => 'file4.jpg',
-      2 => 'file6.jpg',
-      3 => 'file7.jpg',
-      4 => 'file8.jpg',
-      5 => 'file2.jpg',
-    ]);
-
-    // Test that order is preserved after removing two items.
-    $this->removeItemAtPosition(3);
-    $this->removeItemAtPosition(4);
-
-    $this->assertItemOrder([
-      1 => 'file4.jpg',
-      2 => 'file6.jpg',
-      3 => 'file8.jpg',
-    ]);
-
-    // Test that remove with duplicate items removes the one at the
-    // correct delta.  If you remove file 1 at position 3, it should
-    // remove that one, not the same entity at position 1.
-    $values = [
-      ['target_id' => 2],
-      ['target_id' => 3],
-      ['target_id' => 2],
-      ['target_id' => 4],
-      ['target_id' => 5],
-      ['target_id' => 6],
-    ];
-    $node->field_image->setValue($values);
-    $node->save();
-    $edit_link = $node->toUrl('edit-form')->toString();
-    $this->drupalGet($edit_link);
-
-    $this->assertItemOrder([
-      1 => 'file1.jpg',
-      2 => 'file2.jpg',
-      3 => 'file1.jpg',
-      4 => 'file3.jpg',
-      5 => 'file4.jpg',
-      6 => 'file5.jpg',
-    ]);
-
-    $this->removeItemAtPosition(3);
-
-    $this->assertItemOrder([
-      1 => 'file1.jpg',
-      2 => 'file2.jpg',
-      3 => 'file3.jpg',
-      4 => 'file4.jpg',
-      5 => 'file5.jpg',
-    ]);
-
-    $this->drupalGet($edit_link);
-
-    $this->assertItemOrder([
-      1 => 'file1.jpg',
-      2 => 'file2.jpg',
-      3 => 'file1.jpg',
-      4 => 'file3.jpg',
-      5 => 'file4.jpg',
-      6 => 'file5.jpg',
-    ]);
-
-    $this->removeItemAtPosition(1);
-
-    $this->assertItemOrder([
-      1 => 'file2.jpg',
-      2 => 'file1.jpg',
-      3 => 'file3.jpg',
-      4 => 'file4.jpg',
-      5 => 'file5.jpg',
-    ]);
-
   }
 
 }

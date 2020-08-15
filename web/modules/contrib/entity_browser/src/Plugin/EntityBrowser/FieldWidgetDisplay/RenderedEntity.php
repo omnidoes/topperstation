@@ -9,7 +9,6 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\entity_browser\FieldWidgetDisplayBase;
-use Drupal\Core\Entity\EntityTypeInterface;
 
 /**
  * Displays the fully rendered entity.
@@ -91,10 +90,7 @@ class RenderedEntity extends FieldWidgetDisplayBase implements ContainerFactoryP
   public function getViewModeLabel() {
     if (!empty($this->configuration['entity_type']) && !empty($this->configuration['view_mode'])) {
       $view_modes = $this->entityDisplayRepository->getViewModeOptions($this->configuration['entity_type']);
-
-      if (!empty($view_modes[$this->configuration['view_mode']])) {
-        return $view_modes[$this->configuration['view_mode']];
-      }
+      return $view_modes[$this->configuration['view_mode']];
     }
 
     return $this->t('Default');
@@ -138,13 +134,6 @@ class RenderedEntity extends FieldWidgetDisplayBase implements ContainerFactoryP
       $dependencies[$view_mode->getConfigDependencyKey()][] = $view_mode->getConfigDependencyName();
     }
     return $dependencies;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getColumnHeader(EntityTypeInterface $entity_type) {
-    return $this->t('Preview');
   }
 
 }

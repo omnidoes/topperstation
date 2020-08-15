@@ -5,6 +5,7 @@ namespace Drupal\entity_browser\Plugin\Field\FieldWidget;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\entity_browser\Element\EntityBrowserElement;
 use Drupal\entity_browser\Entity\EntityBrowser;
+use Symfony\Component\Validator\ConstraintViolationInterface;
 use Drupal\Component\Utility\Html;
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Entity\ContentEntityInterface;
@@ -75,13 +76,6 @@ class EntityReferenceBrowserWidget extends WidgetBase implements ContainerFactor
    * @var \Drupal\Core\Session\AccountInterface
    */
   protected $currentUser;
-
-  /**
-   * If triggering element was hidden target_id element.
-   *
-   * @var bool
-   */
-  protected $entityBrowserValueUpdated;
 
   /**
    * Constructs widget plugin.
@@ -380,21 +374,30 @@ class EntityReferenceBrowserWidget extends WidgetBase implements ContainerFactor
   public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
 
     $entities = $this->formElementEntities($items, $element, $form_state);
-    $items->setValue($entities);
+
+    // Get correct ordered list of entity IDs.
+    $ids = array_map(
+      function (EntityInterface $entity) {
+        return $entity->id();
+      },
+      $entities
+    );
+
+    // We store current entity IDs as we might need them in future requests. If
+    // some other part of the form triggers an AJAX request with
+    // #limit_validation_errors we won't have access to the value of the
+    // target_id element and won't be able to build the form as a result of
+    // that. This will cause missing submit (Remove, Edit, ...) elements, which
+    // might result in unpredictable results.
+    $form_state->set(['entity_browser_widget', $this->getFormStateKey($items)], $ids);
 
     $hidden_id = Html::getUniqueId('edit-' . $this->fieldDefinition->getName() . '-target-id');
     $details_id = Html::getUniqueId('edit-' . $this->fieldDefinition->getName());
 
-    // Get configuration required to check entity browser availability.
-    $cardinality = $this->fieldDefinition->getFieldStorageDefinition()->getCardinality();
-    $selection_mode = $this->getSetting('selection_mode');
-
-    $display_entity_browser = EntityBrowserElement::isEntityBrowserAvailable($selection_mode, $cardinality, count($entities));
-
     $element += [
       '#id' => $details_id,
       '#type' => 'details',
-      '#open' => !empty($entities) || $this->getSetting('open') || $this->entityBrowserValueUpdated,
+      '#open' => !empty($entities) || $this->getSetting('open'),
       '#required' => $this->fieldDefinition->isRequired(),
       // We are not using Entity browser's hidden element since we maintain
       // selected entities in it during entire process.
@@ -402,11 +405,7 @@ class EntityReferenceBrowserWidget extends WidgetBase implements ContainerFactor
         '#type' => 'hidden',
         '#id' => $hidden_id,
         // We need to repeat ID here as it is otherwise skipped when rendering.
-        '#attributes' => [
-          'id' => $hidden_id,
-          'data-cardinality' => $cardinality,
-          'data-entity-browser-visible' => $display_entity_browser,
-        ],
+        '#attributes' => ['id' => $hidden_id],
         '#default_value' => implode(' ', array_map(
             function (EntityInterface $item) {
               return $item->getEntityTypeId() . ':' . $item->id();
@@ -420,14 +419,15 @@ class EntityReferenceBrowserWidget extends WidgetBase implements ContainerFactor
           'wrapper' => $details_id,
           'event' => 'entity_browser_value_updated',
         ],
-        '#submit' => [[get_class($this), 'entityBrowserValueUpdated']],
-        '#limit_validation_errors' => [array_merge($element['#field_parents'], [$this->fieldDefinition->getName()])],
-        '#executes_submit_callback' => TRUE,
       ],
     ];
 
+    // Get configuration required to check entity browser availability.
+    $cardinality = $this->fieldDefinition->getFieldStorageDefinition()->getCardinality();
+    $selection_mode = $this->getSetting('selection_mode');
+
     // Enable entity browser if requirements for that are fulfilled.
-    if ($display_entity_browser) {
+    if (EntityBrowserElement::isEntityBrowserAvailable($selection_mode, $cardinality, count($ids))) {
       $persistentData = $this->getPersistentData();
 
       $element['entity_browser'] = [
@@ -444,13 +444,6 @@ class EntityReferenceBrowserWidget extends WidgetBase implements ContainerFactor
           [get_called_class(), 'processEntityBrowser'],
         ],
       ];
-
-      $element['target_id']['#attributes']['data-entity-browser-available'] = 1;
-    }
-    else {
-      // Allow non-ajax remove button to trigger ajax refresh when
-      // cardinality.
-      $element['target_id']['#attributes']['data-entity-browser-visible'] = 0;
     }
 
     $element['#attached']['library'][] = 'entity_browser/entity_reference';
@@ -498,6 +491,9 @@ class EntityReferenceBrowserWidget extends WidgetBase implements ContainerFactor
     if (!empty($trigger['#ajax']['event']) && $trigger['#ajax']['event'] == 'entity_browser_value_updated') {
       $parents = array_slice($trigger['#array_parents'], 0, -1);
     }
+    elseif ($trigger['#type'] == 'submit' && strpos($trigger['#name'], '_remove_')) {
+      $parents = array_slice($trigger['#array_parents'], 0, -static::$deleteDepth);
+    }
     elseif ($trigger['#type'] == 'submit' && strpos($trigger['#name'], '_replace_')) {
       $parents = array_slice($trigger['#array_parents'], 0, -static::$deleteDepth);
       // We need to re-open the browser. Instead of just passing "TRUE", send
@@ -512,9 +508,20 @@ class EntityReferenceBrowserWidget extends WidgetBase implements ContainerFactor
   }
 
   /**
+   * {@inheritdoc}
+   */
+  public function errorElement(array $element, ConstraintViolationInterface $violation, array $form, FormStateInterface $form_state) {
+    if (($trigger = $form_state->getTriggeringElement())) {
+      // Can be triggered by "Remove" button.
+      if (end($trigger['#parents']) === 'remove_button') {
+        return FALSE;
+      }
+    }
+    return parent::errorElement($element, $violation, $form, $form_state);
+  }
+
+  /**
    * Submit callback for remove buttons.
-   *
-   * @deprecated Handled in javascript.  See entity_browser.entity_reference.js.
    */
   public static function removeItemSubmit(&$form, FormStateInterface $form_state) {
     $triggering_element = $form_state->getTriggeringElement();
@@ -530,6 +537,7 @@ class EntityReferenceBrowserWidget extends WidgetBase implements ContainerFactor
         // @todo add weight field.
         if ($item == $id) {
           array_splice($values, $index, 1);
+
           break;
         }
       }
@@ -543,30 +551,6 @@ class EntityReferenceBrowserWidget extends WidgetBase implements ContainerFactor
       // Rebuild form.
       $form_state->setRebuild();
     }
-  }
-
-  /**
-   * Submit callback.
-   */
-  public static function entityBrowserValueUpdated(&$form, FormStateInterface $form_state) {
-    $triggering_element = $form_state->getTriggeringElement();
-    $parents = array_slice($triggering_element['#parents'], 0, -1);
-    $array_parents = array_slice($triggering_element['#array_parents'], 0, -1);
-
-    $values = $form_state->getValue($parents);
-
-    $entities = empty($values['target_id']) ? [] : explode(' ', trim($values['target_id']));
-    $values = [];
-    foreach ($entities as $entity) {
-      $values[]['target_id'] = explode(':', $entity)[1];
-    }
-
-    // Set new value for this widget in the form_state.
-    $element = &NestedArray::getValue($form, $array_parents);
-    $form_state->setValueForElement($element, $values);
-
-    // Rebuild form.
-    $form_state->setRebuild();
   }
 
   /**
@@ -631,7 +615,13 @@ class EntityReferenceBrowserWidget extends WidgetBase implements ContainerFactor
             'remove_button' => [
               '#type' => 'submit',
               '#value' => $this->t('Remove'),
+              '#ajax' => [
+                'callback' => [get_class($this), 'updateWidgetCallback'],
+                'wrapper' => $details_id,
+              ],
+              '#submit' => [[get_class($this), 'removeItemSubmit']],
               '#name' => $this->fieldDefinition->getName() . '_remove_' . $entity->id() . '_' . $row_id . '_' . md5(json_encode($field_parents)),
+              '#limit_validation_errors' => [array_merge($field_parents, [$this->fieldDefinition->getName()])],
               '#attributes' => [
                 'data-entity-id' => $entity->getEntityTypeId() . ':' . $entity->id(),
                 'data-row-id' => $row_id,
@@ -803,25 +793,13 @@ class EntityReferenceBrowserWidget extends WidgetBase implements ContainerFactor
    */
   protected function formElementEntities(FieldItemListInterface $items, array $element, FormStateInterface $form_state) {
     $entities = [];
+    $entity_type = $this->fieldDefinition->getFieldStorageDefinition()->getSetting('target_type');
+    $entity_storage = $this->entityTypeManager->getStorage($entity_type);
 
     // Find IDs from target_id element (it stores selected entities in form).
     // This was added to help solve a really edge casey bug in IEF.
-    if (empty($form_state->getValues()) && $form_state->isMethodType('POST')) {
-      $element_path = array_merge($element['#field_parents'], [$this->fieldDefinition->getName()]);
-      $key_exists = NestedArray::keyExists($form_state->getUserInput(), $element_path);
-
-      if ($key_exists) {
-        $input_value = NestedArray::getValue($form_state->getUserInput(), $element_path);
-        if (!empty($input_value) && isset($input_value['target_id'])) {
-          $data = empty($input_value['target_id']) ? [] : explode(' ', trim($input_value['target_id']));
-          $values = [];
-          foreach ($data as $data_item) {
-            $values[]['target_id'] = explode(':', $data_item)[1];
-          }
-          $items->setValue($values);
-          return $items->referencedEntities();
-        }
-      }
+    if (($target_id_entities = $this->getEntitiesByTargetId($element, $form_state)) !== FALSE) {
+      return $target_id_entities;
     }
 
     // Determine if we're submitting and if submit came from this widget.
@@ -839,27 +817,62 @@ class EntityReferenceBrowserWidget extends WidgetBase implements ContainerFactor
         $is_relevant_submit &= ($trigger['#parents'][$field_name_key] === $this->fieldDefinition->getName()) &&
           (array_slice($trigger['#parents'], 0, count($element['#field_parents'])) == $element['#field_parents']);
       }
-    }
+    };
 
     if ($is_relevant_submit) {
       // Submit was triggered by hidden "target_id" element when entities were
       // added via entity browser.
       if (!empty($trigger['#ajax']['event']) && $trigger['#ajax']['event'] == 'entity_browser_value_updated') {
-        $parents = array_slice($trigger['#parents'], 0, -1);
-        $this->entityBrowserValueUpdated = TRUE;
+        $parents = $trigger['#parents'];
+      }
+      // Submit was triggered by one of the "Remove" buttons. We need to walk
+      // few levels up to read value of "target_id" element.
+      elseif ($trigger['#type'] == 'submit' && strpos($trigger['#name'], $this->fieldDefinition->getName() . '_remove_') === 0) {
+        $parents = array_merge(array_slice($trigger['#parents'], 0, -static::$deleteDepth), ['target_id']);
       }
 
       if (isset($parents) && $value = $form_state->getValue($parents)) {
-        $items->setValue($value);
-        $entities = $items->referencedEntities();
+        $entities = EntityBrowserElement::processEntityIds($value);
+        return $entities;
       }
       return $entities;
     }
+    // IDs from a previous request might be saved in the form state.
+    elseif ($form_state->has([
+      'entity_browser_widget',
+      $this->getFormStateKey($items),
+    ])
+    ) {
+      $stored_ids = $form_state->get([
+        'entity_browser_widget',
+        $this->getFormStateKey($items),
+      ]);
+      $indexed_entities = $entity_storage->loadMultiple($stored_ids);
 
+      // Selection can contain same entity multiple times. Since loadMultiple()
+      // returns unique list of entities, it's necessary to recreate list of
+      // entities in order to preserve selection of duplicated entities.
+      foreach ($stored_ids as $entity_id) {
+        if (isset($indexed_entities[$entity_id])) {
+          $entities[] = $indexed_entities[$entity_id];
+        }
+      }
+      return $entities;
+    }
     // We are loading for for the first time so we need to load any existing
     // values that might already exist on the entity. Also, remove any leftover
     // data from removed entity references.
-    return $items->referencedEntities();
+    else {
+      foreach ($items as $item) {
+        if (isset($item->target_id)) {
+          $entity = $entity_storage->load($item->target_id);
+          if (!empty($entity)) {
+            $entities[] = $entity;
+          }
+        }
+      }
+      return $entities;
+    }
   }
 
   /**
@@ -875,6 +888,41 @@ class EntityReferenceBrowserWidget extends WidgetBase implements ContainerFactor
     }
 
     return $dependencies;
+  }
+
+  /**
+   * Get selected elements from target_id element on form.
+   *
+   * @param array $element
+   *   The form element.
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   *   The form state.
+   *
+   * @return \Drupal\Core\Entity\EntityInterface[]|false
+   *   Return list of entities if they are available or false.
+   */
+  protected function getEntitiesByTargetId(array $element, FormStateInterface $form_state) {
+    $target_id_element_path = array_merge(
+      $element['#field_parents'],
+      [$this->fieldDefinition->getName(), 'target_id']
+    );
+
+    $user_input = $form_state->getUserInput();
+
+    $ief_submit = (!empty($user_input['_triggering_element_name']) && strpos($user_input['_triggering_element_name'], 'ief-edit-submit') === 0);
+
+    if (!$ief_submit || !NestedArray::keyExists($form_state->getUserInput(), $target_id_element_path)) {
+      return FALSE;
+    }
+
+    // TODO Figure out how to avoid using raw user input.
+    $current_user_input = NestedArray::getValue($form_state->getUserInput(), $target_id_element_path);
+    if (!is_array($current_user_input)) {
+      $entities = EntityBrowserElement::processEntityIds($current_user_input);
+      return $entities;
+    }
+
+    return FALSE;
   }
 
 }

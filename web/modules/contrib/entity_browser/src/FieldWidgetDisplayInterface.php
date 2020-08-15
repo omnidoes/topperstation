@@ -49,15 +49,4 @@ interface FieldWidgetDisplayInterface extends PluginInspectionInterface, Configu
    */
   public function isApplicable(EntityTypeInterface $entity_type);
 
-  /**
-   * Get the column header label for this plugin.
-   *
-   * @param \Drupal\Core\Entity\EntityTypeInterface $entity_type
-   *   The entity type that should be checked.
-   *
-   * @return \Drupal\Core\StringTranslation\TranslatableMarkup
-   *   The label to be displayed.
-   */
-  public function getColumnHeader(EntityTypeInterface $entity_type);
-
 }

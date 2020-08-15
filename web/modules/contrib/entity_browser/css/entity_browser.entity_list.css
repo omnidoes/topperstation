@@ -8,7 +8,7 @@
  * These styles are compatible with Bartik, Seven, and Classy themes.
  */
 
-.entities-list div.item-container {
+.entities-list .item-container {
   display: inline-block;
   margin: 10px 10px 15px;
   vertical-align: text-bottom;
@@ -32,9 +32,4 @@
 
 .entities-list.hidden {
   display: none;
-}
-
-td.entity-browser--field-widget--tabledrag,
-th.entity-browser--field-widget--tabledrag {
-  width: 30px;
 }

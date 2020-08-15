@@ -127,7 +127,6 @@ class EntityReferenceWidgetTest extends EntityBrowserWebDriverTestBase {
     $title = $title_field->getValue();
     $this->assertEquals('Walrus', $title);
     $title_field->setValue('Alpaca');
-    $this->getSession()->switchToIFrame();
     $this->assertSession()
       ->elementExists('css', '.ui-dialog-buttonset.form-actions .form-submit')
       ->press();

@@ -70,11 +70,4 @@ abstract class FieldWidgetDisplayBase extends PluginBase implements FieldWidgetD
     return [];
   }
 
-  /**
-   * {@inheritdoc}
-   */
-  public function getColumnHeader(EntityTypeInterface $entity_type) {
-    return $this->t('Label');
-  }
-
 }

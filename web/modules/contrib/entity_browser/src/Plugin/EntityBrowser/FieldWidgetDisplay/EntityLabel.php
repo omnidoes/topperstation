@@ -4,7 +4,6 @@ namespace Drupal\entity_browser\Plugin\EntityBrowser\FieldWidgetDisplay;
 
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\entity_browser\FieldWidgetDisplayBase;
-use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -70,11 +69,9 @@ class EntityLabel extends FieldWidgetDisplayBase implements ContainerFactoryPlug
    */
   public function settingsForm(array $form, FormStateInterface $form_state) {
     return [
-      'notice' => [
-        '#prefix' => '<p>',
-        '#suffix' => '</p>',
-        '#markup' => $this->t('This plugin has no configuration options.'),
-      ],
+      '#prefix' => '<p>',
+      '#suffix' => '</p>',
+      '#markup' => $this->t('This plugin has no configuration options.'),
     ];
   }
 

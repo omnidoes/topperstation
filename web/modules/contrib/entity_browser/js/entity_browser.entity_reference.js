@@ -23,30 +23,6 @@
           }
         });
       });
-
-      $(context).find(".field--widget-entity-browser-table").each(function () {
-        var $entitiesList = $(this).find('.entities-list');
-        $(this).find('table.entities-list .tabledrag-handle')
-          .once('entity-browser-table-widget-drag')
-          .on('mouseup pointerup', function () {
-            Drupal.entityBrowserEntityReference.updateTargetId($entitiesList);
-          });
-      });
-
-      $(context).find('[data-entity-browser-entities-list] .remove-button').each(function () {
-        $(this).once('entity-browser-remove').on('mousedown', function(e) {
-          var $currentItems = $(this).parents('[data-entity-browser-entities-list]:first');
-          $(this).parents('.item-container:first').fadeOut(360, function() {
-            $(this).remove();
-            Drupal.entityBrowserEntityReference.updateTargetId($currentItems);
-          });
-        });
-        // Prevent remove button from triggering a form submit.
-        $(this).once('entity-browser-remove-mouseup').on('click', function(e) {
-          e.preventDefault();
-        });
-      });
-
       // The AJAX callback will give us a flag when we need to re-open the
       // browser, most likely due to a "Replace" button being clicked.
       if (typeof drupalSettings.entity_browser_reopen_browser !== 'undefined' &&  drupalSettings.entity_browser_reopen_browser) {

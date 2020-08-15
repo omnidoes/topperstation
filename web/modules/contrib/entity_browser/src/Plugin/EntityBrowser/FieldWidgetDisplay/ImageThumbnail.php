@@ -62,11 +62,6 @@ class ImageThumbnail extends FieldWidgetDisplayBase implements ContainerFactoryP
    * {@inheritdoc}
    */
   public function view(EntityInterface $entity) {
-
-    if (empty($this->configuration['image_style'])) {
-      return ['#markup' => $entity->label()];
-    }
-
     return [
       '#theme' => 'image_style',
       '#style_name' => $this->configuration['image_style'],
@@ -121,13 +116,6 @@ class ImageThumbnail extends FieldWidgetDisplayBase implements ContainerFactoryP
       $dependencies[$image_style->getConfigDependencyKey()][] = $image_style->getConfigDependencyName();
     }
     return $dependencies;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getColumnHeader(EntityTypeInterface $entity_type) {
-    return $this->t('Thumbnail');
   }
 
 }

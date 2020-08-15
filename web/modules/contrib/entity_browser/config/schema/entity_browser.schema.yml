@@ -181,50 +181,6 @@ field.widget.settings.entity_browser_entity_reference:
       type: string
       label: 'Selection mode'
 
-field.widget.settings.entity_browser_table:
-  type: mapping
-  label: 'Entity browser entity reference widget with table layout'
-  mapping:
-    entity_browser:
-      type: string
-      label: 'Entity Browser'
-    field_widget_display:
-      type: string
-      label: 'Field widget display'
-    table_settings:
-      type: entity_browser.table_settings
-    field_widget_edit:
-      type: boolean
-      label: 'Field widget edit'
-    field_widget_remove:
-      type: boolean
-      label: 'Field widget remove'
-    field_widget_replace:
-      type: boolean
-      label: 'Field widget replace'
-    open:
-      type: boolean
-      label: 'Open'
-    field_widget_display_settings:
-      type: entity_browser.field_widget_display.[%parent.field_widget_display]
-    selection_mode:
-      type: string
-      label: 'Selection mode'
-
-entity_browser.table_settings:
-  type: mapping
-  label: 'Table'
-  mapping:
-    status_column:
-      type: boolean
-      label: 'Show publication status'
-    bundle_column:
-      type: boolean
-      label: 'Show bundle in table view'
-    label_column:
-      type: boolean
-      label: 'Display label column in table'
-
 entity_browser.field_widget_display.label:
   type: mapping
   label: 'Entity label display config'
