@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "641cee70753cdca81517433a228da59b",
+    "content-hash": "dd710d58528ebb767d4717887bc03bc3",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -2432,7 +2432,8 @@
                         "[web-root]/profiles/README.txt": "assets/scaffold/files/profiles.README.txt",
                         "[web-root]/themes/README.txt": "assets/scaffold/files/themes.README.txt"
                     }
-                }
+                },
+                "patches_applied": []
             },
             "autoload": {
                 "psr-4": {
