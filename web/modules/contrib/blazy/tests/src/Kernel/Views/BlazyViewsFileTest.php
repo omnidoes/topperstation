@@ -10,18 +10,10 @@ use Drupal\blazy\BlazyViews;
  * Test Blazy Views integration.
  *
  * @coversDefaultClass \Drupal\blazy\Dejavu\BlazyStylePluginBase
- * @requires module views
+ *
  * @group blazy
  */
 class BlazyViewsFileTest extends BlazyViewsTestBase {
-
-  /**
-   * Set to TRUE to strict check all configuration saved.
-   *
-   * @var bool
-   * @see \Drupal\Core\Config\Development\ConfigSchemaChecker
-   */
-  protected $strictConfigSchema = TRUE;
 
   /**
    * {@inheritdoc}
@@ -48,7 +40,6 @@ class BlazyViewsFileTest extends BlazyViewsTestBase {
 
     $bundle = $this->bundle;
     $settings['image_settings'] = [
-      'iframe_lazy'  => TRUE,
       'image_style'  => 'blazy_crop',
       'media_switch' => 'blazy_test',
       'ratio'        => 'fluid',
@@ -66,8 +57,6 @@ class BlazyViewsFileTest extends BlazyViewsTestBase {
     $this->setUpContentTypeTest($bundle, $data);
 
     $data['settings'] = $this->getFormatterSettings();
-    $data['settings']['breakpoints'] = $this->getDataBreakpoints(TRUE);
-
     $display = $this->setUpFormatterDisplay($bundle, $data);
 
     $display->setComponent('field_image', [
@@ -85,7 +74,6 @@ class BlazyViewsFileTest extends BlazyViewsTestBase {
    * Make sure that the HTML list style markup is correct.
    *
    * @todo enable this once corrected, likely broken since Drupal 8.4+.
-   * @requires module video_embed_media
    */
   public function todoTestBlazyViews() {
     $this->buildContents();
@@ -222,13 +210,6 @@ class BlazyViewsFileTest extends BlazyViewsTestBase {
 
     $style_plugin->submitOptionsForm($form, $form_state);
 
-    // Render.
-    $render = $view->getStyle()->render();
-    $this->assertArrayHasKey('data-blazy', $render['#attributes']);
-
-    $output = $view->preview();
-    $output = $this->blazyManager->getRenderer()->renderRoot($output);
-    $this->assertTrue(strpos($output, 'data-blazy') !== FALSE, 'Blazy attribute is added to DIV.');
     $view->destroy();
   }
 

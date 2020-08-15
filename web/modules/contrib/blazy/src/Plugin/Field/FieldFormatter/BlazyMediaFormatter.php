@@ -2,8 +2,7 @@
 
 namespace Drupal\blazy\Plugin\Field\FieldFormatter;
 
-use Drupal\Core\Field\EntityReferenceFieldItemListInterface;
-use Drupal\Core\Field\FieldDefinitionInterface;
+use Drupal\Core\Field\FieldItemListInterface;
 
 /**
  * Plugin for blazy media formatter.
@@ -13,33 +12,43 @@ use Drupal\Core\Field\FieldDefinitionInterface;
  *   label = @Translation("Blazy"),
  *   field_types = {
  *     "entity_reference",
+ *     "entity_reference_revisions",
  *   }
  * )
  *
- * @see \Drupal\blazy\Plugin\Field\FieldFormatter\BlazyFormatter
+ * @see \Drupal\blazy\Plugin\Field\FieldFormatter\BlazyMediaFormatterBase
  * @see \Drupal\media\Plugin\Field\FieldFormatter\MediaThumbnailFormatter
  */
-class BlazyMediaFormatter extends BlazyFormatter {
+class BlazyMediaFormatter extends BlazyMediaFormatterBase {
 
   /**
    * {@inheritdoc}
    */
-  protected function getEntitiesToView(EntityReferenceFieldItemListInterface $items, $langcode) {
-    $media = parent::getEntitiesToView($items, $langcode);
-    $entities = [];
-    foreach ($media as $media_item) {
-      $entity = $media_item->thumbnail->entity;
-      $entity->_referringItem = $media_item->thumbnail;
-      $entities[] = $entity;
+  public function viewElements(FieldItemListInterface $items, $langcode) {
+    $entities = $this->getEntitiesToView($items, $langcode);
+
+    // Early opt-out if the field is empty.
+    if (empty($entities)) {
+      return [];
     }
-    return $entities;
+
+    return $this->commonViewElements($items, $langcode, $entities);
   }
 
   /**
    * {@inheritdoc}
    */
-  public static function isApplicable(FieldDefinitionInterface $field_definition) {
-    return $field_definition->getFieldStorageDefinition()->getSetting('target_type') == 'media';
+  public function getScopedFormElements() {
+    $multiple = $this->fieldDefinition->getFieldStorageDefinition()->isMultiple();
+
+    return [
+      'fieldable_form'  => FALSE,
+      'grid_form'       => $multiple,
+      'layouts'         => [],
+      'style'           => $multiple,
+      'thumbnail_style' => TRUE,
+      'vanilla'         => FALSE,
+    ] + $this->getCommonScopedFormElements() + parent::getScopedFormElements();
   }
 
 }

@@ -3,8 +3,6 @@
 namespace Drupal\Tests\blazy\Traits;
 
 use Drupal\Core\DependencyInjection\ContainerBuilder;
-use Drupal\blazy\BlazyManager;
-use Drupal\Tests\PhpunitCompatibilityTrait;
 
 /**
  * A Trait common for Blazy related service managers.
@@ -15,11 +13,11 @@ trait BlazyManagerUnitTestTrait {
    * Setup the unit manager.
    */
   protected function setUpUnitServices() {
-    $this->entityManager      = $this->createMock('Drupal\Core\Entity\EntityManagerInterface');
     $this->entityStorage      = $this->createMock('Drupal\Core\Entity\EntityStorageInterface');
     $this->entityViewBuilder  = $this->createMock('Drupal\Core\Entity\EntityViewBuilderInterface');
     $this->entityTypeMock     = $this->createMock('\Drupal\Core\Entity\EntityTypeInterface');
     $this->entityFieldManager = $this->createMock('\Drupal\Core\Entity\EntityFieldManagerInterface');
+    $this->entityRepository   = $this->createMock('\Drupal\Core\Entity\EntityRepositoryInterface');
     $this->entityTypeManager  = $this->createMock('\Drupal\Core\Entity\EntityTypeManagerInterface');
     $this->renderer           = $this->createMock('\Drupal\Core\Render\RendererInterface');
     $this->cache              = $this->createMock('\Drupal\Core\Cache\CacheBackendInterface');
@@ -40,6 +38,30 @@ trait BlazyManagerUnitTestTrait {
         'blazy' => ['loadInvisible' => FALSE, 'offset' => 100],
       ],
     ]);
+
+    $this->blazyManager = $this->getMockBuilder('\Drupal\blazy\BlazyManager')
+      ->disableOriginalConstructor()
+      ->getMock();
+
+    $this->blazyManager->expects($this->any())
+      ->method('getModuleHandler')
+      ->willReturn($this->moduleHandler);
+
+    $this->blazyManager->expects($this->any())
+      ->method('getEntityTypeManager')
+      ->willReturn($this->entityTypeManager);
+
+    $this->blazyManager->expects($this->any())
+      ->method('getRenderer')
+      ->willReturn($this->renderer);
+
+    $this->blazyManager->expects($this->any())
+      ->method('getConfigFactory')
+      ->willReturn($this->configFactory);
+
+    $this->blazyManager->expects($this->any())
+      ->method('getCache')
+      ->willReturn($this->cache);
   }
 
   /**
@@ -47,24 +69,17 @@ trait BlazyManagerUnitTestTrait {
    */
   protected function setUpUnitContainer() {
     $container = new ContainerBuilder();
-    $container->set('entity.manager', $this->entityManager);
     $container->set('entity_field.manager', $this->entityFieldManager);
+    $container->set('entity.repository', $this->entityRepository);
     $container->set('entity_type.manager', $this->entityTypeManager);
     $container->set('module_handler', $this->moduleHandler);
     $container->set('renderer', $this->renderer);
     $container->set('config.factory', $this->configFactory);
     $container->set('cache.default', $this->cache);
     $container->set('token', $this->token);
+    $container->set('blazy.manager', $this->blazyManager);
 
     \Drupal::setContainer($container);
-
-    $this->blazyManager = new BlazyManager(
-      $this->entityTypeManager,
-      $this->moduleHandler,
-      $this->renderer,
-      $this->configFactory,
-      $this->cache
-    );
   }
 
   /**

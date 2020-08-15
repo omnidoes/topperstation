@@ -32,6 +32,7 @@ class SlickSettingsFormTest extends KernelTestBase {
     'system',
     'file',
     'image',
+    'media',
     'blazy',
     'slick',
     'slick_ui',
@@ -47,11 +48,9 @@ class SlickSettingsFormTest extends KernelTestBase {
 
     $this->installConfig(static::$modules);
 
-    $this->blazyManager = $this->container->get('blazy.manager');
+    $this->slickManager = $this->container->get('slick.manager');
 
-    $this->slickSettingsForm = new SlickSettingsForm(
-      $this->blazyManager->getConfigFactory()
-    );
+    $this->slickSettingsForm = SlickSettingsForm::create($this->container);
   }
 
   /**
@@ -70,7 +69,7 @@ class SlickSettingsFormTest extends KernelTestBase {
     ]);
 
     $this->assertInstanceOf(FormInterface::class, $this->slickSettingsForm);
-    $this->assertTrue($this->blazyManager->getConfigFactory()->get('slick.settings')->get('slick_css'));
+    $this->assertTrue($this->slickManager->getConfigFactory()->get('slick.settings')->get('slick_css'));
 
     $id = $this->slickSettingsForm->getFormId();
     $this->assertEquals('slick_settings_form', $id);

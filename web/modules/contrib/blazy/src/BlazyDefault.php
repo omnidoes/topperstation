@@ -8,13 +8,6 @@ namespace Drupal\blazy;
 class BlazyDefault {
 
   /**
-   * The supported $breakpoints.
-   *
-   * @var array
-   */
-  private static $breakpoints = ['xs', 'sm', 'md', 'lg', 'xl'];
-
-  /**
    * Defines constant for the supported text tags.
    */
   const TAGS = ['a', 'em', 'strong', 'h2', 'p', 'span', 'ul', 'ol', 'li'];
@@ -27,16 +20,10 @@ class BlazyDefault {
   private static $instance = NULL;
 
   /**
-   * The alterable settings.
-   *
-   * @var array
-   */
-  private static $alterableSettings;
-
-  /**
    * Returns the static instance of this class.
    */
   public static function getInstance() {
+
     if (is_null(self::$instance)) {
       self::$instance = new BlazyDefault();
     }
@@ -46,22 +33,28 @@ class BlazyDefault {
 
   /**
    * Returns Blazy specific breakpoints.
+   *
+   * @todo remove custom breakpoints anytime before blazy:3.x.
    */
   public static function getConstantBreakpoints() {
-    return self::$breakpoints;
+    return ['xs', 'sm', 'md', 'lg', 'xl'];
   }
 
   /**
    * Returns alterable plugin settings to pass the tests.
    */
   public function alterableSettings(array &$settings = []) {
-    if (!isset(static::$alterableSettings)) {
-      $context = ['class' => get_called_class()];
-      \Drupal::moduleHandler()->alter('blazy_base_settings', $settings, $context);
-      static::$alterableSettings = $settings;
-    }
+    $context = ['class' => get_called_class()];
+    \Drupal::moduleHandler()->alter('blazy_base_settings', $settings, $context);
 
-    return static::$alterableSettings;
+    return $settings;
+  }
+
+  /**
+   * Returns settings provided by various UI.
+   */
+  public static function anywhereSettings() {
+    return ['fx' => '', 'style' => ''];
   }
 
   /**
@@ -71,13 +64,25 @@ class BlazyDefault {
     $settings = [
       'cache'             => 0,
       'current_view_mode' => '',
-      'optionset'         => 'default',
       'skin'              => '',
-      'style'             => '',
-    ];
+    ] + self::anywhereSettings();
 
     blazy_alterable_settings($settings);
     return $settings;
+  }
+
+  /**
+   * Returns cherry-picked settings for field formatters and Views fields.
+   */
+  public static function cherrySettings() {
+    return [
+      'box_style'       => '',
+      'image_style'     => '',
+      'media_switch'    => '',
+      'ratio'           => '',
+      'thumbnail_style' => '',
+      '_uri'            => '',
+    ];
   }
 
   /**
@@ -88,15 +93,22 @@ class BlazyDefault {
       'background'             => FALSE,
       'box_caption'            => '',
       'box_caption_custom'     => '',
-      'box_style'              => '',
       'box_media_style'        => '',
-      'breakpoints'            => [],
       'caption'                => [],
-      'image_style'            => '',
-      'media_switch'           => '',
-      'ratio'                  => '',
       'responsive_image_style' => '',
-      'sizes'                  => '',
+    ] + self::cherrySettings();
+  }
+
+  /**
+   * Returns deprecated settings.
+   *
+   * @todo remove custom breakpoints anytime before 3.x.
+   */
+  public static function deprecatedSettings() {
+    return [
+      'breakpoints' => [],
+      'sizes'       => '',
+      'grid_header' => '',
     ];
   }
 
@@ -105,12 +117,10 @@ class BlazyDefault {
    */
   public static function imageSettings() {
     return [
-      'iframe_lazy'     => TRUE,
-      'icon'            => '',
-      'layout'          => '',
-      'thumbnail_style' => '',
-      'view_mode'       => '',
-    ] + self::baseSettings() + self::baseImageSettings();
+      'icon'      => '',
+      'layout'    => '',
+      'view_mode' => '',
+    ] + self::baseSettings() + self::baseImageSettings() + self::deprecatedSettings();
   }
 
   /**
@@ -144,8 +154,7 @@ class BlazyDefault {
       'grid_header' => '',
       'grid_medium' => 0,
       'grid_small'  => 0,
-      'style'       => '',
-    ];
+    ] + self::anywhereSettings();
   }
 
   /**
@@ -164,7 +173,6 @@ class BlazyDefault {
    */
   public static function entitySettings() {
     return [
-      'iframe_lazy'  => TRUE,
       'media_switch' => 'media',
       'rendered'     => FALSE,
       'view_mode'    => 'default',
@@ -173,60 +181,102 @@ class BlazyDefault {
   }
 
   /**
+   * Returns default options common for rich Media entities: Facebook, etc.
+   *
+   * This basically disables few Blazy features for rendered-entity-like.
+   */
+  public static function richSettings() {
+    return [
+      'background'   => FALSE,
+      'lazy'         => '',
+      'lightbox'     => FALSE,
+      'media_switch' => '',
+      'placeholder'  => '',
+      'resimage'     => FALSE,
+      'use_loading'  => FALSE,
+      'type'         => 'rich',
+    ] + self::anywhereSettings();
+  }
+
+  /**
    * Returns shared global form settings which should be consumed at formatters.
    */
   public static function uiSettings() {
     return [
       'one_pixel'        => TRUE,
+      'noscript'         => FALSE,
+      'placeholder'      => '',
       'responsive_image' => FALSE,
-      'theme_hook_image' => 'blazy',
-    ];
+    ] + self::anywhereSettings();
   }
 
   /**
-   * Returns sensible default html settings to shutup notices when lacking.
+   * Returns sensible default container settings to shutup notices when lacking.
+   */
+  public static function htmlSettings() {
+    return [
+      'blazy_data' => [],
+      'lightbox'   => FALSE,
+      'namespace'  => 'blazy',
+      'id'         => '',
+      'is_preview' => FALSE,
+      'route_name' => '',
+      'use_field'  => FALSE,
+      'view_name'  => '',
+    ] + self::imageSettings() + self::uiSettings();
+  }
+
+  /**
+   * Returns sensible default item settings to shutup notices when lacking.
    */
   public static function itemSettings() {
     return [
-      'blazy_data'     => [],
+      '_api'           => FALSE,
+      'bundle'         => '',
       'classes'        => [],
       'content_url'    => '',
       'delta'          => 0,
       'embed_url'      => '',
       'entity_type_id' => '',
       'extension'      => '',
-      'icon'           => '',
       'image_url'      => '',
-      'id'             => '',
       'item_id'        => 'blazy',
       'lazy_attribute' => 'src',
       'lazy_class'     => 'b-lazy',
-      'lightbox'       => FALSE,
-      'namespace'      => 'blazy',
+      'padding_bottom' => '',
       'player'         => FALSE,
+      'resimage'       => FALSE,
       'scheme'         => '',
       'type'           => 'image',
       'uri'            => '',
-      'use_image'      => FALSE,
+      'use_data_uri'   => FALSE,
+      'use_loading'    => TRUE,
       'use_media'      => FALSE,
       'height'         => NULL,
       'width'          => NULL,
-    ] + self::imageSettings() + self::uiSettings();
+    ] + self::htmlSettings();
   }
 
   /**
    * Returns blazy theme properties, its image and container attributes.
    *
-   * The reserved attributes mentioned here might be instantiated as an
-   * instanceof \Drupal\Core\Template\Attribute before entering Blazy.
+   * The reserved attributes is defined before entering Blazy as bonus variable.
+   * Consider other bonuses: title and content attributes at a later stage.
    */
   public static function themeProperties() {
     return [
       'attributes',
       'captions',
+      'content',
+      'iframe',
       'image',
+      'icon',
       'item',
       'item_attributes',
+      'noscript',
+      'overlay',
+      'preface',
+      'postscript',
       'settings',
       'url',
     ];

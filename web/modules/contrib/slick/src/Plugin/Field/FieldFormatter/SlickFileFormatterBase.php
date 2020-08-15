@@ -2,13 +2,9 @@
 
 namespace Drupal\slick\Plugin\Field\FieldFormatter;
 
-use Drupal\Core\Field\FieldItemListInterface;
-use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Component\Utility\Xss;
-use Drupal\blazy\BlazyFormatterManager;
+use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\blazy\Plugin\Field\FieldFormatter\BlazyFileFormatterBase;
-use Drupal\slick\SlickFormatterInterface;
-use Drupal\slick\SlickManagerInterface;
 use Drupal\slick\SlickDefault;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -17,31 +13,15 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 abstract class SlickFileFormatterBase extends BlazyFileFormatterBase {
 
-  /**
-   * Constructs a SlickImageFormatter instance.
-   */
-  public function __construct($plugin_id, $plugin_definition, FieldDefinitionInterface $field_definition, array $settings, $label, $view_mode, array $third_party_settings, BlazyFormatterManager $blazy_manager, SlickFormatterInterface $formatter, SlickManagerInterface $manager) {
-    parent::__construct($plugin_id, $plugin_definition, $field_definition, $settings, $label, $view_mode, $third_party_settings, $blazy_manager);
-    $this->formatter = $formatter;
-    $this->manager   = $manager;
-  }
+  use SlickFormatterTrait;
+  use SlickFormatterViewTrait;
 
   /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
-    return new static(
-      $plugin_id,
-      $plugin_definition,
-      $configuration['field_definition'],
-      $configuration['settings'],
-      $configuration['label'],
-      $configuration['view_mode'],
-      $configuration['third_party_settings'],
-      $container->get('blazy.formatter.manager'),
-      $container->get('slick.formatter'),
-      $container->get('slick.manager')
-    );
+    $instance = parent::create($container, $configuration, $plugin_id, $plugin_definition);
+    return self::injectServices($instance, $container, 'image');
   }
 
   /**
@@ -55,25 +35,14 @@ abstract class SlickFileFormatterBase extends BlazyFileFormatterBase {
    * {@inheritdoc}
    */
   public function viewElements(FieldItemListInterface $items, $langcode) {
-    $files = $this->getEntitiesToView($items, $langcode);
+    $entities = $this->getEntitiesToView($items, $langcode);
 
     // Early opt-out if the field is empty.
-    if (empty($files)) {
+    if (empty($entities)) {
       return [];
     }
 
-    // Collects specific settings to this formatter.
-    $build = ['settings' => $this->buildSettings()];
-
-    $this->formatter->buildSettings($build, $items);
-
-    // Build the elements.
-    $this->buildElements($build, $files);
-
-    // Supports Blazy multi-breakpoint images if provided.
-    $this->formatter->isBlazy($build['settings'], $build['items'][0]);
-
-    return $this->manager()->build($build);
+    return $this->commonViewElements($items, $langcode, $entities);
   }
 
   /**
@@ -83,11 +52,10 @@ abstract class SlickFileFormatterBase extends BlazyFileFormatterBase {
     $settings   = &$build['settings'];
     $item_id    = $settings['item_id'];
     $tn_caption = empty($settings['thumbnail_caption']) ? NULL : $settings['thumbnail_caption'];
-    $media      = method_exists($this, 'getMediaItem');
 
     foreach ($files as $delta => $file) {
       $settings['delta'] = $delta;
-      $settings['type']  = 'image';
+      $settings['type'] = 'image';
 
       /** @var Drupal\image\Plugin\Field\FieldType\ImageItem $item */
       $item = $file->_referringItem;
@@ -97,19 +65,12 @@ abstract class SlickFileFormatterBase extends BlazyFileFormatterBase {
 
       $element = ['item' => $item, 'settings' => $settings];
 
-      // If imported Drupal\blazy\Dejavu\BlazyVideoTrait.
-      if ($media) {
-        if (!empty($this->getImageItem($item))) {
-          $element['item'] = $this->getImageItem($item)['item'];
-          $element['settings'] = array_merge($settings, $this->getImageItem($item)['settings']);
-        }
-
-        $this->getMediaItem($element, $file);
-        $settings = $element['settings'];
-      }
+      // @todo remove, no longer file entity/VEF/M for pure Media.
+      $this->buildElement($element, $file);
+      $settings = $element['settings'];
 
       // Image with responsive image, lazyLoad, and lightbox supports.
-      $element[$item_id] = $this->formatter->getImage($element);
+      $element[$item_id] = $this->formatter->getBlazy($element);
 
       if (!empty($settings['caption'])) {
         foreach ($settings['caption'] as $caption) {
@@ -125,7 +86,7 @@ abstract class SlickFileFormatterBase extends BlazyFileFormatterBase {
         $thumb = ['settings' => $settings];
 
         // Thumbnail usages: asNavFor pagers, dot, arrows, photobox thumbnails.
-        $thumb[$item_id]  = empty($settings['thumbnail_style']) ? [] : $this->formatter->getThumbnail($settings, $element['item']);
+        $thumb[$item_id] = empty($settings['thumbnail_style']) ? [] : $this->formatter->getThumbnail($settings, $element['item']);
         $thumb['caption'] = empty($element['item']->{$tn_caption}) ? [] : ['#markup' => Xss::filterAdmin($element['item']->{$tn_caption})];
 
         $build['thumb']['items'][$delta] = $thumb;

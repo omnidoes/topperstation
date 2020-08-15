@@ -2,11 +2,8 @@
 
 namespace Drupal\slick_views\Plugin\views\style;
 
-use Drupal\blazy\Blazy;
-use Drupal\blazy\BlazyManagerInterface;
 use Drupal\blazy\Dejavu\BlazyStylePluginBase;
 use Drupal\slick\SlickDefault;
-use Drupal\slick\SlickManagerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -22,18 +19,21 @@ abstract class SlickViewsBase extends BlazyStylePluginBase {
   protected $manager;
 
   /**
-   * Constructs a SlickManager object.
-   */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, BlazyManagerInterface $blazy_manager, SlickManagerInterface $manager) {
-    parent::__construct($configuration, $plugin_id, $plugin_definition, $blazy_manager);
-    $this->manager = $manager;
-  }
-
-  /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
-    return new static($configuration, $plugin_id, $plugin_definition, $container->get('blazy.manager'), $container->get('slick.manager'));
+    $instance = parent::create($container, $configuration, $plugin_id, $plugin_definition);
+    $instance->manager = $container->get('slick.manager');
+    $instance->blazyManager = isset($instance->blazyManager) ? $instance->blazyManager : $container->get('blazy.manager');
+
+    return $instance;
+  }
+
+  /**
+   * Returns the slick manager.
+   */
+  public function manager() {
+    return $this->manager;
   }
 
   /**
@@ -57,7 +57,7 @@ abstract class SlickViewsBase extends BlazyStylePluginBase {
   /**
    * Returns the defined scopes for the current form.
    */
-  protected function getDefinedFormScopes() {
+  protected function getDefinedFormScopes(array $extra_fields = []) {
     // Pass the common field options relevant to this style.
     $fields = [
       'captions',
@@ -72,8 +72,10 @@ abstract class SlickViewsBase extends BlazyStylePluginBase {
     ];
 
     // Fetches the returned field definitions to be used to define form scopes.
+    $fields = array_merge($fields, $extra_fields);
     $definition = $this->getDefinedFieldOptions($fields);
 
+    // @todo remove _form for forms when Blazy 2.x has it.
     $options = [
       'fieldable_form',
       'grid_form',
@@ -87,6 +89,10 @@ abstract class SlickViewsBase extends BlazyStylePluginBase {
       $definition[$key] = TRUE;
     }
 
+    $definition['forms'] = ['fieldable' => TRUE, 'grid' => TRUE];
+    $definition['opening_class'] = 'form--views';
+    $definition['_views'] = TRUE;
+
     return $definition;
   }
 
@@ -94,9 +100,12 @@ abstract class SlickViewsBase extends BlazyStylePluginBase {
    * Build the Slick settings form.
    */
   protected function buildSettingsForm(&$form, &$definition) {
+    $count = count($definition['captions']);
+    $definition['captions_count'] = $count;
+
     $this->admin()->buildSettingsForm($form, $definition);
 
-    $count = count($definition['captions']);
+    // @todo remove custom classes for Blazy 2.x and 1.x updates.
     $wide = $count > 2 ? ' form--wide form--caption-' . $count : ' form--caption-' . $count;
     $title = '<p class="form__header form__title">';
     $title .= $this->t('Check Vanilla if using content/custom markups, not fields. <small>See it under <strong>Format > Show</strong> section. Otherwise slick markups apply which require some fields added below.</small>');
@@ -120,38 +129,25 @@ abstract class SlickViewsBase extends BlazyStylePluginBase {
         'hover' => $this->t('Hoverable'),
         'grid' => $this->t('Static grid'),
       ],
+      '#empty_option' => $this->t('- None -'),
       '#description' => $this->t('Dependent on a Skin, Dots and Thumbnail image options. No asnavfor/ Optionset thumbnail is needed. <ol><li><strong>Hoverable</strong>: Dots pager are kept, and thumbnail will be hidden and only visible on dot mouseover, default to min-width 120px.</li><li><strong>Static grid</strong>: Dots are hidden, and thumbnails are displayed as a static grid acting like dots pager.</li></ol>Alternative to asNavFor aka separate thumbnails as slider.'),
       '#weight' => -100,
     ];
   }
 
   /**
-   * Overrides StylePluginBase::render().
+   * {@inheritdoc}
    */
   protected function buildSettings() {
-    $view      = $this->view;
-    $count     = count($view->result);
-    $settings  = $this->options;
-    $view_name = $view->storage->id();
-    $view_mode = $view->current_display;
-    $id        = Blazy::getHtmlId("slick-views-{$view_name}-{$view_mode}", $settings['id']);
-    $settings += [
-      'cache_metadata' => [
-        'keys' => [$id, $view_mode, $settings['optionset']],
-      ],
-    ];
+    // @todo move it into self::prepareSettings() post blazy:2.x.
+    $this->options['item_id'] = 'slide';
+    $this->options['namespace'] = 'slick';
+    $settings = parent::buildSettings();
 
     // Prepare needed settings to work with.
-    $settings['id']                = $id;
-    $settings['item_id']           = 'slide';
-    $settings['cache_tags']        = $view->getCacheTags();
-    $settings['caption']           = array_filter($settings['caption']);
-    $settings['count']             = $count;
-    $settings['current_view_mode'] = $view_mode;
-    $settings['namespace']         = 'slick';
-    $settings['nav']               = !$settings['vanilla'] && $settings['optionset_thumbnail'] && isset($view->result[1]);
-    $settings['overridables']      = empty($settings['override']) ? array_filter($settings['overridables']) : $settings['overridables'];
-    $settings['view_name']         = $view_name;
+    $settings['caption'] = array_filter($settings['caption']);
+    $settings['nav'] = !$settings['vanilla'] && $settings['optionset_thumbnail'] && isset($this->view->result[1]);
+    $settings['overridables'] = empty($settings['override']) ? array_filter($settings['overridables']) : $settings['overridables'];
 
     return $settings;
   }
@@ -162,7 +158,6 @@ abstract class SlickViewsBase extends BlazyStylePluginBase {
   public function buildElements(array $settings, $rows) {
     $build   = [];
     $view    = $this->view;
-    $keys    = array_keys($view->field);
     $item_id = $settings['item_id'];
 
     foreach ($rows as $index => $row) {
@@ -174,9 +169,10 @@ abstract class SlickViewsBase extends BlazyStylePluginBase {
       // Provides a potential unique thumbnail different from the main image.
       if (!empty($settings['thumbnail'])) {
         $thumbnail = $this->getFieldRenderable($row, 0, $settings['thumbnail']);
-        if (isset($thumbnail['rendered']['#item'])) {
-          $item = $thumbnail['rendered']['#item'];
-          $settings['thumbnail_uri'] = (($entity = $item->entity) && empty($item->uri)) ? $entity->getFileUri() : $item->uri;
+        if (isset($thumbnail['rendered']['#image_style'], $thumbnail['rendered']['#item']) && $item = $thumbnail['rendered']['#item']) {
+          $uri = (($entity = $item->entity) && empty($item->uri)) ? $entity->getFileUri() : $item->uri;
+          $settings['thumbnail_style'] = $thumbnail['rendered']['#image_style'];
+          $settings['thumbnail_uri'] = empty($settings['thumbnail_style']) ? $uri : $this->manager->entityLoad($settings['thumbnail_style'], 'image_style')->buildUri($uri);
         }
       }
 
@@ -204,7 +200,7 @@ abstract class SlickViewsBase extends BlazyStylePluginBase {
         $slide['settings']['class'] = empty($classes[$index]) ? [] : $classes[$index];
       }
 
-      if (empty($slide[$item_id])) {
+      if (empty($slide[$item_id]) && !empty($settings['image'])) {
         $slide[$item_id] = $this->getFieldRendered($index, $settings['image']);
       }
 

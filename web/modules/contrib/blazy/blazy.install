@@ -25,3 +25,42 @@ function blazy_requirements($phase) {
     ],
   ];
 }
+
+/**
+ * Added new services blazy.oembed and blazy.entity.
+ */
+function blazy_update_8201() {
+  // Do nothing to clear cache.
+}
+
+/**
+ * Added a new argument date.formatter to blazy.admin.base service.
+ */
+function blazy_update_8202() {
+  // Do nothing to clear cache.
+}
+
+/**
+ * Added a new argument @entity.repository to blazy.manager.base service.
+ */
+function blazy_update_8203() {
+  // Do nothing to clear cache.
+}
+
+/**
+ * Added new classes: BlazyUtil, BlazyBreakpoint to declutter Blazy.
+ */
+function blazy_update_8204() {
+  // Do nothing to clear cache.
+}
+
+/**
+ * Removed deprecated or no longer in use classes, settings, etc.
+ */
+function blazy_update_8205() {
+  $config = \Drupal::configFactory()->getEditable('blazy.settings');
+  foreach (['native', 'unbreakpoints'] as $key) {
+    $config->clear($key);
+  }
+  $config->save(TRUE);
+}

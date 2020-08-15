@@ -3,6 +3,8 @@
 namespace Drupal\Tests\blazy\Unit;
 
 use Drupal\Tests\UnitTestCase;
+use Drupal\Tests\blazy\Traits\BlazyUnitTestTrait;
+use Drupal\blazy\BlazyDefault;
 use Drupal\blazy\BlazyGrid;
 
 /**
@@ -12,13 +14,15 @@ use Drupal\blazy\BlazyGrid;
  */
 class BlazyGridUnitTest extends UnitTestCase {
 
+  use BlazyUnitTestTrait;
+
   /**
    * Tests \Drupal\blazy\BlazyGrid::build().
    *
    * @covers ::build
-   * @covers ::buildGridItemAttributes
    */
   public function testBuild() {
+    $settings                    = BlazyDefault::htmlSettings();
     $settings['grid']            = 4;
     $settings['grid_medium']     = 3;
     $settings['grid_small']      = 2;
@@ -30,7 +34,7 @@ class BlazyGridUnitTest extends UnitTestCase {
 
     $items = [];
     foreach (range(1, 3) as $key) {
-      $items[] = '<img src="/core/misc/druplicon.png" alt="thumbnail ' . $key . '">';
+      $items[] = ['#markup' => '<img src="/core/misc/druplicon.png" alt="thumbnail ' . $key . '">'];
     }
 
     $element = BlazyGrid::build($items, $settings);

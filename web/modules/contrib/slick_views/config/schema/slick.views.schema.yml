@@ -1,12 +1,8 @@
 # Schema for the Slick views style plugins.
 
-views.style.slick:
+slick_extended_views:
   type: slick_extended
-  label: 'Slick Carousel'
-
-views.style.slick_grouping:
-  type: slick_extended
-  label: 'Slick Grouping'
+  label: 'Slick extended views settings'
   mapping:
     grouping:
       type: sequence
@@ -30,3 +26,11 @@ views.style.slick_grouping:
     grouping_optionset:
       type: string
       label: 'Grouping optionset'
+
+views.style.slick:
+  type: slick_extended_views
+  label: 'Slick Carousel'
+
+views.style.slick_grouping:
+  type: slick_extended_views
+  label: 'Slick Grouping'

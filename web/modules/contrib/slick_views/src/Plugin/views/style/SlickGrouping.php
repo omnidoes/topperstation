@@ -100,7 +100,6 @@ class SlickGrouping extends SlickViewsBase {
    * Overrides StylePluginBase::render().
    */
   public function render() {
-    $view     = $this->view;
     $sets     = parent::render();
     $settings = $this->options;
     $grouping = empty($settings['grouping']) ? [] : array_filter($settings['grouping']);
@@ -142,13 +141,13 @@ class SlickGrouping extends SlickViewsBase {
    */
   protected function renderRowGroup(array $rows = [], $level = 0) {
     $view      = $this->view;
-    $count     = count($view->result);
     $settings  = $this->options;
     $view_name = $view->storage->id();
     $view_mode = $view->current_display;
+    $plugin_id = $this->getPluginId();
     $grouping  = empty($settings['grouping']) ? [] : array_filter($settings['grouping']);
     $id        = $grouping ? "{$view_name}-{$view_mode}-{$level}" : "{$view_name}-{$view_mode}";
-    $id        = Blazy::getHtmlId('slick-views-' . $id, $settings['id']);
+    $id        = Blazy::getHtmlId($plugin_id . '-views-' . $id, $settings['id']);
     $settings  = $this->buildSettings();
 
     // Prepare needed settings to work with.
@@ -157,22 +156,10 @@ class SlickGrouping extends SlickViewsBase {
       $settings['nav'] = !$settings['vanilla'] && $settings['optionset_thumbnail'] && isset($view->result[1]);
     }
 
-    // Fetches thumbnail image style from the first found image, if any.
-    if (!empty($settings['thumbnail'])) {
-      $row = reset($rows);
-      $thumb = $this->getFieldRenderable($row, 0, $settings['thumbnail']);
-
-      if ($thumb && isset($thumb['rendered']) && isset($thumb['rendered']['#image_style'])) {
-        $settings['thumbnail_style'] = $thumb['rendered']['#image_style'];
-      }
-    }
-
     $build = $this->buildElements($settings, $rows);
 
-    // Supports Blazy formatter multi-breakpoint images if available.
-    if (empty($settings['vanilla']) && !empty($build['items']) && isset($build['items'][0])) {
-      $this->blazyManager()->isBlazy($settings, $build['items'][0]);
-    }
+    // Supports Blazy multi-breakpoint images if using Blazy formatter.
+    $settings['first_image'] = isset($rows[0]) ? $this->getFirstImage($rows[0]) : [];
 
     $build['settings'] = $settings;
 

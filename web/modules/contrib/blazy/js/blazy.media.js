@@ -1,6 +1,8 @@
 /**
  * @file
  * Provides Media module integration.
+ *
+ * @todo use classList anytime.
  */
 
 (function (Drupal, _db) {
@@ -18,6 +20,7 @@
     var iframe = t.querySelector('iframe');
     var btn = t.querySelector('.media__icon--play');
 
+    // Media player toggler is disabled, just display iframe.
     if (btn === null) {
       return;
     }
@@ -28,7 +31,7 @@
     /**
      * Play the media.
      *
-     * @param {jQuery.Event} event
+     * @param {Event} event
      *   The event triggered by a `click` event.
      *
      * @return {bool}|{mixed}
@@ -51,18 +54,28 @@
 
       // First, reset any video to avoid multiple videos from playing.
       if (playing !== null) {
+        var played = document.querySelector('.is-playing iframe');
+        // Remove the previous iframe.
+        if (played !== null) {
+          playing.removeChild(played);
+        }
         playing.className = playing.className.replace(/(\S+)playing/, '');
       }
 
       // Appends the iframe.
       player.className += ' is-playing';
-      newIframe = document.createElement('iframe');
-      newIframe.className = 'media__iframe media__element';
-      newIframe.setAttribute('src', url);
-      newIframe.setAttribute('allowfullscreen', true);
 
+      // Remove the existing iframe on the current clicked iframe.
       if (iframe !== null) {
         player.removeChild(iframe);
+      }
+
+      // Cache iframe for the potential repeating clicks.
+      if (!newIframe) {
+        newIframe = document.createElement('iframe');
+        newIframe.className = 'media__iframe media__element';
+        newIframe.setAttribute('src', url);
+        newIframe.setAttribute('allowfullscreen', true);
       }
 
       player.appendChild(newIframe);
@@ -71,7 +84,7 @@
     /**
      * Close the media.
      *
-     * @param {jQuery.Event} event
+     * @param {Event} event
      *   The event triggered by a `click` event.
      */
     function stop(event) {
@@ -79,7 +92,7 @@
 
       var target = this;
       var player = target.parentNode;
-      var iframe = player.querySelector('iframe.media__element');
+      var iframe = player.querySelector('iframe');
 
       if (player.className.match('is-playing')) {
         player.className = player.className.replace(/(\S+)playing/, '');
@@ -92,7 +105,7 @@
 
     // Remove iframe to avoid browser requesting them till clicked.
     // The iframe is there as Blazy supports non-lazyloaded/ non-JS iframes.
-    if (iframe !== null) {
+    if (iframe !== null && iframe.parentNode != null) {
       iframe.parentNode.removeChild(iframe);
     }
 
@@ -122,14 +135,15 @@
     var alt = img !== null ? img.getAttribute('alt') : 'Video preview';
     var pad = media ? Math.round(((media.height / media.width) * 100), 2) : 100;
     var boxUrl = elm.getAttribute('data-box-url');
-    var embedUrl = elm.getAttribute('href');
+    var href = elm.getAttribute('href');
+    var oembedUrl = elm.hasAttribute('data-oembed-url') ? elm.getAttribute('data-oembed-url') : href;
     var html;
 
     html = '<div class="media-wrapper media-wrapper--inline" style="width:' + media.width + 'px">';
     html += '<div class="media media--switch media--player media--ratio media--ratio--fluid" style="padding-bottom: ' + pad + '%">';
     html += '<img src="' + boxUrl + '" class="media__image media__element" alt="' + Drupal.t(alt) + '"/>';
     html += '<span class="media__icon media__icon--close"></span>';
-    html += '<span class="media__icon media__icon--play" data-url="' + embedUrl + '" data-autoplay="' + embedUrl + '"></span>';
+    html += '<span class="media__icon media__icon--play" data-url="' + oembedUrl + '"></span>';
     html += '</div></div>';
 
     return html;
@@ -142,8 +156,10 @@
    */
   Drupal.behaviors.blazyMedia = {
     attach: function (context) {
-      var players = context.querySelectorAll('.media--switch.media--player:not(.media--player--on)');
-      _db.once(_db.forEach(players, blazyMedia));
+      var players = context.querySelectorAll('.media--player:not(.media--player--on)');
+      if (players.length > 0) {
+        _db.once(_db.forEach(players, blazyMedia));
+      }
     }
   };
 

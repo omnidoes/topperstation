@@ -7,12 +7,41 @@ blazy:
     url: https://github.com/dinbror/blazy/blob/master/LICENSE
     gpl-compatible: true
   js:
-    /libraries/blazy/blazy.min.js: { weight: -4, minified: true }
+    /libraries/blazy/blazy.js: { weight: -4 }
+
+base:
+  css:
+    component:
+      css/blazy.css: {}
+
+filter:
+  css:
+    component:
+      css/components/blazy.filter.css: {}
 
 loading:
   css:
     component:
       css/components/blazy.loading.css: {}
+  dependencies:
+    - blazy/base
+
+fx.blur:
+  css:
+    component:
+      css/components/blazy.fx.blur.css: {}
+  dependencies:
+    - blazy/loading
+
+oembed:
+  css:
+    component:
+      css/components/blazy.oembed.css: {}
+
+preview:
+  css:
+    component:
+      css/components/blazy.preview.css: {}
 
 ratio:
   css:
@@ -23,34 +52,71 @@ grid:
   css:
     component:
       css/components/blazy.grid.css: {}
+  dependencies:
+    - blazy/base
 
 column:
   css:
     component:
       css/components/blazy.column.css: {}
+  dependencies:
+    - blazy/base
 
 dblazy:
   js:
-    js/dblazy.min.js: { weight: -3, minified: true }
+    js/dblazy.js: { weight: -4 }
+  dependencies:
+    - blazy/base
+
+# @todo adjust weights to use hundredth decimals.
+bio:
+  js:
+    js/bio.js: { weight: -3 }
+  dependencies:
+    - blazy/dblazy
+
+bio.media:
+  js:
+    js/bio.media.js: { weight: -2 }
+  dependencies:
+    - blazy/bio
 
 load:
   js:
-    js/blazy.load.min.js: { weight: -1, minified: true }
+    js/blazy.load.js: { weight: -1.5 }
   dependencies:
-    - core/drupal
+    - core/drupal.debounce
     - blazy/blazy
     - blazy/dblazy
     - blazy/loading
 
+bio.ajax:
+  js:
+    js/bio.ajax.js: {}
+  dependencies:
+    - core/drupal.ajax
+    - blazy/load
+
 media:
   js:
-    js/blazy.media.min.js: {}
+    js/blazy.media.js: {}
   css:
     component:
       css/components/blazy.media.css: {}
   dependencies:
     - core/drupal
     - blazy/ratio
+
+blazybox:
+  js:
+    js/blazy.blazybox.js: {}
+  css:
+    component:
+      css/components/blazy.blazybox.css: {}
+  dependencies:
+    - core/drupal
+    - blazy/dblazy
+    - blazy/lightbox
 
 lightbox:
   css:
@@ -66,7 +132,7 @@ colorbox.skin:
 
 colorbox:
   js:
-    js/blazy.colorbox.min.js: { minified: true }
+    js/blazy.colorbox.js: {}
   dependencies:
     - core/drupal
     - blazy/load
@@ -81,8 +147,8 @@ photobox:
     url: https://github.com/yairEO/photobox/issues/17
     gpl-compatible: true
   js:
-    /libraries/photobox/photobox/jquery.photobox.js: { minified: true }
-    js/blazy.photobox.min.js: { minified: true }
+    /libraries/photobox/photobox/jquery.photobox.js: {}
+    js/blazy.photobox.js: {}
   css:
     base:
       /libraries/photobox/photobox/photobox.css: {}
@@ -96,7 +162,7 @@ photobox:
 
 admin:
   js:
-    js/blazy.admin.min.js: { minified: true }
+    js/blazy.admin.js: {}
   css:
     theme:
       css/blazy.admin.css: {}

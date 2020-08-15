@@ -29,9 +29,7 @@
 #}
 {%
   set classes = [
-    'slick',
     settings.unslick ? 'unslick',
-    display == 'main' and settings.blazy ? 'blazy',
     settings.vertical ? 'slick--vertical',
     settings.attributes.class ? settings.attributes.class|join(' '),
     settings.skin ? 'slick--skin--' ~ settings.skin|clean_class,
@@ -53,30 +51,28 @@
     settings.skin_arrows ? 'slick__arrow--' ~ settings.skin_arrows|clean_class
   ]
 %}
-
 <div{{ attributes.addClass(classes) }}>
   {% if not settings.unslick %}
     <div{{ content_attributes.addClass('slick__slider') }}>
   {% endif %}
 
   {% block slick_content %}
-    {% for item in items %}
-      {{ item }}
-    {% endfor %}
+    {{ items }}
   {% endblock %}
 
   {% if not settings.unslick %}
     </div>
     {% block slick_arrow %}
       <nav{{ arrow_attributes.addClass(arrow_classes) }}>
-        {{ settings.prevArrow|striptags('<a><em><span><strong><button><div>')|raw }}
+        <button type="button" data-role="none" class="slick-prev" aria-label="{{ settings.prevArrow|t }}" tabindex="0">{{ settings.prevArrow|t }}</button>
         {% if arrow_down_attributes is defined %}
           <button{{ arrow_down_attributes.addClass('slick-down')
             .setAttribute('type', 'button')
+            .setAttribute('data-role', 'none')
             .setAttribute('data-target', settings.downArrowTarget)
             .setAttribute('data-offset', settings.downArrowOffset) }}></button>
         {% endif %}
-        {{ settings.nextArrow|striptags('<a><em><span><strong><button><div>')|raw }}
+        <button type="button" data-role="none" class="slick-next" aria-label="{{ settings.nextArrow|t }}" tabindex="0">{{ settings.nextArrow|t }}</button>
       </nav>
     {% endblock %}
   {% endif %}

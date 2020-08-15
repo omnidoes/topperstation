@@ -4,6 +4,7 @@ namespace Drupal\Tests\slick\Kernel;
 
 use Drupal\Tests\blazy\Kernel\BlazyKernelTestBase;
 use Drupal\Tests\slick\Traits\SlickUnitTestTrait;
+use Drupal\Slick\SlickDefault;
 
 /**
  * Tests the Slick field rendering using the image field type.
@@ -23,6 +24,7 @@ class SlickFormatterTest extends BlazyKernelTestBase {
   public static $modules = [
     'system',
     'user',
+    'help',
     'field',
     'file',
     'image',
@@ -66,7 +68,7 @@ class SlickFormatterTest extends BlazyKernelTestBase {
     $settings = [
       'optionset' => 'test',
       'optionset_thumbnail' => 'test_nav',
-    ] + $this->getFormatterSettings();
+    ] + $this->getFormatterSettings() + SlickDefault::extendedSettings();
 
     $data['settings'] = $settings;
     $this->display = $this->setUpFormatterDisplay($bundle, $data);
@@ -75,7 +77,7 @@ class SlickFormatterTest extends BlazyKernelTestBase {
     $this->displayEmpty = $this->setUpFormatterDisplay($bundle, $data);
 
     $this->formatterInstance = $this->getFormatterInstance();
-    $this->skins = $this->slickManager->getSkins();
+    $this->skins = $this->slickManager->skinManager()->getSkins();
 
     $this->setUpContentWithItems($bundle);
     $this->setUpRealImage();
@@ -85,7 +87,6 @@ class SlickFormatterTest extends BlazyKernelTestBase {
    * Tests the Slick formatters.
    */
   public function testSlickFormatter() {
-    $bundle = $this->bundle;
     $entity = $this->entity;
 
     // Generate the render array to verify if the cache tags are as expected.
@@ -127,10 +128,10 @@ class SlickFormatterTest extends BlazyKernelTestBase {
    * @dataProvider providerTestGetThumbnail
    */
   public function testGetThumbnail($uri, $expected) {
-    $settings = $this->getFormatterSettings();
+    $settings = $this->getFormatterSettings() + SlickDefault::extendedSettings();
     $settings['uri'] = empty($uri) ? '' : $this->uri;
 
-    $thumbnail = $this->slickFormatter->getThumbnail($settings, $this->image);
+    $thumbnail = $this->slickFormatter->getThumbnail($settings, $this->testItem);
     $this->assertEquals($expected, !empty($thumbnail));
   }
 
@@ -165,7 +166,7 @@ class SlickFormatterTest extends BlazyKernelTestBase {
    * @dataProvider providerTestBuildSettings
    */
   public function testBuildSettings(array $settings, $expected) {
-    $format['settings'] = array_merge($this->getFormatterSettings(), $settings);
+    $format['settings'] = array_merge($this->getFormatterSettings(), $settings) + SlickDefault::extendedSettings();
 
     $this->slickFormatter->buildSettings($format, $this->testItems);
     $this->assertArrayHasKey('bundle', $format['settings']);
@@ -178,29 +179,24 @@ class SlickFormatterTest extends BlazyKernelTestBase {
    *   An array of tested data.
    */
   public function providerTestBuildSettings() {
-    $breakpoints = $this->getDataBreakpoints(TRUE);
-
     $data[] = [
       [
-        'vanilla'     => TRUE,
-        'breakpoints' => [],
+        'vanilla' => TRUE,
       ],
       FALSE,
     ];
     $data[] = [
       [
-        'vanilla'     => FALSE,
-        'breakpoints' => [],
-        'blazy'       => FALSE,
-        'ratio'       => 'fluid',
+        'vanilla' => FALSE,
+        'blazy' => FALSE,
+        'ratio' => 'fluid',
       ],
       TRUE,
     ];
     $data[] = [
       [
-        'vanilla'     => FALSE,
-        'breakpoints' => $breakpoints,
-        'blazy'       => TRUE,
+        'vanilla' => FALSE,
+        'blazy' => TRUE,
       ],
       TRUE,
     ];

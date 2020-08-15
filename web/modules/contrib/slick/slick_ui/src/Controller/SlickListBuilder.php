@@ -2,53 +2,14 @@
 
 namespace Drupal\slick_ui\Controller;
 
-use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Entity\EntityInterface;
-use Drupal\Core\Entity\EntityStorageInterface;
-use Drupal\Core\Entity\EntityTypeInterface;
-use Drupal\Core\Config\Entity\DraggableListBuilder;
 use Drupal\Component\Utility\Html;
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\blazy\BlazyGrid;
-use Drupal\slick\SlickManagerInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Provides a listing of Slick optionsets.
  */
-class SlickListBuilder extends DraggableListBuilder {
-
-  /**
-   * The slick manager.
-   *
-   * @var \Drupal\slick\SlickManagerInterface
-   */
-  protected $manager;
-
-  /**
-   * Constructs a new SlickListBuilder object.
-   *
-   * @param \Drupal\Core\Entity\EntityTypeInterface $entity_type
-   *   The entity type definition.
-   * @param \Drupal\Core\Entity\EntityStorageInterface $storage
-   *   The entity storage class.
-   * @param \Drupal\slick\SlickManagerInterface $manager
-   *   The slick manager.
-   */
-  public function __construct(EntityTypeInterface $entity_type, EntityStorageInterface $storage, SlickManagerInterface $manager) {
-    parent::__construct($entity_type, $storage);
-    $this->manager = $manager;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function createInstance(ContainerInterface $container, EntityTypeInterface $entity_type) {
-    return new static(
-      $entity_type,
-      $container->get('entity_type.manager')->getStorage($entity_type->id()),
-      $container->get('slick.manager')
-    );
-  }
+class SlickListBuilder extends SlickListBuilderBase {
 
   /**
    * {@inheritdoc}
@@ -76,8 +37,8 @@ class SlickListBuilder extends DraggableListBuilder {
    * {@inheritdoc}
    */
   public function buildRow(EntityInterface $entity) {
-    $skins = $this->manager->getSkins()['skins'];
-    $skin  = $entity->getSkin();
+    $skins = $this->manager->skinManager()->getSkins()['skins'];
+    $skin = $entity->getSkin();
 
     $row['label'] = Html::escape($entity->label());
     $row['breakpoints']['#markup'] = $entity->getBreakpoints();
@@ -96,29 +57,6 @@ class SlickListBuilder extends DraggableListBuilder {
   }
 
   /**
-   * {@inheritdoc}
-   */
-  public function getDefaultOperations(EntityInterface $entity) {
-    $operations = parent::getDefaultOperations($entity);
-
-    if (isset($operations['edit'])) {
-      $operations['edit']['title'] = $this->t('Configure');
-    }
-
-    $operations['duplicate'] = [
-      'title'  => $this->t('Duplicate'),
-      'weight' => 15,
-      'url'    => $entity->toUrl('duplicate-form'),
-    ];
-
-    if ($entity->id() == 'default') {
-      unset($operations['delete'], $operations['edit']);
-    }
-
-    return $operations;
-  }
-
-  /**
    * Adds some descriptive text to the slick optionsets list.
    *
    * @return array
@@ -132,7 +70,7 @@ class SlickListBuilder extends DraggableListBuilder {
     ];
 
     $availaible_skins = [];
-    $skins = $manager->getSkins()['skins'];
+    $skins = $manager->skinManager()->getSkins()['skins'];
 
     foreach ($skins as $key => $skin) {
       $name = isset($skin['name']) ? $skin['name'] : $key;
@@ -175,15 +113,6 @@ class SlickListBuilder extends DraggableListBuilder {
 
     $build[] = parent::render();
     return $build;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function submitForm(array &$form, FormStateInterface $form_state) {
-    parent::submitForm($form, $form_state);
-
-    drupal_set_message($this->t('The optionsets order has been updated.'));
   }
 
 }
