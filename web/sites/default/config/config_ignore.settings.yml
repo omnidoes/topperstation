@@ -11,5 +11,6 @@ ignored_config_entities:
   - system.performance
   - simple_block.simple_block.schedule_intro
   - simple_block.simple_block.watch_videos_intro
+  - field.field.taxonomy_term.show_categories.field_image.yml
 _core:
   default_config_hash: UVH1aJ4b44UM-VdPVN7hNNuuVqfReJxwfVeDQH1Hvsk
