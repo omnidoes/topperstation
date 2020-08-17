@@ -136,17 +136,6 @@ processor_settings:
     weights:
       preprocess_index: -47
       preprocess_query: -46
-  ignorecase:
-    all_fields: false
-    fields:
-      - body
-      - description
-      - long_description
-      - name
-      - title
-    weights:
-      preprocess_index: -48
-      preprocess_query: -48
   ignore_character:
     all_fields: false
     fields:
@@ -167,6 +156,17 @@ processor_settings:
     weights:
       preprocess_index: -10
       preprocess_query: -10
+  ignorecase:
+    all_fields: false
+    fields:
+      - body
+      - description
+      - long_description
+      - name
+      - title
+    weights:
+      preprocess_index: -48
+      preprocess_query: -48
   language_with_fallback: {  }
   rendered_item: {  }
   stemmer:
