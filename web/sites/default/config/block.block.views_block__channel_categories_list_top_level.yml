@@ -1,21 +1,21 @@
-uuid: 16081454-5256-4277-86a0-28cf5395de80
+uuid: d9e8c216-2784-4dd5-9bcb-89a3b7780d19
 langcode: en
 status: true
 dependencies:
   config:
-    - views.view.shows
+    - views.view.channel_categories
   module:
     - views
   theme:
     - topperstation
-id: views_block__shows_block_shows_list
+id: views_block__channel_categories_list_top_level
 theme: topperstation
 region: footer_first
-weight: 0
+weight: -8
 provider: null
-plugin: 'views_block:shows-block_shows_list'
+plugin: 'views_block:channel_categories-list_top_level'
 settings:
-  id: 'views_block:shows-block_shows_list'
+  id: 'views_block:channel_categories-list_top_level'
   label: ''
   provider: views
   label_display: visible
