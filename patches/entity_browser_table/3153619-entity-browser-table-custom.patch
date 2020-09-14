@@ -1,0 +1,52 @@
+diff --git a/entity_browser_table.libraries.yml b/entity_browser_table.libraries.yml
+index 8355470..c5f6f2f 100644
+--- a/entity_browser_table.libraries.yml
++++ b/entity_browser_table.libraries.yml
+@@ -1,6 +1,8 @@
+ entity_browser_table:
+-  js:
+-    js/entity_browser.table.js: {}
+   css:
+     theme:
+       css/entity_browser.table.css: {}
++  js:
++    js/entity_browser.table.js: {}
++  dependencies:
++    - core/sortable
+diff --git a/js/entity_browser.table.js b/js/entity_browser.table.js
+index dbec9b1..2403f7e 100644
+--- a/js/entity_browser.table.js
++++ b/js/entity_browser.table.js
+@@ -4,20 +4,17 @@
+  * Allows the table rows to be sortable.
+  */
+ 
+-(function ($, Drupal) {
+-    'use strict';
+-    document.querySelector('.table--widget-entity_reference_browser_table_widget').querySelector('tbody').classList += ' entities-list sortable ui-sortable';
+-    Drupal.behaviors.entityBrowserEntityReferenceTable = {
+-        attach: function (context) {
+-            $(context).find('.table--widget-entity_reference_browser_table_widget').find('tbody').addClass('entities-list sortable ui-sortable');
+-        }
+-    };
++(function ($, Drupal, Sortable) {
++
++  'use strict';
+ 
+   /**
+    * Registers behaviours related to entity reference field widget.
+    */
+   Drupal.behaviors.entityBrowserEntityReferenceTable = {
+     attach: function (context) {
++      $(context).find('.table--widget-entity_reference_browser_table_widget').find('tbody').addClass('entities-list sortable ui-sortable');
++
+       var sortableSelector = context.querySelectorAll('.table--widget-entity_reference_browser_table_widget .entities-list.sortable');
+       sortableSelector.forEach(function (widget) {
+         $(widget).find('.item-container .handle').parent().addClass('handle-cell');
+@@ -64,5 +61,5 @@
+     }
+     $(widget).parent().parent().find('input[type*=hidden][name*="[target_id]"]').val(ids.join(' '));
+   };
+-}(jQuery, Drupal));
++}(jQuery, Drupal, Sortable));
+ 

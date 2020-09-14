@@ -4,20 +4,17 @@
  * Allows the table rows to be sortable.
  */
 
-(function ($, Drupal) {
-    'use strict';
-    document.querySelector('.table--widget-entity_reference_browser_table_widget').querySelector('tbody').classList += ' entities-list sortable ui-sortable';
-    Drupal.behaviors.entityBrowserEntityReferenceTable = {
-        attach: function (context) {
-            $(context).find('.table--widget-entity_reference_browser_table_widget').find('tbody').addClass('entities-list sortable ui-sortable');
-        }
-    };
+(function ($, Drupal, Sortable) {
+
+  'use strict';
 
   /**
    * Registers behaviours related to entity reference field widget.
    */
   Drupal.behaviors.entityBrowserEntityReferenceTable = {
     attach: function (context) {
+      $(context).find('.table--widget-entity_reference_browser_table_widget').find('tbody').addClass('entities-list sortable ui-sortable');
+
       var sortableSelector = context.querySelectorAll('.table--widget-entity_reference_browser_table_widget .entities-list.sortable');
       sortableSelector.forEach(function (widget) {
         $(widget).find('.item-container .handle').parent().addClass('handle-cell');
@@ -64,5 +61,5 @@
     }
     $(widget).parent().parent().find('input[type*=hidden][name*="[target_id]"]').val(ids.join(' '));
   };
-}(jQuery, Drupal));
+}(jQuery, Drupal, Sortable));
 

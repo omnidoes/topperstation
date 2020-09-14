@@ -8,7 +8,7 @@ dependencies:
     - field.field.paragraph.video_collection.field_collection_videos
     - paragraphs.paragraphs_type.video_collection
   module:
-    - entity_browser_table
+    - entity_browser
 id: paragraph.video_collection.default
 targetEntityType: paragraph
 bundle: video_collection
@@ -23,7 +23,7 @@ content:
     type: string_textfield
     region: content
   field_collection_videos:
-    type: entity_reference_browser_table_widget
+    type: entity_browser_table
     weight: 1
     settings:
       entity_browser: brightcove_videos
@@ -34,6 +34,10 @@ content:
       field_widget_edit: false
       field_widget_replace: false
       field_widget_display_settings: {  }
+      table_settings:
+        status_column: false
+        bundle_column: false
+        label_column: false
     third_party_settings: {  }
     region: content
 hidden:
