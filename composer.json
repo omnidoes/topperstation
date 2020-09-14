@@ -65,6 +65,7 @@
         "drupal/svg_image": "^1.9",
         "drupal/time_field": "^1.12",
         "drupal/twig_tweak": "^2.3",
+        "drupal/redirect": "^1.6",
         "drupal/views_block_filter_block": "^1.0",
         "drupal/views_jump_menu": "^1.0@beta",
         "drupal/views_selective_filters": "dev-8.x-1.x",
