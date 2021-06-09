@@ -23,25 +23,25 @@
     ],
     "require": {
         "php": ">=7.0.8",
-        "composer/installers": "^1.7",
-        "cweagans/composer-patches": "^1.0",
-        "drupal-composer/drupal-scaffold": "^2.0.1",
+        "composer/installers": "^1.9",
+        "cweagans/composer-patches": "^1.7",
         "drupal/addtoany": "^1.12",
-        "drupal/admin_toolbar": "^1.26",
-        "drupal/better_exposed_filters": "^3.0@alpha",
-        "drupal/blazy": "2.1",
+        "drupal/admin_toolbar": "^2.4",
+        "drupal/better_exposed_filters": "5.0-beta1",
+        "drupal/blazy": "2.2",
         "drupal/block_class": "^1.0",
         "drupal/block_content_permissions": "^1.6",
         "drupal/brightcove": "^1.3",
-        "drupal/config_direct_save": "^1.0",
+        "drupal/config_direct_save": "^2.1",
         "drupal/config_ignore": "^2.1",
         "drupal/config_installer": "^1.0",
         "drupal/console": "^1",
-        "drupal/core-recommended": "^8.8",
+        "drupal/core-composer-scaffold": "^8.9",
+        "drupal/core-recommended": "^8.9",
         "drupal/ctools": "^3.2",
         "drupal/devel": "^2.0",
         "drupal/entityqueue": "^1.0@beta",
-        "drupal/field_group": "^1.0",
+        "drupal/field_group": "^3.1",
         "drupal/focal_point": "^1.0",
         "drupal/google_analytics": "^3.0",
         "drupal/inline_entity_form": "~1.0",
@@ -56,9 +56,9 @@
         "drupal/pathauto": "^1.4",
         "drupal/search_api": "^1.13",
         "drupal/simple_block": "^1.0@beta",
-        "drupal/slick": "2.2",
+        "drupal/slick": "2.3",
         "drupal/slick_entityreference": "2.0",
-        "drupal/slick_views": "2.3",
+        "drupal/slick_views": "2.4",
         "drupal/smart_trim": "^1.1",
         "drupal/social_link_field": "^1.0@alpha",
         "drupal/social_media_links": "^2.6",
@@ -68,23 +68,22 @@
         "drupal/redirect": "^1.6",
         "drupal/views_block_filter_block": "^1.0",
         "drupal/views_jump_menu": "^1.0@beta",
-        "drupal/views_selective_filters": "dev-8.x-1.x",
+        "drupal/views_selective_filters": "1.x-dev",
         "drupal/webform": "^5.2",
         "drush-ops/behat-drush-endpoint": "^9.3",
         "drush/drush": "~8",
         "npm-asset/blazy": "^1.8",
         "npm-asset/slick-carousel": "^1.8",
-        "oomphinc/composer-installers-extender": "^1.1",
+        "oomphinc/composer-installers-extender": "^2.0",
         "pantheon-systems/quicksilver-pushback": "~1",
-        "rvtraveller/qs-composer-installer": "^1.1",
-        "zaporylie/composer-drupal-optimizations": "^1.0"
+        "rvtraveller/qs-composer-installer": "^1.1"
     },
     "require-dev": {
         "behat/behat": "3.*",
         "behat/mink": "^1.7",
         "behat/mink-extension": "^2.2",
         "behat/mink-goutte-driver": "^1.2",
-        "dealerdirect/phpcodesniffer-composer-installer": "^0.5.0",
+        "dealerdirect/phpcodesniffer-composer-installer": "^0.7.0",
         "drupal/coder": "^8.3.1",
         "drupal/drupal-extension": "^3.1",
         "jcalderonzumba/gastonjs": "^1.0.2",
@@ -170,7 +169,10 @@
                 ".eslintrc.json",
                 ".htaccess",
                 "web.config"
-            ]
+            ],
+            "locations": {
+                "web-root": "web/"
+            }
         },
         "enable-patching": true,
         "patches": {
@@ -191,12 +193,8 @@
                     "https://www.drupal.org/files/issues/2019-02-19/panelizer_temp_store-3034080-03.patch"
             },
             "drupal/views_selective_filters": {
-                "3161947-2: Notice on getOids() method, 2804485-4":
-                    "patches/views_selective_filters/views_selective_filters-2804485-and-3161947.patch"
-            },
-            "drupal/menu_block": {
-                "2809699-82: Menu parent as block title":
-                    "https://www.drupal.org/files/issues/2020-05-03/2809699-162-dynamic-block-titles.patch"
+                "2804485-15: SQL error when adding multiple fields of the same type":
+                    "https://git.drupalcode.org/project/views_selective_filters/-/merge_requests/1.patch"
             }
         }
     },
@@ -205,7 +203,7 @@
         "preferred-install": "dist",
         "sort-packages": true,
         "platform": {
-            "php": "7.0.8"
+            "php": "7.4"
         },
         "discard-changes": true
     }
